@@ -1,5 +1,5 @@
 
-require_relative '../iterator'
+require_relative '../iterator_c'
 
 class Object
 	#
