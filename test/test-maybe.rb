@@ -1,18 +1,20 @@
 require 'test/unit'
 $VERBOSE = true
 
-class A
-  def initialize; @b = B.new; end
-  attr_accessor :b
-end
+module MaybeTest
+	class A
+		def initialize; @b = B.new; end
+		attr_accessor :b
+	end
 
-class B
-  def initialize; @c = C.new; end
-  attr_accessor :c
-end
+	class B
+		def initialize; @c = C.new; end
+		attr_accessor :c
+	end
 
-class C
-  def to_i; 1; end
+	class C
+		def to_i; 1; end
+	end
 end
 
 def false.c
@@ -22,7 +24,7 @@ end
 require_relative '../lib/mug/maybe'
 class Test_maybe < Test::Unit::TestCase
 	def test_maybe_block_nil
-		a = A.new
+		a = MaybeTest::A.new
 		assert_equal( 1, a.maybe{ b.maybe{ c } }.to_i )
 		assert_equal( 1, a.maybe{ b.c.to_i } )
 		assert_equal( 1, a.maybe{ b }.c.to_i )
@@ -40,7 +42,7 @@ class Test_maybe < Test::Unit::TestCase
 		assert_raise(NoMethodError) { a.maybe{ b }.c }
 	end
 	def test_maybe_block_false
-		a = A.new
+		a = MaybeTest::A.new
 		assert_equal( 1, a.maybe{ b.maybe{ c } }.to_i )
 		assert_equal( 1, a.maybe{ b.c.to_i } )
 		assert_equal( 1, a.maybe{ b }.c.to_i )
@@ -58,7 +60,7 @@ class Test_maybe < Test::Unit::TestCase
 		assert_equal( 2, a.maybe{ b }.c )
 	end
 	def test_maybe_delegator_nil
-		a = A.new
+		a = MaybeTest::A.new
 		assert_equal( 1, a.maybe.b.maybe.c.to_i )
 		assert_equal( 1, a.maybe.b.c.to_i )
 		a.b.c = nil
@@ -72,7 +74,7 @@ class Test_maybe < Test::Unit::TestCase
 		assert_raise(NoMethodError) { a.maybe.b.c }
 	end
 	def test_maybe_delegator_false
-		a = A.new
+		a = MaybeTest::A.new
 		assert_equal( 1, a.maybe.b.maybe.c.to_i )
 		assert_equal( 1, a.maybe.b.c.to_i )
 		a.b.c = false
