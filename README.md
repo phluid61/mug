@@ -1,6 +1,9 @@
 Matty's Ultimate Gem
 ================
 
+[![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluig61/mug)
+[![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
+
 bool
 ----
 ```ruby
