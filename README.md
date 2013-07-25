@@ -47,6 +47,22 @@ obj.to_bool #=> !!obj
 obj.to_b #=> C-like truthiness
 ```
 
+fragile-method-chain
+--------------------
+
+Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.
+
+```ruby
+require 'mug/fragile-method-chain'
+
+# Similar to: a.b && a.b.c
+# except that a.b is not called twice
+a._?.b.c._!
+
+# Also works with #[] method
+nested_hash._?[:a][:b][:c]._!
+```
+
 hashmap
 -------
 
@@ -87,22 +103,6 @@ require 'mug/hashmap'
 
 {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
-```
-
-fragile-method-chain
---------------------
-
-Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.
-
-```ruby
-require 'mug/fragile-method-chain'
-
-# Similar to: a.b && a.b.c
-# except that a.b is not called twice
-a._?.b.c._!
-
-# Also works with #[] method
-nested_hash._?[:a][:b][:c]._!
 ```
 
 iterator/for
@@ -190,6 +190,27 @@ obj.self #=> obj
 2.self{|i| i*3 } #=> 6
 [1,1,2,2,3].group_by(&:self) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
+
+tau
+---
+
+Defines the true circle constant.
+
+```ruby
+Math::TAU #= 6.283185307179586..
+```
+
+Additionally it expands the BigDecimal/BigMath module:
+
+```ruby
+require 'bigdecimal'
+require 'bigdecimal/math'
+include BigMath
+
+puts TAU(15)
+```
+
+See http://tauday.com to find out what it's all about.
 
 to_h
 ----
