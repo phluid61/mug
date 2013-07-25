@@ -1,17 +1,28 @@
 
-class Object
+unless {}.respond_to? :to_h
+	warn %|Warning: "mug/to_h" does not make much sense without "to_h" (https://rubygems.org/gems/to_h)|
+end
+
+module Enumerable
 	#
-	# Returns this object.
+	# Converts +enum+ to a Hash.
 	#
-	# If a block is given, this object is yielded to it, and the result
-	# is returned.
+	# Each element of +enum+ must be a single item, or an array of two items.
+	# Duplicate keys are overwritten in order.
 	#
-	def self(&block)
-		if block_given?
-			yield self
-		else
-			self
+	#    [].to_h             #=> {}
+	#    [1,2].to_h          #=> {1=>nil, 2=>nil}
+	#    (1..2).to_h         #=> {1=>nil, 2=>nil}
+	#    [[1,2],[3,4]].to_h  #=> {1=>2, 3=>4}
+	#    [[1,2],[1,4]].to_h  #=> {1=>4}
+	#
+	def to_h
+		hsh = {}
+		each do |k,v,*x|
+			raise ArgumentError, "invalid number of elements (#{x.length+1} for 1..2)" if x.any?
+			hsh[k] = v
 		end
+		hsh
 	end
 end
 
