@@ -5,6 +5,10 @@
 <style type="text/css">
 body{font:16px/20px normal 'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0;padding:16px;background:#fff;color:#000}
 #license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}
+h1{font:32px/48px normal;color:#6c6c6c}
+h2{font-size:22px;font-weight:normal;margin:2em 0 1.2em;border:1px solid #bbb;border-radius:3px;padding:0.75em 0.5em;background:#dedede}
+h3{font-size:32px;font-weight:normal;color:#6c6c6c}
+h4{font-size:18px;font-weight:bold;}
 </style>
 <link rel="stylesheet" href="highlight.js/styles/default.css">
 <script src="highlight.js/highlight.pack.js"></script>
