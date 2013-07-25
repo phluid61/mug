@@ -18,53 +18,216 @@ body{font:16px/20px normal 'Helvetica Neue',Helvetica,Arial,sans-serif;margin:0;
 
 <h2>bool</h2>
 
-<pre><code class="language-ruby">
-require 'mug/bool'
-Bool(obj) #=&gt; !!obj
-obj.to_bool #=&gt; !!obj
-obj.to_b #=&gt; C-like truthiness
-</code></pre>
+<h3>Kernel</h3>
+
+<h4><code>Bool(obj)</code></h4>
+
+<p>Returns the truthiness of <em>obj</em>, as either <em>True</em> or <em>False</em>.</p>
+
+<p>This is functionally equivalent to calling <code>!!obj</code></pre>
+
+<h3>Object</h3>
+
+<h4><code>obj.to_b</code></h4>
+
+<p>Converts <em>obj</em> to a boolean using "typical" C-like conversion rules.</p>
+
+<p>The following values all become false:</p>
+
+<ul>
+<li><code>0</code>, <code>0.0</code>, etc. (any numeric zero)</li>
+<li><code>Float::NAN</code></li>
+<li><code>""</code></li>
+<li><code>[]</code>, <code>{}</code>, etc. (any Enumerable or Enumerator with no elements)</li>
+<li>any Exception</li>
+</ul>
+
+<p>All others values become true.</p>
+
+<h4><code>obj.to_bool</code></h4>
+
+<p>Returns the truthiness of <em>obj</em>, as either <em>True</em> or <em>False</em>.</p>
+
+<p>This is functionally equivalent to calling <code>!!obj</code></pre>
+
+<h3>Examples</h3>
+
+<p>```ruby
+require 'mug/bool'</p>
+
+<p>Bool(obj) #=> !!obj
+obj.to<em>bool #=> !!obj
+obj.to</em>b #=> C-like truthiness
+```</p>
+
+<h2>hashmap</h2>
+
+<h3>Hash</h3>
+
+<h4><code>hsh.map_values {|v| block }</code></h4>
+
+<p>Returns a new hash which is a copy of +hsh+ but each value is replaced by the result of running it through +block+.</p>
+
+<p>```ruby
+require 'mug/hashmap'</p>
+
+<p>{'a'=>1, 'b'=>2}.map<em>values { |v| v*2 } #=> {'a'=>2, 'b'=>4}
+{'a'=>1, 'b'=>2}.map</em>values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
+```</p>
+
+<h4><code>hsh.map_keys {|k| block }</code></h4>
+
+<p>Returns a new hash which is a copy of +hsh+ but each key is replaced by the result of running it through +block+.</p>
+
+<p>If +block+ returns duplicate keys, they will be overwritten in the resulting hash.</p>
+
+<p>```ruby
+require 'mug/hashmap'</p>
+
+<p>{'a'=>1, 'b'=>2}.map<em>keys { |k| k*2 } #=> {'aa'=>1, 'bb'=>2}
+{'a'=>1, 'b'=>2}.map</em>keys { "cat" }   #=> {'cat'=>2}
+```</p>
+
+<h4><code>hsh.map_pairs {|k, v| block }</code></h4>
+
+<p>Returns a new hash which is a copy of +hsh+ but each key-value pair is replaced by the result of running it through +block+.</p>
+
+<p>If +block+ returns duplicate keys, they will be overwritten in the resulting hash.</p>
+
+<p>```ruby
+require 'mug/hashmap'</p>
+
+<p>{'a'=>1, 'b'=>2}.map<em>pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
+{'a'=>1, 'b'=>2}.map</em>pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
+```</p>
 
 <h2>fragile-method-chain</h2>
 
-<pre><code class="language-ruby">
-require 'mug/fragile-method-chain'
-a._?.b.c._!
-nested_hash._?[:a][:b][:c]._!
-</code></pre>
+<p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
+
+<p>```ruby
+require 'mug/fragile-method-chain'</p>
+
+<h1>Similar to: a.b &amp;&amp; a.b.c</h1>
+
+<h1>except that a.b is not called twice</h1>
+
+<p>a.<em>?.b.c.</em>!</p>
+
+<h1>Also works with #[] method</h1>
+
+<p>nested<em>hash.</em>?[:a][:b][:c]._!
+```</p>
 
 <h2>iterator/for</h2>
 
-<pre><code class="language-ruby">
-require 'mug/iterator/for'
-0.iter_for(:next).take(5) #=&gt; [0,1,2,3,4]
-0.iter_for(:+,2).take(5) #=&gt; [0,2,4,6,8]
-</code></pre>
+<h3>Object</h3>
+
+<h4><code>obj.iter_for(meth, *args)</code></h4>
+
+<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.</p>
+
+<p>Initially the receiving object is +obj+.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+
+<p>```ruby
+require 'mug/iterator/for'</p>
+
+<p>0.iter<em>for(:next).take(5) #=> [0,1,2,3,4]
+0.iter</em>for(:+,2).take(5) #=> [0,2,4,6,8]
+```</p>
 
 <h2>iterator/method</h2>
 
-<pre><code class="language-ruby">
-require 'mug/iterator/method'
-0.method(:next).to_iter.take(5) #=&gt; [0,1,2,3,4]
-0.method(:+).to_iter(2).take(5) #=&gt; [0,2,4,6,8]
-</code></pre>
+<h3>Method</h3>
+
+<h4><code>meth.to_iter(*args)</code></h4>
+
+<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes +meth+ on an object.</p>
+
+<p>Initially the receiving object is the object on which +meth+ is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+
+<p>```ruby
+require 'mug/iterator/method'</p>
+
+<p>0.method(:next).to<em>iter.take(5) #=> [0,1,2,3,4]
+0.method(:+).to</em>iter(2).take(5) #=> [0,2,4,6,8]
+```</p>
 
 <h2>maybe</h2>
 
-<pre><code class="language-ruby">
-require 'mug/maybe'
-a.maybe{ b.maybe{ c } }
-a.maybe.b.maybe.c
-</code></pre>
+<h3>Object</h3>
+
+<h4><code>obj.maybe</code></h4>
+
+<h4><code>obj.maybe { block }</code></h4>
+
+<p>Invokes a method on +obj+ iff +obj+ is truthy, otherwise returns +obj+.</p>
+
+<p>When a block is given, the block is invoked in the scope of +obj+ (i.e. <code>self</code> in the block refers to +obj+).</p>
+
+<p>When no block is given, <code>maybe</code> returns an object to conditionally delegates methods to +obj+.</p>
+
+<p>```ruby
+require 'mug/maybe'</p>
+
+<h1>Equivalent to: a &amp;&amp; a.b &amp;&amp; a.b.c</h1>
+
+<h1>except that a and b are only invoked once</h1>
+
+<h1>(block form)</h1>
+
+<p>a.maybe{ b.maybe{ c } }</p>
+
+<h1>(delegator form)</h1>
+
+<p>a.maybe.b.maybe.c
+```</p>
 
 <h2>self</h2>
 
+<h3>Object</h3>
+
+<h4><code>obj.self</code></h4>
+
+<h4><code>obj.self {|o| block }</code></h4>
+
+<p>When a block is given, yields +obj+ to the block and returns the resulting value.</p>
+
+<p>When no block is given, simply returns +obj+.</p>
+
+<blockquote>
+  <p>Note: this is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <code>obj</code>, but <code>obj.self{nil}</code> returns <code>nil</code>.</p>
+</blockquote>
+
+<p>```ruby
+require 'mug/self'</p>
+
+<p>1.self #=> 1
+obj.self #=> obj
+2.self{|i| i*3 } #=> 6
+[1,1,2,2,3].group_by(&amp;:self) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
+```</p>
+
+<h2>to_h</h2>
+
+<blockquote>
+  <p>Note: for Ruby &lt;2.0, it is advisable to also include the <a href="https://rubygems.org/gems/to_h"><em>to_h</em> gem</a>.</p>
+</blockquote>
+
+<h3>Enumerable</h3>
+
+<h4><code>enum.to_h</code></h4>
+
+<p>Converts <em>enum</em> to a hash.</p>
+
+<p>Each element of <em>enum</em> must be a single item, or an array of two items.  Duplicate keys are overwritten in order.</p>
+
 <pre><code class="language-ruby">
-require 'mug/self'
-1.self #=&gt; 1
-obj.self #=&gt; obj
-2.self{|i| i*3 } #=&gt; 6
-[1,1,2,2,3].group_by(&amp;:self) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+[].to_h             #=&gt; {}
+[1,2].to_h          #=&gt; {1=&gt;nil, 2=&gt;nil}
+(1..2).to_h         #=&gt; {1=&gt;nil, 2=&gt;nil}
+[[1,2],[3,4]].to_h  #=&gt; {1=&gt;2, 3=&gt;4}
+[[1,2],[1,4]].to_h  #=&gt; {1=&gt;4}
 </code></pre>
 <pre id="license" class="no-highlight">Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>Permission to use, copy, modify, and/or distribute this software for anypurpose with or without fee is hereby granted, provided that the abovecopyright notice and this permission notice appear in all copies.THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIESWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OFMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FORANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGESWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN ANACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OFOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</pre></body>
 </html>
