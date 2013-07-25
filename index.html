@@ -60,6 +60,24 @@ obj.to<em>bool #=> !!obj
 obj.to</em>b #=> C-like truthiness
 ```</p>
 
+<h2>fragile-method-chain</h2>
+
+<p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
+
+<p>```ruby
+require 'mug/fragile-method-chain'</p>
+
+<h1>Similar to: a.b &amp;&amp; a.b.c</h1>
+
+<h1>except that a.b is not called twice</h1>
+
+<p>a.<em>?.b.c.</em>!</p>
+
+<h1>Also works with #[] method</h1>
+
+<p>nested<em>hash.</em>?[:a][:b][:c]._!
+```</p>
+
 <h2>hashmap</h2>
 
 <h3>Hash</h3>
@@ -99,24 +117,6 @@ require 'mug/hashmap'</p>
 
 <p>{'a'=>1, 'b'=>2}.map<em>pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
 {'a'=>1, 'b'=>2}.map</em>pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
-```</p>
-
-<h2>fragile-method-chain</h2>
-
-<p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
-
-<p>```ruby
-require 'mug/fragile-method-chain'</p>
-
-<h1>Similar to: a.b &amp;&amp; a.b.c</h1>
-
-<h1>except that a.b is not called twice</h1>
-
-<p>a.<em>?.b.c.</em>!</p>
-
-<h1>Also works with #[] method</h1>
-
-<p>nested<em>hash.</em>?[:a][:b][:c]._!
 ```</p>
 
 <h2>iterator/for</h2>
@@ -207,6 +207,26 @@ obj.self #=> obj
 2.self{|i| i*3 } #=> 6
 [1,1,2,2,3].group_by(&amp;:self) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```</p>
+
+<h2>tau</h2>
+
+<p>Defines the true circle constant.</p>
+
+<pre><code class="language-ruby">
+Math::TAU #= 6.283185307179586..
+</code></pre>
+
+<p>Additionally it expands the BigDecimal/BigMath module:</p>
+
+<p>```ruby
+require 'bigdecimal'
+require 'bigdecimal/math'
+include BigMath</p>
+
+<p>puts TAU(15)
+```</p>
+
+<p>See http://tauday.com to find out what it's all about.</p>
 
 <h2>to_h</h2>
 
