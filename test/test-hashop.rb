@@ -20,6 +20,18 @@ class Test_hashop < Test::Unit::TestCase
 			assert_equal( a|b, x )
 		end
 	end
+	def test_hash_plus
+		h = { :a => 1, :b => 2 }
+		[
+			[{}, h, h],
+			[{:c=>3}, h, {:a=>1, :b=>2, :c=>3}],
+			[{:a=>0, :b=>0}, h, h],
+			[{:a=>0, :c=>3}, h, {:a=>1, :b=>2, :c=>3}],
+			[h, {}, h],
+		].each do |a, b, x|
+			assert_equal( a|b, x )
+		end
+	end
 	def test_hash_poke
 		h = {}
 
