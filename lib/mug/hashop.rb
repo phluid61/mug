@@ -17,12 +17,27 @@ class Hash
 	end
 
 	#
+	# Adds the contents of +other_hash+ to +hsh+.
+	# Entries with duplicate keys are overwritten with the
+	# values from +other_hash+
+	#
+	def + other_hash
+		merge other_hash
+	end
+
+	#
 	# Appends stuff to the hash.
 	#
 	# If +o+ is a Hash, this is identical to calling #merge!
 	# If +o+ is an Array with two elements, it is interpreted as [key,value]
 	# If +o+ can be converted to a hash with #to_h, this is identical to calling #merge!
 	# Otherwise an ArgumentError is raised.
+	#
+	# Example:
+	#     h = {}
+	#     h << {:a=>0}       # h = {:a=>0}
+	#     h << {:b=>2,:c=>3} # h = {:a=>0,:b=>2,:c=>3}
+	#     h << [:a,1]        # h = {:a=>1,:b=>2,:c=>3}
 	#
 	def << o
 		if o.respond_to? :to_hash
