@@ -29,7 +29,7 @@ class Test_hashop < Test::Unit::TestCase
 			[{:a=>0, :c=>3}, h, {:a=>1, :b=>2, :c=>3}],
 			[h, {}, h],
 		].each do |a, b, x|
-			assert_equal( a|b, x )
+			assert_equal( a+b, x )
 		end
 	end
 	def test_hash_poke
