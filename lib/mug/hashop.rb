@@ -43,7 +43,7 @@ class Hash
 		if o.respond_to? :to_hash
 			merge! o.to_hash
 		elsif o.respond_to?(:to_a) && (a = o.to_a) && a.length == 2
-			store a[0], a[1]
+			tap { store a[0], a[1] }
 		elsif o.respond_to? :to_h
 			merge! o.to_h
 		else
