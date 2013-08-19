@@ -3,7 +3,7 @@ class Hash
 
 	#
 	# Returns a new Hash, whose value is the same as this
-	# one, with any extras in +o+ added in.
+	# one, with any extras in +other_hash+ added in.
 	#
 	# Useful for default options.
 	#
@@ -12,8 +12,8 @@ class Hash
 	#     dflt = {:a => 0, :x => 9 }
 	#     opts |= dflt # => opts = {:a=>1, :b=>2, :x=>9}
 	#
-	def | o
-		o.merge self
+	def | other_hash
+		other_hash.merge self
 	end
 
 	#

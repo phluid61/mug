@@ -105,6 +105,61 @@ require 'mug/hashmap'
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
 ```
 
+hashop
+------
+
+### Hash
+
+#### `hsh | other_hsh`
+
+
+Returns a new Hash, whose value is the same as this
+one, with any extras in +other_hash+ added in.
+
+Useful for default options.
+
+```ruby
+require 'mug/hashop'
+
+def foo options={}
+  options | {b: 2, c: 2}
+end
+foo a: 1, b: 1 # => {:a=>1, :b=>1, :c=>2}
+```
+
+#### `hsh + other_hsh`
+
+Adds the contents of +other_hash+ to +hsh+.
+Entries with duplicate keys are overwritten with the values from +other_hash+
+
+```ruby
+require 'mug/hashop'
+
+a = {a: 1, b: 1}
+b = {b: 2, c: 2}
+a + b # => {:a=>1, :b=>2, :c=>2}
+b + a # => {:a=>1, :b=>1, :c=>2}
+```
+
+#### `hsh << o`
+
+Appends stuff to the hash.
+
+* If +o+ is a Hash, this is identical to calling #merge!
+* If +o+ is an Array with two elements, it is interpreted as [key,value]
+* If +o+ can be converted to a hash with #to_h, this is identical to calling #merge!
+* Otherwise an ArgumentError is raised.
+
+```ruby
+require 'mug/hashop'
+
+h = {}
+h << {:a=>0}       # h = {:a=>0}
+h << {:b=>2,:c=>3} # h = {:a=>0,:b=>2,:c=>3}
+h << [:a,1]        # h = {:a=>1,:b=>2,:c=>3}
+```
+
+
 iterator/for
 ------------
 
