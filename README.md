@@ -4,6 +4,35 @@ Matty's Ultimate Gem
 [![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 
+and-or
+------
+
+### Object
+
+#### `obj.and default`
+#### `obj.and default {|o| block }`
+
+Returns either _obj_ or _default_, depending on the falsiness of _obj_.
+
+If a block is given, _obj_ is yielded to it; if it returns truthy, _default_ is returned, otherwise _obj_ is returned.
+
+#### `obj.or default`
+#### `obj.or default {|o| block }`
+
+Returns either _obj_ or _default_, depending on the truthiness of _obj_.
+
+If a block is given, _obj_ is yielded to it; if it returns truthy, _obj_ is returned, otherwise _default_ is returned.
+
+### Examples
+
+```ruby
+require 'mug/and-or'
+
+data_store.get_env_hash.or(default_hash).do_something
+
+get_a_list.and(default_list, &:empty?).do_something
+```
+
 bool
 ----
 
