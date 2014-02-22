@@ -1,4 +1,5 @@
 
+require_relative 'mug/apply'
 require_relative 'mug/bool'
 require_relative 'mug/fragile-method-chain'
 require_relative 'mug/hashmap'
