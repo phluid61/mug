@@ -9,13 +9,6 @@ end
 
 require_relative '../lib/mug/apply'
 class Test_self < Test::Unit::TestCase
-	def test_foo
-l = lambda{|a,b,c| a+b+c }
-l1 = l.curry.call(1)
-l2 = l1.curry.call(2)
-assert_equal( 6, l2.curry.call(3) )
-assert_nothing_raised{ l1.curry.call(2,3) }
-	end
 	def test_apply_proc
 		prc = proc{|a,b,*c| (a||0) + (b||0) + c.inject(0, &:+) }
 		p1 = prc.apply(1)
