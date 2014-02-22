@@ -7,5 +7,6 @@ group :development do
 end
 
 group :test do
+	gem 'minitest' if RUBY_VERSION.to_f > 2.1
 	gem 'rake'
 end
