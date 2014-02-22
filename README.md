@@ -1,6 +1,6 @@
 Matty's Ultimate Gem
 ================
-                                                                                                                                                                       
+
 [![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 
@@ -32,6 +32,39 @@ data_store.get_env_hash.or(default_hash).do_something
 
 get_a_list.and(default_list, &:empty?).do_something
 ```
+
+apply
+-----
+
+### Proc
+
+#### `proc.apply *args`
+
+Curries this Proc and partially applies parameters.
+If a sufficient number of arguments are supplied, it passes the
+supplied arguments to the original proc and returns the result.
+Otherwise, returns another curried proc that takes the rest of
+arguments.
+
+### Method
+
+#### `meth.curry`
+#### `meth.curry n`
+
+Returns a curried proc. If the optional arity argument is given,
+it determines the number of arguments. A curried proc receives
+some arguments. If a sufficient number of arguments are supplied,
+it passes the supplied arguments to the original proc and returns
+the result. Otherwise, returns another curried proc that takes the
+rest of arguments.
+
+#### `meth.apply *args`
+
+Curries this Method and partially applies parameters.
+If a sufficient number of arguments are supplied, it passes the
+supplied arguments to the original proc and returns the result.
+Otherwise, returns another curried proc that takes the rest of
+arguments.
 
 bool
 ----
