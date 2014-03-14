@@ -1,4 +1,8 @@
 
+if 0.to_enum.respond_to? :to_h
+	warn %|Warning: "mug/to_h" may conflict with built-in Enumerable#to_h functionality|
+end
+
 unless {}.respond_to? :to_h
 	warn %|Warning: "mug/to_h" does not make much sense without "to_h" (https://rubygems.org/gems/to_h)|
 end
