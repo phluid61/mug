@@ -9,7 +9,7 @@ if RUBY_VERSION.to_f < 1.9
 	end
 end
 
-require_relative '../lib/mug/hashmap'
+require_relative '../lib/mug/hash/map'
 class Test_hashmap < Test::Unit::TestCase
 	def test_hashmap
 		h        = {'s'=>1, :x=>2, 3=>'a'}

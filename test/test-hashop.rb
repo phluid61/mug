@@ -6,7 +6,7 @@ def $coercable.to_h
 	{:a=>0, :z=>99}
 end
 
-require_relative '../lib/mug/hashop'
+require_relative '../lib/mug/hash/operations'
 class Test_hashop < Test::Unit::TestCase
 	def test_hash_or
 		h = { :a => 1, :b => 2 }
