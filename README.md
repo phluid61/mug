@@ -71,7 +71,7 @@ array/extend
 
 ### Array
 
-#### `array.extend!(size=0, obj=nil)
+#### `array.extend!(size=0, obj=nil)`
 #### `array.extend!(array)`
 #### `array.extend!(size) {|index| block }`
 
@@ -89,7 +89,7 @@ In the last form, the array is extended by the given size. Each new
 element in the array is created by passing the element's index to the
 given block and storing the return value.
 
-#### `array.extend(size=0, obj=nil)
+#### `array.extend(size=0, obj=nil)`
 #### `array.extend(array)`
 #### `array.extend(size) {|index| block }`
 
