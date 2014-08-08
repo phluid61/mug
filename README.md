@@ -321,8 +321,8 @@ self
 
 #### `obj.self`
 #### `obj.self {|o| block }`
-#### `obj.yield`
-#### `obj.yield {|o| block }`
+#### `obj.itself`
+#### `obj.itself {|o| block }`
 
 When a block is given, yields +obj+ to the block and returns the resulting value.
 
@@ -338,10 +338,10 @@ obj.self #=> obj
 2.self{|i| i*3 } #=> 6
 [1,1,2,2,3].group_by(&:self) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 
-1.yield #=> 1
-obj.yield #=> obj
-2.yield{|i| i*3 } #=> 6
-[1,1,2,2,3].group_by(&:yield) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
+1.itself #=> 1
+obj.itself #=> obj
+2.itself{|i| i*3 } #=> 6
+[1,1,2,2,3].group_by(&:itself) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
 
 tau

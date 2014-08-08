@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.name     = 'mug'
-  s.version  = '0.2.2'
-  s.date     = '2014-07-28'
+  s.version  = '0.2.3'
+  s.date     = '2014-08-08'
   s.summary  = %(MUG: Matty's Ultimate Gem)
   s.description = <<EOS
 == MUG: Matty's Ultimate Gem
 
 A collection of wonders to astound the mind!!
 
-See the documentation at [github](https://github.com/phluid61/mug).
+See the documentation at <https://github.com/phluid61/mug>.
 EOS
   s.authors  = ['Matthew Kerwin'.freeze]
   s.email    = ['matthew@kerwin.net.au'.freeze]

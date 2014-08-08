@@ -13,7 +13,13 @@ class Object
 			self
 		end
 	end
-	alias :yield :self
+	alias :itself :self
+
+	# Deprecated alias for #self
+	def yield(&block) #:nodoc:
+		warn 'Object#yield is deprecated; use Object#self'
+		self.self(&block)
+	end
 end
 
 =begin
