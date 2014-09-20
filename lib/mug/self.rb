@@ -30,7 +30,7 @@ class Object
 		if block_given?
 			yield self, *args
 		else
-			enum_for(:revapply, self, *args) {|*x| x.length }
+			enum_for(:revapply, *args) { args.length + 1 }
 		end
 	end
 end
