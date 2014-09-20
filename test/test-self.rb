@@ -21,6 +21,8 @@ class Test_self < Test::Unit::TestCase
 		assert_equal( [1,2,3], 1.revapply(2,3,&p) )
 		if RUBY_VERSION.to_i >= 2
 			assert_equal( 3, 1.revapply(2,3).size )
+		else
+			assert_equal( [1,2,3], 1.revapply(2,3).to_a )
 		end
 	end
 end
