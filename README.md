@@ -161,7 +161,7 @@ hash/map
 
 #### `hsh.map_values {|v| block }`
 
-Returns a new hash which is a copy of `hsh` but each value is replaced by the result of running it through `block`.
+Returns a new hash which is a copy of _hsh_ but each value is replaced by the result of running it through _block_.
 
 ```ruby
 require 'mug/hash/map'
@@ -172,9 +172,9 @@ require 'mug/hash/map'
 
 #### `hsh.map_keys {|k| block }`
 
-Returns a new hash which is a copy of `hsh` but each key is replaced by the result of running it through `block`.
+Returns a new hash which is a copy of _hsh_ but each key is replaced by the result of running it through _block_.
 
-If `block` returns duplicate keys, they will be overwritten in the resulting hash.
+If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
 
 ```ruby
 require 'mug/hash/map'
@@ -185,9 +185,9 @@ require 'mug/hash/map'
 
 #### `hsh.map_pairs {|k, v| block }`
 
-Returns a new hash which is a copy of `hsh` but each key-value pair is replaced by the result of running it through `block`.
+Returns a new hash which is a copy of _hsh_ but each key-value pair is replaced by the result of running it through _block_.
 
-If `block` returns duplicate keys, they will be overwritten in the resulting hash.
+If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
 
 ```ruby
 require 'mug/hash/map'
@@ -205,7 +205,7 @@ hash/operations
 
 
 Returns a new Hash, whose value is the same as this
-one, with any extras in `other_hash` added in.
+one, with any extras in _other_hash_ added in.
 
 Useful for default options.
 
@@ -220,8 +220,8 @@ foo a: 1, b: 1 # => {:a=>1, :b=>1, :c=>2}
 
 #### `hsh + other_hsh`
 
-Adds the contents of `other_hash` to `hsh`.
-Entries with duplicate keys are overwritten with the values from `other_hash`
+Adds the contents of _other_hash_ to _hsh_.
+Entries with duplicate keys are overwritten with the values from _other_hash_
 
 ```ruby
 require 'mug/hash/operations'
@@ -236,9 +236,9 @@ b + a # => {:a=>1, :b=>1, :c=>2}
 
 Appends stuff to the hash.
 
-* If `o` is a Hash, this is identical to calling #merge!
-* If `o` is an Array with two elements, it is interpreted as [key,value]
-* If `o` can be converted to a hash with #to_h, this is identical to calling #merge!
+* If _o_ is a Hash, this is identical to calling #merge!
+* If _o_ is an Array with two elements, it is interpreted as [key,value]
+* If _o_ can be converted to a hash with #to_h, this is identical to calling #merge!
 * Otherwise an ArgumentError is raised.
 
 ```ruby
@@ -260,7 +260,7 @@ iterator/for
 
 Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.
 
-Initially the receiving object is `obj`.  After each iteration, the receiving object is replaced with the result of the previous iteration.
+Initially the receiving object is _obj_.  After each iteration, the receiving object is replaced with the result of the previous iteration.
 
 ```ruby
 require 'mug/iterator/for'
@@ -276,9 +276,9 @@ iterator/method
 
 #### `meth.to_iter(*args)`
 
-Creates an Iterator object, which is a subclass of Enumerator that recursively invokes `meth` on an object.
+Creates an Iterator object, which is a subclass of Enumerator that recursively invokes _meth_ on an object.
 
-Initially the receiving object is the object on which `meth` is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.
+Initially the receiving object is the object on which _meth_ is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.
 
 ```ruby
 require 'mug/iterator/method'
@@ -295,11 +295,11 @@ maybe
 #### `obj.maybe`
 #### `obj.maybe { block }`
 
-Invokes a method on `obj` iff `obj` is truthy, otherwise returns `obj`.
+Invokes a method on _obj_ iff _obj_ is truthy, otherwise returns _obj_.
 
-When a block is given, the block is invoked in the scope of `obj` (i.e. `self` in the block refers to `obj`).
+When a block is given, the block is invoked in the scope of _obj_ (i.e. `self` in the block refers to _obj_).
 
-When no block is given, `maybe` returns an object to conditionally delegates methods to `obj`.
+When no block is given, _maybe_ returns an object to conditionally delegates methods to _obj_.
 
 ```ruby
 require 'mug/maybe'
@@ -324,11 +324,11 @@ self
 #### `obj.itself`
 #### `obj.itself {|o| block }`
 
-When a block is given, yields `obj` to the block and returns the resulting value.
+When a block is given, yields _obj_ to the block and returns the resulting value.
 
-When no block is given, simply returns `obj`.
+When no block is given, simply returns _obj_.
 
-> Note: this is different from `#tap` because `obj.tap{nil}` returns `obj`, but `obj.self{nil}` returns `nil`.
+> Note: this is different from `#tap` because `obj.tap{nil}` returns _obj_, but `obj.self{nil}` returns _nil_.
 
 ```ruby
 require 'mug/self'
@@ -347,9 +347,9 @@ obj.itself #=> obj
 #### `obj.revapply(*args) {|*list| block }`
 #### `obj.revapply(*args)`
 
-When a block is given, yields `obj` and any `args` to the block and returns the resulting value.
+When a block is given, yields _obj_ and any _args_ to the block and returns the resulting value.
 
-When no block is given, returns an `Enumerator`.
+When no block is given, returns an Enumerator.
 
 tau
 ---
