@@ -20,6 +20,19 @@ class Object
 		warn 'Object#yield is deprecated; use Object#self'
 		self.self(&block)
 	end
+
+	#
+	# Yields this object (and any other arguments)
+	# to a block. If no block is given, returns an
+	# Enumerator.
+	#
+	def revapply(*args, &block)
+		if block_given?
+			yield self, *args
+		else
+			enum_for(:revapply, self, *args) {|*x| x.length }
+		end
+	end
 end
 
 =begin

@@ -15,4 +15,10 @@ class Test_self < Test::Unit::TestCase
 		assert_equal( 6, 2.itself{|i| i*3 } )
 		assert_equal( {1=>[1,1], 2=>[2,2], 3=>[3]}, [1,1,2,2,3].group_by(&:itself) )
 	end
+	def test_revapply
+		p = proc {|*args| args }
+		assert_equal( [1], 1.revapply(&p) )
+		assert_equal( [1,2,3], 1.revapply(2,3,&p) )
+		assert_equal( 3, 1.revapply(2,3).size )
+	end
 end
