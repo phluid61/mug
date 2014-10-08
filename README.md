@@ -372,7 +372,7 @@ puts TAU(15)
 
 See http://tauday.com to find out what it's all about.
 
-to_h
+to\_h
 ----
 
 > Note: for Ruy 2.1, `Enumerable#to_h` [is already defined](http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h) in a similar but _not identical_ way.  Please take care when mixing this gem with Ruby >=2.1.
@@ -394,4 +394,52 @@ Each element of _enum_ must be a single item, or an array of two items.  Duplica
 [[1,2],[3,4]].to_h  #=> {1=>2, 3=>4}
 [[1,2],[1,4]].to_h  #=> {1=>4}
 ```
+
+top
+---
+
+### Enumerable
+
+#### `enum.top(n=1)`
+#### `enum.top(n=1) {|a,b| block }`
+
+Get the top _n_ items, in order from top to bottom.
+
+Returns an _Array_ even when _n_ is 1.
+
+See: `Enumerable#sort`
+
+#### `enum.top_by(n=1) {|item| block }`
+
+Get the top _n_ items, in order from top to bottom, ordered
+by mapping the values through the given block.
+
+Returns an _Array_ even when _n_ is 1. Values that are tied
+after mapping are returned in the initial order.
+
+If no block is given, an enumerator is returned instead.
+
+See: `Enumerable#sort_by`
+
+
+#### `enum.bottom(n=1)`
+#### `enum.bottom(n=1) {|a,b| block }`
+
+Get the bottom _n_ items, in order from bottom to top.
+
+Returns an _Array_ even when _n_ is 1.
+
+See: `Enumerable#sort`
+
+#### `enum.bottom_by(n=1) {|item| item }`
+
+Get the bottom _n_ items, in order from bottom to top, ordered
+by mapping the values through the given block.
+
+Returns an _Array_ even when _n_ is 1. Values that are tied
+after mapping are returned in the initial order.
+
+If no block is given, an enumerator is returned instead.
+
+See: `Enumerable#sort_by`
 
