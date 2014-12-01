@@ -138,6 +138,34 @@ obj.to_bool #=> !!obj
 obj.to_b #=> C-like truthiness
 ```
 
+counts
+------
+
+Returns counts of objects in enumerables.
+
+### Enumerable
+
+#### `enum.counts`
+
+Returns a hash of `item=>count` showing how many
+of each _item_ are in this Enumerable.
+
+#### `enum.counts_by {|item| block }`
+
+Passes each element in turn to the block, and returns a
+hash of `result=>count`.
+
+If no block is given, an enumerator is returned.
+
+### Examples
+
+```ruby
+require 'mug/counts'
+
+%w(a b b).counts                   #=> {'a'=>1, 'b'=>2}
+%w(a b b).counts_by{|o| o.upcase } #=> {'A'=>1, 'B'=>2}
+```
+
 fragile-method-chain
 --------------------
 
@@ -285,6 +313,39 @@ require 'mug/iterator/method'
 
 0.method(:next).to_iter.take(5) #=> [0,1,2,3,4]
 0.method(:+).to_iter(2).take(5) #=> [0,2,4,6,8]
+```
+
+loop-with
+---------
+
+### Kernel
+
+#### `loop_with_index(offset=0) {|i| block }`
+
+Repeatedly executes the block, yielding the current iteration
+count, which starts from _offset_. If no block is given, returns
+a new Enumerator that includes the iteration count, starting
+from _offset_
+
+#### `loop_with_object(obj) {|o| block }`
+
+Repeatedly executes the block, yielding an arbitrary object, _obj_.
+
+### Examples
+
+```ruby
+require 'mug/loop-with'
+
+loop_with_index do |i|
+  p i
+  break
+end
+
+arr = loop_with_object([]) do |a|
+  s = gets.chomp
+  throw StopIteration if s.empty?
+  a << s
+end
 ```
 
 maybe
