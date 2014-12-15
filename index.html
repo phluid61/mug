@@ -157,6 +157,62 @@ obj.to_bool #=&gt; !!obj
 obj.to_b #=&gt; C-like truthiness
 </code></pre>
 
+<h2>clamp</h2>
+
+<p>Clamps a number to a range.</p>
+
+<h3>Numeric</h3>
+
+<h4><code>num.clamp lower, higher =&gt; new\_num</code></h4>
+
+<p>Clamps <em>num</em> so that <em>lower</em> &lt;= <em>new_num</em> &lt;= <em>higher</em>.</p>
+
+<p>Returns <em>lower</em> when <em>num</em> &lt; <em>lower</em>, <em>higher</em> when <em>num</em> &gt; <em>higher</em>, otherwise<br>
+<em>num</em> itself.</p>
+
+<p>Raises an exception if <em>lower</em> &gt; <em>higher</em></p>
+
+<h4><code>num.clamp range =&gt; new\_num</code></h4>
+
+<p>Effectively calls range#bound</p>
+
+<h3>Range</h3>
+
+<h4><code>rng.bound val =&gt; new\_val</code></h4>
+
+<p>Bounds val so that <em>first</em> &lt;= <em>new_val</em> &lt;= <em>last</em>.</p>
+
+<p>Returns <em>first</em> when <em>val</em> &lt; <em>first</em>, <em>last</em> when <em>val</em> &gt; <em>last</em>, otherwise<br>
+<em>val</em> itself.</p>
+
+<p>Raises an exception if <em>val</em> &gt;= <em>end</em> and the range is exclusive.</p>
+
+<h2>counts</h2>
+
+<p>Returns counts of objects in enumerables.</p>
+
+<h3>Enumerable</h3>
+
+<h4><code>enum.counts</code></h4>
+
+<p>Returns a hash of <code>item=&gt;count</code> showing how many<br>
+of each <em>item</em> are in this Enumerable.</p>
+
+<h4><code>enum.counts_by {|item| block }</code></h4>
+
+<p>Passes each element in turn to the block, and returns a<br>
+hash of <code>result=&gt;count</code>.</p>
+
+<p>If no block is given, an enumerator is returned.</p>
+
+<h3>Examples</h3>
+
+<pre lang="ruby"><code>require &#39;mug/counts&#39;
+
+%w(a b b).counts                   #=&gt; {&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2}
+%w(a b b).counts_by{|o| o.upcase } #=&gt; {&#39;A&#39;=&gt;1, &#39;B&#39;=&gt;2}
+</code></pre>
+
 <h2>fragile-method-chain</h2>
 
 <p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
@@ -177,7 +233,7 @@ nested_hash._?[:a][:b][:c]._!
 
 <h4><code>hsh.map_values {|v| block }</code></h4>
 
-<p>Returns a new hash which is a copy of +hsh+ but each value is replaced by the result of running it through +block+.</p>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each value is replaced by the result of running it through <em>block</em>.</p>
 
 <pre lang="ruby"><code>require &#39;mug/hash/map&#39;
 
@@ -187,9 +243,9 @@ nested_hash._?[:a][:b][:c]._!
 
 <h4><code>hsh.map_keys {|k| block }</code></h4>
 
-<p>Returns a new hash which is a copy of +hsh+ but each key is replaced by the result of running it through +block+.</p>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each key is replaced by the result of running it through <em>block</em>.</p>
 
-<p>If +block+ returns duplicate keys, they will be overwritten in the resulting hash.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
 
 <pre lang="ruby"><code>require &#39;mug/hash/map&#39;
 
@@ -199,9 +255,9 @@ nested_hash._?[:a][:b][:c]._!
 
 <h4><code>hsh.map_pairs {|k, v| block }</code></h4>
 
-<p>Returns a new hash which is a copy of +hsh+ but each key-value pair is replaced by the result of running it through +block+.</p>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each key-value pair is replaced by the result of running it through <em>block</em>.</p>
 
-<p>If +block+ returns duplicate keys, they will be overwritten in the resulting hash.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
 
 <pre lang="ruby"><code>require &#39;mug/hash/map&#39;
 
@@ -216,7 +272,7 @@ nested_hash._?[:a][:b][:c]._!
 <h4><code>hsh | other_hsh</code></h4>
 
 <p>Returns a new Hash, whose value is the same as this<br>
-one, with any extras in +other_hash+ added in.</p>
+one, with any extras in <em>other_hash</em> added in.</p>
 
 <p>Useful for default options.</p>
 
@@ -230,8 +286,8 @@ foo a: 1, b: 1 # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
 
 <h4><code>hsh + other_hsh</code></h4>
 
-<p>Adds the contents of +other_hash+ to +hsh+.<br>
-Entries with duplicate keys are overwritten with the values from +other_hash+</p>
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>.<br>
+Entries with duplicate keys are overwritten with the values from <em>other_hash</em></p>
 
 <pre lang="ruby"><code>require &#39;mug/hash/operations&#39;
 
@@ -246,9 +302,9 @@ b + a # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
 <p>Appends stuff to the hash.</p>
 
 <ul>
-<li>If +o+ is a Hash, this is identical to calling #merge!</li>
-<li>If +o+ is an Array with two elements, it is interpreted as [key,value]</li>
-<li>If +o+ can be converted to a hash with #to_h, this is identical to calling #merge!</li>
+<li>If <em>o</em> is a Hash, this is identical to calling #merge!</li>
+<li>If <em>o</em> is an Array with two elements, it is interpreted as [key,value]</li>
+<li>If <em>o</em> can be converted to a hash with #to_h, this is identical to calling #merge!</li>
 <li>Otherwise an ArgumentError is raised.</li>
 </ul>
 
@@ -268,7 +324,7 @@ h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 
 <p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.</p>
 
-<p>Initially the receiving object is +obj+.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+<p>Initially the receiving object is <em>obj</em>.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
 
 <pre lang="ruby"><code>require &#39;mug/iterator/for&#39;
 
@@ -282,14 +338,45 @@ h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 
 <h4><code>meth.to_iter(*args)</code></h4>
 
-<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes +meth+ on an object.</p>
+<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes <em>meth</em> on an object.</p>
 
-<p>Initially the receiving object is the object on which +meth+ is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+<p>Initially the receiving object is the object on which <em>meth</em> is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
 
 <pre lang="ruby"><code>require &#39;mug/iterator/method&#39;
 
 0.method(:next).to_iter.take(5) #=&gt; [0,1,2,3,4]
 0.method(:+).to_iter(2).take(5) #=&gt; [0,2,4,6,8]
+</code></pre>
+
+<h2>loop-with</h2>
+
+<h3>Kernel</h3>
+
+<h4><code>loop_with_index(offset=0) {|i| block }</code></h4>
+
+<p>Repeatedly executes the block, yielding the current iteration<br>
+count, which starts from <em>offset</em>. If no block is given, returns<br>
+a new Enumerator that includes the iteration count, starting<br>
+from <em>offset</em></p>
+
+<h4><code>loop_with_object(obj) {|o| block }</code></h4>
+
+<p>Repeatedly executes the block, yielding an arbitrary object, <em>obj</em>.</p>
+
+<h3>Examples</h3>
+
+<pre lang="ruby"><code>require &#39;mug/loop-with&#39;
+
+loop_with_index do |i|
+  p i
+  break
+end
+
+arr = loop_with_object([]) do |a|
+  s = gets.chomp
+  throw StopIteration if s.empty?
+  a &lt;&lt; s
+end
 </code></pre>
 
 <h2>maybe</h2>
@@ -300,11 +387,11 @@ h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 
 <h4><code>obj.maybe { block }</code></h4>
 
-<p>Invokes a method on +obj+ iff +obj+ is truthy, otherwise returns +obj+.</p>
+<p>Invokes a method on <em>obj</em> iff <em>obj</em> is truthy, otherwise returns <em>obj</em>.</p>
 
-<p>When a block is given, the block is invoked in the scope of +obj+ (i.e. <code>self</code> in the block refers to +obj+).</p>
+<p>When a block is given, the block is invoked in the scope of <em>obj</em> (i.e. <code>self</code> in the block refers to <em>obj</em>).</p>
 
-<p>When no block is given, <code>maybe</code> returns an object to conditionally delegates methods to +obj+.</p>
+<p>When no block is given, <em>maybe</em> returns an object to conditionally delegates methods to <em>obj</em>.</p>
 
 <pre lang="ruby"><code>require &#39;mug/maybe&#39;
 
@@ -326,12 +413,16 @@ a.maybe.b.maybe.c
 
 <h4><code>obj.self {|o| block }</code></h4>
 
-<p>When a block is given, yields +obj+ to the block and returns the resulting value.</p>
+<h4><code>obj.itself</code></h4>
 
-<p>When no block is given, simply returns +obj+.</p>
+<h4><code>obj.itself {|o| block }</code></h4>
+
+<p>When a block is given, yields <em>obj</em> to the block and returns the resulting value.</p>
+
+<p>When no block is given, simply returns <em>obj</em>.</p>
 
 <blockquote>
-<p>Note: this is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <code>obj</code>, but <code>obj.self{nil}</code> returns <code>nil</code>.</p>
+<p>Note: this is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <em>obj</em>, but <code>obj.self{nil}</code> returns <em>nil</em>.</p>
 </blockquote>
 
 <pre lang="ruby"><code>require &#39;mug/self&#39;
@@ -340,7 +431,20 @@ a.maybe.b.maybe.c
 obj.self #=&gt; obj
 2.self{|i| i*3 } #=&gt; 6
 [1,1,2,2,3].group_by(&amp;:self) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+
+1.itself #=&gt; 1
+obj.itself #=&gt; obj
+2.itself{|i| i*3 } #=&gt; 6
+[1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
 </code></pre>
+
+<h4><code>obj.revapply(*args) {|*list| block }</code></h4>
+
+<h4><code>obj.revapply(*args)</code></h4>
+
+<p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
+
+<p>When no block is given, returns an Enumerator.</p>
 
 <h2>tau</h2>
 
@@ -382,5 +486,53 @@ puts TAU(15)
 [[1,2],[3,4]].to_h  #=&gt; {1=&gt;2, 3=&gt;4}
 [[1,2],[1,4]].to_h  #=&gt; {1=&gt;4}
 </code></pre>
+
+<h2>top</h2>
+
+<h3>Enumerable</h3>
+
+<h4><code>enum.top(n=1)</code></h4>
+
+<h4><code>enum.top(n=1) {|a,b| block }</code></h4>
+
+<p>Get the top <em>n</em> items, in order from top to bottom.</p>
+
+<p>Returns an <em>Array</em> even when <em>n</em> is 1.</p>
+
+<p>See: <code>Enumerable#sort</code></p>
+
+<h4><code>enum.top_by(n=1) {|item| block }</code></h4>
+
+<p>Get the top <em>n</em> items, in order from top to bottom, ordered<br>
+by mapping the values through the given block.</p>
+
+<p>Returns an <em>Array</em> even when <em>n</em> is 1. Values that are tied<br>
+after mapping are returned in the initial order.</p>
+
+<p>If no block is given, an enumerator is returned instead.</p>
+
+<p>See: <code>Enumerable#sort_by</code></p>
+
+<h4><code>enum.bottom(n=1)</code></h4>
+
+<h4><code>enum.bottom(n=1) {|a,b| block }</code></h4>
+
+<p>Get the bottom <em>n</em> items, in order from bottom to top.</p>
+
+<p>Returns an <em>Array</em> even when <em>n</em> is 1.</p>
+
+<p>See: <code>Enumerable#sort</code></p>
+
+<h4><code>enum.bottom_by(n=1) {|item| item }</code></h4>
+
+<p>Get the bottom <em>n</em> items, in order from bottom to top, ordered<br>
+by mapping the values through the given block.</p>
+
+<p>Returns an <em>Array</em> even when <em>n</em> is 1. Values that are tied<br>
+after mapping are returned in the initial order.</p>
+
+<p>If no block is given, an enumerator is returned instead.</p>
+
+<p>See: <code>Enumerable#sort_by</code></p>
 <pre id="license" class="no-highlight">Copyright (c) 2013,2014, Matthew Kerwin <matthew@kerwin.net.au>Permission to use, copy, modify, and/or distribute this software for anypurpose with or without fee is hereby granted, provided that the abovecopyright notice and this permission notice appear in all copies.THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIESWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OFMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FORANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGESWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN ANACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OFOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</pre></body>
 </html>

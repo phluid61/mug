@@ -138,6 +138,66 @@ obj.to_bool #=> !!obj
 obj.to_b #=> C-like truthiness
 ```
 
+clamp
+-----
+
+Clamps a number to a range.
+
+### Numeric
+
+#### `num.clamp lower, higher => new\_num`
+
+Clamps _num_ so that _lower_ <= _new\_num_ <= _higher_.
+
+Returns _lower_ when _num_ < _lower_, _higher_ when _num_ > _higher_, otherwise
+_num_ itself.
+
+Raises an exception if _lower_ > _higher_
+
+#### `num.clamp range => new\_num`
+
+Effectively calls range#bound
+
+### Range
+
+#### `rng.bound val => new\_val`
+
+Bounds val so that _first_ <= _new\_val_ <= _last_.
+
+Returns _first_ when _val_ < _first_, _last_ when _val_ > _last_, otherwise
+_val_ itself.
+
+Raises an exception if _val_ >= _end_ and the range is exclusive.
+
+
+counts
+------
+
+Returns counts of objects in enumerables.
+
+### Enumerable
+
+#### `enum.counts`
+
+Returns a hash of `item=>count` showing how many
+of each _item_ are in this Enumerable.
+
+#### `enum.counts_by {|item| block }`
+
+Passes each element in turn to the block, and returns a
+hash of `result=>count`.
+
+If no block is given, an enumerator is returned.
+
+### Examples
+
+```ruby
+require 'mug/counts'
+
+%w(a b b).counts                   #=> {'a'=>1, 'b'=>2}
+%w(a b b).counts_by{|o| o.upcase } #=> {'A'=>1, 'B'=>2}
+```
+
 fragile-method-chain
 --------------------
 
@@ -161,7 +221,7 @@ hash/map
 
 #### `hsh.map_values {|v| block }`
 
-Returns a new hash which is a copy of +hsh+ but each value is replaced by the result of running it through +block+.
+Returns a new hash which is a copy of _hsh_ but each value is replaced by the result of running it through _block_.
 
 ```ruby
 require 'mug/hash/map'
@@ -172,9 +232,9 @@ require 'mug/hash/map'
 
 #### `hsh.map_keys {|k| block }`
 
-Returns a new hash which is a copy of +hsh+ but each key is replaced by the result of running it through +block+.
+Returns a new hash which is a copy of _hsh_ but each key is replaced by the result of running it through _block_.
 
-If +block+ returns duplicate keys, they will be overwritten in the resulting hash.
+If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
 
 ```ruby
 require 'mug/hash/map'
@@ -185,9 +245,9 @@ require 'mug/hash/map'
 
 #### `hsh.map_pairs {|k, v| block }`
 
-Returns a new hash which is a copy of +hsh+ but each key-value pair is replaced by the result of running it through +block+.
+Returns a new hash which is a copy of _hsh_ but each key-value pair is replaced by the result of running it through _block_.
 
-If +block+ returns duplicate keys, they will be overwritten in the resulting hash.
+If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
 
 ```ruby
 require 'mug/hash/map'
@@ -205,7 +265,7 @@ hash/operations
 
 
 Returns a new Hash, whose value is the same as this
-one, with any extras in +other_hash+ added in.
+one, with any extras in _other_hash_ added in.
 
 Useful for default options.
 
@@ -220,8 +280,8 @@ foo a: 1, b: 1 # => {:a=>1, :b=>1, :c=>2}
 
 #### `hsh + other_hsh`
 
-Adds the contents of +other_hash+ to +hsh+.
-Entries with duplicate keys are overwritten with the values from +other_hash+
+Adds the contents of _other_hash_ to _hsh_.
+Entries with duplicate keys are overwritten with the values from _other_hash_
 
 ```ruby
 require 'mug/hash/operations'
@@ -236,9 +296,9 @@ b + a # => {:a=>1, :b=>1, :c=>2}
 
 Appends stuff to the hash.
 
-* If +o+ is a Hash, this is identical to calling #merge!
-* If +o+ is an Array with two elements, it is interpreted as [key,value]
-* If +o+ can be converted to a hash with #to_h, this is identical to calling #merge!
+* If _o_ is a Hash, this is identical to calling #merge!
+* If _o_ is an Array with two elements, it is interpreted as [key,value]
+* If _o_ can be converted to a hash with #to_h, this is identical to calling #merge!
 * Otherwise an ArgumentError is raised.
 
 ```ruby
@@ -260,7 +320,7 @@ iterator/for
 
 Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.
 
-Initially the receiving object is +obj+.  After each iteration, the receiving object is replaced with the result of the previous iteration.
+Initially the receiving object is _obj_.  After each iteration, the receiving object is replaced with the result of the previous iteration.
 
 ```ruby
 require 'mug/iterator/for'
@@ -276,15 +336,48 @@ iterator/method
 
 #### `meth.to_iter(*args)`
 
-Creates an Iterator object, which is a subclass of Enumerator that recursively invokes +meth+ on an object.
+Creates an Iterator object, which is a subclass of Enumerator that recursively invokes _meth_ on an object.
 
-Initially the receiving object is the object on which +meth+ is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.
+Initially the receiving object is the object on which _meth_ is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.
 
 ```ruby
 require 'mug/iterator/method'
 
 0.method(:next).to_iter.take(5) #=> [0,1,2,3,4]
 0.method(:+).to_iter(2).take(5) #=> [0,2,4,6,8]
+```
+
+loop-with
+---------
+
+### Kernel
+
+#### `loop_with_index(offset=0) {|i| block }`
+
+Repeatedly executes the block, yielding the current iteration
+count, which starts from _offset_. If no block is given, returns
+a new Enumerator that includes the iteration count, starting
+from _offset_
+
+#### `loop_with_object(obj) {|o| block }`
+
+Repeatedly executes the block, yielding an arbitrary object, _obj_.
+
+### Examples
+
+```ruby
+require 'mug/loop-with'
+
+loop_with_index do |i|
+  p i
+  break
+end
+
+arr = loop_with_object([]) do |a|
+  s = gets.chomp
+  throw StopIteration if s.empty?
+  a << s
+end
 ```
 
 maybe
@@ -295,11 +388,11 @@ maybe
 #### `obj.maybe`
 #### `obj.maybe { block }`
 
-Invokes a method on +obj+ iff +obj+ is truthy, otherwise returns +obj+.
+Invokes a method on _obj_ iff _obj_ is truthy, otherwise returns _obj_.
 
-When a block is given, the block is invoked in the scope of +obj+ (i.e. `self` in the block refers to +obj+).
+When a block is given, the block is invoked in the scope of _obj_ (i.e. `self` in the block refers to _obj_).
 
-When no block is given, `maybe` returns an object to conditionally delegates methods to +obj+.
+When no block is given, _maybe_ returns an object to conditionally delegates methods to _obj_.
 
 ```ruby
 require 'mug/maybe'
@@ -321,12 +414,14 @@ self
 
 #### `obj.self`
 #### `obj.self {|o| block }`
+#### `obj.itself`
+#### `obj.itself {|o| block }`
 
-When a block is given, yields +obj+ to the block and returns the resulting value.
+When a block is given, yields _obj_ to the block and returns the resulting value.
 
-When no block is given, simply returns +obj+.
+When no block is given, simply returns _obj_.
 
-> Note: this is different from `#tap` because `obj.tap{nil}` returns `obj`, but `obj.self{nil}` returns `nil`.
+> Note: this is different from `#tap` because `obj.tap{nil}` returns _obj_, but `obj.self{nil}` returns _nil_.
 
 ```ruby
 require 'mug/self'
@@ -335,7 +430,19 @@ require 'mug/self'
 obj.self #=> obj
 2.self{|i| i*3 } #=> 6
 [1,1,2,2,3].group_by(&:self) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
+
+1.itself #=> 1
+obj.itself #=> obj
+2.itself{|i| i*3 } #=> 6
+[1,1,2,2,3].group_by(&:itself) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
+
+#### `obj.revapply(*args) {|*list| block }`
+#### `obj.revapply(*args)`
+
+When a block is given, yields _obj_ and any _args_ to the block and returns the resulting value.
+
+When no block is given, returns an Enumerator.
 
 tau
 ---
@@ -358,7 +465,7 @@ puts TAU(15)
 
 See http://tauday.com to find out what it's all about.
 
-to_h
+to\_h
 ----
 
 > Note: for Ruy 2.1, `Enumerable#to_h` [is already defined](http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h) in a similar but _not identical_ way.  Please take care when mixing this gem with Ruby >=2.1.
@@ -380,4 +487,52 @@ Each element of _enum_ must be a single item, or an array of two items.  Duplica
 [[1,2],[3,4]].to_h  #=> {1=>2, 3=>4}
 [[1,2],[1,4]].to_h  #=> {1=>4}
 ```
+
+top
+---
+
+### Enumerable
+
+#### `enum.top(n=1)`
+#### `enum.top(n=1) {|a,b| block }`
+
+Get the top _n_ items, in order from top to bottom.
+
+Returns an _Array_ even when _n_ is 1.
+
+See: `Enumerable#sort`
+
+#### `enum.top_by(n=1) {|item| block }`
+
+Get the top _n_ items, in order from top to bottom, ordered
+by mapping the values through the given block.
+
+Returns an _Array_ even when _n_ is 1. Values that are tied
+after mapping are returned in the initial order.
+
+If no block is given, an enumerator is returned instead.
+
+See: `Enumerable#sort_by`
+
+
+#### `enum.bottom(n=1)`
+#### `enum.bottom(n=1) {|a,b| block }`
+
+Get the bottom _n_ items, in order from bottom to top.
+
+Returns an _Array_ even when _n_ is 1.
+
+See: `Enumerable#sort`
+
+#### `enum.bottom_by(n=1) {|item| item }`
+
+Get the bottom _n_ items, in order from bottom to top, ordered
+by mapping the values through the given block.
+
+Returns an _Array_ even when _n_ is 1. Values that are tied
+after mapping are returned in the initial order.
+
+If no block is given, an enumerator is returned instead.
+
+See: `Enumerable#sort_by`
 
