@@ -12,5 +12,4 @@ matrix:
   allow_failures:
     - rvm: jruby-19mode
     - rvm: "1.9.3"
-    - rvm: "2.2.0"
 script: "bundle exec rake test"
