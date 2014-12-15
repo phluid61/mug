@@ -138,6 +138,38 @@ obj.to_bool #=> !!obj
 obj.to_b #=> C-like truthiness
 ```
 
+clamp
+-----
+
+Clamps a number to a range.
+
+### Numeric
+
+#### `num.clamp lower, higher => new\_num`
+
+Clamps _num_ so that _lower_ <= _new\_num_ <= _higher_.
+
+Returns _lower_ when _num_ < _lower_, _higher_ when _num_ > _higher_, otherwise
+_num_ itself.
+
+Raises an exception if _lower_ > _higher_
+
+#### `num.clamp range => new\_num`
+
+Effectively calls range#bound
+
+### Range
+
+#### `rng.bound val => new\_val`
+
+Bounds val so that _first_ <= _new\_val_ <= _last_.
+
+Returns _first_ when _val_ < _first_, _last_ when _val_ > _last_, otherwise
+_val_ itself.
+
+Raises an exception if _val_ >= _end_ and the range is exclusive.
+
+
 counts
 ------
 
