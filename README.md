@@ -407,6 +407,23 @@ a.maybe{ b.maybe{ c } }
 a.maybe.b.maybe.c
 ```
 
+rexproc
+-------
+
+### Regexp
+
+#### `rex.to_proc`
+
+Returns a proc that accepts one argument, that matches against this regexp object.
+
+```ruby
+require 'mug/rexproc'
+
+%w[foo bar baz].select &/\Ab/ #=> ["bar", "baz"]
+%w[foo bar baz].reject &/\Ab/ #=> ["foo"]
+%w[foo bar baz].find &/\Ab/ #=> "bar"
+```
+
 self
 ----
 
