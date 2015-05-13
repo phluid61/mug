@@ -407,6 +407,43 @@ a.maybe{ b.maybe{ c } }
 a.maybe.b.maybe.c
 ```
 
+negativity
+----------
+
+### Numeric
+
+#### `num.negative?`
+
+If _num_ is negative (i.e. < 0), returns itself, otherwise returns _nil_.
+
+#### `num.positive?`
+
+If _num_ is positive (i.e. > 0), returns itself, otherwise returns _nil_.
+
+#### `num.nonnegative?`
+
+If _num_ is nonnegative (i.e. >= 0), returns itself, otherwise returns _nil_.
+
+#### `num.nonpositive?`
+
+If _num_ is nonpositive (i.e. <= 0), returns itself, otherwise returns _nil_.
+
+### Examples
+
+```ruby
+require 'mug/negativity'
+
+if i.negative?
+  puts "#{i} = 0 - #{-i}"
+end
+
+n.positive? or raise('not enough items')
+
+x.nonnegative? || -x
+
+arr.map{|i| i.nonpositive? }.flatten
+```
+
 rexproc
 -------
 
