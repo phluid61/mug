@@ -405,6 +405,56 @@ a.maybe{ b.maybe{ c } }
 a.maybe.b.maybe.c
 </code></pre>
 
+<h2>negativity</h2>
+
+<h3>Numeric</h3>
+
+<h4><code>num.negative?</code></h4>
+
+<p>If <em>num</em> is negative (i.e. &lt; 0), returns itself, otherwise returns <em>nil</em>.</p>
+
+<h4><code>num.positive?</code></h4>
+
+<p>If <em>num</em> is positive (i.e. &gt; 0), returns itself, otherwise returns <em>nil</em>.</p>
+
+<h4><code>num.nonnegative?</code></h4>
+
+<p>If <em>num</em> is nonnegative (i.e. &gt;= 0), returns itself, otherwise returns <em>nil</em>.</p>
+
+<h4><code>num.nonpositive?</code></h4>
+
+<p>If <em>num</em> is nonpositive (i.e. &lt;= 0), returns itself, otherwise returns <em>nil</em>.</p>
+
+<h3>Examples</h3>
+
+<pre lang="ruby"><code>require &#39;mug/negativity&#39;
+
+if i.negative?
+  puts &quot;#{i} = 0 - #{-i}&quot;
+end
+
+n.positive? or raise(&#39;not enough items&#39;)
+
+x.nonnegative? || -x
+
+arr.map{|i| i.nonpositive? }.flatten
+</code></pre>
+
+<h2>rexproc</h2>
+
+<h3>Regexp</h3>
+
+<h4><code>rex.to_proc</code></h4>
+
+<p>Returns a proc that accepts one argument, that matches against this regexp object.</p>
+
+<pre lang="ruby"><code>require &#39;mug/rexproc&#39;
+
+%w[foo bar baz].select &amp;/\Ab/ #=&gt; [&quot;bar&quot;, &quot;baz&quot;]
+%w[foo bar baz].reject &amp;/\Ab/ #=&gt; [&quot;foo&quot;]
+%w[foo bar baz].find &amp;/\Ab/ #=&gt; &quot;bar&quot;
+</code></pre>
+
 <h2>self</h2>
 
 <h3>Object</h3>
