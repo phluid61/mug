@@ -441,7 +441,7 @@ n.positive? or raise('not enough items')
 
 x.nonnegative? || -x
 
-arr.map{|i| i.nonpositive? }.flatten
+arr.map{|i| i.nonpositive? }.compact
 ```
 
 rexproc
