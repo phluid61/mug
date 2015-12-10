@@ -516,26 +516,13 @@ puts TAU(15)
 
 <h2>to_h</h2>
 
+<p><strong>Removed</strong></p>
+
 <blockquote>
-<p>Note: for Ruy 2.1, <code>Enumerable#to_h</code> <a href="http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h">is already defined</a> in a similar but <em>not identical</em> way.  Please take care when mixing this gem with Ruby &gt;=2.1.</p>
+<p>Note: for Ruy 2.1, <code>Enumerable#to_h</code> <a href="http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h">is already defined</a>.</p>
 
-<p>Note: for Ruby &lt;2.0, it is advisable to also include the <a href="https://rubygems.org/gems/to_h"><em>to_h</em> gem</a>.</p>
+<p>Note: for Ruby &lt;2.0, it is advisable to instead use the <a href="https://rubygems.org/gems/to_h"><em>to_h</em> gem</a>.</p>
 </blockquote>
-
-<h3>Enumerable</h3>
-
-<h4><code>enum.to_h</code></h4>
-
-<p>Converts <em>enum</em> to a hash.</p>
-
-<p>Each element of <em>enum</em> must be a single item, or an array of two items.  Duplicate keys are overwritten in order.</p>
-
-<pre lang="ruby"><code>[].to_h             #=&gt; {}
-[1,2].to_h          #=&gt; {1=&gt;nil, 2=&gt;nil}
-(1..2).to_h         #=&gt; {1=&gt;nil, 2=&gt;nil}
-[[1,2],[3,4]].to_h  #=&gt; {1=&gt;2, 3=&gt;4}
-[[1,2],[1,4]].to_h  #=&gt; {1=&gt;4}
-</code></pre>
 
 <h2>top</h2>
 
