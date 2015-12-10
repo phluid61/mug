@@ -8,7 +8,7 @@ class Foo
 end
 
 require_relative '../lib/mug/apply'
-class Test_self < Test::Unit::TestCase
+class Test_apply < Test::Unit::TestCase
 	def test_apply_proc
 		prc = proc{|a,b,*c| (a||0) + (b||0) + c.inject(0, &:+) }
 		p1 = prc.apply(1)
