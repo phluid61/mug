@@ -46,7 +46,7 @@ class Array
 
 	# @see #extend!
 	def extend *args, &block
-		dup.extend! *args, &block
+		dup.extend!( *args, &block )
 	end
 
 end

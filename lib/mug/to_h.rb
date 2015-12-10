@@ -1,37 +1,12 @@
 
-if 0.to_enum.respond_to? :to_h
-	warn %|Warning: "mug/to_h" may conflict with built-in Enumerable#to_h functionality|
-end
-
-unless {}.respond_to? :to_h
-	warn %|Warning: "mug/to_h" does not make much sense without "to_h" (https://rubygems.org/gems/to_h)|
-end
-
-module Enumerable
-	#
-	# Converts +enum+ to a Hash.
-	#
-	# Each element of +enum+ must be a single item, or an array of two items.
-	# Duplicate keys are overwritten in order.
-	#
-	#    [].to_h             #=> {}
-	#    [1,2].to_h          #=> {1=>nil, 2=>nil}
-	#    (1..2).to_h         #=> {1=>nil, 2=>nil}
-	#    [[1,2],[3,4]].to_h  #=> {1=>2, 3=>4}
-	#    [[1,2],[1,4]].to_h  #=> {1=>4}
-	#
-	def to_h
-		hsh = {}
-		each do |k,v,*x|
-			raise ArgumentError, "invalid number of elements (#{x.length+2} for 1..2)" if x.any?
-			hsh[k] = v
-		end
-		hsh
-	end
+if {}.respond_to? :to_h
+	warn %|Warning: "mug/to_h" has been removed as it conflicts with core to_h behaviour|
+else
+	warn %|Warning: "mug/to_h" has been removed; see the "to_h" gem (https://rubygems.org/gems/to_h)|
 end
 
 =begin
-Copyright (c) 2013,2014, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2015, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

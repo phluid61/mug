@@ -16,6 +16,5 @@ require_relative 'mug/negativity'
 require_relative 'mug/rexproc'
 require_relative 'mug/self'
 require_relative 'mug/tau'
-require_relative 'mug/to_h'
 require_relative 'mug/top'
 

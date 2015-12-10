@@ -1,12 +1,14 @@
 
 class Numeric
 
-	def negative?
-		self < 0 ? self : nil
-	end
+	if RUBY_VERSION < '2.3'
+		def negative?
+			self < 0 ? self : nil
+		end
 
-	def positive?
-		self > 0 ? self : nil
+		def positive?
+			self > 0 ? self : nil
+		end
 	end
 
 	def nonnegative?
@@ -20,8 +22,10 @@ class Numeric
 end
 
 class Complex
-	undef :negative?
-	undef :positive?
+	if RUBY_VERSION < '2.3'
+		undef :negative?
+		undef :positive?
+	end
 	undef :nonnegative?
 	undef :nonpositive?
 end
