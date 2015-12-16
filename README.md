@@ -95,6 +95,21 @@ given block and storing the return value.
 
 See `#extend!`
 
+array/minus
+-----------
+
+### Array
+
+#### `array.minus(ary, remainder: false)`
+
+Subtract elements from this array.
+
+This is similar to `Array#-` except that elements from this array are
+removed only once per instance in _ary_.
+
+If _remainder_ is given and true, returns a second array which is
+all elements in _ary_ that were not present in this array.
+
 bool
 ----
 
