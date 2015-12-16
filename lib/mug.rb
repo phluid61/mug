@@ -2,6 +2,7 @@
 require_relative 'mug/and-or'
 require_relative 'mug/apply'
 require_relative 'mug/array/extend'
+require_relative 'mug/array/minus'
 require_relative 'mug/bool'
 require_relative 'mug/clamp'
 require_relative 'mug/counts'
