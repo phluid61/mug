@@ -3,16 +3,18 @@ branches:
     - gh-pages
 language: ruby
 rvm:
-#  - "2.3.0"
+  - ruby-trunk
+  - "2.3.0"
   - "2.2.0"
   - "2.1.0"
   - "2.0.0"
   - "1.9.3"
   - jruby-19mode
-  - rbx-2.1.1
+#  - rbx-2.1.1
 matrix:
   allow_failures:
-    - rvm: jruby-19mode
-    - rvm: rbx-2.1.1
     - rvm: "1.9.3"
+    - rvm: ruby-trunk
+    - rvm: jruby-19mode
+#    - rvm: rbx-2.1.1
 script: "bundle exec rake test"
