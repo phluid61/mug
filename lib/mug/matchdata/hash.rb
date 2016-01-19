@@ -8,15 +8,15 @@ class MatchData
 	# groups or not.
 	def to_h
 		if names.empty?
-			captures.each_with_index.map{|v,i| [i+1, v] }.to_h
+			Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
 		else
-			names.map{|n| [n, self[n]] }.to_h
+			Hash[ names.map{|n| [n, self[n]] } ]
 		end
 	end
 
 	# Returns a Hash object of capture name => captured string.
 	def named_captures
-		names.map{|n| [n, self[n]] }.to_h
+		Hash[ names.map{|n| [n, self[n]] } ]
 	end
 
 	# Returns a Hash object of capture position => captured string.
@@ -28,7 +28,7 @@ class MatchData
 	# captures will be available using this method!
 	def positional_captures include_names: false
 		return {} unless names.empty? || include_names
-		captures.each_with_index.map{|v,i| [i+1, v] }.to_h
+		Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
 	end
 
 end
