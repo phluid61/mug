@@ -395,6 +395,73 @@ arr = loop_with_object([]) do |a|
 end
 ```
 
+matchdata/each
+--------------
+
+### MatchData
+
+#### `md.each`
+#### `md.each { |str| block }`
+
+Iterates over each capture group in the MatchData object,
+including `$&` (the entire matched string), yielding the
+captured string.
+
+#### `md.each_capture`
+#### `md.each_capture {|key, str| block }
+
+Iterates over each capture group in the MatchData object,
+yielding the capture position and captured string.
+
+The capture positions are either all Strings or all Integers,
+depending on whether the original Regexp had named capture
+groups or not.
+
+#### `md.each_named_capture`
+#### `md.each_named_capture {|name, str| block }
+
+Iterates over each named capture group in the MatchData object,
+yielding the capture name and string.
+
+#### `md.each_positional_capture(include_names: false)`
+#### `md.each_positional_capture(include_names: false) {|name, str| block }
+
+Iterates over each positional capture group in the MatchData object,
+yielding the capture position and string.
+
+If `include_names` is given and true, treats named captures
+as positional captures.
+
+WARNING: if mixing named and positional captures, no positional
+captures will be available using this method!
+
+matchdata/hash
+--------------
+
+### MatchData
+
+#### `md.to_h`
+
+Returns a Hash object of capture position => captured string.
+
+The capture positions are either all Strings or all Integers,
+depending on whether the original Regexp had named capture
+groups or not.
+
+#### `md.named_captures`
+
+Returns a Hash object of capture name => captured string.
+
+#### `md.positional_captures(include_names: false)`
+
+Returns a Hash object of capture position => captured string.
+
+If `include_names` is given and true, treats named captures
+as positional captures.
+
+WARNING: if mixing named and positional captures, no positional
+captures will be available using this method!
+
 maybe
 -----
 
