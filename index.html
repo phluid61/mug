@@ -393,6 +393,75 @@ arr = loop_with_object([]) do |a|
 end
 </code></pre>
 
+<h2>matchdata/each</h2>
+
+<h3>MatchData</h3>
+
+<h4><code>md.each</code></h4>
+
+<h4><code>md.each { |str| block }</code></h4>
+
+<p>Iterates over each capture group in the MatchData object,<br>
+including <code>$&amp;</code> (the entire matched string), yielding the<br>
+captured string.</p>
+
+<h4><code>md.each_capture</code></h4>
+
+<h4>`md.each_capture {|key, str| block }</h4>
+
+<p>Iterates over each capture group in the MatchData object,<br>
+yielding the capture position and captured string.</p>
+
+<p>The capture positions are either all Strings or all Integers,<br>
+depending on whether the original Regexp had named capture<br>
+groups or not.</p>
+
+<h4><code>md.each_named_capture</code></h4>
+
+<h4>`md.each_named_capture {|name, str| block }</h4>
+
+<p>Iterates over each named capture group in the MatchData object,<br>
+yielding the capture name and string.</p>
+
+<h4><code>md.each_positional_capture(include_names: false)</code></h4>
+
+<h4>`md.each_positional_capture(include_names: false) {|name, str| block }</h4>
+
+<p>Iterates over each positional capture group in the MatchData object,<br>
+yielding the capture position and string.</p>
+
+<p>If <code>include_names</code> is given and true, treats named captures<br>
+as positional captures.</p>
+
+<p>WARNING: if mixing named and positional captures, no positional<br>
+captures will be available using this method!</p>
+
+<h2>matchdata/hash</h2>
+
+<h3>MatchData</h3>
+
+<h4><code>md.to_h</code></h4>
+
+<p>Returns a Hash object of capture position =&gt; captured string.</p>
+
+<p>The capture positions are either all Strings or all Integers,<br>
+depending on whether the original Regexp had named capture<br>
+groups or not.</p>
+
+<h4><code>md.named_captures</code></h4>
+
+<p>Returns a Hash object of capture name =&gt; captured string.</p>
+
+<h4><code>md.positional_captures(include_names: false)</code></h4>
+
+<p>Returns a Hash object of capture position =&gt; captured string.</p>
+
+<p>If <code>include_names</code> is given and true, treats named captures<br>
+as positional captures.</p>
+
+<p>WARNING: if mixing named and positional captures, no positional<br>
+captures will be available using this method!</p>
+
 <h2>maybe</h2>
 
 <h3>Object</h3>
