@@ -40,6 +40,12 @@ Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
 
+Additional license is granted to the Ruby Core Team to use this software
+in the ruby core or ruby standard libraries without including the above
+copyright notice nor this permission notice.  Subsequently, such a copy
+of this software becomes wholly subject to the relevant licensing terms
+of the ruby core or ruby standard libraries.
+
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR

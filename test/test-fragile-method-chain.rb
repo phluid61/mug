@@ -60,6 +60,12 @@ class Test_fmc < Test::Unit::TestCase
 	def test_fmc_nested
 		a = FMCTest::A.new
 		assert_equal( 1, a._?.b._?.c._!.to_i._! )
+		a.b.c = false
+		assert_equal( false, a._?.b._?.c._!.to_i._! )
+		a.b = false
+		assert_equal( false, a._?.b._?.c._!.to_i._! )
+		a = false
+		assert_equal( false, a._?.b._?.c._!.to_i._! )
 	end
 end
 

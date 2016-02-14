@@ -11,9 +11,9 @@ class FragileMethodChain
 	#
 	# Creates a FragileMethodChain which will send its first method to +o+
 	#
-	def initialize o
+	def initialize o, falsy: true
 		@o = o
-		@chain = []
+		@falsy = falsy
 	end
 
 	#
@@ -23,23 +23,30 @@ class FragileMethodChain
 	# returned in the chain, or its end result.
 	#
 	def _!
-		@chain.inject(@o) do |o,x|
-			a,b = x
-			break o unless o
-			o.__send__(*a, &b)
-		end
+		@o
 	end
 
-	# Record the method args/block
+	# Delegate the method args/block
 	def method_missing *a, &b #:nodoc:
-		@chain << [a,b]
+		if __defer?
+			@o = @o.__send__(*a, &b)
+		end
 		self
 	end
 
-	# Explicitly record :_? as a method in the chain.
+	# Explicitly invoke :_? as a method in the chain.
 	def _? #:nodoc:
-		@chain << [[ :_? ],nil]
+		# Unconditionally invoke it, so the eventual _! doesn't fail
+		#if __defer?
+			@o = @o.__send__(:_?)
+		#end
 		self
+	end
+
+	# Return true iff @o is deferable.
+	def __defer?
+		return @o if @falsy
+		! @o.nil?
 	end
 end
 
@@ -53,7 +60,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013,2016, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
