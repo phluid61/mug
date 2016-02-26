@@ -1,55 +1,10 @@
 
-class Array
+module Kernel
 	#
-	# Returns +true+ if +self+ contains elements.
+	# Negate a predicate.
 	#
-	def nonempty?
-		!empty?
-	end
-end
-
-class Hash
-	#
-	# Returns +true+ if +hsh+ contains elements.
-	#
-	def nonempty?
-		!empty?
-	end
-end
-
-class String
-	#
-	# Returns +true+ if +str+ has a length greater than zero.
-	#
-	def nonempty?
-		!empty?
-	end
-end
-
-class Symbol
-	#
-	# Returns that +sym+ is not :"".
-	#
-	def nonempty?
-		!empty?
-	end
-end
-
-class << ENV
-	#
-	# Returns true when there are environment variables.
-	#
-	def nonempty?
-		!empty?
-	end
-end
-
-class Queue
-	#
-	# Returns +true+ if the queue is not empty.
-	#
-	def nonempty?
-		!empty?
+	def not(*a, &b)
+		not a.empty? ? (b ? (yield self) : self) : __send__(*a, &b)
 	end
 end
 
@@ -59,6 +14,12 @@ Copyright (c) 2016, Matthew Kerwin <matthew@kerwin.net.au>
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
+
+Additional license is granted to the Ruby Core Team to use this software
+in the ruby core or ruby standard libraries without including the above
+copyright notice nor this permission notice.  Subsequently, such a copy
+of this software becomes wholly subject to the relevant licensing terms
+of the ruby core or ruby standard libraries.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
