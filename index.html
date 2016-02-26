@@ -532,57 +532,31 @@ x.nonnegative? || -x
 arr.map{|i| i.nonpositive? }.compact
 </code></pre>
 
-<h2>nonempty</h2>
+<h2>not</h2>
 
-<h3>Array</h3>
+<h3>Kernel</h3>
 
-<h4><code>arr.nonempty?</code></h4>
+<h4><code>obj.not</code></h4>
 
-<p>Returns <code>true</code> if <code>self</code> contains elements.</p>
+<h4><code>obj.not {|o| block }</code></h4>
 
-<h3>Hash</h3>
+<h4><code>obj.not(*a)</code></h4>
 
-<h4><code>hsh.nonempty?</code></h4>
+<h4><code>obj.not(*a) {|o| block }</code></h4>
 
-<p>Returns <code>true</code> if <em>hsh</em> contains elements.</p>
-
-<h3>String</h3>
-
-<h4><code>str.nonempty?</code></h4>
-
-<p>Returns <code>true</code> if <em>str</em>  has a length greater than zero.</p>
-
-<h3>Symbol</h3>
-
-<h4><code>sym.nonempty?</code></h4>
-
-<p>Returns that <em>sym</em> is not <code>:&quot;&quot;</code>.</p>
-
-<h3>ENV</h3>
-
-<h4><code>ENV.nonempty?</code></h4>
-
-<p>Returns true when there are environment variables.</p>
-
-<h3>Queue</h3>
-
-<h4><code>q.nonempty?</code></h4>
-
-<p>Returns <code>true</code> if the queue is not empty.</p>
+<p>Negate a predicate.</p>
 
 <h3>Examples</h3>
 
-<pre lang="ruby"><code>require &#39;mug/nonempty/
+<pre lang="ruby"><code>require &#39;mug/not
 
-[1 2 3].nonempty? #=&gt; true
-{}.nonempty?      #=&gt; false
-&#39;&#39;.nonempty?      #=&gt; false
-:foo.nonempty?    #=&gt; true
-ENV.nonempty?     #=&gt; true
+false.not        #=&gt; true
+true.not         #=&gt; false
 
-require &#39;thread&#39;
+[].not &amp;:empty?  #=&gt; false
+[1].not :empty?  #=&gt; true
 
-Queue.new.nonempty? #=&gt; false
+[1,-2,3].not(:all?) {|e| e &gt; 0 } #=&gt; true
 </code></pre>
 
 <h2>rexproc</h2>

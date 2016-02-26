@@ -536,59 +536,33 @@ x.nonnegative? || -x
 arr.map{|i| i.nonpositive? }.compact
 ```
 
-nonempty
+not
 --------
 
-### Array
+### Kernel
 
-#### `arr.nonempty?`
+#### `obj.not`
 
-Returns `true` if `self` contains elements.
+#### `obj.not {|o| block }`
 
-### Hash
+#### `obj.not(*a)`
 
-#### `hsh.nonempty?`
+#### `obj.not(*a) {|o| block }`
 
-Returns `true` if _hsh_ contains elements.
-
-### String
-
-#### `str.nonempty?`
-
-Returns `true` if _str_  has a length greater than zero.
-
-### Symbol
-
-#### `sym.nonempty?`
-
-Returns that _sym_ is not `:""`.
-
-### ENV
-
-#### `ENV.nonempty?`
-
-Returns true when there are environment variables.
-
-### Queue
-
-#### `q.nonempty?`
-
-Returns `true` if the queue is not empty.
+Negate a predicate.
 
 ### Examples
 
 ```ruby
-require 'mug/nonempty/
+require 'mug/not
 
-[1 2 3].nonempty? #=> true
-{}.nonempty?      #=> false
-''.nonempty?      #=> false
-:foo.nonempty?    #=> true
-ENV.nonempty?     #=> true
+false.not        #=> true
+true.not         #=> false
 
-require 'thread'
+[].not &:empty?  #=> false
+[1].not :empty?  #=> true
 
-Queue.new.nonempty? #=> false
+[1,-2,3].not(:all?) {|e| e > 0 } #=> true
 ```
 
 
