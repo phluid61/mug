@@ -554,7 +554,7 @@ Negate a predicate.
 ### Examples
 
 ```ruby
-require 'mug/not
+require 'mug/not'
 
 false.not        #=> true
 true.not         #=> false
