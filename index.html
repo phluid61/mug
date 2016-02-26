@@ -49,6 +49,15 @@ data_store.get_env_hash.or(default_hash).do_something
 get_a_list.and(default_list, &amp;:empty?).do_something
 </code></pre>
 
+<h2>any-and-all</h2>
+
+<h3>Enumerable</h3>
+
+<p>Passes each element of the collection to the given block. The method returns <code>true</code> if the<br>
+block contains elements that never return <code>false</code> or <code>nil</code>. If the block is not given, Ruby<br>
+adds an implicit block of <code>{ |obj| obj }</code> which will cause <code>and_and_all?</code> to return <code>true</code><br>
+when none of the collection members are <code>false</code> or <code>nil</code>.</p>
+
 <h2>apply</h2>
 
 <h3>Proc</h3>
@@ -521,6 +530,59 @@ n.positive? or raise(&#39;not enough items&#39;)
 x.nonnegative? || -x
 
 arr.map{|i| i.nonpositive? }.compact
+</code></pre>
+
+<h2>nonempty</h2>
+
+<h3>Array</h3>
+
+<h4><code>arr.nonempty?</code></h4>
+
+<p>Returns <code>true</code> if <code>self</code> contains elements.</p>
+
+<h3>Hash</h3>
+
+<h4><code>hsh.nonempty?</code></h4>
+
+<p>Returns <code>true</code> if <em>hsh</em> contains elements.</p>
+
+<h3>String</h3>
+
+<h4><code>str.nonempty?</code></h4>
+
+<p>Returns <code>true</code> if <em>str</em>  has a length greater than zero.</p>
+
+<h3>Symbol</h3>
+
+<h4><code>sym.nonempty?</code></h4>
+
+<p>Returns that <em>sym</em> is not <code>:&quot;&quot;</code>.</p>
+
+<h3>ENV</h3>
+
+<h4><code>ENV.nonempty?</code></h4>
+
+<p>Returns true when there are environment variables.</p>
+
+<h3>Queue</h3>
+
+<h4><code>q.nonempty?</code></h4>
+
+<p>Returns <code>true</code> if the queue is not empty.</p>
+
+<h3>Examples</h3>
+
+<pre lang="ruby"><code>require &#39;mug/nonempty/
+
+[1 2 3].nonempty? #=&gt; true
+{}.nonempty?      #=&gt; false
+&#39;&#39;.nonempty?      #=&gt; false
+:foo.nonempty?    #=&gt; true
+ENV.nonempty?     #=&gt; true
+
+require &#39;thread&#39;
+
+Queue.new.nonempty? #=&gt; false
 </code></pre>
 
 <h2>rexproc</h2>
