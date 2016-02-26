@@ -33,6 +33,16 @@ data_store.get_env_hash.or(default_hash).do_something
 get_a_list.and(default_list, &:empty?).do_something
 ```
 
+any-and-all
+-----------
+
+### Enumerable
+
+Passes each element of the collection to the given block. The method returns `true` if the
+block contains elements that never return `false` or `nil`. If the block is not given, Ruby
+adds an implicit block of `{ |obj| obj }` which will cause `and_and_all?` to return `true`
+when none of the collection members are `false` or `nil`.
+
 apply
 -----
 
@@ -525,6 +535,62 @@ x.nonnegative? || -x
 
 arr.map{|i| i.nonpositive? }.compact
 ```
+
+nonempty
+--------
+
+### Array
+
+#### `arr.nonempty?`
+
+Returns `true` if `self` contains elements.
+
+### Hash
+
+#### `hsh.nonempty?`
+
+Returns `true` if _hsh_ contains elements.
+
+### String
+
+#### `str.nonempty?`
+
+Returns `true` if _str_  has a length greater than zero.
+
+### Symbol
+
+#### `sym.nonempty?`
+
+Returns that _sym_ is not `:""`.
+
+### ENV
+
+#### `ENV.nonempty?`
+
+Returns true when there are environment variables.
+
+### Queue
+
+#### `q.nonempty?`
+
+Returns `true` if the queue is not empty.
+
+### Examples
+
+```ruby
+require 'mug/nonempty/
+
+[1 2 3].nonempty? #=> true
+{}.nonempty?      #=> false
+''.nonempty?      #=> false
+:foo.nonempty?    #=> true
+ENV.nonempty?     #=> true
+
+require 'thread'
+
+Queue.new.nonempty? #=> false
+```
+
 
 rexproc
 -------
