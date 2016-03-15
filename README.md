@@ -641,6 +641,40 @@ puts TAU(15)
 
 See http://tauday.com to find out what it's all about.
 
+time
+----
+
+### Time
+
+#### `t.to_now`
+
+Returns the number of seconds since the time represented by
+this Time object.
+
+```ruby
+start = Time.now
+#...
+duration = start.to_now
+```
+
+#### `t.from_now`
+
+Returns the number of seconds until the time represented by
+this Time object.
+
+```ruby
+target = Time.new 2017, 1, 1, 0, 0, 0
+sleep target.from_now
+```
+
+#### `Time.until t`
+
+Returns the number of seconds until `t`.
+
+#### `Time.since t`
+
+Returns the number of seconds since `t`.
+
 to\_h
 ----
 

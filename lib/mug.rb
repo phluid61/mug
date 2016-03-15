@@ -21,5 +21,6 @@ require_relative 'mug/not'
 require_relative 'mug/rexproc'
 require_relative 'mug/self'
 require_relative 'mug/tau'
+require_relative 'mug/time'
 require_relative 'mug/top'
 
