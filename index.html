@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="highlight.js/styles/default.css">
     <script src="highlight.js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <style type="text/css">#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}</style>
+    <style type="text/css">#toc{float:right}#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}</style>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,12 +70,12 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="gem-#and-or">and-or</a></li><li><a href="gem-#any-and-all">any-and-all</a></li><li><a href="gem-#apply">apply</a></li><li><a href="gem-#array/extend">array/extend</a></li><li><a href="gem-#array/minus">array/minus</a></li><li><a href="gem-#bool">bool</a></li><li><a href="gem-#clamp">clamp</a></li><li><a href="gem-#counts">counts</a></li><li><a href="gem-#fragile-method-chain">fragile-method-chain</a></li><li><a href="gem-#hash/map">hash/map</a></li><li><a href="gem-#hash/operations">hash/operations</a></li><li><a href="gem-#iterator/for">iterator/for</a></li><li><a href="gem-#iterator/method">iterator/method</a></li><li><a href="gem-#loop-with">loop-with</a></li><li><a href="gem-#matchdata/each">matchdata/each</a></li><li><a href="gem-#matchdata/hash">matchdata/hash</a></li><li><a href="gem-#maybe">maybe</a></li><li><a href="gem-#negativity">negativity</a></li><li><a href="gem-#not">not</a></li><li><a href="gem-#rexproc">rexproc</a></li><li><a href="gem-#self">self</a></li><li><a href="gem-#tau">tau</a></li><li><a href="gem-#to_h">to_h</a></li><li><a href="gem-#top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a></p>
 
-<h2>and-or</h2>
+<h2 id="gem-and-or">and-or</h2>
 
 <h3>Object</h3>
 
@@ -104,7 +104,7 @@ data_store.get_env_hash.or(default_hash).do_something
 get_a_list.and(default_list, &amp;:empty?).do_something
 </code></pre>
 
-<h2>any-and-all</h2>
+<h2 id="gem-any-and-all">any-and-all</h2>
 
 <h3>Enumerable</h3>
 
@@ -113,7 +113,7 @@ block contains elements that never return <code>false</code> or <code>nil</code>
 adds an implicit block of <code>{ |obj| obj }</code> which will cause <code>and_and_all?</code> to return <code>true</code><br>
 when none of the collection members are <code>false</code> or <code>nil</code>.</p>
 
-<h2>apply</h2>
+<h2 id="gem-apply">apply</h2>
 
 <h3>Proc</h3>
 
@@ -146,7 +146,7 @@ supplied arguments to the original proc and returns the result.<br>
 Otherwise, returns another curried proc that takes the rest of<br>
 arguments.</p>
 
-<h2>array/extend</h2>
+<h2 id="gem-array/extend">array/extend</h2>
 
 <h3>Array</h3>
 
@@ -178,7 +178,7 @@ given block and storing the return value.</p>
 
 <p>See <code>#extend!</code></p>
 
-<h2>array/minus</h2>
+<h2 id="gem-array/minus">array/minus</h2>
 
 <h3>Array</h3>
 
@@ -192,7 +192,7 @@ removed only once per instance in <em>ary</em>.</p>
 <p>If <em>remainder</em> is given and true, returns a second array which is<br>
 all elements in <em>ary</em> that were not present in this array.</p>
 
-<h2>bool</h2>
+<h2 id="gem-bool">bool</h2>
 
 <h3>Kernel</h3>
 
@@ -235,7 +235,7 @@ obj.to_bool #=&gt; !!obj
 obj.to_b #=&gt; C-like truthiness
 </code></pre>
 
-<h2>clamp</h2>
+<h2 id="gem-clamp">clamp</h2>
 
 <p>Clamps a number to a range.</p>
 
@@ -265,7 +265,7 @@ obj.to_b #=&gt; C-like truthiness
 
 <p>Raises an exception if <em>val</em> &gt;= <em>end</em> and the range is exclusive.</p>
 
-<h2>counts</h2>
+<h2 id="gem-counts">counts</h2>
 
 <p>Returns counts of objects in enumerables.</p>
 
@@ -291,7 +291,7 @@ hash of <code>result=&gt;count</code>.</p>
 %w(a b b).counts_by{|o| o.upcase } #=&gt; {&#39;A&#39;=&gt;1, &#39;B&#39;=&gt;2}
 </code></pre>
 
-<h2>fragile-method-chain</h2>
+<h2 id="gem-fragile-method-chain">fragile-method-chain</h2>
 
 <p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
 
@@ -305,7 +305,7 @@ a._?.b.c._!
 nested_hash._?[:a][:b][:c]._!
 </code></pre>
 
-<h2>hash/map</h2>
+<h2 id="gem-hash/map">hash/map</h2>
 
 <h3>Hash</h3>
 
@@ -343,7 +343,7 @@ nested_hash._?[:a][:b][:c]._!
 {&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2}.map_pairs { [&quot;cat&quot;,&quot;dog&quot;] }   #=&gt; {&#39;cat&#39;=&gt;&#39;dog&#39;}
 </code></pre>
 
-<h2>hash/operations</h2>
+<h2 id="gem-hash/operations">hash/operations</h2>
 
 <h3>Hash</h3>
 
@@ -394,7 +394,7 @@ h &lt;&lt; {:b=&gt;2,:c=&gt;3} # h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
 h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 </code></pre>
 
-<h2>iterator/for</h2>
+<h2 id="gem-iterator/for">iterator/for</h2>
 
 <h3>Object</h3>
 
@@ -410,7 +410,7 @@ h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 0.iter_for(:+,2).take(5) #=&gt; [0,2,4,6,8]
 </code></pre>
 
-<h2>iterator/method</h2>
+<h2 id="gem-iterator/method">iterator/method</h2>
 
 <h3>Method</h3>
 
@@ -426,7 +426,7 @@ h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 0.method(:+).to_iter(2).take(5) #=&gt; [0,2,4,6,8]
 </code></pre>
 
-<h2>loop-with</h2>
+<h2 id="gem-loop-with">loop-with</h2>
 
 <h3>Kernel</h3>
 
@@ -457,7 +457,7 @@ arr = loop_with_object([]) do |a|
 end
 </code></pre>
 
-<h2>matchdata/each</h2>
+<h2 id="gem-matchdata/each">matchdata/each</h2>
 
 <h3>MatchData</h3>
 
@@ -500,7 +500,7 @@ as positional captures.</p>
 <p>WARNING: if mixing named and positional captures, no positional<br>
 captures will be available using this method!</p>
 
-<h2>matchdata/hash</h2>
+<h2 id="gem-matchdata/hash">matchdata/hash</h2>
 
 <h3>MatchData</h3>
 
@@ -526,7 +526,7 @@ as positional captures.</p>
 <p>WARNING: if mixing named and positional captures, no positional<br>
 captures will be available using this method!</p>
 
-<h2>maybe</h2>
+<h2 id="gem-maybe">maybe</h2>
 
 <h3>Object</h3>
 
@@ -552,7 +552,7 @@ a.maybe{ b.maybe{ c } }
 a.maybe.b.maybe.c
 </code></pre>
 
-<h2>negativity</h2>
+<h2 id="gem-negativity">negativity</h2>
 
 <h3>Numeric</h3>
 
@@ -587,7 +587,7 @@ x.nonnegative? || -x
 arr.map{|i| i.nonpositive? }.compact
 </code></pre>
 
-<h2>not</h2>
+<h2 id="gem-not">not</h2>
 
 <h3>Kernel</h3>
 
@@ -614,7 +614,7 @@ true.not         #=&gt; false
 [1,-2,3].not(:all?) {|e| e &gt; 0 } #=&gt; true
 </code></pre>
 
-<h2>rexproc</h2>
+<h2 id="gem-rexproc">rexproc</h2>
 
 <h3>Regexp</h3>
 
@@ -629,7 +629,7 @@ true.not         #=&gt; false
 %w[foo bar baz].find &amp;/\Ab/ #=&gt; &quot;bar&quot;
 </code></pre>
 
-<h2>self</h2>
+<h2 id="gem-self">self</h2>
 
 <h3>Object</h3>
 
@@ -670,7 +670,7 @@ obj.itself #=&gt; obj
 
 <p>When no block is given, returns an Enumerator.</p>
 
-<h2>tau</h2>
+<h2 id="gem-tau">tau</h2>
 
 <p>Defines the true circle constant.</p>
 
@@ -688,7 +688,7 @@ puts TAU(15)
 
 <p>See <a href="http://tauday.com">http://tauday.com</a> to find out what it&#39;s all about.</p>
 
-<h2>to_h</h2>
+<h2 id="gem-to_h">to_h</h2>
 
 <p><strong>Removed</strong></p>
 
@@ -698,7 +698,7 @@ puts TAU(15)
 <p>Note: for Ruby &lt;2.0, it is advisable to instead use the <a href="https://rubygems.org/gems/to_h"><em>to_h</em> gem</a>.</p>
 </blockquote>
 
-<h2>top</h2>
+<h2 id="gem-top">top</h2>
 
 <h3>Enumerable</h3>
 
