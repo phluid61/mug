@@ -10,7 +10,7 @@ task 'index.html' => %w[head README.md LICENSE tail] do
   readme.gsub!(/<h2>([^<]+)<\/h2>/) do |m|
     name = $1
     id = $1.gsub /^\W+/, '_'
-    toc << "<li><a href=\"gem-\##{id}\">#{name}</a></li>"
+    toc << "<li><a href=\"\#gem-#{id}\">#{name}</a></li>"
     "<h2 id=\"gem-#{id}\">#{name}</h2>"
   end
   toc << '</ul></div>'
