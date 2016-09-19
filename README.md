@@ -277,6 +277,8 @@ require 'mug/hash/map'
 hash/merge
 ----------
 
+### Hash
+
 #### `hsh.merge_left other_hash => new_hash`
 
 Returns a new hash containing the contents of _other_hash_ and the
