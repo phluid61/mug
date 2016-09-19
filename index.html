@@ -70,7 +70,7 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a></p>
@@ -79,17 +79,13 @@
 
 <h3>Object</h3>
 
-<h4><code>obj.and default</code></h4>
-
-<h4><code>obj.and default {|o| block }</code></h4>
+<h4><code>obj.and default</code><br><code>obj.and default {|o| block }</code></h4>
 
 <p>Returns either <em>obj</em> or <em>default</em>, depending on the falsiness of <em>obj</em>.</p>
 
 <p>If a block is given, <em>obj</em> is yielded to it; if it returns truthy, <em>default</em> is returned, otherwise <em>obj</em> is returned.</p>
 
-<h4><code>obj.or default</code></h4>
-
-<h4><code>obj.or default {|o| block }</code></h4>
+<h4><code>obj.or default</code><br><code>obj.or default {|o| block }</code></h4>
 
 <p>Returns either <em>obj</em> or <em>default</em>, depending on the truthiness of <em>obj</em>.</p>
 
@@ -127,9 +123,7 @@ arguments.</p>
 
 <h3>Method</h3>
 
-<h4><code>meth.curry</code></h4>
-
-<h4><code>meth.curry n</code></h4>
+<h4><code>meth.curry</code><br><code>meth.curry n</code></h4>
 
 <p>Returns a curried proc. If the optional arity argument is given,<br>
 it determines the number of arguments. A curried proc receives<br>
@@ -150,11 +144,7 @@ arguments.</p>
 
 <h3>Array</h3>
 
-<h4><code>array.extend!(size=0, obj=nil)</code></h4>
-
-<h4><code>array.extend!(array)</code></h4>
-
-<h4><code>array.extend!(size) {|index| block }</code></h4>
+<h4><code>array.extend!(size=0, obj=nil)</code><br><code>array.extend!(array)</code><br><code>array.extend!(size) {|index| block }</code></h4>
 
 <p>Extend this Array.</p>
 
@@ -170,11 +160,7 @@ See also: <code>#concat</code>, <code>#+</code></p>
 element in the array is created by passing the element&#39;s index to the<br>
 given block and storing the return value.</p>
 
-<h4><code>array.extend(size=0, obj=nil)</code></h4>
-
-<h4><code>array.extend(array)</code></h4>
-
-<h4><code>array.extend(size) {|index| block }</code></h4>
+<h4><code>array.extend(size=0, obj=nil)</code><br><code>array.extend(array)</code><br><code>array.extend(size) {|index| block }</code></h4>
 
 <p>See <code>#extend!</code></p>
 
@@ -241,7 +227,7 @@ obj.to_b #=&gt; C-like truthiness
 
 <h3>Numeric</h3>
 
-<h4><code>num.clamp lower, higher =&gt; new\_num</code></h4>
+<h4><code>num.clamp lower, higher =&gt; new_num</code></h4>
 
 <p>Clamps <em>num</em> so that <em>lower</em> &lt;= <em>new_num</em> &lt;= <em>higher</em>.</p>
 
@@ -250,13 +236,13 @@ obj.to_b #=&gt; C-like truthiness
 
 <p>Raises an exception if <em>lower</em> &gt; <em>higher</em></p>
 
-<h4><code>num.clamp range =&gt; new\_num</code></h4>
+<h4><code>num.clamp range =&gt; new_num</code></h4>
 
 <p>Effectively calls range#bound</p>
 
 <h3>Range</h3>
 
-<h4><code>rng.bound val =&gt; new\_val</code></h4>
+<h4><code>rng.bound val =&gt; new_val</code></h4>
 
 <p>Bounds val so that <em>first</em> &lt;= <em>new_val</em> &lt;= <em>last</em>.</p>
 
@@ -342,6 +328,34 @@ nested_hash._?[:a][:b][:c]._!
 {&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2}.map_pairs { |k,v| [k*2, v+1] } #=&gt; {&#39;aa&#39;=&gt;2, &#39;bb&#39;=&gt;3}
 {&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2}.map_pairs { [&quot;cat&quot;,&quot;dog&quot;] }   #=&gt; {&#39;cat&#39;=&gt;&#39;dog&#39;}
 </code></pre>
+
+<h2 id="gem-hash/merge">hash/merge</h2>
+
+<h3>Hash</h3>
+
+<h4><code>hsh.merge_left other_hash =&gt; new_hash</code></h4>
+
+<p>Returns a new hash containing the contents of <em>other_hash</em> and the<br>
+contents of <em>hsh</em>. The value for each duplicate key is the value in<br>
+<em>hsh</em> when it exists.</p>
+
+<h4><code>hsh.merge_right other_hash =&gt; new_hash</code></h4>
+
+<p>Returns a new hash containing the contents of <em>other_hash</em> and the<br>
+contents of <em>hsh</em>. The value for each duplicate key is the value in<br>
+<em>other_hash</em> when it exists.</p>
+
+<h4><code>hsh.merge_left! other_hash =&gt; hsh</code></h4>
+
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate<br>
+keys are overwritten with the values from <em>other_hash</em> if the<br>
+values in <em>hsh</em> are <em>nil</em>.</p>
+
+<h4><code>hsh.merge_right! other_hash =&gt; hsh</code></h4>
+
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate<br>
+keys are overwritten with the values from <em>other_hash</em> unless the<br>
+values in <em>other_hash</em> are <em>nil</em>.</p>
 
 <h2 id="gem-hash/operations">hash/operations</h2>
 
@@ -461,17 +475,13 @@ end
 
 <h3>MatchData</h3>
 
-<h4><code>md.each</code></h4>
-
-<h4><code>md.each { |str| block }</code></h4>
+<h4><code>md.each</code><br><code>md.each { |str| block }</code></h4>
 
 <p>Iterates over each capture group in the MatchData object,<br>
 including <code>$&amp;</code> (the entire matched string), yielding the<br>
 captured string.</p>
 
-<h4><code>md.each_capture</code></h4>
-
-<h4>`md.each_capture {|key, str| block }</h4>
+<h4><code>md.each_capture</code><br><code>md.each_capture {|key, str| block }</code></h4>
 
 <p>Iterates over each capture group in the MatchData object,<br>
 yielding the capture position and captured string.</p>
@@ -480,16 +490,12 @@ yielding the capture position and captured string.</p>
 depending on whether the original Regexp had named capture<br>
 groups or not.</p>
 
-<h4><code>md.each_named_capture</code></h4>
-
-<h4>`md.each_named_capture {|name, str| block }</h4>
+<h4><code>md.each_named_capture</code><br><code>md.each_named_capture {|name, str| block }</code></h4>
 
 <p>Iterates over each named capture group in the MatchData object,<br>
 yielding the capture name and string.</p>
 
-<h4><code>md.each_positional_capture(include_names: false)</code></h4>
-
-<h4>`md.each_positional_capture(include_names: false) {|name, str| block }</h4>
+<h4><code>md.each_positional_capture(include_names: false)</code><br><code>md.each_positional_capture(include_names: false) {|name, str| block }</code></h4>
 
 <p>Iterates over each positional capture group in the MatchData object,<br>
 yielding the capture position and string.</p>
@@ -530,9 +536,7 @@ captures will be available using this method!</p>
 
 <h3>Object</h3>
 
-<h4><code>obj.maybe</code></h4>
-
-<h4><code>obj.maybe { block }</code></h4>
+<h4><code>obj.maybe</code><br><code>obj.maybe { block }</code></h4>
 
 <p>Invokes a method on <em>obj</em> iff <em>obj</em> is truthy, otherwise returns <em>obj</em>.</p>
 
@@ -591,13 +595,7 @@ arr.map{|i| i.nonpositive? }.compact
 
 <h3>Kernel</h3>
 
-<h4><code>obj.not</code></h4>
-
-<h4><code>obj.not {|o| block }</code></h4>
-
-<h4><code>obj.not(*a)</code></h4>
-
-<h4><code>obj.not(*a) {|o| block }</code></h4>
+<h4><code>obj.not</code><br><code>obj.not {|o| block }</code><br><code>obj.not(*a)</code><br><code>obj.not(*a) {|o| block }</code></h4>
 
 <p>Negate a predicate.</p>
 
@@ -633,13 +631,7 @@ true.not         #=&gt; false
 
 <h3>Object</h3>
 
-<h4><code>obj.self</code></h4>
-
-<h4><code>obj.self {|o| block }</code></h4>
-
-<h4><code>obj.itself</code></h4>
-
-<h4><code>obj.itself {|o| block }</code></h4>
+<h4><code>obj.self</code><br><code>obj.self {|o| block }</code><br><code>obj.itself</code><br><code>obj.itself {|o| block }</code></h4>
 
 <p>When a block is given, yields <em>obj</em> to the block and returns the resulting value.</p>
 
@@ -662,9 +654,7 @@ obj.itself #=&gt; obj
 [1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
 </code></pre>
 
-<h4><code>obj.revapply(*args) {|*list| block }</code></h4>
-
-<h4><code>obj.revapply(*args)</code></h4>
+<h4><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code></h4>
 
 <p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
 
@@ -688,6 +678,37 @@ puts TAU(15)
 
 <p>See <a href="http://tauday.com">http://tauday.com</a> to find out what it&#39;s all about.</p>
 
+<h2 id="gem-time">time</h2>
+
+<h3>Time</h3>
+
+<h4><code>t.to_now</code></h4>
+
+<p>Returns the number of seconds since the time represented by<br>
+this Time object.</p>
+
+<pre lang="ruby"><code>start = Time.now
+#...
+duration = start.to_now
+</code></pre>
+
+<h4><code>t.from_now</code></h4>
+
+<p>Returns the number of seconds until the time represented by<br>
+this Time object.</p>
+
+<pre lang="ruby"><code>target = Time.new 2017, 1, 1, 0, 0, 0
+sleep target.from_now
+</code></pre>
+
+<h4><code>Time.until t</code></h4>
+
+<p>Returns the number of seconds until <code>t</code>.</p>
+
+<h4><code>Time.since t</code></h4>
+
+<p>Returns the number of seconds since <code>t</code>.</p>
+
 <h2 id="gem-to_h">to_h</h2>
 
 <p><strong>Removed</strong></p>
@@ -702,9 +723,7 @@ puts TAU(15)
 
 <h3>Enumerable</h3>
 
-<h4><code>enum.top(n=1)</code></h4>
-
-<h4><code>enum.top(n=1) {|a,b| block }</code></h4>
+<h4><code>enum.top(n=1)</code><br><code>enum.top(n=1) {|a,b| block }</code></h4>
 
 <p>Get the top <em>n</em> items, in order from top to bottom.</p>
 
@@ -724,9 +743,7 @@ after mapping are returned in the initial order.</p>
 
 <p>See: <code>Enumerable#sort_by</code></p>
 
-<h4><code>enum.bottom(n=1)</code></h4>
-
-<h4><code>enum.bottom(n=1) {|a,b| block }</code></h4>
+<h4><code>enum.bottom(n=1)</code><br><code>enum.bottom(n=1) {|a,b| block }</code></h4>
 
 <p>Get the bottom <em>n</em> items, in order from bottom to top.</p>
 

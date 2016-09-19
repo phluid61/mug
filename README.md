@@ -9,15 +9,13 @@ and-or
 
 ### Object
 
-#### `obj.and default`
-#### `obj.and default {|o| block }`
+#### `obj.and default`<br>`obj.and default {|o| block }`
 
 Returns either _obj_ or _default_, depending on the falsiness of _obj_.
 
 If a block is given, _obj_ is yielded to it; if it returns truthy, _default_ is returned, otherwise _obj_ is returned.
 
-#### `obj.or default`
-#### `obj.or default {|o| block }`
+#### `obj.or default`<br>`obj.or default {|o| block }`
 
 Returns either _obj_ or _default_, depending on the truthiness of _obj_.
 
@@ -58,8 +56,7 @@ arguments.
 
 ### Method
 
-#### `meth.curry`
-#### `meth.curry n`
+#### `meth.curry`<br>`meth.curry n`
 
 Returns a curried proc. If the optional arity argument is given,
 it determines the number of arguments. A curried proc receives
@@ -81,9 +78,7 @@ array/extend
 
 ### Array
 
-#### `array.extend!(size=0, obj=nil)`
-#### `array.extend!(array)`
-#### `array.extend!(size) {|index| block }`
+#### `array.extend!(size=0, obj=nil)`<br>`array.extend!(array)`<br>`array.extend!(size) {|index| block }`
 
 Extend this Array.
 
@@ -99,9 +94,7 @@ In the last form, the array is extended by the given size. Each new
 element in the array is created by passing the element's index to the
 given block and storing the return value.
 
-#### `array.extend(size=0, obj=nil)`
-#### `array.extend(array)`
-#### `array.extend(size) {|index| block }`
+#### `array.extend(size=0, obj=nil)`<br>`array.extend(array)`<br>`array.extend(size) {|index| block }`
 
 See `#extend!`
 
@@ -170,7 +163,7 @@ Clamps a number to a range.
 
 ### Numeric
 
-#### `num.clamp lower, higher => new\_num`
+#### `num.clamp lower, higher => new_num`
 
 Clamps _num_ so that _lower_ <= _new\_num_ <= _higher_.
 
@@ -179,13 +172,13 @@ _num_ itself.
 
 Raises an exception if _lower_ > _higher_
 
-#### `num.clamp range => new\_num`
+#### `num.clamp range => new_num`
 
 Effectively calls range#bound
 
 ### Range
 
-#### `rng.bound val => new\_val`
+#### `rng.bound val => new_val`
 
 Bounds val so that _first_ <= _new\_val_ <= _last_.
 
@@ -280,6 +273,35 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
 ```
+
+hash/merge
+----------
+
+### Hash
+
+#### `hsh.merge_left other_hash => new_hash`
+
+Returns a new hash containing the contents of _other_hash_ and the
+contents of _hsh_. The value for each duplicate key is the value in
+_hsh_ when it exists.
+
+#### `hsh.merge_right other_hash => new_hash`
+
+Returns a new hash containing the contents of _other_hash_ and the
+contents of _hsh_. The value for each duplicate key is the value in
+_other_hash_ when it exists.
+
+#### `hsh.merge_left! other_hash => hsh`
+
+Adds the contents of _other_hash_ to _hsh_. Entries with duplicate
+keys are overwritten with the values from _other_hash_ if the
+values in _hsh_ are _nil_.
+
+#### `hsh.merge_right! other_hash => hsh`
+
+Adds the contents of _other_hash_ to _hsh_. Entries with duplicate
+keys are overwritten with the values from _other_hash_ unless the
+values in _other_hash_ are _nil_.
 
 hash/operations
 ---------------
@@ -410,15 +432,13 @@ matchdata/each
 
 ### MatchData
 
-#### `md.each`
-#### `md.each { |str| block }`
+#### `md.each`<br>`md.each { |str| block }`
 
 Iterates over each capture group in the MatchData object,
 including `$&` (the entire matched string), yielding the
 captured string.
 
-#### `md.each_capture`
-#### `md.each_capture {|key, str| block }
+#### `md.each_capture`<br>`md.each_capture {|key, str| block }`
 
 Iterates over each capture group in the MatchData object,
 yielding the capture position and captured string.
@@ -427,14 +447,12 @@ The capture positions are either all Strings or all Integers,
 depending on whether the original Regexp had named capture
 groups or not.
 
-#### `md.each_named_capture`
-#### `md.each_named_capture {|name, str| block }
+#### `md.each_named_capture`<br>`md.each_named_capture {|name, str| block }`
 
 Iterates over each named capture group in the MatchData object,
 yielding the capture name and string.
 
-#### `md.each_positional_capture(include_names: false)`
-#### `md.each_positional_capture(include_names: false) {|name, str| block }
+#### `md.each_positional_capture(include_names: false)`<br>`md.each_positional_capture(include_names: false) {|name, str| block }`
 
 Iterates over each positional capture group in the MatchData object,
 yielding the capture position and string.
@@ -477,8 +495,7 @@ maybe
 
 ### Object
 
-#### `obj.maybe`
-#### `obj.maybe { block }`
+#### `obj.maybe`<br>`obj.maybe { block }`
 
 Invokes a method on _obj_ iff _obj_ is truthy, otherwise returns _obj_.
 
@@ -541,13 +558,7 @@ not
 
 ### Kernel
 
-#### `obj.not`
-
-#### `obj.not {|o| block }`
-
-#### `obj.not(*a)`
-
-#### `obj.not(*a) {|o| block }`
+#### `obj.not`<br>`obj.not {|o| block }`<br>`obj.not(*a)`<br>`obj.not(*a) {|o| block }`
 
 Negate a predicate.
 
@@ -588,10 +599,7 @@ self
 
 ### Object
 
-#### `obj.self`
-#### `obj.self {|o| block }`
-#### `obj.itself`
-#### `obj.itself {|o| block }`
+#### `obj.self`<br>`obj.self {|o| block }`<br>`obj.itself`<br>`obj.itself {|o| block }`
 
 When a block is given, yields _obj_ to the block and returns the resulting value.
 
@@ -613,8 +621,7 @@ obj.itself #=> obj
 [1,1,2,2,3].group_by(&:itself) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
 
-#### `obj.revapply(*args) {|*list| block }`
-#### `obj.revapply(*args)`
+#### `obj.revapply(*args) {|*list| block }`<br>`obj.revapply(*args)`
 
 When a block is given, yields _obj_ and any _args_ to the block and returns the resulting value.
 
@@ -641,6 +648,40 @@ puts TAU(15)
 
 See http://tauday.com to find out what it's all about.
 
+time
+----
+
+### Time
+
+#### `t.to_now`
+
+Returns the number of seconds since the time represented by
+this Time object.
+
+```ruby
+start = Time.now
+#...
+duration = start.to_now
+```
+
+#### `t.from_now`
+
+Returns the number of seconds until the time represented by
+this Time object.
+
+```ruby
+target = Time.new 2017, 1, 1, 0, 0, 0
+sleep target.from_now
+```
+
+#### `Time.until t`
+
+Returns the number of seconds until `t`.
+
+#### `Time.since t`
+
+Returns the number of seconds since `t`.
+
 to\_h
 ----
 
@@ -648,15 +689,14 @@ to\_h
 
 > Note: for Ruy 2.1, `Enumerable#to_h` [is already defined](http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h).
 
-> Note: for Ruby <2.0, it is advisable to instead use the [*to_h* gem](https://rubygems.org/gems/to_h).
+> Note: for Ruby <2.0, it is advisable to instead use the [*to\_h* gem](https://rubygems.org/gems/to_h).
 
 top
 ---
 
 ### Enumerable
 
-#### `enum.top(n=1)`
-#### `enum.top(n=1) {|a,b| block }`
+#### `enum.top(n=1)`<br>`enum.top(n=1) {|a,b| block }`
 
 Get the top _n_ items, in order from top to bottom.
 
@@ -677,8 +717,7 @@ If no block is given, an enumerator is returned instead.
 See: `Enumerable#sort_by`
 
 
-#### `enum.bottom(n=1)`
-#### `enum.bottom(n=1) {|a,b| block }`
+#### `enum.bottom(n=1)`<br>`enum.bottom(n=1) {|a,b| block }`
 
 Get the bottom _n_ items, in order from bottom to top.
 
