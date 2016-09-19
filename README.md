@@ -274,6 +274,33 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
 ```
 
+hash/merge
+----------
+
+#### `hsh.merge_left other_hash => new_hash`
+
+Returns a new hash containing the contents of _other_hash_ and the
+contents of _hsh_. The value for each duplicate key is the value in
+_hsh_ when it exists.
+
+#### `hsh.merge_right other_hash => new_hash`
+
+Returns a new hash containing the contents of _other_hash_ and the
+contents of _hsh_. The value for each duplicate key is the value in
+_other_hash_ when it exists.
+
+#### `hsh.merge_left! other_hash => hsh`
+
+Adds the contents of _other_hash_ to _hsh_. Entries with duplicate
+keys are overwritten with the values from _other_hash_ if the
+values in _hsh_ are _nil_.
+
+#### `hsh.merge_right! other_hash => hsh`
+
+Adds the contents of _other_hash_ to _hsh_. Entries with duplicate
+keys are overwritten with the values from _other_hash_ unless the
+values in _other_hash_ are _nil_.
+
 hash/operations
 ---------------
 
