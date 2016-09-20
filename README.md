@@ -113,6 +113,28 @@ removed only once per instance in _ary_.
 If _remainder_ is given and true, returns a second array which is
 all elements in _ary_ that were not present in this array.
 
+array/samples
+-------------
+
+### Array
+
+#### `array.samples(min: int, max: int, random: rng) => new_ary`
+
+Choose a random subset of elements from the array.
+
+The elements are chosen by using random and unique indices into the
+array in order to ensure that an element doesn't repeat itself
+unless the array already contained duplicate elements.
+
+The optional _min_ and _max_ arguments restrict the size of the
+returned array.  _min_ must be >= 0, and _max_ must be >= _min_.
+(Both values are clamped to the size of the array.)
+
+If the array is empty, always returns an empty array.
+
+The optional _random_ argument will be used as the random number
+generator.
+
 bool
 ----
 
