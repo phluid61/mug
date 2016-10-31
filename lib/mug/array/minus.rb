@@ -1,38 +1,38 @@
 
 class Array
 
-	##
-	# Subtract elements from this array.
-	#
-	# This is similar to Array#- except that elements from this array are
-	# removed only once per instance in +ary+.
-	#
-	# If +remainder+ is given and true, returns a second array which is
-	# all elements in +ary+ that were not present in this array.
-	#
-	# @call-seq minus(ary)
-	# @call-seq minus(ary, remainder: true)
-	#
-	def minus ary, remainder: false
+  ##
+  # Subtract elements from this array.
+  #
+  # This is similar to Array#- except that elements from this array are
+  # removed only once per instance in +ary+.
+  #
+  # If +remainder+ is given and true, returns a second array which is
+  # all elements in +ary+ that were not present in this array.
+  #
+  # @call-seq minus(ary)
+  # @call-seq minus(ary, remainder: true)
+  #
+  def minus ary, remainder: false
 
-		result = dup
-		rem = []
+    result = dup
+    rem = []
 
-		ary.each do |x|
-			i = result.index x
-			if i
-				result.delete_at i
-			elsif remainder
-				rem << x
-			end
-		end
+    ary.each do |x|
+      i = result.index x
+      if i
+        result.delete_at i
+      elsif remainder
+        rem << x
+      end
+    end
 
-		if remainder
-			[result, rem]
-		else
-			result
-		end
-	end
+    if remainder
+      [result, rem]
+    else
+      result
+    end
+  end
 
 end
 

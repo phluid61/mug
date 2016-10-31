@@ -1,46 +1,46 @@
 
 class Numeric
 
-	#
-	# Clamps num so that lower <= new_num <= higher.
-	#
-	# Returns lower when num < lower, higher when num > higher, otherwise
-	# num itself.
-	#
-	# Raises an exception if lower > higher
-	#
-	def clamp lower, higher=nil
-		return lower.bound(self) if lower.is_a?(Range) && higher.nil?
-		raise ArgumentError, 'range must not be negative' if lower > higher
-		[[lower, self].max, higher].min
-	end
+  #
+  # Clamps num so that lower <= new_num <= higher.
+  #
+  # Returns lower when num < lower, higher when num > higher, otherwise
+  # num itself.
+  #
+  # Raises an exception if lower > higher
+  #
+  def clamp lower, higher=nil
+    return lower.bound(self) if lower.is_a?(Range) && higher.nil?
+    raise ArgumentError, 'range must not be negative' if lower > higher
+    [[lower, self].max, higher].min
+  end
 
 end
 
 class Range
 
-	#
-	# Bounds val so that first <= new_val <= last.
-	#
-	# Returns first when val < first, last when val > last, otherwise
-	# val itself.
-	#
-	# Raises an exception if val >= end and the range is exclusive.
-	#
-	def bound val
-		a = first
-		return a if val < a
+  #
+  # Bounds val so that first <= new_val <= last.
+  #
+  # Returns first when val < first, last when val > last, otherwise
+  # val itself.
+  #
+  # Raises an exception if val >= end and the range is exclusive.
+  #
+  def bound val
+    a = first
+    return a if val < a
 
-		b = last
-		if val >= b
-			if exclude_end?
-				raise ArgumentError, 'more than or equal to the exclusive range'
-			end
-			return b
-		end
+    b = last
+    if val >= b
+      if exclude_end?
+        raise ArgumentError, 'more than or equal to the exclusive range'
+      end
+      return b
+    end
 
-		val
-	end
+    val
+  end
 
 end
 

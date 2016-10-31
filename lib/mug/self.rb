@@ -1,38 +1,38 @@
 
 class Object
-	#
-	# Returns this object.
-	#
-	# If a block is given, this object is yielded to it, and the result
-	# is returned.
-	#
-	def self(&block)
-		if block_given?
-			yield self
-		else
-			self
-		end
-	end
-	alias :itself :self
+  #
+  # Returns this object.
+  #
+  # If a block is given, this object is yielded to it, and the result
+  # is returned.
+  #
+  def self(&block)
+    if block_given?
+      yield self
+    else
+      self
+    end
+  end
+  alias :itself :self
 
-	# Deprecated alias for #self
-	def yield(&block) #:nodoc:
-		warn 'Object#yield is deprecated; use Object#self'
-		self.self(&block)
-	end
+  # Deprecated alias for #self
+  def yield(&block) #:nodoc:
+    warn 'Object#yield is deprecated; use Object#self'
+    self.self(&block)
+  end
 
-	#
-	# Yields this object (and any other arguments)
-	# to a block. If no block is given, returns an
-	# Enumerator.
-	#
-	def revapply(*args, &block)
-		if block_given?
-			yield self, *args
-		else
-			enum_for(:revapply, *args) { args.length + 1 }
-		end
-	end
+  #
+  # Yields this object (and any other arguments)
+  # to a block. If no block is given, returns an
+  # Enumerator.
+  #
+  def revapply(*args, &block)
+    if block_given?
+      yield self, *args
+    else
+      enum_for(:revapply, *args) { args.length + 1 }
+    end
+  end
 end
 
 =begin

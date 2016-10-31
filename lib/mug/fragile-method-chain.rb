@@ -8,55 +8,55 @@
 #     nested_hash._?[:a][:b][:c]._!
 #
 class FragileMethodChain
-	#
-	# Creates a FragileMethodChain which will send its first method to +o+
-	#
-	def initialize o, falsy: true
-		@o = o
-		@falsy = falsy
-	end
+  #
+  # Creates a FragileMethodChain which will send its first method to +o+
+  #
+  def initialize o, falsy: true
+    @o = o
+    @falsy = falsy
+  end
 
-	#
-	# Finalises the FragileMethodChain.
-	#
-	# The final result will be the first +nil+ or +false+ value
-	# returned in the chain, or its end result.
-	#
-	def _!
-		@o
-	end
+  #
+  # Finalises the FragileMethodChain.
+  #
+  # The final result will be the first +nil+ or +false+ value
+  # returned in the chain, or its end result.
+  #
+  def _!
+    @o
+  end
 
-	# Delegate the method args/block
-	def method_missing *a, &b #:nodoc:
-		if __defer?
-			@o = @o.__send__(*a, &b)
-		end
-		self
-	end
+  # Delegate the method args/block
+  def method_missing *a, &b #:nodoc:
+    if __defer?
+      @o = @o.__send__(*a, &b)
+    end
+    self
+  end
 
-	# Explicitly invoke :_? as a method in the chain.
-	def _? #:nodoc:
-		# Unconditionally invoke it, so the eventual _! doesn't fail
-		#if __defer?
-			@o = @o.__send__(:_?)
-		#end
-		self
-	end
+  # Explicitly invoke :_? as a method in the chain.
+  def _? #:nodoc:
+    # Unconditionally invoke it, so the eventual _! doesn't fail
+    #if __defer?
+      @o = @o.__send__(:_?)
+    #end
+    self
+  end
 
-	# Return true iff @o is deferable.
-	def __defer?
-		return @o if @falsy
-		! @o.nil?
-	end
+  # Return true iff @o is deferable.
+  def __defer?
+    return @o if @falsy
+    ! @o.nil?
+  end
 end
 
 class Object
-	#
-	# Begins a FragileMethodChain.
-	#
-	def _?
-		FragileMethodChain.new(self)
-	end
+  #
+  # Begins a FragileMethodChain.
+  #
+  def _?
+    FragileMethodChain.new(self)
+  end
 end
 
 =begin

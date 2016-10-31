@@ -1,11 +1,11 @@
 
 class Regexp
-	#
-	# Matches the regexp against the parameter object.
-	#
-	def to_proc
-		lambda {|s| self =~ s }
-	end
+  #
+  # Matches the regexp against the parameter object.
+  #
+  def to_proc
+    lambda {|s| self =~ s }
+  end
 end
 
 =begin

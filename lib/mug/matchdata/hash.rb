@@ -1,35 +1,35 @@
 
 class MatchData
 
-	# Returns a Hash object of capture position => captured string.
-	#
-	# The capture positions are either all Strings or all Integers,
-	# depending on whether the original Regexp had named capture
-	# groups or not.
-	def to_h
-		if names.empty?
-			Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
-		else
-			Hash[ names.map{|n| [n, self[n]] } ]
-		end
-	end
+  # Returns a Hash object of capture position => captured string.
+  #
+  # The capture positions are either all Strings or all Integers,
+  # depending on whether the original Regexp had named capture
+  # groups or not.
+  def to_h
+    if names.empty?
+      Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
+    else
+      Hash[ names.map{|n| [n, self[n]] } ]
+    end
+  end
 
-	# Returns a Hash object of capture name => captured string.
-	def named_captures
-		Hash[ names.map{|n| [n, self[n]] } ]
-	end
+  # Returns a Hash object of capture name => captured string.
+  def named_captures
+    Hash[ names.map{|n| [n, self[n]] } ]
+  end
 
-	# Returns a Hash object of capture position => captured string.
-	#
-	# If +include_names+ is given and true, treats named captures
-	# as positional captures.
-	#
-	# WARNING: if mixing named and positional captures, no positional
-	# captures will be available using this method!
-	def positional_captures include_names: false
-		return {} unless names.empty? || include_names
-		Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
-	end
+  # Returns a Hash object of capture position => captured string.
+  #
+  # If +include_names+ is given and true, treats named captures
+  # as positional captures.
+  #
+  # WARNING: if mixing named and positional captures, no positional
+  # captures will be available using this method!
+  def positional_captures include_names: false
+    return {} unless names.empty? || include_names
+    Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
+  end
 
 end
 

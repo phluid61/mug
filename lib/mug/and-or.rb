@@ -1,33 +1,33 @@
 
 class Object
 
-	#
-	# Returns either +obj+ or +default+, depending on the falsiness of +obj+.
-	#
-	# If a block is given, +obj+ is yielded to it; if it returns truthy,
-	# +default+ is returned, otherwise +obj+ is returned.
-	#
-	def and default
-		if block_given?
-			yield(self) ? default : self
-		else
-			self && default
-		end
-	end
+  #
+  # Returns either +obj+ or +default+, depending on the falsiness of +obj+.
+  #
+  # If a block is given, +obj+ is yielded to it; if it returns truthy,
+  # +default+ is returned, otherwise +obj+ is returned.
+  #
+  def and default
+    if block_given?
+      yield(self) ? default : self
+    else
+      self && default
+    end
+  end
 
-	#
-	# Returns either +obj+ or +default+, depending on the truthiness of +obj+.
-	#
-	# If a block is given, +obj+ is yielded to it; if it returns truthy,
-	# +obj+ is returned, otherwise +default+ is returned.
-	#
-	def or default
-		if block_given?
-			yield(self) ? self : default
-		else
-			self || default
-		end
-	end
+  #
+  # Returns either +obj+ or +default+, depending on the truthiness of +obj+.
+  #
+  # If a block is given, +obj+ is yielded to it; if it returns truthy,
+  # +obj+ is returned, otherwise +default+ is returned.
+  #
+  def or default
+    if block_given?
+      yield(self) ? self : default
+    else
+      self || default
+    end
+  end
 end
 
 =begin

@@ -1,11 +1,11 @@
 
 module Kernel
-	#
-	# Negate a predicate.
-	#
-	def not(*a, &b)
-		not a.empty? ? (b ? (yield self) : self) : __send__(*a, &b)
-	end
+  #
+  # Negate a predicate.
+  #
+  def not(*a, &b)
+    not a.empty? ? (b ? (yield self) : self) : __send__(*a, &b)
+  end
 end
 
 =begin

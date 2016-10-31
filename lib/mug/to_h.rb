@@ -1,8 +1,8 @@
 
 if {}.respond_to? :to_h
-	warn %|Warning: "mug/to_h" has been removed as it conflicts with core to_h behaviour|
+  warn %|Warning: "mug/to_h" has been removed as it conflicts with core to_h behaviour|
 else
-	warn %|Warning: "mug/to_h" has been removed; see the "to_h" gem (https://rubygems.org/gems/to_h)|
+  warn %|Warning: "mug/to_h" has been removed; see the "to_h" gem (https://rubygems.org/gems/to_h)|
 end
 
 =begin

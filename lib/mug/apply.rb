@@ -1,46 +1,46 @@
 
 class Proc
-	#
-	# Curries this Proc and partially applies parameters.
-	# If a sufficient number of arguments are supplied, it passes the
-	# supplied arguments to the original proc and returns the result.
-	# Otherwise, returns another curried proc that takes the rest of
-	# arguments.
-	#
-	def apply(*args)
-		curry.call(*args)
-	end
+  #
+  # Curries this Proc and partially applies parameters.
+  # If a sufficient number of arguments are supplied, it passes the
+  # supplied arguments to the original proc and returns the result.
+  # Otherwise, returns another curried proc that takes the rest of
+  # arguments.
+  #
+  def apply(*args)
+    curry.call(*args)
+  end
 end
 
 class Method
-	if RUBY_VERSION < '2.2'
-		#
-		# Returns a curried proc. If the optional arity argument is given,
-		# it determines the number of arguments. A curried proc receives
-		# some arguments. If a sufficient number of arguments are supplied,
-		# it passes the supplied arguments to the original proc and returns
-		# the result. Otherwise, returns another curried proc that takes the
-		# rest of arguments.
-		#
-		def curry(n=nil)
-			if n
-				to_proc.curry n
-			else
-				to_proc.curry
-			end
-		end
-	end
+  if RUBY_VERSION < '2.2'
+    #
+    # Returns a curried proc. If the optional arity argument is given,
+    # it determines the number of arguments. A curried proc receives
+    # some arguments. If a sufficient number of arguments are supplied,
+    # it passes the supplied arguments to the original proc and returns
+    # the result. Otherwise, returns another curried proc that takes the
+    # rest of arguments.
+    #
+    def curry(n=nil)
+      if n
+        to_proc.curry n
+      else
+        to_proc.curry
+      end
+    end
+  end
 
-	#
-	# Curries this Method and partially applies parameters.
-	# If a sufficient number of arguments are supplied, it passes the
-	# supplied arguments to the original proc and returns the result.
-	# Otherwise, returns another curried proc that takes the rest of
-	# arguments.
-	#
-	def apply(*args)
-		curry.call(*args)
-	end
+  #
+  # Curries this Method and partially applies parameters.
+  # If a sufficient number of arguments are supplied, it passes the
+  # supplied arguments to the original proc and returns the result.
+  # Otherwise, returns another curried proc that takes the rest of
+  # arguments.
+  #
+  def apply(*args)
+    curry.call(*args)
+  end
 end
 
 =begin

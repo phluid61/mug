@@ -1,22 +1,22 @@
 
 module Enumerable
 
-	#
-	# Passes each element of the collection to the given block. The method returns `true` if the
-	# block contains elements that never return `false` or `nil`. If the block is not given, Ruby
-	# adds an implicit block of `{ |obj| obj }` which will cause `and_and_all?` to return `true`
-	# when none of the collection members are `false` or `nil`.
-	#
-	def any_and_all? &block
-		block ||= proc {|obj| obj }
+  #
+  # Passes each element of the collection to the given block. The method returns `true` if the
+  # block contains elements that never return `false` or `nil`. If the block is not given, Ruby
+  # adds an implicit block of `{ |obj| obj }` which will cause `and_and_all?` to return `true`
+  # when none of the collection members are `false` or `nil`.
+  #
+  def any_and_all? &block
+    block ||= proc {|obj| obj }
 
-		result = false
-		each do |x|
-			return false unless block[x]
-			result = true
-		end
-		result
-	end
+    result = false
+    each do |x|
+      return false unless block[x]
+      result = true
+    end
+    result
+  end
 
 end
 
