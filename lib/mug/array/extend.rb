@@ -25,7 +25,7 @@ class Array
     raise ArgumentError, "wrong number of arguments (#{rest.length+1} for 1..2)" if rest.length > 1
 
     # Same logic as array.c/rb_ary_initialize
-    if rest.empty? && !size.is_a?(Fixnum)
+    if rest.empty? && !size.is_a?(Integer)
       warn 'warning: given block not used' if block_given?
       concat size.to_ary
       return self
