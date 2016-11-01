@@ -7,12 +7,14 @@ $MIN = 4
 $MAX = 6
 
 class MyPRNG
-  def rand n
+  def rand n=1.0
     case n
     when Integer
       n - 1
     when Range
       n.max
+    when Float
+      n.prev_float
     end
   end
 end
