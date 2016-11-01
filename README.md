@@ -425,8 +425,7 @@ loop-with
 
 Repeatedly executes the block, yielding the current iteration
 count, which starts from _offset_. If no block is given, returns
-a new Enumerator that includes the iteration count, starting
-from _offset_
+an Enumerator.
 
 #### `loop_with_object(obj) {|o| block }`
 
