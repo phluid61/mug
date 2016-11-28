@@ -4,7 +4,7 @@ module Enumerable
   #
   # Passes each element of the collection to the given block. The method returns `true` if the
   # block contains elements that never return `false` or `nil`. If the block is not given, Ruby
-  # adds an implicit block of `{ |obj| obj }` which will cause `and_and_all?` to return `true`
+  # adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to return `true`
   # when none of the collection members are `false` or `nil`.
   #
   def any_and_all? &block
