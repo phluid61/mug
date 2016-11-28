@@ -104,9 +104,11 @@ get_a_list.and(default_list, &amp;:empty?).do_something
 
 <h3>Enumerable</h3>
 
+<h4><code>any_and_all? {|obj| block }</code></h4>
+
 <p>Passes each element of the collection to the given block. The method returns <code>true</code> if the<br>
 block contains elements that never return <code>false</code> or <code>nil</code>. If the block is not given, Ruby<br>
-adds an implicit block of <code>{ |obj| obj }</code> which will cause <code>and_and_all?</code> to return <code>true</code><br>
+adds an implicit block of <code>{ |obj| obj }</code> which will cause <code>any_and_all?</code> to return <code>true</code><br>
 when none of the collection members are <code>false</code> or <code>nil</code>.</p>
 
 <h2 id="gem-apply">apply</h2>
