@@ -135,6 +135,40 @@ If the array is empty, always returns an empty array.
 The optional _random_ argument will be used as the random number
 generator.
 
+bittest
+-------
+
+### Integer
+
+#### `and?(other, test: :any)`
+
+Tests common bits in _this_ AND _other_.
+
+test:
+
+* `:any` => true if any bits are set
+* `:all` => true if all bits are set
+
+#### `and_any?(other)`
+
+True if _this_ AND _other_ is non-zero.
+
+i.e. if any set bits in _other_ are set in _this_.
+
+#### `and_all?(other)`
+
+True if _this_ AND _other_ is _other_.
+
+i.e. if all set bits in _other_ are set in _this_.
+
+#### `or?(other)`
+
+True if _this_ OR _other_ is non-zero.
+
+#### `xor?(other)`
+
+True if _this_ XOR _other_ is non-zero.
+
 bool
 ----
 
