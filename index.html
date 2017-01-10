@@ -92,6 +92,18 @@
 
 <p>If a block is given, <em>obj</em> is yielded to it; if it returns truthy, <em>obj</em> is returned, otherwise <em>default</em> is returned.</p>
 
+<h4><code>obj.and_then {|o| block }</code></h4>
+
+<p>Calls <em>block</em> if <em>obj</em> is truthy.</p>
+
+<p>Returns <em>obj</em>.</p>
+
+<h4><code>obj.or_then {|o| block }</code></h4>
+
+<p>Calls <em>block</em> if <em>obj</em> is falsey.</p>
+
+<p>Returns <em>obj</em>.</p>
+
 <h3>Examples</h3>
 
 <pre lang="ruby"><code>require &#39;mug/and-or&#39;
