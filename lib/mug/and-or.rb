@@ -28,10 +28,31 @@ class Object
       self || default
     end
   end
+
+  #
+  # Calls +block+ if +obj+ is truthy.
+  #
+  # Returns +obj+.
+  #
+  def and_then &block
+    yield self if self
+    self
+  end
+
+  #
+  # Calls +block+ is +obj+ is not falsey.
+  #
+  # Returns +obj+.
+  #
+  def or_then &block
+    yield self unless self
+    self
+  end
+
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

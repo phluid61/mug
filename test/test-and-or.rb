@@ -37,5 +37,44 @@ class Test_and_or < Test::Unit::TestCase
     assert_equal( 'a1c', 'a1c'.or(''){|x|x =~ /\d/} )
   end
 
+
+  def test_and_then
+    [
+      [true,  true,  true],
+      [1,     true,  1],
+      ['a',   true,  'a'],
+      [false, false, -1],
+      [nil,   false, -1],
+    ].each do |o,x,y|
+      v = false
+      r = o.and_then { v = true }
+      assert_equal( x, v ) # executes the block if truthy
+      assert_equal( o, r ) # returns self
+
+      v = -1
+      o.and_then {|e| v = e }
+      assert_equal( y, v ) # yields self
+    end
+  end
+
+  def test_or_then
+    [
+      [true,  false, -1],
+      [1,     false, -1],
+      ['a',   false, -1],
+      [false, true,  false],
+      [nil,   true,  nil],
+    ].each do |o,x,y|
+      v = false
+      r = o.or_then { v = true }
+      assert_equal( x, v ) # executes the block if falsey
+      assert_equal( o, r ) # returns self
+
+      v = -1
+      o.or_then {|e| v = e }
+      assert_equal( y, v ) # yields self
+    end
+  end
+
 end
 

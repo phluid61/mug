@@ -21,6 +21,18 @@ Returns either _obj_ or _default_, depending on the truthiness of _obj_.
 
 If a block is given, _obj_ is yielded to it; if it returns truthy, _obj_ is returned, otherwise _default_ is returned.
 
+#### `obj.and_then {|o| block }`
+
+Calls _block_ if _obj_ is truthy.
+
+Returns _obj_.
+
+#### `obj.or_then {|o| block }`
+
+Calls _block_ if _obj_ is falsey.
+
+Returns _obj_.
+
 ### Examples
 
 ```ruby
