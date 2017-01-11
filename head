@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="highlight.js/styles/default.css">
     <script src="highlight.js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <style type="text/css">#toc{float:right;background:#fff}#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}h2{border-top:1px solid rgba(0,0,0,0.04)}</style>
+    <style type="text/css">#toc{float:right;background:#fff}#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}h2{border:1px solid rgba(0,0,0,0.04);border-radius:5px;background:rgba(12,177,206,0.04);padding:0.1em}</style>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
