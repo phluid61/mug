@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="highlight.js/styles/default.css">
     <script src="highlight.js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <style type="text/css">#toc{float:right;background:#fff}#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}h2{border-top:1px solid rgba(0,0,0,0.04)}</style>
+    <style type="text/css">#toc{float:right}#license{font:12px/14px normal 'Andale Mono',monospace;margin:1em 0;padding:12px;background:#d8d8d8;color:#000}</style>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
@@ -104,20 +104,23 @@
 
 <p>Returns <em>obj</em>.</p>
 
-<h3>Examples</h3>
+<h4>Examples</h4>
 
 <pre lang="ruby"><code>require &#39;mug/and-or&#39;
 
 data_store.get_env_hash.or(default_hash).do_something
 
 get_a_list.and(default_list, &amp;:empty?).do_something
+
+try_thing.and_then {|result| log &quot;got #{result.inspect}&quot; }
+try_thing.or_then { log &quot;failed&quot; }
 </code></pre>
 
 <h2 id="gem-any-and-all">any-and-all</h2>
 
 <h3>Enumerable</h3>
 
-<h4><code>any_and_all? {|obj| block }</code></h4>
+<h4><code>enum.any_and_all? {|obj| block }</code></h4>
 
 <p>Passes each element of the collection to the given block. The method returns <code>true</code> if the<br>
 block contains elements that never return <code>false</code> or <code>nil</code>. If the block is not given, Ruby<br>
@@ -218,7 +221,7 @@ generator.</p>
 
 <h3>Integer</h3>
 
-<h4><code>and?(other, test: :any)</code></h4>
+<h4><code>int.and?(other, test: :any)</code></h4>
 
 <p>Tests common bits in <em>this</em> AND <em>other</em>.</p>
 
@@ -229,23 +232,23 @@ generator.</p>
 <li><code>:all</code> =&gt; true if all bits are set</li>
 </ul>
 
-<h4><code>and_any?(other)</code></h4>
+<h4><code>int.and_any?(other)</code></h4>
 
 <p>True if <em>this</em> AND <em>other</em> is non-zero.</p>
 
 <p>i.e. if any set bits in <em>other</em> are set in <em>this</em>.</p>
 
-<h4><code>and_all?(other)</code></h4>
+<h4><code>int.and_all?(other)</code></h4>
 
 <p>True if <em>this</em> AND <em>other</em> is <em>other</em>.</p>
 
 <p>i.e. if all set bits in <em>other</em> are set in <em>this</em>.</p>
 
-<h4><code>or?(other)</code></h4>
+<h4><code>int.or?(other)</code></h4>
 
 <p>True if <em>this</em> OR <em>other</em> is non-zero.</p>
 
-<h4><code>xor?(other)</code></h4>
+<h4><code>int.xor?(other)</code></h4>
 
 <p>True if <em>this</em> XOR <em>other</em> is non-zero.</p>
 

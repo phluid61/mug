@@ -33,7 +33,7 @@ Calls _block_ if _obj_ is falsey.
 
 Returns _obj_.
 
-### Examples
+#### Examples
 
 ```ruby
 require 'mug/and-or'
@@ -41,6 +41,9 @@ require 'mug/and-or'
 data_store.get_env_hash.or(default_hash).do_something
 
 get_a_list.and(default_list, &:empty?).do_something
+
+try_thing.and_then {|result| log "got #{result.inspect}" }
+try_thing.or_then { log "failed" }
 ```
 
 any-and-all
@@ -48,7 +51,7 @@ any-and-all
 
 ### Enumerable
 
-#### `any_and_all? {|obj| block }`
+#### `enum.any_and_all? {|obj| block }`
 
 Passes each element of the collection to the given block. The method returns `true` if the
 block contains elements that never return `false` or `nil`. If the block is not given, Ruby
@@ -154,7 +157,7 @@ bittest
 
 ### Integer
 
-#### `and?(other, test: :any)`
+#### `int.and?(other, test: :any)`
 
 Tests common bits in _this_ AND _other_.
 
@@ -163,23 +166,23 @@ test:
 * `:any` => true if any bits are set
 * `:all` => true if all bits are set
 
-#### `and_any?(other)`
+#### `int.and_any?(other)`
 
 True if _this_ AND _other_ is non-zero.
 
 i.e. if any set bits in _other_ are set in _this_.
 
-#### `and_all?(other)`
+#### `int.and_all?(other)`
 
 True if _this_ AND _other_ is _other_.
 
 i.e. if all set bits in _other_ are set in _this_.
 
-#### `or?(other)`
+#### `int.or?(other)`
 
 True if _this_ OR _other_ is non-zero.
 
-#### `xor?(other)`
+#### `int.xor?(other)`
 
 True if _this_ XOR _other_ is non-zero.
 
