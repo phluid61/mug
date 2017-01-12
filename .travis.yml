@@ -7,12 +7,12 @@ rvm:
   - "2.4.0"
   - "2.3.3"
   - "2.2.6"
-  #- "2.1.9"
-  - jruby-head
+  #- jruby-head
+  - jruby
   - rbx-3
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-head
+    - rvm: jruby
     - rvm: rbx-3
 script: "bundle exec rake test"
