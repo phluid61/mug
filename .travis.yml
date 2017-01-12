@@ -5,8 +5,8 @@ language: ruby
 rvm:
   - ruby-head
   - "2.4.0"
-  - ruby-2.3
-  - ruby-2.2
+  - "2.3"
+  - "2.2"
   - jruby-9k
   #- rbx
 matrix:
