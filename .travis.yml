@@ -4,14 +4,14 @@ branches:
 language: ruby
 rvm:
   - ruby-head
-  - ruby-2.4
+  - "2.4.0"
   - ruby-2.3
   - ruby-2.2
   - jruby-9k
-  - rbx
+  #- rbx
 matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-9k
-    - rvm: rbx
+    #- rvm: rbx
 script: "bundle exec rake test"
