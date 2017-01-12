@@ -4,9 +4,10 @@ branches:
 language: ruby
 rvm:
   - ruby-head
+  - "2.4.0"
   - "2.3.3"
   - "2.2.6"
-  - "2.1.9"
+  #- "2.1.9"
   - jruby-head
   - rbx-3
 matrix:
