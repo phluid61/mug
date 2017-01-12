@@ -107,8 +107,8 @@ class Test_loop_with < Test::Unit::TestCase
     assert( y.equal?(o), "should return `obj`" )
 
     c = []
-    loop_with_object(c).with_index do |a, i|
-      a << i
+    loop_with_object(c).with_index do |d, i|
+      d << i
       break if i >= 2
     end
     assert_equal( [0,1,2], c )
