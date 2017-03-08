@@ -71,7 +71,7 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a></p>
@@ -480,6 +480,27 @@ h = {}
 h &lt;&lt; {:a=&gt;0}       # h = {:a=&gt;0}
 h &lt;&lt; {:b=&gt;2,:c=&gt;3} # h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
 h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
+</code></pre>
+
+<h2 id="gem-hash/when">hash/when</h2>
+
+<p>Use a Hash like a case statement.</p>
+
+<pre lang="ruby"><code>case key
+when /foo/ then &quot;FOO&quot;
+when /bar/ then &quot;BAR&quot;
+else &quot;DEFAULT&quot;
+end
+</code></pre>
+
+<p>becomes:</p>
+
+<pre lang="ruby"><code>h = {
+  /foo/ =&gt; &quot;FOO&quot;,
+  /bar/ =&gt; &quot;BAR&quot;,
+}
+h.default = &quot;DEFAULT&quot;
+h[key]
 </code></pre>
 
 <h2 id="gem-iterator/for">iterator/for</h2>
