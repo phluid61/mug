@@ -431,6 +431,31 @@ h << [:a,1]        # h = {:a=>1,:b=>2,:c=>3}
 ```
 
 
+hash/when
+---------
+
+Use a Hash like a case statement.
+
+```ruby
+case key
+when /foo/ then "FOO"
+when /bar/ then "BAR"
+else "DEFAULT"
+end
+```
+
+becomes:
+
+```ruby
+h = {
+  /foo/ => "FOO",
+  /bar/ => "BAR",
+}
+h.default = "DEFAULT"
+h[key]
+```
+
+
 iterator/for
 ------------
 
