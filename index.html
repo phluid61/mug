@@ -86,13 +86,18 @@
 
 <h4>Examples</h4>
 
-<pre lang="ruby"><code>module Mod
+<pre lang="ruby"><code>require &#39;mug/alias&#39;
+
+module Mod
   def self.foo
     1
   end
   alias_instance_method :bar, :foo
+  def self.foo
+    2
+  end
 end
-Mod.foo #=&gt; 1
+Mod.foo #=&gt; 2
 Mod.bar #=&gt; 1
 </code></pre>
 
