@@ -1,4 +1,5 @@
 
+require_relative 'mug/alias'
 require_relative 'mug/and-or'
 require_relative 'mug/any-and-all'
 require_relative 'mug/apply'
