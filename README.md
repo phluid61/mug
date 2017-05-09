@@ -16,13 +16,18 @@ Makes _new_name_ a new copy of the instance method _old_name_.  This can be used
 #### Examples
 
 ```ruby
+require 'mug/alias'
+
 module Mod
   def self.foo
     1
   end
   alias_instance_method :bar, :foo
+  def self.foo
+    2
+  end
 end
-Mod.foo #=> 1
+Mod.foo #=> 2
 Mod.bar #=> 1
 ```
 
