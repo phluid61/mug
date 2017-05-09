@@ -4,6 +4,28 @@ Matty's Ultimate Gem
 [![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 
+alias
+-----
+
+### Module
+
+#### `alias_singleton_method(new_name, old_name) => self`
+
+Makes _new_name_ a new copy of the instance method _old_name_.  This can be used to retain access to instance methods that are overridden.
+
+#### Examples
+
+```ruby
+module Mod
+  def self.foo
+    1
+  end
+  alias_instance_method :bar, :foo
+end
+Mod.foo #=> 1
+Mod.bar #=> 1
+```
+
 and-or
 ------
 
