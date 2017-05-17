@@ -773,7 +773,7 @@ obj.itself #=&gt; obj
 [1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
 </code></pre>
 
-<h4><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code></h4>
+<h4><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.cede(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code><br><code>obj.cede(*args)</code></h4>
 
 <p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
 
