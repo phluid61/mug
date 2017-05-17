@@ -745,7 +745,7 @@ obj.itself #=> obj
 [1,1,2,2,3].group_by(&:itself) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
 
-#### `obj.revapply(*args) {|*list| block }`<br>`obj.revapply(*args)`
+#### `obj.revapply(*args) {|*list| block }`<br>`obj.cede(*args) {|*list| block }`<br>`obj.revapply(*args)`<br>`obj.cede(*args)`
 
 When a block is given, yields _obj_ and any _args_ to the block and returns the resulting value.
 
