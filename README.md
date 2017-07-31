@@ -117,6 +117,24 @@ supplied arguments to the original proc and returns the result.
 Otherwise, returns another curried proc that takes the rest of
 arguments.
 
+array/delete_all
+---------------
+
+### Array
+
+#### `array.delete_all {|item| block } => array`<br>`array.delete_all => Enumerator`
+
+Deletes every element of `self` for which block evaluates to `true`.
+
+Returns an array of the deleted elements.
+
+If no block is given, an Enumerator is returned instead.
+
+See \#delete\_if, \#reject!
+
+[Feature #13777](https://bugs.ruby-lang.org/issues/13777)
+
+
 array/extend
 ------------
 

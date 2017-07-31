@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name     = 'mug'
-  s.version  = '0.9.1-dev'
-  s.date     = '2017-05-17'
+  s.version  = '0.10.0'
+  s.date     = '2017-07-31'
   s.summary  = %(MUG: Matty's Ultimate Gem)
   s.description = <<EOS
 == MUG: Matty's Ultimate Gem
