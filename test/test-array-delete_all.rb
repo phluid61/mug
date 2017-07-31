@@ -11,8 +11,8 @@ class Test_array_delete_all < Test::Unit::TestCase
   def test_delete_all__block
     a = $ARRAY.call
     result = a.delete_all &$EVEN
-    assert( result == $E )
-    assert( a == $O )
+    assert_equal( result, $E )
+    assert_equal( a, $O )
   end
   def test_delete_all__noblock
     a = $ARRAY.call
@@ -20,20 +20,20 @@ class Test_array_delete_all < Test::Unit::TestCase
     assert( enum.is_a? Enumerator )
 
     result = enum.each &$EVEN
-    assert( result == $E )
-    assert( a == $O )
+    assert_equal( result, $E )
+    assert_equal( a, $O )
   end
   def test_delete_all__all
     a = $E.dup
     result = a.delete_all &$EVEN
-    assert( result == $E )
+    assert_equal( result, $E )
     assert( a.empty? )
   end
   def test_delete_all__none
     a = $O.dup
     result = a.delete_all &$EVEN
     assert( result.empty? )
-    assert( a == $O )
+    assert_equal( a, $O )
   end
 end
 
