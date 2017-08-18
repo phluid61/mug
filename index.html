@@ -71,10 +71,35 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="#gem-alias">alias</a></li><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-any-and-all">any-and-all</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/delete_all">array/delete_all</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-counts">counts</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a></p>
+
+<h2 id="gem-alias">alias</h2>
+
+<h3>Module</h3>
+
+<h4><code>alias_singleton_method(new_name, old_name) =&gt; self</code></h4>
+
+<p>Makes <em>new_name</em> a new copy of the instance method <em>old_name</em>.  This can be used to retain access to instance methods that are overridden.</p>
+
+<h4>Examples</h4>
+
+<pre lang="ruby"><code>require &#39;mug/alias&#39;
+
+module Mod
+  def self.foo
+    1
+  end
+  alias_instance_method :bar, :foo
+  def self.foo
+    2
+  end
+end
+Mod.foo #=&gt; 2
+Mod.bar #=&gt; 1
+</code></pre>
 
 <h2 id="gem-and-or">and-or</h2>
 
@@ -157,6 +182,22 @@ If a sufficient number of arguments are supplied, it passes the<br>
 supplied arguments to the original proc and returns the result.<br>
 Otherwise, returns another curried proc that takes the rest of<br>
 arguments.</p>
+
+<h2 id="gem-array/delete_all">array/delete_all</h2>
+
+<h3>Array</h3>
+
+<h4><code>array.delete_all {|item| block } =&gt; array</code><br><code>array.delete_all =&gt; Enumerator</code></h4>
+
+<p>Deletes every element of <code>self</code> for which block evaluates to <code>true</code>.</p>
+
+<p>Returns an array of the deleted elements.</p>
+
+<p>If no block is given, an Enumerator is returned instead.</p>
+
+<p>See #delete_if, #reject!</p>
+
+<p><a href="https://bugs.ruby-lang.org/issues/13777">Feature #13777</a></p>
 
 <h2 id="gem-array/extend">array/extend</h2>
 
@@ -482,6 +523,27 @@ h &lt;&lt; {:b=&gt;2,:c=&gt;3} # h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
 h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
 </code></pre>
 
+<h2 id="gem-hash/when">hash/when</h2>
+
+<p>Use a Hash like a case statement.</p>
+
+<pre lang="ruby"><code>case key
+when /foo/ then &quot;FOO&quot;
+when /bar/ then &quot;BAR&quot;
+else &quot;DEFAULT&quot;
+end
+</code></pre>
+
+<p>becomes:</p>
+
+<pre lang="ruby"><code>h = {
+  /foo/ =&gt; &quot;FOO&quot;,
+  /bar/ =&gt; &quot;BAR&quot;,
+}
+h.default = &quot;DEFAULT&quot;
+h[key]
+</code></pre>
+
 <h2 id="gem-iterator/for">iterator/for</h2>
 
 <h3>Object</h3>
@@ -727,7 +789,7 @@ obj.itself #=&gt; obj
 [1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
 </code></pre>
 
-<h4><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code></h4>
+<h4><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.cede(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code><br><code>obj.cede(*args)</code></h4>
 
 <p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
 

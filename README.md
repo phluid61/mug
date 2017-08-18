@@ -4,6 +4,33 @@ Matty's Ultimate Gem
 [![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 
+alias
+-----
+
+### Module
+
+#### `alias_singleton_method(new_name, old_name) => self`
+
+Makes _new_name_ a new copy of the instance method _old_name_.  This can be used to retain access to instance methods that are overridden.
+
+#### Examples
+
+```ruby
+require 'mug/alias'
+
+module Mod
+  def self.foo
+    1
+  end
+  alias_instance_method :bar, :foo
+  def self.foo
+    2
+  end
+end
+Mod.foo #=> 2
+Mod.bar #=> 1
+```
+
 and-or
 ------
 
@@ -89,6 +116,24 @@ If a sufficient number of arguments are supplied, it passes the
 supplied arguments to the original proc and returns the result.
 Otherwise, returns another curried proc that takes the rest of
 arguments.
+
+array/delete_all
+---------------
+
+### Array
+
+#### `array.delete_all {|item| block } => array`<br>`array.delete_all => Enumerator`
+
+Deletes every element of `self` for which block evaluates to `true`.
+
+Returns an array of the deleted elements.
+
+If no block is given, an Enumerator is returned instead.
+
+See \#delete\_if, \#reject!
+
+[Feature #13777](https://bugs.ruby-lang.org/issues/13777)
+
 
 array/extend
 ------------
@@ -431,6 +476,31 @@ h << [:a,1]        # h = {:a=>1,:b=>2,:c=>3}
 ```
 
 
+hash/when
+---------
+
+Use a Hash like a case statement.
+
+```ruby
+case key
+when /foo/ then "FOO"
+when /bar/ then "BAR"
+else "DEFAULT"
+end
+```
+
+becomes:
+
+```ruby
+h = {
+  /foo/ => "FOO",
+  /bar/ => "BAR",
+}
+h.default = "DEFAULT"
+h[key]
+```
+
+
 iterator/for
 ------------
 
@@ -693,7 +763,7 @@ obj.itself #=> obj
 [1,1,2,2,3].group_by(&:itself) #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
 ```
 
-#### `obj.revapply(*args) {|*list| block }`<br>`obj.revapply(*args)`
+#### `obj.revapply(*args) {|*list| block }`<br>`obj.cede(*args) {|*list| block }`<br>`obj.revapply(*args)`<br>`obj.cede(*args)`
 
 When a block is given, yields _obj_ and any _args_ to the block and returns the resulting value.
 
