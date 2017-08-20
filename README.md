@@ -175,6 +175,12 @@ removed only once per instance in _ary_.
 If _remainder_ is given and true, returns a second array which is
 all elements in _ary_ that were not present in this array.
 
+#### `array ^ other`
+
+Get the elements unique to one of two arrays.
+
+Duplicates in either array are included only once.
+
 array/samples
 -------------
 
