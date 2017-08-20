@@ -34,10 +34,28 @@ class Array
     end
   end
 
+  ##
+  # Get the elements unique to one of two arrays.
+  #
+  # Duplicates in either array are included only once.
+  #
+  def ^ other
+    left = uniq
+    right = []
+    other.uniq.each do |x|
+      if left.include? x
+        left.delete x
+      elsif ! right.include?(x)
+        right << x
+      end
+    end
+    left + right
+  end
+
 end
 
 =begin
-Copyright (c) 2015, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
