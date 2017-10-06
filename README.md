@@ -203,6 +203,17 @@ If the array is empty, always returns an empty array.
 The optional _random_ argument will be used as the random number
 generator.
 
+array/to_proc
+-------------
+
+### Array
+
+#### `array.to_proc => proc {|x| ...}`
+
+Returns a Proc that accepts a single argument.
+
+The Proc's parameter is used as an index into this array.
+
 bittest
 -------
 
