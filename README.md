@@ -829,7 +829,7 @@ Returns the number of seconds until the time represented by
 this Time object.
 
 ```ruby
-target = Time.new 2017, 1, 1, 0, 0, 0
+target = Time.new 2117, 1, 1, 0, 0, 0
 sleep target.from_now
 ```
 
