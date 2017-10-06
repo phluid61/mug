@@ -514,7 +514,7 @@ h = {
   /bar/ => "BAR",
 }
 h.default = "DEFAULT"
-h[key]
+h.when key
 ```
 
 

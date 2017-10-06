@@ -17,7 +17,7 @@ class Hash
   #     /bar/ => "BAR",
   #   }
   #   h.default = "DEFAULT"
-  #   h[key]
+  #   h.when key
   #
   def when o
     each_pair do |k, v|
