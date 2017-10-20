@@ -42,5 +42,64 @@ class Test_affix < Test::Unit::TestCase
     end
   end
 
+  def test_affix?
+    str = "abc"
+    [
+      # obvious cases
+      [ 'a', 'c',  true],
+      [ /a/, /c/,  true],
+      [/^a/, /c$/, true],
+      # expected edges
+      ['','', true],
+      ['abc','', true],
+      ['','abc', true],
+      # failures
+      ['x','c', false],
+      ['a','x', false],
+      ['ab','bc', false],
+      [/../,/../, false],
+    ].each do |p, s, x|
+      assert_equal( x, str.affix?(p, s) )
+    end
+  end
+
+  def test_prefix?
+    str = "abc"
+    [
+      # obvious cases
+      [ 'a', true],
+      [ /a/, true],
+      [/^a/, true],
+      # expected edges
+      ['', true],
+      ['abc', true],
+      # failures
+      ['x', false],
+      ['abcd', false],
+      [/..../, false],
+    ].each do |p, x|
+      assert_equal( x, str.prefix?(p) )
+    end
+  end
+
+  def test_suffix?
+    str = "abc"
+    [
+      # obvious cases
+      ['c',  true],
+      [/c/,  true],
+      [/c$/, true],
+      # expected edges
+      ['', true],
+      ['abc', true],
+      # failures
+      ['x', false],
+      ['zabc', false],
+      [/..../, false],
+    ].each do |s, x|
+      assert_equal( x, str.suffix?(s) )
+    end
+  end
+
 end
 

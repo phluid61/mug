@@ -27,6 +27,44 @@ class String
     replace suffix(str)
   end
 
+
+
+  def affix? prefix, suffix
+    if Regexp === prefix
+      md = match(/\A#{prefix}/)
+      if md
+        rest = md.post_match
+      else
+        return false
+      end
+    else
+      prefix = prefix.to_s
+      if start_with? prefix
+        i = prefix.length
+        rest = self[i..-1]
+      else
+        return false
+      end
+    end
+    rest.suffix? suffix
+  end
+
+  def prefix? pattern
+    if Regexp === pattern
+      match?(/\A#{pattern}/)
+    else
+      start_with? pattern.to_s
+    end
+  end
+
+  def suffix? pattern
+    if Regexp === pattern
+      match?(/#{pattern}\z/)
+    else
+      end_with? pattern.to_s
+    end
+  end
+
 end
 
 =begin
