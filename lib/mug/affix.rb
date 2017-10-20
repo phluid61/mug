@@ -51,7 +51,8 @@ class String
 
   def prefix? pattern
     if Regexp === pattern
-      match?(/\A#{pattern}/)
+      #match?(/\A#{pattern}/)
+      !!(self =~ /\A#{pattern}/)
     else
       start_with? pattern.to_s
     end
@@ -59,7 +60,8 @@ class String
 
   def suffix? pattern
     if Regexp === pattern
-      match?(/#{pattern}\z/)
+      #match?(/#{pattern}\z/)
+      !!(self =~ /#{pattern}/\z)
     else
       end_with? pattern.to_s
     end
