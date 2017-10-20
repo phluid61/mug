@@ -61,7 +61,7 @@ class String
   def suffix? pattern
     if Regexp === pattern
       #match?(/#{pattern}\z/)
-      !!(self =~ /#{pattern}/\z)
+      !!(self =~ /#{pattern}\z/)
     else
       end_with? pattern.to_s
     end
