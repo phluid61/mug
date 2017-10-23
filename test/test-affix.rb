@@ -12,10 +12,12 @@ class Test_affix < Test::Unit::TestCase
     a = "#{pre}#{str}#{suf}"
     b = "#{pre}#{str}"
     c =       "#{str}#{suf}"
+    d = "#{pre}#{str}#{pre}"
 
     assert_equal( a, str.affix(pre, suf) )
     assert_equal( b, str.prefix(pre) )
     assert_equal( c, str.suffix(suf) )
+    assert_equal( d, str.affix(pre) )
   end
 
   def test_affix_bang
@@ -42,6 +44,19 @@ class Test_affix < Test::Unit::TestCase
     end
   end
 
+  def test_affix_bang2
+    str = ''
+    pre = '+'
+
+    3.times do |i|
+      n = i * 2
+
+      str.affix! pre
+      n += 2
+      assert_equal( "#{pre * n}", str )
+    end
+  end
+
   def test_affix?
     str = "abc"
     [
@@ -60,6 +75,21 @@ class Test_affix < Test::Unit::TestCase
       [/../,/../, false],
     ].each do |p, s, x|
       assert_equal( x, str.affix?(p, s) )
+    end
+
+    str = "xyx"
+    [
+      # obvious cases
+      [ 'x', true],
+      [ /x/, true],
+      # expected edges
+      ['', true],
+      [/^x|x$/, true],
+      # failures
+      ['a', false],
+      [/../, false],
+    ].each do |p, x|
+      assert_equal( x, str.affix?(p) )
     end
   end
 

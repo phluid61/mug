@@ -1,7 +1,8 @@
 
 class String
 
-  def affix prefix, suffix
+  def affix prefix, suffix=nil
+    suffix = prefix if suffix.nil?
     "#{prefix}#{self}#{suffix}"
   end
 
@@ -15,7 +16,7 @@ class String
 
 
 
-  def affix! prefix, suffix
+  def affix! prefix, suffix=nil
     replace affix(prefix, suffix)
   end
 
@@ -29,7 +30,8 @@ class String
 
 
 
-  def affix? prefix, suffix
+  def affix? prefix, suffix=nil
+    suffix = prefix if suffix.nil?
     if Regexp === prefix
       md = match(/\A#{prefix}/)
       if md
