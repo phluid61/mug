@@ -1,0 +1,109 @@
+Layout/SpaceInsideBlockBraces:
+  #Enabled: false
+  SpaceBeforeBlockParameters: false
+Layout/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+Style/Lambda:
+  # no, no no no
+  EnforcedStyle: lambda
+
+# Petty
+Style/MethodDefParentheses:
+  Enabled: false
+
+# arbitrary
+Lint/UnusedBlockArgument:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
+Metrics/LineLength:
+  Max: 101
+Metrics/MethodLength:
+  Max: 50
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+# Sometimes it looks better
+Layout/EmptyLineBetweenDefs:
+  Enabled: false
+Layout/EmptyLines:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/SpaceAfterComma:
+  Enabled: false
+Layout/SpaceAfterNot:
+  Enabled: false
+Layout/SpaceAroundOperators:
+  Enabled: false
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+Layout/SpaceInsideBrackets:
+  Enabled: false
+Style/IfInsideElse:
+  Enabled: false
+Style/NegatedIf:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/SingleLineMethods:
+  Enabled: false
+
+# Stupid
+Lint/HandleExceptions:
+  Enabled: false
+Lint/LiteralAsCondition:
+  Enabled: false
+Style/CaseEquality:
+  Enabled: false
+Style/CommentedKeyword:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/MethodMissing:
+  Enabled: false
+Style/NestedTernaryOperator:
+  Enabled: false
+Style/Not:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false
+
+# I know what I'm doing
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
+Layout/IndentationConsistency:
+  Enabled: false
+Layout/IndentationWidth:
+  Enabled: false
+Layout/LeadingCommentSpace:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/InfiniteLoop:
+  Enabled: false
+
+# what even
+Metrics/AbcSize:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+# Wish I could enforce the opposite
+Layout/TrailingBlankLines:
+  Enabled: false
+Naming/FileName:
+  Enabled: false
+
