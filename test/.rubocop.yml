@@ -1,0 +1,27 @@
+inherit_from: ../.rubocop.yml
+#Lint/AmbiguousOperator:
+#  Enabled: false
+Layout/SpaceAfterComma:
+  Enabled: false
+Layout/SpaceAroundBlockParameters:
+  Enabled: false
+Layout/SpaceBeforeComma:
+  Enabled: false
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Layout/SpaceInsideParens:
+  Enabled: false
+Metrics/LineLength:
+  Enabled: false
+Naming/ClassAndModuleCamelCase:
+  Enabled: false
+Naming/MethodName:
+  Enabled: false
+Style/GlobalVars:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Style/WordArray:
+  Enabled: false

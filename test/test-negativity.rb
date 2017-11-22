@@ -11,7 +11,7 @@ $err = [ Complex(1,1) ]
 require_relative '../lib/mug/negativity'
 class Test_negativity < Test::Unit::TestCase
 
-  alias :assert_true :assert
+  alias assert_true assert
   def assert_false val, msg=UNASSIGNED
     assert !val, msg
   end
