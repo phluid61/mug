@@ -95,23 +95,23 @@ end
 
 class Array
   def top! n=1, &blk
-    replace(top n, &blk)
+    replace top(n, &blk)
   end
   def top_by! n=1, &blk
     return enum_for(:top_by!, n) unless block_given?
-    replace(top_by n, &blk)
+    replace top_by(n, &blk)
   end
   def bottom! n=1, &blk
-    replace(bottom n, &blk)
+    replace bottom(n, &blk)
   end
   def bottom_by! n=1, &blk
     return enum_for(:bottom_by!, n) unless block_given?
-    replace(bottom_by n, &blk)
+    replace bottom_by(n, &blk)
   end
 end
 
 =begin
-Copyright (c) 2014, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2014-2017, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

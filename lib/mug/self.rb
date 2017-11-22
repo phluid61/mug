@@ -13,7 +13,7 @@ class Object
       self
     end
   end
-  alias :itself :self
+  alias itself self
 
   # Deprecated alias for #self
   def yield(&block) #:nodoc:
@@ -33,7 +33,7 @@ class Object
       enum_for(:revapply, *args) { args.length + 1 }
     end
   end
-  alias :cede :revapply
+  alias cede revapply
 end
 
 =begin

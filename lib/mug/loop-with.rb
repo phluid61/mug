@@ -6,7 +6,7 @@ module Kernel
   # an Enumerator.
   #
   def loop_with_index(offset=0)
-    return c=enum_for(:loop_with_index, offset) unless block_given?
+    return enum_for(:loop_with_index, offset) unless block_given?
     c = 0 + offset
     begin
       while true

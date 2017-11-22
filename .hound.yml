@@ -1,0 +1,4 @@
+ruby:
+  config_file: .rubocop.yml
+  # Not while rubocop sucks so hard...
+  #fail_on_violations: true
