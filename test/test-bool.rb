@@ -18,7 +18,7 @@ end
 require_relative '../lib/mug/bool'
 class Test_bool < Test::Unit::TestCase
 
-  alias :assert_true :assert
+  alias assert_true assert
   def assert_false val, msg=UNASSIGNED
     assert !val, msg
   end

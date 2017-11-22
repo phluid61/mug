@@ -15,7 +15,7 @@ class Test_hashwhen < Test::Unit::TestCase
     assert_equal( 'DEFAULT', h.when("qux") )
   end
   def test_hashwhen_proc
-    h = Hash.new {|h,k| k.to_s.upcase }
+    h = Hash.new {|_,k| k.to_s.upcase }
     h[/foo/] = 'FOO'
     h[/bar/] = 'BAR'
 

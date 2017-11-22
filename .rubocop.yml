@@ -6,6 +6,9 @@ Layout/SpaceAroundEqualsInParameterDefault:
 Style/Lambda:
   # no, no no no
   EnforcedStyle: lambda
+Style/HashSyntax:
+  #EnforcedStyle: hash_rockets
+  EnforcedStyle: no_mixed_keys
 
 # Petty
 Style/MethodDefParentheses:
@@ -20,6 +23,8 @@ Metrics/LineLength:
   Max: 101
 Metrics/MethodLength:
   Max: 50
+Metrics/ClassLength:
+  Max: 500
 Style/PercentLiteralDelimiters:
   Enabled: false
 
@@ -34,6 +39,8 @@ Layout/EmptyLinesAroundMethodBody:
   Enabled: false
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
+Layout/ExtraSpacing:
+  Enabled: false
 Layout/SpaceAfterComma:
   Enabled: false
 Layout/SpaceAfterNot:
@@ -44,9 +51,17 @@ Layout/SpaceBeforeBlockBraces:
   Enabled: false
 Layout/SpaceInsideBrackets:
   Enabled: false
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: false
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
 Style/IfInsideElse:
   Enabled: false
 Style/NegatedIf:
+  Enabled: false
+Style/NumericLiterals:
   Enabled: false
 Style/RedundantSelf:
   Enabled: false
@@ -71,6 +86,10 @@ Style/MethodMissing:
 Style/NestedTernaryOperator:
   Enabled: false
 Style/Not:
+  Enabled: false
+Style/SymbolProc:
+  Enabled: false
+Style/TrailingCommaInLiteral:
   Enabled: false
 Style/WhileUntilModifier:
   Enabled: false
@@ -105,5 +124,7 @@ Metrics/PerceivedComplexity:
 Layout/TrailingBlankLines:
   Enabled: false
 Naming/FileName:
+  Enabled: false
+Style/UnneededInterpolation:
   Enabled: false
 
