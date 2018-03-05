@@ -3,6 +3,7 @@ Matty's Ultimate Gem
 
 [![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
+[![Hound-CI](https://img.shields.io/badge/style%20guide-hound--ci-a873d1.svg)](https://houndci.com/)
 
 alias
 -----
@@ -584,6 +585,44 @@ arr = loop_with_object([]) do |a|
   throw StopIteration if s.empty?
   a << s
 end
+```
+
+main
+----
+
+### Kernel
+
+#### `__main__`<br>`__main__ { block }`
+
+Compares the calling source filename with `$PROGRAM_NAME` (`$0`).
+
+Returns a falsey value if the calling context is not in the 'main' file.
+
+If called without a block, and the calling context is in the 'main' file,
+returns `true`.
+
+If called with a block, and the calling context is in the 'main' file, the
+block is executed and the result is returned.
+
+### Examples
+
+```ruby
+require 'mug/main'
+
+if __main__
+  puts "the main file"
+end
+
+__main__ do
+  puts "also the main file"
+end
+
+# More advanced example:
+
+if __main__ { ARGV[0] == 'foo' }
+  do_foo
+end
+
 ```
 
 matchdata/each
