@@ -1,8 +1,8 @@
 require 'test/unit'
 $VERBOSE = true
 
-require_relative '../lib/mug/counts'
-class Test_hashmap < Test::Unit::TestCase
+require_relative '../lib/mug/enumerable/counts'
+class Test_counts < Test::Unit::TestCase
   def test_counts
     a = %w(a b b c c c)
     c = {'a'=>1, 'b'=>2, 'c'=>3}

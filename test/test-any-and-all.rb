@@ -1,7 +1,7 @@
 require 'test/unit'
 $VERBOSE = true
 
-require_relative '../lib/mug/any-and-all'
+require_relative '../lib/mug/enumerable/any-and-all'
 class Test_any_and_all < Test::Unit::TestCase
   def test_any_and_all__block
     b = proc {|o| o > 1 }
