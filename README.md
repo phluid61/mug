@@ -364,31 +364,31 @@ infinite sequences.
 
 #### `each_pair {| key, value | block } -> hsh`<br>`each_pair -> an_enumerator`
 
-Calls +block+ once for each key in the enum, passing the key-value pair as parameters.
+Calls `block` once for each key in the enum, passing the key-value pair as parameters.
 If no block is given, an enumerator is returned instead.
 
 #### `each_key {| key | block } -> hsh`<br>`each_key -> an_enumerator`
 
-Calls +block+ once for each key in the enum, passing the key as a parameter.
+Calls `block` once for each key in the enum, passing the key as a parameter.
 If no block is given, an enumerator is returned instead.
 
 #### `fetch(key [, default] ) -> obj`<br>`fetch(key) { |key| block } -> obj`
 
 Returns a value from the enum for the given key. If the key can't be
 found, there are several options: With no other arguments, it will
-raise a +KeyError+ exception; if +default+ is given, then that will
+raise a `KeyError` exception; if `default` is given, then that will
 be returned; if the optional code block is specified, then that will
 be run and its result returned.
 
 #### `fetch_values(key, ...) -> array`<br>`fetch_values(key, ...) { |key| block } -> array`
 
 Returns an array containing the values associated with the given keys
-but also raises +KeyError+ when one of keys can't be found.
-Also see +#values_at+ and +#fetch+.
+but also raises `KeyError` when one of keys can't be found.
+Also see `#values_at` and `#fetch`.
 
 #### `key?(key) -> true or false`
 
-Returns +true+ if the given key is present in this enum.
+Returns `true` if the given key is present in this enum.
 
 #### `keys -> array`
 
@@ -418,7 +418,7 @@ If no block is given, an enumerator is returned instead.
 
 #### `value?(value) -> true or false`
 
-Returns +true+ if the given value is present for some key.
+Returns `true` if the given value is present for some key.
 
 #### `values -> array`
 
