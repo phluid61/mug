@@ -1,7 +1,7 @@
 require 'test/unit'
 $VERBOSE = true
 
-class MyEnum
+class HashLikeEnum
   def each
     return enum_for(:each) unless block_given?
     yield 'a'
@@ -15,7 +15,7 @@ end
 require_relative '../lib/mug/enumerable/hash-like'
 class Test_hashlike < Test::Unit::TestCase
   def test__each_pair__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = [[0, 'a'], [1, 'b'], [2, 'c'], [3, 'd']]
 
     my_enum.each_pair do |key, value|
@@ -25,7 +25,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__each_pair
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = [[0, 'a'], [1, 'b'], [2, 'c'], [3, 'd']]
 
     enm = my_enum.each_pair
@@ -37,7 +37,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__each_key__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = [0, 1, 2, 3]
 
     my_enum.each_key do |key|
@@ -47,7 +47,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__each_key
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = [0, 1, 2, 3]
 
     enm = my_enum.each_key
@@ -59,7 +59,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__each_value__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = %w[a b c d]
 
     my_enum.each_value do |value|
@@ -69,7 +69,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__each_value
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = %w[a b c d]
 
     enm = my_enum.each_value
@@ -81,7 +81,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_raise(ArgumentError) { my_enum.fetch }
 
@@ -93,7 +93,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch__default
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     default = 'z'
 
     assert_equal('a', my_enum.fetch(0, default))
@@ -104,7 +104,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|key| key }
 
@@ -116,7 +116,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch__default_block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     default = 'z'
 
     block = proc {|key| key }
@@ -129,7 +129,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch_values
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_equal(%w[a d], my_enum.fetch_values(0, 3))
     assert_equal(%w[a d a d], my_enum.fetch_values(0, 3, 0, 3))
@@ -138,7 +138,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__fetch_values__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|key| key }
 
@@ -149,7 +149,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__key
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_equal(0, my_enum.key('a'))
     assert_equal(3, my_enum.key('d'))
@@ -157,21 +157,21 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__keys
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = [0, 1, 2, 3]
 
     assert_equal(expect, my_enum.keys)
   end
 
   def test__length
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
     expect = 4
 
     assert_equal(expect, my_enum.length)
   end
 
   def test__member?
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert(my_enum.member?(0))
     assert(my_enum.member?(3))
@@ -181,7 +181,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__slice
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_equal({0=>'a', 3=>'d'}, my_enum.slice(0, 3))
     assert_equal({0=>'a', 3=>'d'}, my_enum.slice(0, 3, 0))
@@ -192,7 +192,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__transform_keys
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|key| "_#{key}_" }
 
@@ -201,7 +201,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__transform_keys__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|key| "_#{key}_" }
 
@@ -209,7 +209,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__transform_values
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|value| value.upcase }
 
@@ -218,7 +218,7 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__transform_values__block
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     block = proc {|value| value.upcase }
 
@@ -226,13 +226,13 @@ class Test_hashlike < Test::Unit::TestCase
   end
 
   def test__values
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_equal(%w[a b c d], my_enum.values)
   end
 
   def test__values_at
-    my_enum = MyEnum.new
+    my_enum = HashLikeEnum.new
 
     assert_equal(%w[a d], my_enum.values_at(0, 3))
     assert_equal(%w[a d a], my_enum.values_at(0, 3, 0))
