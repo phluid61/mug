@@ -357,22 +357,22 @@ require 'mug/enumerable/counts'
 enumerable/hash-like
 --------------------
 
-Makes Enumerables quack a bit more like a duck.  A lot of these *will not work* on indeterminate or
+Makes Enumerables quack a bit more like a hash.  A lot of these *will not work* on indeterminate or
 infinite sequences.
 
 ### Enumerable
 
-#### `each_pair {| key, value | block } -> hsh`<br>`each_pair -> an_enumerator`
+#### `each_pair {| key, value | block } => hsh`<br>`each_pair => an_enumerator`
 
 Calls `block` once for each key in the enum, passing the key-value pair as parameters.
 If no block is given, an enumerator is returned instead.
 
-#### `each_key {| key | block } -> hsh`<br>`each_key -> an_enumerator`
+#### `each_key {| key | block } => hsh`<br>`each_key => an_enumerator`
 
 Calls `block` once for each key in the enum, passing the key as a parameter.
 If no block is given, an enumerator is returned instead.
 
-#### `fetch(key [, default] ) -> obj`<br>`fetch(key) { |key| block } -> obj`
+#### `fetch(key [, default] ) => obj`<br>`fetch(key) { |key| block } => obj`
 
 Returns a value from the enum for the given key. If the key can't be
 found, there are several options: With no other arguments, it will
@@ -380,51 +380,51 @@ raise a `KeyError` exception; if `default` is given, then that will
 be returned; if the optional code block is specified, then that will
 be run and its result returned.
 
-#### `fetch_values(key, ...) -> array`<br>`fetch_values(key, ...) { |key| block } -> array`
+#### `fetch_values(key, ...) => array`<br>`fetch_values(key, ...) { |key| block } => array`
 
 Returns an array containing the values associated with the given keys
 but also raises `KeyError` when one of keys can't be found.
 Also see `#values_at` and `#fetch`.
 
-#### `key?(key) -> true or false`
+#### `key?(key) => true or false`
 
 Returns `true` if the given key is present in this enum.
 
-#### `keys -> array`
+#### `keys => array`
 
 Returns a new array populated with the keys from this enum.
 
-#### `length -> integer`
+#### `length => integer`
 
 Returns the number of key-value pairs in the hash.
 
-#### `member?(key) -> true or false`
+#### `member?(key) => true or false`
 
 Returns true if the given key is present in this enum.
 
-#### `slice(*keys) -> a_hash`
+#### `slice(*keys) => a_hash`
 
 Returns a hash containing only the given keys and their values.
 
-#### `transform_keys {|key| block } -> new_hash`<br>`transform_keys -> an_enumerator`
+#### `transform_keys {|key| block } => new_hash`<br>`transform_keys => an_enumerator`
 
 Returns a new hash with the results of running the block once for every key.
 If no block is given, an enumerator is returned instead.
 
-#### `transform_values {|value| block } -> new_hash`<br>`transform_values -> an_enumerator`
+#### `transform_values {|value| block } => new_hash`<br>`transform_values => an_enumerator`
 
 Returns a new hash with the results of running the block once for every value.
 If no block is given, an enumerator is returned instead.
 
-#### `value?(value) -> true or false`
+#### `value?(value) => true or false`
 
 Returns `true` if the given value is present for some key.
 
-#### `values -> array`
+#### `values => array`
 
 Returns a new array populated with the values from this enum.
 
-#### `values_at(key, ...) -> array`
+#### `values_at(key, ...) => array`
 
 Return an array containing the values associated with the given keys.
 
