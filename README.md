@@ -74,18 +74,6 @@ try_thing.and_then {|result| log "got #{result.inspect}" }
 try_thing.or_then { log "failed" }
 ```
 
-any-and-all
------------
-
-### Enumerable
-
-#### `enum.any_and_all? {|obj| block }`
-
-Passes each element of the collection to the given block. The method returns `true` if the
-block contains elements that never return `false` or `nil`. If the block is not given, Ruby
-adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to return `true`
-when none of the collection members are `false` or `nil`.
-
 apply
 -----
 
@@ -324,8 +312,21 @@ _val_ itself.
 Raises an exception if _val_ >= _end_ and the range is exclusive.
 
 
-counts
-------
+enumerable/any-and-all
+----------------------
+
+### Enumerable
+
+#### `enum.any_and_all? {|obj| block }`
+
+Passes each element of the collection to the given block. The method returns `true` if the
+block contains elements that never return `false` or `nil`. If the block is not given, Ruby
+adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to return `true`
+when none of the collection members are `false` or `nil`.
+
+
+enumerable/counts
+-----------------
 
 Returns counts of objects in enumerables.
 
@@ -346,11 +347,87 @@ If no block is given, an enumerator is returned.
 ### Examples
 
 ```ruby
-require 'mug/counts'
+require 'mug/enumerable/counts'
 
 %w(a b b).counts                   #=> {'a'=>1, 'b'=>2}
 %w(a b b).counts_by{|o| o.upcase } #=> {'A'=>1, 'B'=>2}
 ```
+
+
+enumerable/hash-like
+--------------------
+
+Makes Enumerables quack a bit more like a duck.  A lot of these *will not work* on indeterminate or
+infinite sequences.
+
+### Enumerable
+
+#### `each_pair {| key, value | block } -> hsh`<br>`each_pair -> an_enumerator`
+
+Calls `block` once for each key in the enum, passing the key-value pair as parameters.
+If no block is given, an enumerator is returned instead.
+
+#### `each_key {| key | block } -> hsh`<br>`each_key -> an_enumerator`
+
+Calls `block` once for each key in the enum, passing the key as a parameter.
+If no block is given, an enumerator is returned instead.
+
+#### `fetch(key [, default] ) -> obj`<br>`fetch(key) { |key| block } -> obj`
+
+Returns a value from the enum for the given key. If the key can't be
+found, there are several options: With no other arguments, it will
+raise a `KeyError` exception; if `default` is given, then that will
+be returned; if the optional code block is specified, then that will
+be run and its result returned.
+
+#### `fetch_values(key, ...) -> array`<br>`fetch_values(key, ...) { |key| block } -> array`
+
+Returns an array containing the values associated with the given keys
+but also raises `KeyError` when one of keys can't be found.
+Also see `#values_at` and `#fetch`.
+
+#### `key?(key) -> true or false`
+
+Returns `true` if the given key is present in this enum.
+
+#### `keys -> array`
+
+Returns a new array populated with the keys from this enum.
+
+#### `length -> integer`
+
+Returns the number of key-value pairs in the hash.
+
+#### `member?(key) -> true or false`
+
+Returns true if the given key is present in this enum.
+
+#### `slice(*keys) -> a_hash`
+
+Returns a hash containing only the given keys and their values.
+
+#### `transform_keys {|key| block } -> new_hash`<br>`transform_keys -> an_enumerator`
+
+Returns a new hash with the results of running the block once for every key.
+If no block is given, an enumerator is returned instead.
+
+#### `transform_values {|value| block } -> new_hash`<br>`transform_values -> an_enumerator`
+
+Returns a new hash with the results of running the block once for every value.
+If no block is given, an enumerator is returned instead.
+
+#### `value?(value) -> true or false`
+
+Returns `true` if the given value is present for some key.
+
+#### `values -> array`
+
+Returns a new array populated with the values from this enum.
+
+#### `values_at(key, ...) -> array`
+
+Return an array containing the values associated with the given keys.
+
 
 fragile-method-chain
 --------------------
