@@ -412,22 +412,22 @@ hash of <code>result=&gt;count</code>.</p>
 
 <h2 id="gem-enumerable/hash-like">enumerable/hash-like</h2>
 
-<p>Makes Enumerables quack a bit more like a duck.  A lot of these <em>will not work</em> on indeterminate or<br>
+<p>Makes Enumerables quack a bit more like a hash.  A lot of these <em>will not work</em> on indeterminate or<br>
 infinite sequences.</p>
 
 <h3>Enumerable</h3>
 
-<h4><code>each_pair {| key, value | block } -&gt; hsh</code><br><code>each_pair -&gt; an_enumerator</code></h4>
+<h4><code>each_pair {| key, value | block } =&gt; hsh</code><br><code>each_pair =&gt; an_enumerator</code></h4>
 
 <p>Calls <code>block</code> once for each key in the enum, passing the key-value pair as parameters.<br>
 If no block is given, an enumerator is returned instead.</p>
 
-<h4><code>each_key {| key | block } -&gt; hsh</code><br><code>each_key -&gt; an_enumerator</code></h4>
+<h4><code>each_key {| key | block } =&gt; hsh</code><br><code>each_key =&gt; an_enumerator</code></h4>
 
 <p>Calls <code>block</code> once for each key in the enum, passing the key as a parameter.<br>
 If no block is given, an enumerator is returned instead.</p>
 
-<h4><code>fetch(key [, default] ) -&gt; obj</code><br><code>fetch(key) { |key| block } -&gt; obj</code></h4>
+<h4><code>fetch(key [, default] ) =&gt; obj</code><br><code>fetch(key) { |key| block } =&gt; obj</code></h4>
 
 <p>Returns a value from the enum for the given key. If the key can&#39;t be<br>
 found, there are several options: With no other arguments, it will<br>
@@ -435,51 +435,51 @@ raise a <code>KeyError</code> exception; if <code>default</code> is given, then 
 be returned; if the optional code block is specified, then that will<br>
 be run and its result returned.</p>
 
-<h4><code>fetch_values(key, ...) -&gt; array</code><br><code>fetch_values(key, ...) { |key| block } -&gt; array</code></h4>
+<h4><code>fetch_values(key, ...) =&gt; array</code><br><code>fetch_values(key, ...) { |key| block } =&gt; array</code></h4>
 
 <p>Returns an array containing the values associated with the given keys<br>
 but also raises <code>KeyError</code> when one of keys can&#39;t be found.<br>
 Also see <code>#values_at</code> and <code>#fetch</code>.</p>
 
-<h4><code>key?(key) -&gt; true or false</code></h4>
+<h4><code>key?(key) =&gt; true or false</code></h4>
 
 <p>Returns <code>true</code> if the given key is present in this enum.</p>
 
-<h4><code>keys -&gt; array</code></h4>
+<h4><code>keys =&gt; array</code></h4>
 
 <p>Returns a new array populated with the keys from this enum.</p>
 
-<h4><code>length -&gt; integer</code></h4>
+<h4><code>length =&gt; integer</code></h4>
 
 <p>Returns the number of key-value pairs in the hash.</p>
 
-<h4><code>member?(key) -&gt; true or false</code></h4>
+<h4><code>member?(key) =&gt; true or false</code></h4>
 
 <p>Returns true if the given key is present in this enum.</p>
 
-<h4><code>slice(*keys) -&gt; a_hash</code></h4>
+<h4><code>slice(*keys) =&gt; a_hash</code></h4>
 
 <p>Returns a hash containing only the given keys and their values.</p>
 
-<h4><code>transform_keys {|key| block } -&gt; new_hash</code><br><code>transform_keys -&gt; an_enumerator</code></h4>
+<h4><code>transform_keys {|key| block } =&gt; new_hash</code><br><code>transform_keys =&gt; an_enumerator</code></h4>
 
 <p>Returns a new hash with the results of running the block once for every key.<br>
 If no block is given, an enumerator is returned instead.</p>
 
-<h4><code>transform_values {|value| block } -&gt; new_hash</code><br><code>transform_values -&gt; an_enumerator</code></h4>
+<h4><code>transform_values {|value| block } =&gt; new_hash</code><br><code>transform_values =&gt; an_enumerator</code></h4>
 
 <p>Returns a new hash with the results of running the block once for every value.<br>
 If no block is given, an enumerator is returned instead.</p>
 
-<h4><code>value?(value) -&gt; true or false</code></h4>
+<h4><code>value?(value) =&gt; true or false</code></h4>
 
 <p>Returns <code>true</code> if the given value is present for some key.</p>
 
-<h4><code>values -&gt; array</code></h4>
+<h4><code>values =&gt; array</code></h4>
 
 <p>Returns a new array populated with the values from this enum.</p>
 
-<h4><code>values_at(key, ...) -&gt; array</code></h4>
+<h4><code>values_at(key, ...) =&gt; array</code></h4>
 
 <p>Return an array containing the values associated with the given keys.</p>
 
