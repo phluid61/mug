@@ -23,7 +23,7 @@ module Mod
   def self.foo
     1
   end
-  alias_instance_method :bar, :foo
+  alias_singleton_method :bar, :foo
   def self.foo
     2
   end
