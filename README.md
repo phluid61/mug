@@ -1012,3 +1012,11 @@ If no block is given, an enumerator is returned instead.
 
 See: `Enumerable#sort_by`
 
+with
+----
+
+### Kernel
+
+#### `with(*args) {|*foo| block }`
+
+Yields the arguments to a block.
