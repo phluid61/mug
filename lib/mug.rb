@@ -31,4 +31,5 @@ require_relative 'mug/self'
 require_relative 'mug/tau'
 require_relative 'mug/time'
 require_relative 'mug/top'
+require_relative 'mug/with'
 
