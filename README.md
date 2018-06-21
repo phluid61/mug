@@ -596,6 +596,34 @@ h.when key
 ```
 
 
+iterator
+--------
+
+### Iterator
+
+A special class of Enumerator that repeatedly yields values
+to a block.
+
+The initial yielded value is given in the constructor, but in
+subsequent iterations the result of the previous iteration is
+yielded.
+
+
+#### `new(initial, *args) { |obj, *args| ... }`<br>`new(initial, method=:each, *args)`
+
+Creates a new Iterator object, which can be used as an
+Enumerable.
+
+In the first form, iteration is defined by the given block,
+to which the current object and any other *args* are yielded.
+
+In the second, deprecated, form, a generated Iterator sends the
+given method with any +args+ to the iterand.
+
+Use of this form is discourages.  Use Object#iter_for or
+Object#to_iter instead.
+
+
 iterator/for
 ------------
 
