@@ -1,9 +1,11 @@
 
 #
-# A special class of Enumerator that repeatedly invokes a method.
+# A special class of Enumerator that repeatedly yields values
+# to a block.
 #
-# Initially the method is send to the given +obj+, but subsequent
-# invocations are sent to the result of the previous invocation.
+# The initial yielded value is given in the constructor, but in
+# subsequent iterations the result of the previous iteration is
+# yielded.
 #
 # Example:
 #
@@ -11,15 +13,35 @@
 #
 class Iterator < Enumerator
   #
-  # Creates a new Iterator for method +meth+, to be
-  # called initially on object +obj+.
+  # Creates a new Iterator object, which can be used as an
+  # Enumerable.
   #
-  # All method calls will have +args+ as parameters.
+  # In the first form, iteration is defined by the given block,
+  # to which the current object and any other +args+ are yielded.
+  #
+  # In the second, deprecated, form, a generated Iterator sends the
+  # given method with any +args+ to the iterand.
+  #
+  # Use of this form is discourages.  Use Object#iter_for or
+  # Object#to_iter instead.
+  #
+  # @call-seq new(initial, *args) { |obj, *args| ... }
+  # @call-seq new(initial, method=:each, *args)
   #
   def initialize obj, *args
-    super() do |y|
-      loop do
-        y << (obj = yield obj, *args)
+    if block_given?
+      super() do |y|
+        loop do
+          y << (obj = yield obj, *args)
+        end
+      end
+    else
+      warn 'Iterator.new without a block is deprecated; use Object#to_iter'
+      args = [:each] if args.empty?
+      super() do |y|
+        loop do
+          y << (obj = obj.send(*args))
+        end
       end
     end
   end
