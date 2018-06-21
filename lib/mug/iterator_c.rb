@@ -7,7 +7,7 @@
 #
 # Example:
 #
-#     0.iter_for(:next).take(5) #=> [0,1,2,3,4]
+#     0.iter_for(:next).take(5) #=> [1,2,3,4,5]
 #
 class Iterator < Enumerator
   #
@@ -19,15 +19,14 @@ class Iterator < Enumerator
   def initialize obj, meth, *args
     super() do |y|
       loop do
-        y << obj
-        obj = obj.send(meth, *args)
+        y << (obj = obj.send(meth, *args))
       end
     end
   end
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013-2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

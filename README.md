@@ -610,8 +610,8 @@ Initially the receiving object is _obj_.  After each iteration, the receiving ob
 ```ruby
 require 'mug/iterator/for'
 
-0.iter_for(:next).take(5) #=> [0,1,2,3,4]
-0.iter_for(:+,2).take(5) #=> [0,2,4,6,8]
+0.iter_for(:next).take(5) #=> [1,2,3,4,5]
+0.iter_for(:+,2).take(5) #=> [2,4,6,8,10]
 ```
 
 iterator/method
@@ -628,8 +628,8 @@ Initially the receiving object is the object on which _meth_ is defined.  After 
 ```ruby
 require 'mug/iterator/method'
 
-0.method(:next).to_iter.take(5) #=> [0,1,2,3,4]
-0.method(:+).to_iter(2).take(5) #=> [0,2,4,6,8]
+0.method(:next).to_iter.take(5) #=> [1,2,3,4,5]
+0.method(:+).to_iter(2).take(5) #=> [2,4,6,8,10]
 ```
 
 loop-with
