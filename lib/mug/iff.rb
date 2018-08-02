@@ -1,6 +1,12 @@
 
 class Object
 
+  ##
+  # Test for logical equivalence.
+  #
+  # Returns true if +condition+ and +obj+ are either
+  # both truthy, or both falsey.
+  #
   def iff? *condition
     if condition.length == 1
       cond = condition[0]
