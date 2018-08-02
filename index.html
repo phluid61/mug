@@ -72,7 +72,7 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul><li><a href="#gem-alias">alias</a></li><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/delete_all">array/delete_all</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-array/to_proc">array/to_proc</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-enumerable/any-and-all">enumerable/any-and-all</a></li><li><a href="#gem-enumerable/counts">enumerable/counts</a></li><li><a href="#gem-enumerable/hash-like">enumerable/hash-like</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-main">main</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="#gem-alias">alias</a></li><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/delete_all">array/delete_all</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-array/to_proc">array/to_proc</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-enumerable/any-and-all">enumerable/any-and-all</a></li><li><a href="#gem-enumerable/counts">enumerable/counts</a></li><li><a href="#gem-enumerable/hash-like">enumerable/hash-like</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iff">iff</a></li><li><a href="#gem-iterator">iterator</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-main">main</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li><li><a href="#gem-with">with</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a><br>
@@ -635,6 +635,42 @@ h.default = &quot;DEFAULT&quot;
 h.when key
 </code></pre>
 
+<h2 id="gem-iff">iff</h2>
+
+<h3>Object</h3>
+
+<h4><code>obj.iff? condition</code><br><code>obj.iff? { condition }</code></h4>
+
+<p>Test for logical equivalence.</p>
+
+<p>Returns true if <code>condition</code> and <code>obj</code> are either<br>
+both truthy, or both falsey.</p>
+
+<h2 id="gem-iterator">iterator</h2>
+
+<h3>Iterator</h3>
+
+<p>A special class of Enumerator that repeatedly yields values<br>
+to a block.</p>
+
+<p>The initial yielded value is given in the constructor, but in<br>
+subsequent iterations the result of the previous iteration is<br>
+yielded.</p>
+
+<h4><code>new(initial, *args) { |obj, *args| ... }</code><br><code>new(initial, method=:each, *args)</code></h4>
+
+<p>Creates a new Iterator object, which can be used as an<br>
+Enumerable.</p>
+
+<p>In the first form, iteration is defined by the given block,<br>
+to which the current object and any other <em>args</em> are yielded.</p>
+
+<p>In the second, deprecated, form, a generated Iterator sends the<br>
+given method with any +args+ to the iterand.</p>
+
+<p>Use of this form is discourages.  Use Object#iter_for or<br>
+Object#to_iter instead.</p>
+
 <h2 id="gem-iterator/for">iterator/for</h2>
 
 <h3>Object</h3>
@@ -647,8 +683,8 @@ h.when key
 
 <pre lang="ruby"><code>require &#39;mug/iterator/for&#39;
 
-0.iter_for(:next).take(5) #=&gt; [0,1,2,3,4]
-0.iter_for(:+,2).take(5) #=&gt; [0,2,4,6,8]
+0.iter_for(:next).take(5) #=&gt; [1,2,3,4,5]
+0.iter_for(:+,2).take(5) #=&gt; [2,4,6,8,10]
 </code></pre>
 
 <h2 id="gem-iterator/method">iterator/method</h2>
@@ -663,8 +699,8 @@ h.when key
 
 <pre lang="ruby"><code>require &#39;mug/iterator/method&#39;
 
-0.method(:next).to_iter.take(5) #=&gt; [0,1,2,3,4]
-0.method(:+).to_iter(2).take(5) #=&gt; [0,2,4,6,8]
+0.method(:next).to_iter.take(5) #=&gt; [1,2,3,4,5]
+0.method(:+).to_iter(2).take(5) #=&gt; [2,4,6,8,10]
 </code></pre>
 
 <h2 id="gem-loop-with">loop-with</h2>
@@ -1024,6 +1060,14 @@ after mapping are returned in the initial order.</p>
 <p>If no block is given, an enumerator is returned instead.</p>
 
 <p>See: <code>Enumerable#sort_by</code></p>
+
+<h2 id="gem-with">with</h2>
+
+<h3>Kernel</h3>
+
+<h4><code>with(*args) {|*foo| block }</code></h4>
+
+<p>Yields the arguments to a block.</p>
 <pre id="license" class="no-highlight">Copyright (c) 2013-2015, Matthew Kerwin <matthew@kerwin.net.au>Permission to use, copy, modify, and/or distribute this software for anypurpose with or without fee is hereby granted, provided that the abovecopyright notice and this permission notice appear in all copies.THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIESWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OFMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FORANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGESWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN ANACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OFOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 </pre><h1>Contributor Covenant Code of Conduct</h1>
 
