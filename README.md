@@ -596,6 +596,19 @@ h.when key
 ```
 
 
+iff
+---
+
+### Object
+
+#### `obj.iff? condition`<br>`obj.iff? { condition }`
+
+Test for logical equivalence.
+
+Returns true if `condition` and `obj` are either
+both truthy, or both falsey.
+
+
 iterator
 --------
 
