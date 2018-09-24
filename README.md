@@ -325,6 +325,22 @@ adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to ret
 when none of the collection members are `false` or `nil`.
 
 
+enumerable/chain
+----------------
+
+### Enumerable
+
+#### `Enumerable.chain(*enums)`<br>`Enumerable.chain(*enums) {|...| block }`
+
+Invokes a block once for every element in a sequence of
+Enumerables.
+
+#### `enum.chain(*enums)`<br>`enum.chain(*enums) {|...| block }`
+
+Creates a chain of Enumerables following this one, and
+invokes a block once for each element of each Enumerable.
+
+
 enumerable/counts
 -----------------
 
