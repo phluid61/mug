@@ -24,6 +24,10 @@ task 'index.html' => %w[head README.md LICENSE tail] do
   File.open('index.html', 'w') {|f| f.write(html) }
 end
 
+task :push => 'index.html' do
+  system 'git commit -a -m "rebuild gh-pages from master"' and system 'git push'
+end
+
 require 'rake/clean'
 CLEAN.include %w[index.html]
 
