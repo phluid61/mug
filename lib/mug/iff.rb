@@ -1,33 +1,27 @@
 
-#
-# A special class of Enumerator that repeatedly invokes a method.
-#
-# Initially the method is send to the given +obj+, but subsequent
-# invocations are sent to the result of the previous invocation.
-#
-# Example:
-#
-#     0.iter_for(:next).take(5) #=> [0,1,2,3,4]
-#
-class Iterator < Enumerator
+class Object
+
+  ##
+  # Test for logical equivalence.
   #
-  # Creates a new Iterator for method +meth+, to be
-  # called initially on object +obj+.
+  # Returns true if +condition+ and +obj+ are either
+  # both truthy, or both falsey.
   #
-  # All method calls will have +args+ as parameters.
-  #
-  def initialize obj, meth, *args
-    super() do |y|
-      loop do
-        y << obj
-        obj = obj.send(meth, *args)
-      end
+  def iff? *condition
+    if condition.length == 1
+      cond = condition[0]
+    elsif condition.empty? && block_given?
+      cond = yield
+    else
+      raise ArgumentError, "wrong number of arguments (given #{condition.length}, expected 1)"
     end
+    cond ? !!self : !self
   end
+
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -41,4 +35,3 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =end
-

@@ -1,18 +1,20 @@
 
-require_relative '../iterator_c'
+require_relative '../iterator'
 
 class Object
   #
   # Creates a new Iterator for the method named +meth+
   #
   def iter_for meth, *args
-    Iterator.new self, meth, *args
+    Iterator.new(self) do |o|
+      o.send(meth, *args)
+    end
   end
   alias to_iter iter_for
 end
 
 =begin
-Copyright (c) 2013-2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013-2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

@@ -325,6 +325,22 @@ adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to ret
 when none of the collection members are `false` or `nil`.
 
 
+enumerable/chain
+----------------
+
+### Enumerable
+
+#### `Enumerable.chain(*enums)`<br>`Enumerable.chain(*enums) {|...| block }`
+
+Invokes a block once for every element in a sequence of
+Enumerables.
+
+#### `enum.chain(*enums)`<br>`enum.chain(*enums) {|...| block }`
+
+Creates a chain of Enumerables following this one, and
+invokes a block once for each element of each Enumerable.
+
+
 enumerable/counts
 -----------------
 
@@ -596,6 +612,47 @@ h.when key
 ```
 
 
+iff
+---
+
+### Object
+
+#### `obj.iff? condition`<br>`obj.iff? { condition }`
+
+Test for logical equivalence.
+
+Returns true if `condition` and `obj` are either
+both truthy, or both falsey.
+
+
+iterator
+--------
+
+### Iterator
+
+A special class of Enumerator that repeatedly yields values
+to a block.
+
+The initial yielded value is given in the constructor, but in
+subsequent iterations the result of the previous iteration is
+yielded.
+
+
+#### `new(initial, *args) { |obj, *args| ... }`<br>`new(initial, method=:each, *args)`
+
+Creates a new Iterator object, which can be used as an
+Enumerable.
+
+In the first form, iteration is defined by the given block,
+to which the current object and any other *args* are yielded.
+
+In the second, deprecated, form, a generated Iterator sends the
+given method with any +args+ to the iterand.
+
+Use of this form is discourages.  Use Object#iter_for or
+Object#to_iter instead.
+
+
 iterator/for
 ------------
 
@@ -610,8 +667,8 @@ Initially the receiving object is _obj_.  After each iteration, the receiving ob
 ```ruby
 require 'mug/iterator/for'
 
-0.iter_for(:next).take(5) #=> [0,1,2,3,4]
-0.iter_for(:+,2).take(5) #=> [0,2,4,6,8]
+0.iter_for(:next).take(5) #=> [1,2,3,4,5]
+0.iter_for(:+,2).take(5) #=> [2,4,6,8,10]
 ```
 
 iterator/method
@@ -628,8 +685,8 @@ Initially the receiving object is the object on which _meth_ is defined.  After 
 ```ruby
 require 'mug/iterator/method'
 
-0.method(:next).to_iter.take(5) #=> [0,1,2,3,4]
-0.method(:+).to_iter(2).take(5) #=> [0,2,4,6,8]
+0.method(:next).to_iter.take(5) #=> [1,2,3,4,5]
+0.method(:+).to_iter(2).take(5) #=> [2,4,6,8,10]
 ```
 
 loop-with
