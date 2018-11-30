@@ -14,6 +14,7 @@ module Enumerable
     end
   end
 
+  undef chain if RUBY_VERSION >= '2.6'
   #
   # Creates a chain of Enumerables following this one, and
   # invokes a block once for each element of each Enumerable.
