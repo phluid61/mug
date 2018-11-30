@@ -1,20 +1,35 @@
 
-require_relative '../iterator'
+module Enumerable
 
-class Method
-  #
-  # Creates a new Iterator for this method, initially invoked
-  # on this method's receiver.
-  #
-  def to_iter *args
-    Iterator.new(receiver) do |o|
-      o.send(name, *args)
+  class <<self
+    #
+    # Invokes a block once for every element in a sequence of
+    # Enumerables.
+    #
+    def chain *enums
+      return enum_for(:chain, *enums) unless block_given?
+      enums.each do |enum|
+        enum.each {|*args| yield *args }
+      end
     end
   end
+
+  #
+  # Creates a chain of Enumerables following this one, and
+  # invokes a block once for each element of each Enumerable.
+  #
+  def chain *enums
+    return enum_for(:chain, *enums) unless block_given?
+    [self, *enums].each do |enum|
+      enum.each {|*args| yield *args }
+    end
+    nil
+  end
+
 end
 
 =begin
-Copyright (c) 2013-2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
