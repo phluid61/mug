@@ -14,9 +14,11 @@ class MatchData
     end
   end
 
+  if RUBY_VERSION < '2.4'
   # Returns a Hash object of capture name => captured string.
   def named_captures
     Hash[ names.map{|n| [n, self[n]] } ]
+  end
   end
 
   # Returns a Hash object of capture position => captured string.
@@ -34,7 +36,7 @@ class MatchData
 end
 
 =begin
-Copyright (c) 2016, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

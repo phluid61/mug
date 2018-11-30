@@ -33,7 +33,7 @@ class Numeric
   # Returns true if not zero.
   #
   def to_b
-    self != 0
+    !self.zero?
   end
 end
 
@@ -93,9 +93,10 @@ class Enumerator
   #
   # Converts enum to a boolean.
   # Returns true if there are any elements.
+  # An enumerator whose size cannot be calculated lazily is assumed to be true.
   #
   def to_b
-    size.to_b
+    (s = size).nil? || s.to_b
   end
 end
 end
@@ -111,7 +112,7 @@ class Exception
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

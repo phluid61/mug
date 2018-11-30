@@ -7,7 +7,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_values { |v| v*2 } #=> {'a'=>2, 'b'=>4}
   #   {'a'=>1, 'b'=>2}.map_values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
   #
-  def map_values &block # :yields: value
+  def map_values &_block # :yields: value
     hsh = {}
     each do |k, v|
       hsh[k] = yield v
@@ -34,7 +34,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_keys { |k| k*2 } #=> {'aa'=>1, 'bb'=>2}
   #   {'a'=>1, 'b'=>2}.map_keys { "cat" }   #=> {'cat'=>2}
   #
-  def map_keys &block # :yields: key
+  def map_keys &_block # :yields: key
     hsh = {}
     each do |k, v|
       hsh[ yield k ] = v
@@ -63,7 +63,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
   #   {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
   #
-  def map_pairs &block # :yields: key, value
+  def map_pairs &_block # :yields: key, value
     hsh = {}
     each do |k, v|
       a, b = yield k, v
@@ -83,7 +83,7 @@ class Hash
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

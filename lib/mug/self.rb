@@ -6,7 +6,7 @@ class Object
   # If a block is given, this object is yielded to it, and the result
   # is returned.
   #
-  def self(&block)
+  def self(&_block)
     if block_given?
       yield self
     else
@@ -26,7 +26,7 @@ class Object
   # to a block. If no block is given, returns an
   # Enumerator.
   #
-  def revapply(*args, &block)
+  def revapply(*args, &_block)
     if block_given?
       yield self, *args
     else
@@ -37,7 +37,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

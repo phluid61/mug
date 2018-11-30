@@ -8,7 +8,7 @@ module Enumerable
   #
   # @see Enumerable#sort
   #
-  def top n=1, &blk
+  def top n=1, &_blk
     if block_given?
       sort{|x,y| yield y, x }[0...n]
     else
@@ -32,7 +32,7 @@ module Enumerable
   #
   # @see Enumerable#sort_by
   #
-  def top_by n=1, &blk
+  def top_by n=1, &_blk
     return enum_for(:top_by, n) unless block_given?
     chain = {}
     each do |x|
@@ -75,7 +75,7 @@ module Enumerable
   #
   # @see Enumerable#sort_by
   #
-  def bottom_by n=1, &blk
+  def bottom_by n=1, &_blk
     return enum_for(:bottom_by, n) unless block_given?
     chain = {}
     each do |x|
@@ -111,7 +111,7 @@ class Array
 end
 
 =begin
-Copyright (c) 2014-2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

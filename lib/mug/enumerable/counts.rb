@@ -20,7 +20,7 @@ module Enumerable
   #
   # If no block is given, an enumerator is returned.
   #
-  def counts_by &block
+  def counts_by &_block
     return enum_for(:counts_by) unless block_given?
     hsh = Hash.new{|h,k| h[k] = 0 }
     each do |j|
