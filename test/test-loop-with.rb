@@ -7,7 +7,7 @@ class Test_loop_with < Test::Unit::TestCase
   def test_loop_with_index__block
     a = []
     b = []
-    x = loop_with_index do |i|
+    _x = loop_with_index do |i|
       a << i
       break if a.length >= 3
     end
@@ -22,7 +22,7 @@ class Test_loop_with < Test::Unit::TestCase
   def test_loop_with_index__block_offset
     a = []
     b = []
-    x = loop_with_index(10) do |i|
+    _x = loop_with_index(10) do |i|
       a << i
       break if a.length >= 3
     end
@@ -40,7 +40,7 @@ class Test_loop_with < Test::Unit::TestCase
 
     a = []
     b = []
-    x = enum.each do |i|
+    _x = enum.each do |i|
       a << i
       break if a.length >= 3
     end
@@ -58,7 +58,7 @@ class Test_loop_with < Test::Unit::TestCase
 
     a = []
     b = []
-    x = enum.each do |i|
+    _x = enum.each do |i|
       a << i
       break if a.length >= 3
     end
@@ -75,7 +75,7 @@ class Test_loop_with < Test::Unit::TestCase
     o = "x"
     a = []
     b = []
-    x = loop_with_object(o) do |e|
+    _x = loop_with_object(o) do |e|
       a << e
       break if a.length >= 3
     end
@@ -94,7 +94,7 @@ class Test_loop_with < Test::Unit::TestCase
 
     a = []
     b = []
-    x = enum.each do |e|
+    _x = enum.each do |e|
       a << e
       break if a.length >= 3
     end
