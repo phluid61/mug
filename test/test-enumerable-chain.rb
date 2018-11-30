@@ -14,8 +14,8 @@ class Test_enumerable_chain < Test::Unit::TestCase
     ]
 
     result = []
-    a.chain(b, c) do |*a|
-      result << a
+    a.chain(b, c) do |*x|
+      result << x
     end
 
     assert_equal( expect, result )
@@ -35,8 +35,8 @@ class Test_enumerable_chain < Test::Unit::TestCase
     assert_kind_of( Enumerator, enum )
 
     result = []
-    enum.each do |*a|
-      result << a
+    enum.each do |*x|
+      result << x
     end
 
     assert_equal( expect, result )
@@ -51,8 +51,8 @@ class Test_enumerable_chain < Test::Unit::TestCase
     ]
 
     result = []
-    Enumerable.chain(a, b) do |*a|
-      result << a
+    Enumerable.chain(a, b) do |*x|
+      result << x
     end
 
     assert_equal( expect, result )
@@ -70,8 +70,8 @@ class Test_enumerable_chain < Test::Unit::TestCase
     assert_kind_of( Enumerator, enum )
 
     result = []
-    enum.each do |*a|
-      result << a
+    enum.each do |*x|
+      result << x
     end
 
     assert_equal( expect, result )
