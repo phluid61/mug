@@ -133,6 +133,7 @@ module Enumerable
   end
   alias size length
 
+  undef member? # FIXME: do something about this? maybe warn?
   ##
   # Returns true if the given key is present in this enum.
   #
