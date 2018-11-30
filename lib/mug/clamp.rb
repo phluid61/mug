@@ -33,9 +33,7 @@ class Range
 
     b = last
     if val >= b
-      if exclude_end?
-        raise ArgumentError, 'more than or equal to the exclusive range'
-      end
+      raise ArgumentError, 'greater than or equal to the exclusive range' if exclude_end?
       return b
     end
 
@@ -45,7 +43,7 @@ class Range
 end
 
 =begin
-Copyright (c) 2014, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

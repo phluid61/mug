@@ -10,7 +10,7 @@ class Array
   #
   # See #delete_if, #reject!
   #
-  def delete_all &block
+  def delete_all &_block
     return enum_for :delete_all unless block_given?
     [].tap do |removed|
       delete_if do |e|
@@ -25,7 +25,7 @@ class Array
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

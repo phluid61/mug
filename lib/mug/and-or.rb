@@ -7,7 +7,7 @@ class Object
   # If a block is given, +obj+ is yielded to it; if it returns truthy,
   # +default+ is returned, otherwise +obj+ is returned.
   #
-  def and default
+  def and default, &_block
     if block_given?
       yield(self) ? default : self
     else
@@ -21,7 +21,7 @@ class Object
   # If a block is given, +obj+ is yielded to it; if it returns truthy,
   # +obj+ is returned, otherwise +default+ is returned.
   #
-  def or default
+  def or default, &_block
     if block_given?
       yield(self) ? self : default
     else
@@ -34,7 +34,7 @@ class Object
   #
   # Returns +obj+.
   #
-  def and_then &block
+  def and_then &_block
     yield self if self
     self
   end
@@ -44,7 +44,7 @@ class Object
   #
   # Returns +obj+.
   #
-  def or_then &block
+  def or_then &_block
     yield self unless self
     self
   end
@@ -52,7 +52,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
