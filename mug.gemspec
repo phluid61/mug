@@ -16,5 +16,4 @@ EOS
   s.test_files=Dir['test/*.rb']
   s.homepage = 'http://phluid61.github.com/mug'.freeze
   s.license  = 'ISC'.freeze
-  s.has_rdoc = true
 end
