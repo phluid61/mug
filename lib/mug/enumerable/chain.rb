@@ -9,7 +9,7 @@ module Enumerable
     def chain *enums
       return enum_for(:chain, *enums) unless block_given?
       enums.each do |enum|
-        enum.each {|*args| yield *args }
+        enum.each {|*args| yield(*args) }
       end
     end
   end
@@ -21,7 +21,7 @@ module Enumerable
   def chain *enums
     return enum_for(:chain, *enums) unless block_given?
     [self, *enums].each do |enum|
-      enum.each {|*args| yield *args }
+      enum.each {|*args| yield(*args) }
     end
     nil
   end
