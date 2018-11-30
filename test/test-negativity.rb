@@ -3,9 +3,9 @@ $VERBOSE = true
 
 require 'bigdecimal'
 
-$neg = [ -1, -(2**65), -3.14, Rational(-1,2), BigDecimal.new('-1') ]
-$pos = [ +1, +(2**65), +3.14, Rational(+1,2), BigDecimal.new('+1') ]
-$zer = [  0, 0.0, BigDecimal.new('0') ]
+$neg = [ -1, -(2**65), -3.14, Rational(-1,2), BigDecimal('-1') ]
+$pos = [ +1, +(2**65), +3.14, Rational(+1,2), BigDecimal('+1') ]
+$zer = [  0, 0.0, BigDecimal('0') ]
 $err = [ Complex(1,1) ]
 
 require_relative '../lib/mug/negativity'
