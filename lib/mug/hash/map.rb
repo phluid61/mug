@@ -26,7 +26,7 @@ class Hash
     replace map_values(&block)
   end
 
-  if RUBY_VERSION < 2.4
+  if RUBY_VERSION < '2.4'
     alias transform_values  map_values
     alias transform_values! map_values!
   end
@@ -62,7 +62,7 @@ class Hash
     replace map_keys(&block)
   end
 
-  if RUBY_VERSION < 2.5
+  if RUBY_VERSION < '2.5'
     alias transform_keys  map_keys
     alias transform_keys! map_keys!
   end
