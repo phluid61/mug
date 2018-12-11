@@ -64,20 +64,25 @@ class Test_compat < Test::Unit::TestCase
     assert_equal( {:a=>1, :b=>false}, hash )
   end
 
-  ##########
-
-  def test_hash_transform_values
-    hash = {:a=>1,:b=>2,:c=>3}
-    assert_equal( {:a=>'1',:b=>'2',:c=>'3'}, hash.transform_values(&:to_s) )
-  end
-
-  def test_hash_transform_values!
-    hash = {:a=>1,:b=>2,:c=>3}
-    hash.transform_values!(&:to_s)
-    assert_equal( {:a=>'1',:b=>'2',:c=>'3'}, hash )
+  def test_hash_slice
+    h = {:a=>100, :b=>200, :c=>300}
+    assert_equal( {:a=>100}, h.slice(:a) )
+    assert_equal( {:b=>200, :c=>300}, h.slice(:b, :c, :d) )
   end
 
   ##########
+
+  def test_string_casecmp
+    a = 'AbC'
+    b = 'abc'
+    c = 'AbD'
+
+    assert_equal( 0, a.casecmp(a) )
+    assert_equal( 0, a.casecmp(b) )
+    assert_equal(-1, a.casecmp(c) )
+    assert_nil( 'foo'.casecmp(2) )
+    assert_nil( "\u{e4 f6 fc}".encode('ISO-8859-1').casecmp("\u{c4 d6 dc}")  )
+  end
 
   def test_string_casecmp?
     a = 'AbC'
@@ -89,6 +94,56 @@ class Test_compat < Test::Unit::TestCase
     assert_false( a.casecmp? c )
     assert_nil( 'foo'.casecmp?(2) )
     assert_nil( "\u{e4 f6 fc}".encode('ISO-8859-1').casecmp?("\u{c4 d6 dc}")  )
+  end
+
+  def test_symbol_casecmp
+    a = :AbC
+    b = :abc
+    c = :AbD
+
+    assert_equal( 0, a.casecmp(a) )
+    assert_equal( 0, a.casecmp(b) )
+    assert_equal(-1, a.casecmp(c) )
+    assert_nil( :foo.casecmp(2) )
+    assert_nil( "\u{e4 f6 fc}".encode('ISO-8859-1').to_sym.casecmp(:"\u{c4 d6 dc}")  )
+  end
+
+  def test_symbol_casecmp?
+    a = :AbC
+    b = :abc
+    c = :AbD
+
+    assert( a.casecmp? a )
+    assert( a.casecmp? b )
+    assert_false( a.casecmp? c )
+    assert_nil( :foo.casecmp? 2 )
+    assert_nil( "\u{e4 f6 fc}".encode('ISO-8859-1').to_sym.casecmp?(:"\u{c4 d6 dc}")  )
+  end
+
+  def test_string_delete_prefix
+    str = 'hello'
+    [
+      ['hel', 'lo'],
+      ['',    'hello'],
+      ['llo', 'hello'],
+    ].each do |arg, exp|
+      assert_equal( exp, str.delete_prefix(arg) )
+      assert_equal( 'hello', str )
+    end
+  end
+
+  def test_string_delete_prefix!
+    str = 'hello'
+    assert_equal( 'lo', str.delete_prefix!('hel') )
+    assert_equal( 'lo', str )
+
+    str = 'hello'
+    assert_nil( str.delete_prefix!('') )
+    assert_equal( 'hello', str )
+
+    str = 'hello'
+    assert_nil( str.delete_prefix!('llo') )
+    assert_equal( 'hello', str )
   end
 
   ##########

@@ -8,6 +8,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
   #
   def map_values &_block # :yields: value
+    return enum_for(:map_values) unless block_given?
     hsh = {}
     each do |k, v|
       hsh[k] = yield v
@@ -21,7 +22,13 @@ class Hash
   # See: #map_values
   #
   def map_values! &block # :yields: value
+    return enum_for(:map_values!) unless block_given?
     replace map_values(&block)
+  end
+
+  if RUBY_VERSION < 2.4
+    alias transform_values  map_values
+    alias transform_values! map_values!
   end
 
   #
@@ -35,6 +42,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_keys { "cat" }   #=> {'cat'=>2}
   #
   def map_keys &_block # :yields: key
+    return enum_for(:map_keys) unless block_given?
     hsh = {}
     each do |k, v|
       hsh[ yield k ] = v
@@ -50,7 +58,13 @@ class Hash
   # See: #map_keys
   #
   def map_keys! &block # :yields: key
+    return enum_for(:map_keys!) unless block_given?
     replace map_keys(&block)
+  end
+
+  if RUBY_VERSION < 2.5
+    alias transform_keys  map_keys
+    alias transform_keys! map_keys!
   end
 
   #
@@ -64,6 +78,7 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
   #
   def map_pairs &_block # :yields: key, value
+    return enum_for(:map_pairs) unless block_given?
     hsh = {}
     each do |k, v|
       a, b = yield k, v
@@ -78,6 +93,7 @@ class Hash
   # See: #map_values
   #
   def map_pairs! &block # :yields: key, value
+    return enum_for(:map_pairs!) unless block_given?
     replace map_pairs(&block)
   end
 end
