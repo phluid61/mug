@@ -26,11 +26,6 @@ class Hash
     replace map_values(&block)
   end
 
-  if RUBY_VERSION < '2.4'
-    alias transform_values  map_values
-    alias transform_values! map_values!
-  end
-
   #
   # Returns a new hash which is a copy of the current hash but each
   # key is replaced by the result of running it through +block+.
@@ -60,11 +55,6 @@ class Hash
   def map_keys! &block # :yields: key
     return enum_for(:map_keys!) unless block_given?
     replace map_keys(&block)
-  end
-
-  if RUBY_VERSION < '2.5'
-    alias transform_keys  map_keys
-    alias transform_keys! map_keys!
   end
 
   #
