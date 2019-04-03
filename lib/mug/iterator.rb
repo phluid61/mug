@@ -22,7 +22,7 @@ class Iterator < Enumerator
   # In the second, deprecated, form, a generated Iterator sends the
   # given method with any +args+ to the iterand.
   #
-  # Use of this form is discourages.  Use Object#iter_for or
+  # Use of this form is discouraged.  Use Object#iter_for or
   # Object#to_iter instead.
   #
   # @call-seq new(initial, *args) { |obj, *args| ... }
