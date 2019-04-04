@@ -72,7 +72,7 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul><li><a href="#gem-alias">alias</a></li><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/delete_all">array/delete_all</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-array/to_proc">array/to_proc</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-enumerable/any-and-all">enumerable/any-and-all</a></li><li><a href="#gem-enumerable/chain">enumerable/chain</a></li><li><a href="#gem-enumerable/counts">enumerable/counts</a></li><li><a href="#gem-enumerable/hash-like">enumerable/hash-like</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iff">iff</a></li><li><a href="#gem-iterator">iterator</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-main">main</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li><li><a href="#gem-with">with</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
+<div id="toc"><ul><li><a href="#gem-alias">alias</a></li><li><a href="#gem-and-or">and-or</a></li><li><a href="#gem-apply">apply</a></li><li><a href="#gem-array/delete_all">array/delete_all</a></li><li><a href="#gem-array/extend">array/extend</a></li><li><a href="#gem-array/minus">array/minus</a></li><li><a href="#gem-array/samples">array/samples</a></li><li><a href="#gem-array/to_proc">array/to_proc</a></li><li><a href="#gem-bittest">bittest</a></li><li><a href="#gem-bool">bool</a></li><li><a href="#gem-clamp">clamp</a></li><li><a href="#gem-compat">compat</a></li><li><a href="#gem-enumerable/any-and-all">enumerable/any-and-all</a></li><li><a href="#gem-enumerable/chain">enumerable/chain</a></li><li><a href="#gem-enumerable/counts">enumerable/counts</a></li><li><a href="#gem-enumerable/hash-like">enumerable/hash-like</a></li><li><a href="#gem-fragile-method-chain">fragile-method-chain</a></li><li><a href="#gem-hash/map">hash/map</a></li><li><a href="#gem-hash/merge">hash/merge</a></li><li><a href="#gem-hash/operations">hash/operations</a></li><li><a href="#gem-hash/when">hash/when</a></li><li><a href="#gem-iff">iff</a></li><li><a href="#gem-iterator">iterator</a></li><li><a href="#gem-iterator/for">iterator/for</a></li><li><a href="#gem-iterator/method">iterator/method</a></li><li><a href="#gem-loop-with">loop-with</a></li><li><a href="#gem-main">main</a></li><li><a href="#gem-matchdata/each">matchdata/each</a></li><li><a href="#gem-matchdata/hash">matchdata/hash</a></li><li><a href="#gem-maybe">maybe</a></li><li><a href="#gem-negativity">negativity</a></li><li><a href="#gem-not">not</a></li><li><a href="#gem-rexproc">rexproc</a></li><li><a href="#gem-self">self</a></li><li><a href="#gem-tau">tau</a></li><li><a href="#gem-time">time</a></li><li><a href="#gem-to_h">to_h</a></li><li><a href="#gem-top">top</a></li><li><a href="#gem-with">with</a></li></ul></div><h1>Matty&#39;s Ultimate Gem</h1>
 
 <p><a href="http://travis-ci.org/phluid61/mug"><img src="https://secure.travis-ci.org/phluid61/mug.png" alt="Build Status"></a><br>
 <a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version"></a><br>
@@ -372,6 +372,10 @@ obj.to_b #=&gt; C-like truthiness
 <em>val</em> itself.</p>
 
 <p>Raises an exception if <em>val</em> &gt;= <em>end</em> and the range is exclusive.</p>
+
+<h2 id="gem-compat">compat</h2>
+
+<p>Backwards compatibility for new core methods.</p>
 
 <h2 id="gem-enumerable/any-and-all">enumerable/any-and-all</h2>
 
@@ -1082,7 +1086,19 @@ after mapping are returned in the initial order.</p>
 <h4><code>with(*args) {|*foo| block }</code></h4>
 
 <p>Yields the arguments to a block.</p>
-<pre id="license" class="no-highlight">Copyright (c) 2013-2015, Matthew Kerwin <matthew@kerwin.net.au>Permission to use, copy, modify, and/or distribute this software for anypurpose with or without fee is hereby granted, provided that the abovecopyright notice and this permission notice appear in all copies.THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIESWITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OFMERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FORANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGESWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN ANACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OFOR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+<pre id="license" class="no-highlight">Copyright (c) 2013-2019, Matthew Kerwin <matthew@kerwin.net.au>
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 </pre><h1>Contributor Covenant Code of Conduct</h1>
 
 <h2>Our Pledge</h2>
