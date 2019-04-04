@@ -7,6 +7,7 @@ module Kernel
     return enum_for(:with, *args) unless block_given?
     yield *args
   end
+  private :with
 end
 
 =begin
