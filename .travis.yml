@@ -4,6 +4,7 @@ branches:
 language: ruby
 rvm:
   - ruby-head
+  - "2.6.1"
   - "2.5.3"
   - "2.4.5"
   - "2.3"
@@ -12,6 +13,7 @@ rvm:
   #- rbx
 matrix:
   allow_failures:
+    - rvm: "2.3"
     - rvm: "2.2"
     - rvm: ruby-head
     - rvm: jruby-9k
