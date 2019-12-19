@@ -39,7 +39,7 @@ class Test_with < Test::Unit::TestCase
   end
 
   def test_with__private
-    assert_raise(NoMethodError) { self.with }
+    assert_raise(NoMethodError) { Object.new.with }
   end
 
 end
