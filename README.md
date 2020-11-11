@@ -471,6 +471,8 @@ hash/map
 
 Returns a new hash which is a copy of _hsh_ but each value is replaced by the result of running it through _block_.
 
+As of Ruby 2.4 this is equivalent to `#transform_values`
+
 ```ruby
 require 'mug/hash/map'
 
@@ -482,6 +484,8 @@ require 'mug/hash/map'
 
 Replaces the values in _hsh_ by running them each through _block_.
 
+As of Ruby 2.4 this is equivalent to `#transform_values!`
+
 See: #map\_values
 
 #### `hsh.map_keys {|k| block }`
@@ -489,6 +493,8 @@ See: #map\_values
 Returns a new hash which is a copy of _hsh_ but each key is replaced by the result of running it through _block_.
 
 If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
+
+As of Ruby 2.5 this is equivalent to `#transform_keys`
 
 ```ruby
 require 'mug/hash/map'
@@ -502,6 +508,8 @@ require 'mug/hash/map'
 Replaces the keys in _hsh_ by running them each through _block_.
 
 If _block_ returns duplicate keys, they will be overwritten in turn.
+
+As of Ruby 2.5 this is equivalent to `#transform_keys!`
 
 See: #map\_keys
 
