@@ -311,13 +311,6 @@ _val_ itself.
 Raises an exception if _val_ >= _end_ and the range is exclusive.
 
 
-compat
-------
-
-Backwards compatibility for new core methods.
-
-
-
 enumerable/any-and-all
 ----------------------
 
