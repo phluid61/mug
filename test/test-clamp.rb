@@ -27,6 +27,12 @@ class Test_clamp < Test::Unit::TestCase
     assert_equal( 3, 2.clamp(rng) )
     assert_equal( 4, 4.clamp(rng) )
     assert_raise(ArgumentError) { 6.clamp(rng) }
+
+    rng = (..3)
+    assert_raise(RangeError) { 2.clamp(rng) }
+
+    rng = (1..)
+    assert_raise(RangeError) { 2.clamp(rng) }
   end
 
   def test_bound__inclusive
@@ -45,6 +51,22 @@ class Test_clamp < Test::Unit::TestCase
     assert_equal( 4, rng.bound(4) )
     assert_raise(ArgumentError) { rng.bound(5) }
     assert_raise(ArgumentError) { rng.bound(6) }
+  end
+
+  def test_bound__endless
+    rng = (1..)
+    assert_raise(RangeError) { rng.bound(2) }
+
+    rng = (1...)
+    assert_raise(RangeError) { rng.bound(2) }
+  end
+
+  def test_bound__beginless
+    rng = (..3)
+    assert_raise(RangeError) { rng.bound(2) }
+
+    rng = (...3)
+    assert_raise(RangeError) { rng.bound(2) }
   end
 
 end
