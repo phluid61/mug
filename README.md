@@ -334,6 +334,8 @@ enumerable/chain
 Invokes a block once for every element in a sequence of
 Enumerables.
 
+WARNING: `Enumerable\#chain` defined since Ruby 2.6 is incompatible with this gem when used with args and a block
+
 #### `enum.chain(*enums)`<br>`enum.chain(*enums) {|...| block }`
 
 Creates a chain of Enumerables following this one, and
