@@ -5,7 +5,7 @@ module Kernel
   #
   def with *args
     return enum_for(:with, *args) unless block_given?
-    yield *args
+    yield(*args)
   end
   private :with
 end
