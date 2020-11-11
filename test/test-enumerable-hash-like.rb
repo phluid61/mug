@@ -1,19 +1,20 @@
 require 'test/unit'
 $VERBOSE = true
 
-class HashLikeEnum
-  def each
-    return enum_for(:each) unless block_given?
-    yield 'a'
-    yield 'b'
-    yield 'c'
-    yield 'd'
-  end
-  include Enumerable
-end
-
 require_relative '../lib/mug/enumerable/hash-like'
 class Test_hashlike < Test::Unit::TestCase
+
+  class HashLikeEnum
+    def each
+      return enum_for(:each) unless block_given?
+      yield 'a'
+      yield 'b'
+      yield 'c'
+      yield 'd'
+    end
+    include Enumerable
+  end
+
   def test__each_pair__block
     my_enum = HashLikeEnum.new
     expect = [[0, 'a'], [1, 'b'], [2, 'c'], [3, 'd']]

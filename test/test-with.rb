@@ -1,15 +1,6 @@
 require 'test/unit'
 $VERBOSE = true
 
-class ::DummyClass
-  def self.dummy_method
-    :ok
-  end
-  def self.clobber_method
-    :original
-  end
-end
-
 require_relative '../lib/mug/with'
 class Test_with < Test::Unit::TestCase
 

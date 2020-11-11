@@ -1,28 +1,38 @@
 require 'test/unit'
 $VERBOSE = true
 
-module MaybeTest
-  class A
-    def initialize; @b = B.new; end
-    attr_accessor :b
-  end
-
-  class B
-    def initialize; @c = C.new; end
-    attr_accessor :c
-  end
-
-  class C
-    def to_i; 1; end
-  end
-end
-
-def false.c
-  2
-end
-
 require_relative '../lib/mug/maybe'
 class Test_maybe < Test::Unit::TestCase
+
+  module MaybeTest
+    class A
+      def initialize; @b = B.new; end
+      attr_accessor :b
+    end
+
+    class B
+      def initialize; @c = C.new; end
+      attr_accessor :c
+    end
+
+    class C
+      def to_i; 1; end
+    end
+  end
+
+  def self.startup
+    class << false
+      def c
+        2
+      end
+    end
+  end
+  def self.shutdown
+    class << false
+      undef c
+    end
+  end
+
   def test_maybe_block_nil
     a = MaybeTest::A.new
     assert_equal( 1, a.maybe{ b.maybe{ c } }.to_i )
