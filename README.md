@@ -1,9 +1,9 @@
 Matty's Ultimate Gem
 ====================
 
-[![Build Status](https://secure.travis-ci.org/phluid61/mug.png)](http://travis-ci.org/phluid61/mug)
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 [![Hound-CI](https://img.shields.io/badge/style%20guide-hound--ci-a873d1.svg)](https://houndci.com/)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) 
 
 alias
 -----
@@ -312,13 +312,6 @@ _val_ itself.
 Raises an exception if _val_ >= _end_ and the range is exclusive.
 
 
-compat
-------
-
-Backwards compatibility for new core methods.
-
-
-
 enumerable/any-and-all
 ----------------------
 
@@ -341,6 +334,8 @@ enumerable/chain
 
 Invokes a block once for every element in a sequence of
 Enumerables.
+
+WARNING: `Enumerable\#chain` defined since Ruby 2.6 is incompatible with this gem when used with args and a block
 
 #### `enum.chain(*enums)`<br>`enum.chain(*enums) {|...| block }`
 
@@ -477,6 +472,8 @@ hash/map
 
 Returns a new hash which is a copy of _hsh_ but each value is replaced by the result of running it through _block_.
 
+As of Ruby 2.4 this is equivalent to `#transform_values`
+
 ```ruby
 require 'mug/hash/map'
 
@@ -484,11 +481,21 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
 ```
 
+#### `hsh.map_values! {|v| block }`
+
+Replaces the values in _hsh_ by running them each through _block_.
+
+As of Ruby 2.4 this is equivalent to `#transform_values!`
+
+See: #map\_values
+
 #### `hsh.map_keys {|k| block }`
 
 Returns a new hash which is a copy of _hsh_ but each key is replaced by the result of running it through _block_.
 
 If _block_ returns duplicate keys, they will be overwritten in the resulting hash.
+
+As of Ruby 2.5 this is equivalent to `#transform_keys`
 
 ```ruby
 require 'mug/hash/map'
@@ -496,6 +503,16 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_keys { |k| k*2 } #=> {'aa'=>1, 'bb'=>2}
 {'a'=>1, 'b'=>2}.map_keys { "cat" }   #=> {'cat'=>2}
 ```
+
+#### `hsh.map_keys! {|k| block }`
+
+Replaces the keys in _hsh_ by running them each through _block_.
+
+If _block_ returns duplicate keys, they will be overwritten in turn.
+
+As of Ruby 2.5 this is equivalent to `#transform_keys!`
+
+See: #map\_keys
 
 #### `hsh.map_pairs {|k, v| block }`
 
@@ -509,6 +526,15 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
 ```
+
+#### `hsh.map_pairs! {|k, v| block }`
+
+Replaces the keys and values in _hsh_ by running them each through _block_.
+
+If _block_ returns duplicate keys, they will be overwritten.
+
+See: #map\_pairs
+
 
 hash/merge
 ----------
@@ -656,8 +682,8 @@ to which the current object and any other *args* are yielded.
 In the second, deprecated, form, a generated Iterator sends the
 given method with any +args+ to the iterand.
 
-Use of this form is discourages.  Use Object#iter_for or
-Object#to_iter instead.
+Use of this form is discouraged.  Use Object#iter_for or
+Method#to_iter instead.
 
 
 iterator/for
@@ -840,7 +866,7 @@ Invokes a method on _obj_ iff _obj_ is truthy, otherwise returns _obj_.
 
 When a block is given, the block is invoked in the scope of _obj_ (i.e. `self` in the block refers to _obj_).
 
-When no block is given, _maybe_ returns an object to conditionally delegates methods to _obj_.
+When no block is given, _maybe_ returns an object that conditionally delegates methods to _obj_.
 
 ```ruby
 require 'mug/maybe'
@@ -1084,3 +1110,8 @@ with
 #### `with(*args) {|*foo| block }`
 
 Yields the arguments to a block.
+
+```ruby
+with(1, 2, 3) {|x, y, z| x + y + z }
+#=> 6
+```
