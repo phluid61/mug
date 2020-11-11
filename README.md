@@ -1109,3 +1109,8 @@ with
 #### `with(*args) {|*foo| block }`
 
 Yields the arguments to a block.
+
+```ruby
+with(1, 2, 3) {|x, y, z| x + y + z }
+#=> 6
+```
