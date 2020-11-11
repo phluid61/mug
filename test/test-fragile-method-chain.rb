@@ -1,28 +1,38 @@
 require 'test/unit'
 $VERBOSE = true
 
-module FMCTest
-  class A
-    def initialize; @b = B.new; end
-    attr_accessor :b
-  end
-
-  class B
-    def initialize; @c = C.new; end
-    attr_accessor :c
-  end
-
-  class C
-    def to_i; 1; end
-  end
-end
-
-def false.c
-  2
-end
-
 require_relative '../lib/mug/fragile-method-chain'
 class Test_fmc < Test::Unit::TestCase
+
+  module FMCTest
+    class A
+      def initialize; @b = B.new; end
+      attr_accessor :b
+    end
+
+    class B
+      def initialize; @c = C.new; end
+      attr_accessor :c
+    end
+
+    class C
+      def to_i; 1; end
+    end
+  end
+
+  def self.startup
+    class << false
+      def c
+        2
+      end
+    end
+  end
+  def self.shutdown
+    class << false
+      undef c
+    end
+  end
+
   def test_fmc_nil
     a = FMCTest::A.new
     assert_equal( 1, a._?.b.c.to_i._! )

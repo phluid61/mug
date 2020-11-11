@@ -1,14 +1,15 @@
 require 'test/unit'
 $VERBOSE = true
 
-class Foo
-  def bar a, b
-    (a||0) + (b||0)
-  end
-end
-
 require_relative '../lib/mug/apply'
 class Test_apply < Test::Unit::TestCase
+
+  class Foo
+    def bar a, b
+      (a||0) + (b||0)
+    end
+  end
+
   def test_apply_proc
     prc = proc{|a,b,*c| (a||0) + (b||0) + c.inject(0, &:+) }
     p1 = prc.apply(1)

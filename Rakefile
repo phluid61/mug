@@ -6,4 +6,5 @@ task :default => [:test]
 require 'rake/testtask'
 Rake::TestTask.new do |tt|
   tt.verbose = true
+  tt.warning = true
 end
