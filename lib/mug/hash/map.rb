@@ -78,9 +78,11 @@ class Hash
   end
 
   #
-  # Replaces the values in +hsh+ by running them each through +block+.
+  # Replaces the keys and values in +hsh+ by running them each through +block+.
   #
-  # See: #map_values
+  # If +block+ returns duplicate keys, they will be overwritten.
+  #
+  # See: #map_pairs
   #
   def map_pairs! &block # :yields: key, value
     return enum_for(:map_pairs!) unless block_given?

@@ -478,6 +478,12 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
 ```
 
+#### `hsh.map_values! {|v| block }`
+
+Replaces the values in _hsh_ by running them each through _block_.
+
+See: #map\_values
+
 #### `hsh.map_keys {|k| block }`
 
 Returns a new hash which is a copy of _hsh_ but each key is replaced by the result of running it through _block_.
@@ -491,6 +497,14 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_keys { "cat" }   #=> {'cat'=>2}
 ```
 
+#### `hsh.map_keys! {|k| block }`
+
+Replaces the keys in _hsh_ by running them each through _block_.
+
+If _block_ returns duplicate keys, they will be overwritten in turn.
+
+See: #map\_keys
+
 #### `hsh.map_pairs {|k, v| block }`
 
 Returns a new hash which is a copy of _hsh_ but each key-value pair is replaced by the result of running it through _block_.
@@ -503,6 +517,15 @@ require 'mug/hash/map'
 {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
 {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
 ```
+
+#### `hsh.map_pairs! {|k, v| block }`
+
+Replaces the keys and values in _hsh_ by running them each through _block_.
+
+If _block_ returns duplicate keys, they will be overwritten.
+
+See: #map\_pairs
+
 
 hash/merge
 ----------
