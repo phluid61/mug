@@ -23,7 +23,7 @@ class Iterator < Enumerator
   # given method with any +args+ to the iterand.
   #
   # Use of this form is discouraged.  Use Object#iter_for or
-  # Object#to_iter instead.
+  # Method#to_iter instead.
   #
   # @call-seq new(initial, *args) { |obj, *args| ... }
   # @call-seq new(initial, method=:each, *args)

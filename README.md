@@ -681,8 +681,8 @@ to which the current object and any other *args* are yielded.
 In the second, deprecated, form, a generated Iterator sends the
 given method with any +args+ to the iterand.
 
-Use of this form is discourages.  Use Object#iter_for or
-Object#to_iter instead.
+Use of this form is discouraged.  Use Object#iter_for or
+Method#to_iter instead.
 
 
 iterator/for
@@ -865,7 +865,7 @@ Invokes a method on _obj_ iff _obj_ is truthy, otherwise returns _obj_.
 
 When a block is given, the block is invoked in the scope of _obj_ (i.e. `self` in the block refers to _obj_).
 
-When no block is given, _maybe_ returns an object to conditionally delegates methods to _obj_.
+When no block is given, _maybe_ returns an object that conditionally delegates methods to _obj_.
 
 ```ruby
 require 'mug/maybe'
