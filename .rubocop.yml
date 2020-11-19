@@ -19,13 +19,31 @@ Lint/UnusedBlockArgument:
   Enabled: false
 Lint/UnusedMethodArgument:
   Enabled: false
-Metrics/LineLength:
+Layout/LineLength:
   Max: 101
 Metrics/MethodLength:
   Max: 50
+Metrics/ModuleLength:
+  Max: 500
 Metrics/ClassLength:
   Max: 500
 Style/PercentLiteralDelimiters:
+  Enabled: false
+
+# I need back-compat
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false
+Style/SlicingWithRange:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/SafeNavigation:
+  Enabled: false
+
+# Some files don't have string literals in ...
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 # Sometimes it looks better
@@ -39,23 +57,37 @@ Layout/EmptyLinesAroundMethodBody:
   Enabled: false
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 Layout/ExtraSpacing:
+  Enabled: false
+Layout/LeadingEmptyLines:
   Enabled: false
 Layout/SpaceAfterComma:
   Enabled: false
 Layout/SpaceAfterNot:
   Enabled: false
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 Layout/SpaceAroundOperators:
   Enabled: false
 Layout/SpaceBeforeBlockBraces:
-  Enabled: false
-Layout/SpaceInsideBrackets:
   Enabled: false
 Layout/SpaceInsideArrayPercentLiteral:
   Enabled: false
 Layout/SpaceInsidePercentLiteralDelimiters:
   Enabled: false
-Style/BracesAroundHashParameters:
+Layout/SpaceInsideReferenceBrackets:
+  Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
+Style/BisectedAttrAccessor:
+  Enabled: false
+Style/CaseLikeIf:
+  Enabled: false
+Style/HashLikeCase:
   Enabled: false
 Style/IfInsideElse:
   Enabled: false
@@ -63,13 +95,17 @@ Style/NegatedIf:
   Enabled: false
 Style/NumericLiterals:
   Enabled: false
+Style/RedundantParentheses:
+  Enabled: false
+Style/RedundantRegexpCharacterClass:
+  Enabled: false
 Style/RedundantSelf:
   Enabled: false
 Style/SingleLineMethods:
   Enabled: false
 
 # Stupid
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 Lint/LiteralAsCondition:
   Enabled: false
@@ -81,21 +117,27 @@ Style/GuardClause:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false
-Style/MethodMissing:
+Style/MethodMissingSuper:
   Enabled: false
+#Style/MissingRespondToMissing:
+#  Enabled: false
 Style/NestedTernaryOperator:
   Enabled: false
 Style/Not:
   Enabled: false
 Style/SymbolProc:
   Enabled: false
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
   Enabled: false
 Style/WhileUntilModifier:
   Enabled: false
 
 # I know what I'm doing
 Naming/BinaryOperatorParameterName:
+  Enabled: false
+Naming/MethodParameterName:
   Enabled: false
 Layout/CommentIndentation:
   Enabled: false
@@ -111,6 +153,12 @@ Style/DoubleNegation:
   Enabled: false
 Style/InfiniteLoop:
   Enabled: false
+Naming/MethodName:
+  IgnoredPatterns:
+    - Bool
+    - TAU
+Style/Documentation:
+  Enabled: false
 
 # what even
 Metrics/AbcSize:
@@ -120,11 +168,43 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Enabled: false
 
+# $0 is way more readable than $PROGRAM_NAME
+Style/SpecialGlobalVars:
+  Enabled: false
+
 # Wish I could enforce the opposite
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: false
 Naming/FileName:
   Enabled: false
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Enabled: false
 
+# New cops, not sorted yet
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Style/ArrayCoercion: #???
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+  EnforcedStyle: integral
+Style/HashAsLastArrayItem:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/RedundantAssignment:
+  Enabled: true
+Style/RedundantFetchBlock:
+  Enabled: true
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
