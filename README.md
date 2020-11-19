@@ -312,6 +312,23 @@ _val_ itself.
 Raises an exception if _val_ >= _end_ and the range is exclusive.
 
 
+diggable
+--------
+
+Implements #dig for any object that implements #[]
+
+### Diggable
+
+Extend any class or object that implements a `#[]` method, to
+also have `#dig`
+
+#### `diggy.dig *idx`
+
+Extracts the nested value specified by the sequence of `idx` objects by
+calling `dig` at each step, returning `nil` if any intermediate step is
+`nil`.
+
+
 enumerable/any-and-all
 ----------------------
 
