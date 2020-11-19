@@ -11,8 +11,8 @@ module Diggable
   #
   def dig *idx
     inner = self[idx.shift]
-    return inner if idx.empty? or inner.nil?
-    inner.dig *idx
+    return inner if idx.empty? || inner.nil?
+    inner.dig(*idx)
   end
 end
 
