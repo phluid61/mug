@@ -13,7 +13,7 @@ Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 Layout/SpaceInsideParens:
   Enabled: false
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 Naming/ClassAndModuleCamelCase:
   Enabled: false

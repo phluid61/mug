@@ -47,7 +47,7 @@ module Enumerable
       return v if k == key
     end
     if args.length > 1
-      return default
+      default
     elsif block_given?
       yield key
     else
@@ -78,12 +78,12 @@ module Enumerable
       break if remain < 1
 
       key_indices = key_map[k]
-      if key_indices
-        key_indices.each do |key_index|
-          result[key_index] = v
-          define[key_index] = true
-          remain -= 1
-        end
+      next unless key_indices
+
+      key_indices.each do |key_index|
+        result[key_index] = v
+        define[key_index] = true
+        remain -= 1
       end
     end
 

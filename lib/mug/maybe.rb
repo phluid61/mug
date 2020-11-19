@@ -21,6 +21,15 @@ class MaybeDelegator
   def method_missing *a, &b #:nodoc:
     @o && @o.send(*a, &b)
   end
+
+  # This is a bit flakey, but I think it's meaningful.
+  def respond_to_missing? meth, priv
+    if @o
+      @o.repond_to_missing? meth, priv
+    else
+      true
+    end
+  end
 end
 
 class Object
@@ -42,7 +51,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2013, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013,2020, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

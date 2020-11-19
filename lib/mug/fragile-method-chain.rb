@@ -34,6 +34,16 @@ class FragileMethodChain
     self
   end
 
+  # If the object is resolved, defer. Otherwise, sure, I
+  # respond to anything, I guess.
+  def respond_to_missing? meth, priv
+    if __defer?
+      @o.respond_to_missing? meth, priv
+    else
+      true
+    end
+  end
+
   # Explicitly invoke :_? as a method in the chain.
   def _? #:nodoc:
     # Unconditionally invoke it, so the eventual _! doesn't fail
@@ -60,7 +70,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2013,2016, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013,2016,2020, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
