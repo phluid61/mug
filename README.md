@@ -480,6 +480,34 @@ a._?.b.c._!
 nested_hash._?[:a][:b][:c]._!
 ```
 
+hash/fetch-assign
+-----------------
+
+### Hash
+
+#### `hsh.fetch_assign(key, default) => obj`<br>`hsh.fetch_assign(key) {|key| block } => obj`
+
+Returns a value from the hash for the given key. If the key can’t be
+found, there are several options: if default is given, then that will
+be stored and returned; if the optional code block is specified, then
+that will be run and its result stored and returned.
+
+```ruby
+require 'mug/hash/fetch-assign'
+
+hsh = {}
+
+hsh.fetch_assign(:a, 1) # => 1
+# hsh => {:a => 1}
+
+hsh.fetch_assign(:a, 42) # => 1
+# hsh => {:a => 1}
+
+hsh.fetch_assign(:b) {|key| key.to_s } #=> "b"
+# hsh => {:a => 1, :b => "b"}
+```
+
+
 hash/map
 --------
 
