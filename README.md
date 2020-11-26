@@ -492,6 +492,8 @@ found, there are several options: if default is given, then that will
 be stored and returned; if the optional code block is specified, then
 that will be run and its result stored and returned.
 
+(`#compute_if_absent` is an alias of this method)
+
 ```ruby
 require 'mug/hash/fetch-assign'
 
