@@ -1,3 +1,6 @@
+AllCops:
+  NewCops: enable
+
 Layout/SpaceInsideBlockBraces:
   #Enabled: false
   SpaceBeforeBlockParameters: false
@@ -87,6 +90,8 @@ Style/BisectedAttrAccessor:
   Enabled: false
 Style/CaseLikeIf:
   Enabled: false
+Style/ExplicitBlockArgument:
+  Enabled: false
 Style/HashLikeCase:
   Enabled: false
 Style/IfInsideElse:
@@ -117,7 +122,7 @@ Style/GuardClause:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false
-Style/MethodMissingSuper:
+Lint/MissingSuper:
   Enabled: false
 #Style/MissingRespondToMissing:
 #  Enabled: false
@@ -153,6 +158,8 @@ Style/DoubleNegation:
   Enabled: false
 Style/InfiniteLoop:
   Enabled: false
+Style/ZeroLengthPredicate:
+  Enabled: false
 Naming/MethodName:
   IgnoredPatterns:
     - Bool
@@ -181,30 +188,6 @@ Style/RedundantInterpolation:
   Enabled: false
 
 # New cops, not sorted yet
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-Lint/DuplicateElsifCondition:
-  Enabled: true
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-Lint/RaiseException:
-  Enabled: true
-Lint/StructNewOverride:
-  Enabled: true
-Style/ArrayCoercion: #???
-  Enabled: true
 Style/ExponentialNotation:
   Enabled: true
   EnforcedStyle: integral
-Style/HashAsLastArrayItem:
-  Enabled: true
-Style/HashEachMethods:
-  Enabled: true
-Style/RedundantAssignment:
-  Enabled: true
-Style/RedundantFetchBlock:
-  Enabled: true
-Style/RedundantFileExtensionInRequire:
-  Enabled: true
-Style/RedundantRegexpEscape:
-  Enabled: true
