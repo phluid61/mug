@@ -487,7 +487,7 @@ hash/fetch-assign
 
 #### `hsh.fetch_assign(key, default) => obj`<br>`hsh.fetch_assign(key) {|key| block } => obj`
 
-Returns a value from the hash for the given key. If the key can’t be
+Returns a value from the hash for the given key. If the key can't be
 found, there are several options: if default is given, then that will
 be stored and returned; if the optional code block is specified, then
 that will be run and its result stored and returned.
