@@ -12,6 +12,7 @@ class Hash
     store key, (default.length == 1 ? default[0] : yield(key)) unless key? key
     fetch key
   end
+  alias compute_if_absent fetch_assign
 
 end
 
