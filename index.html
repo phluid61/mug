@@ -259,11 +259,13 @@ generator.</p>
 
 <h3>Array</h3>
 
-<h4><code>array.to_proc =&gt; proc {|x| ...}</code></h4>
+<h4><code>array.to_proc =&gt; proc {|args..| ...}</code></h4>
 
-<p>Returns a Proc that accepts a single argument.</p>
+<p>Returns a Proc that accepts one or two arguments.</p>
 
 <p>The Proc&#39;s parameter is used as an index into this array.</p>
+
+<p>See: #slice</p>
 
 <h2 id="gem-bittest">bittest</h2>
 
