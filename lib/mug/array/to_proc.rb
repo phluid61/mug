@@ -7,13 +7,13 @@ class Array
   # The Proc's parameter is used as an index into this array.
   #
   def to_proc
-    proc {|i| self[i] }
+    method(:slice).to_proc
   end
 
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017-2020, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
