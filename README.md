@@ -197,11 +197,14 @@ array/to_proc
 
 ### Array
 
-#### `array.to_proc => proc {|x| ...}`
+#### `array.to_proc => proc {|args..| ...}`
 
-Returns a Proc that accepts a single argument.
+Returns a Proc that accepts one or two arguments.
 
 The Proc's parameter is used as an index into this array.
+
+See: #slice
+
 
 bittest
 -------

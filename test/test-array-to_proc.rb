@@ -10,6 +10,8 @@ class Test_array_to_proc < Test::Unit::TestCase
     assert_equal( p[3], a[3] )
     assert_equal( p[-1], a[-1] )
     assert_equal( p[0..-1], a )
+    assert_equal( p[0,1], a[0,1] )
+    assert_equal( p[1,2], a[1,2] )
     assert_raise(TypeError) { p['not-a-number'] }
   end
 end
