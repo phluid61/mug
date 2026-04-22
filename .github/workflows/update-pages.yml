@@ -43,7 +43,7 @@ jobs:
 
       - name: Build site
         if: steps.sync.outputs.changed == 'true'
-        run: rake compile
+        run: bundle exec rake compile
 
       - name: Commit changes
         if: steps.sync.outputs.changed == 'true'
