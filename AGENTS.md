@@ -11,7 +11,7 @@ primary content source for the generated page.
 
 ## Repository layout
 
-- `index.html` — generated output (not committed; built in CI)
+- `index.html` — generated output (committed by CI; built from source files)
 - `head` — HTML before the content (doctype, head, navigation, etc.)
 - `tail` — HTML after the content (closing tags, scripts)
 - `README.md` — Markdown content, converted to HTML during compilation
@@ -21,8 +21,8 @@ primary content source for the generated page.
 - `Gemfile` — gem dependencies (`commonmarker`)
 - `markdown` — helper script (Ruby) that converts Markdown to HTML using
   `commonmarker`
-- `.github/workflows/deploy-pages.yml` — GitHub Actions workflow for building
-  and deploying the site
+- `.github/workflows/deploy-pages.yml` — GitHub Actions workflow that builds
+  `index.html` and commits it when source files change
 - `highlight.js/` — syntax highlighting for code blocks
 
 ## Building
@@ -38,17 +38,24 @@ The `markdown` script requires the `commonmarker` gem (declared in `Gemfile`).
 
 ## Deployment
 
-Deployment is automated via GitHub Actions (`.github/workflows/deploy-pages.yml`).
-Pushing to the `gh-pages` branch triggers a workflow that compiles `index.html`
-and deploys it to GitHub Pages. The `index.html` file is not committed to the
-repository — it is a build artefact produced in CI.
+GitHub Pages is configured to deploy from the `gh-pages` branch (branch-based
+deployment). The `index.html` file is committed to the repository by CI.
+
+Two workflows keep the site up to date:
+
+- `.github/workflows/deploy-pages.yml` (on `gh-pages`) — triggers when source
+  files are pushed directly to `gh-pages`. Builds `index.html` and commits it.
+- `.github/workflows/update-pages.yml` (on `main`) — triggers when `README.md`,
+  `LICENSE`, or `code_of_conduct.md` change on `main`. Syncs those files to
+  `gh-pages`, rebuilds `index.html`, and commits both.
 
 ## Style
 
 - `head` and `tail` are raw HTML fragments. Keep them consistent with
   Bootstrap 3 markup used throughout.
-- `index.html` is a build artefact. Changes to site structure or styling
-  should be made in `head`, `tail`, or the `Rakefile`, then recompiled.
+- `index.html` is a build artefact committed by CI. Changes to site structure
+  or styling should be made in `head`, `tail`, or the `Rakefile`; CI will
+  rebuild and commit `index.html` automatically.
 - `README.md` content changes should be ported from the main branch to keep
   the documentation in sync.
 
