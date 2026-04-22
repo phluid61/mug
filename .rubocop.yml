@@ -191,7 +191,5 @@ Style/RedundantInterpolation:
 Style/ExponentialNotation:
   Enabled: true
   EnforcedStyle: integral
-Style/ReturnNilInPredicateMethodDefinition:
-  Enabled: false
 Style/ComparableClamp:
   Enabled: false

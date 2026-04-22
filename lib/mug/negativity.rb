@@ -1,37 +1,53 @@
 
 class Numeric
 
-  if RUBY_VERSION < '2.3'
-    def negative?
-      self < 0 ? self : nil
-    end
+  def negative?
+    self < 0
+  end
 
-    def positive?
-      self > 0 ? self : nil
-    end
+  def positive?
+    self > 0
   end
 
   def nonnegative?
-    self < 0 ? nil : self
+    self >= 0
   end
 
   def nonpositive?
-    self > 0 ? nil : self
+    self <= 0
+  end
+
+  def negative!
+    self < 0 ? self : nil
+  end
+
+  def positive!
+    self > 0 ? self : nil
+  end
+
+  def nonnegative!
+    self >= 0 ? self : nil
+  end
+
+  def nonpositive!
+    self <= 0 ? self : nil
   end
 
 end
 
 class Complex
-  if RUBY_VERSION < '2.3'
-    undef :negative?
-    undef :positive?
-  end
+  undef :negative? if method_defined?(:negative?)
+  undef :positive? if method_defined?(:positive?)
   undef :nonnegative?
   undef :nonpositive?
+  undef :negative!
+  undef :positive!
+  undef :nonnegative!
+  undef :nonpositive!
 end
 
 =begin
-Copyright (c) 2015, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
