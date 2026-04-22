@@ -23,7 +23,7 @@ Lint/UnusedBlockArgument:
 Lint/UnusedMethodArgument:
   Enabled: false
 Layout/LineLength:
-  Max: 101
+  Max: 120
 Metrics/MethodLength:
   Max: 50
 Metrics/ModuleLength:
@@ -161,7 +161,7 @@ Style/InfiniteLoop:
 Style/ZeroLengthPredicate:
   Enabled: false
 Naming/MethodName:
-  IgnoredPatterns:
+  AllowedPatterns:
     - Bool
     - TAU
 Style/Documentation:
@@ -185,6 +185,14 @@ Layout/TrailingEmptyLines:
 Naming/FileName:
   Enabled: false
 Style/RedundantInterpolation:
+  Enabled: false
+
+# Monkey-patching files define multiple classes by design
+Style/OneClassPerFile:
+  Enabled: false
+
+# to_b and not are not predicate methods
+Naming/PredicateMethod:
   Enabled: false
 
 # New cops, not sorted yet

@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger gh-pages deploy
-        run: gh workflow run deploy-pages.yml --ref gh-pages
+        run: gh workflow run deploy-pages.yml --ref gh-pages --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
