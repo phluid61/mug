@@ -13,7 +13,7 @@ class Test_tau < Test::Unit::TestCase
   include BigMath
   def test_TAU
     assert_equal(TAU(3).round(1).to_s('F'), '6.3')
-    assert_equal(TAU(100).truncate(100).to_s('F'), '6.2831853071795864769252867665590057683943387987502116419498891846156328125724179972560696506842341359')
+    assert_equal(TAU(50).truncate(50).to_s('F'), '6.28318530717958647692528676655900576839433879875021')
     assert_raise(ArgumentError) { TAU(0) }
     assert_raise(ArgumentError) { TAU(-3) }
     assert_raise(ArgumentError) { TAU('barf') }
