@@ -28,7 +28,7 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: rake compile
+        run: bundle exec rake compile
 
       - name: Commit index.html
         run: |
