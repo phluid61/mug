@@ -8,16 +8,16 @@ class MatchData
   # groups or not.
   def to_h
     if names.empty?
-      Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
+      captures.each_with_index.to_h{|v,i| [i+1, v] }
     else
-      Hash[ names.map{|n| [n, self[n]] } ]
+      names.to_h{|n| [n, self[n]] }
     end
   end
 
   if RUBY_VERSION < '2.4'
   # Returns a Hash object of capture name => captured string.
   def named_captures
-    Hash[ names.map{|n| [n, self[n]] } ]
+    names.to_h{|n| [n, self[n]] }
   end
   end
 
@@ -30,13 +30,13 @@ class MatchData
   # captures will be available using this method!
   def positional_captures include_names: false
     return {} unless names.empty? || include_names
-    Hash[ captures.each_with_index.map{|v,i| [i+1, v] } ]
+    captures.each_with_index.to_h{|v,i| [i+1, v] }
   end
 
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
