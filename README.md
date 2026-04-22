@@ -288,21 +288,6 @@ clamp
 
 Clamps a number to a range.
 
-### Numeric
-
-#### `num.clamp lower, higher => new_num`
-
-Clamps _num_ so that _lower_ <= _new\_num_ <= _higher_.
-
-Returns _lower_ when _num_ < _lower_, _higher_ when _num_ > _higher_, otherwise
-_num_ itself.
-
-Raises an exception if _lower_ > _higher_
-
-#### `num.clamp range => new_num`
-
-Effectively calls range#bound
-
 ### Range
 
 #### `rng.bound val => new_val`
@@ -313,6 +298,9 @@ Returns _first_ when _val_ < _first_, _last_ when _val_ > _last_, otherwise
 _val_ itself.
 
 Raises an exception if _val_ >= _end_ and the range is exclusive.
+
+Note: `Numeric#clamp` is provided as a polyfill for Ruby < 2.7. On Ruby
+2.7+, the built-in `Comparable#clamp` is used instead.
 
 
 diggable
@@ -355,12 +343,9 @@ enumerable/chain
 Invokes a block once for every element in a sequence of
 Enumerables.
 
-WARNING: `Enumerable\#chain` defined since Ruby 2.6 is incompatible with this gem when used with args and a block
-
-#### `enum.chain(*enums)`<br>`enum.chain(*enums) {|...| block }`
-
-Creates a chain of Enumerables following this one, and
-invokes a block once for each element of each Enumerable.
+Note: the instance method `Enumerable#chain` is provided as a polyfill
+for Ruby < 2.6. On Ruby 2.6+, the built-in `Enumerable#chain` (which
+returns a lazy `Enumerator::Chain`) is used instead.
 
 
 enumerable/counts
@@ -938,17 +923,33 @@ negativity
 
 #### `num.negative?`
 
-If _num_ is negative (i.e. < 0), returns itself, otherwise returns _nil_.
+Returns `true` if _num_ is negative (i.e. < 0), `false` otherwise.
 
 #### `num.positive?`
 
-If _num_ is positive (i.e. > 0), returns itself, otherwise returns _nil_.
+Returns `true` if _num_ is positive (i.e. > 0), `false` otherwise.
 
 #### `num.nonnegative?`
 
-If _num_ is nonnegative (i.e. >= 0), returns itself, otherwise returns _nil_.
+Returns `true` if _num_ is nonnegative (i.e. >= 0), `false` otherwise.
 
 #### `num.nonpositive?`
+
+Returns `true` if _num_ is nonpositive (i.e. <= 0), `false` otherwise.
+
+#### `num.negative!`
+
+If _num_ is negative (i.e. < 0), returns itself, otherwise returns _nil_.
+
+#### `num.positive!`
+
+If _num_ is positive (i.e. > 0), returns itself, otherwise returns _nil_.
+
+#### `num.nonnegative!`
+
+If _num_ is nonnegative (i.e. >= 0), returns itself, otherwise returns _nil_.
+
+#### `num.nonpositive!`
 
 If _num_ is nonpositive (i.e. <= 0), returns itself, otherwise returns _nil_.
 
@@ -963,9 +964,9 @@ end
 
 n.positive? or raise('not enough items')
 
-x.nonnegative? || -x
+x.nonnegative? ? x : -x
 
-arr.map{|i| i.nonpositive? }.compact
+arr.map{|i| i.nonpositive! }.compact
 ```
 
 not
