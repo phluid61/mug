@@ -1,14 +1,6 @@
 require 'test/unit'
 $VERBOSE = true
 
-if RUBY_VERSION.to_f < 1.9
-  class Symbol
-    def next
-      to_s.next.to_sym
-    end
-  end
-end
-
 require_relative '../lib/mug/array/extend'
 class Test_array_extend < Test::Unit::TestCase
 

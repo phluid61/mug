@@ -19,10 +19,6 @@ class Test_self < Test::Unit::TestCase
     p = proc {|*args| args }
     assert_equal( [1], 1.revapply(&p) )
     assert_equal( [1,2,3], 1.revapply(2,3,&p) )
-    if RUBY_VERSION.to_i >= 2
-      assert_equal( 3, 1.revapply(2,3).size )
-    else
-      assert_equal( [1,2,3], 1.revapply(2,3).first )
-    end
+    assert_equal( 3, 1.revapply(2,3).size )
   end
 end

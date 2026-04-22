@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name     = 'mug'
-  s.version  = '1.7.0-dev'
-  s.date     = '2020-12-07'
+  s.version  = '2.0.0'
+  s.date     = '2026-04-22'
   s.summary  = %(MUG: Matty's Ultimate Gem)
   s.description = <<EOS
 == MUG: Matty's Ultimate Gem
@@ -16,4 +16,5 @@ EOS
   s.test_files=Dir['test/*.rb']
   s.homepage = 'http://phluid61.github.com/mug'.freeze
   s.license  = 'ISC'.freeze
+  s.required_ruby_version = '>= 2.7'
 end

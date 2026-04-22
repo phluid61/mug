@@ -1,24 +1,4 @@
 
-if RUBY_VERSION < '2.7'
-  class Numeric
-
-    #
-    # Clamps num so that lower <= new_num <= higher.
-    #
-    # Returns lower when num < lower, higher when num > higher, otherwise
-    # num itself.
-    #
-    # Raises an exception if lower > higher
-    #
-    def clamp lower, higher=nil
-      return lower.bound(self) if lower.is_a?(Range) && higher.nil?
-      raise ArgumentError, 'range must not be negative' if lower > higher
-      [[lower, self].max, higher].min
-    end
-
-  end
-end
-
 class Range
 
   #
@@ -45,7 +25,7 @@ class Range
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

@@ -14,20 +14,6 @@ module Enumerable
     end
   end
 
-  if RUBY_VERSION < '2.6'
-    #
-    # Creates a chain of Enumerables following this one, and
-    # invokes a block once for each element of each Enumerable.
-    #
-    def chain *enums
-      return enum_for(:chain, *enums) unless block_given?
-      [self, *enums].each do |enum|
-        enum.each {|*args| yield(*args) }
-      end
-      nil
-    end
-  end
-
 end
 
 =begin

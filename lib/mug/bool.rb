@@ -88,7 +88,6 @@ module Enumerable
   end
 end
 
-if RUBY_VERSION.to_i >= 2
 class Enumerator
   #
   # Converts enum to a boolean.
@@ -98,7 +97,6 @@ class Enumerator
   def to_b
     (s = size).nil? || s.to_b
   end
-end
 end
 
 class Exception
@@ -112,7 +110,7 @@ class Exception
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
