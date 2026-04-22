@@ -9,3 +9,6 @@ how to add new modules.
   methods do not conflict with the Ruby version's stdlib.
 - Individual modules must remain independently requireable; do not introduce
   cross-dependencies between modules.
+- Commits that modify `README.md`, `LICENSE`, or `code_of_conduct.md` must NOT
+  include `[ci skip]`, because a workflow triggers a gh-pages deployment when
+  those files change on `main`.
