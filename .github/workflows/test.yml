@@ -4,8 +4,22 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'Gemfile'
+      - 'mug.gemspec'
+      - 'Rakefile'
+      - '.github/workflows/test.yml'
   pull_request:
     branches: [main]
+    paths:
+      - 'lib/**'
+      - 'test/**'
+      - 'Gemfile'
+      - 'mug.gemspec'
+      - 'Rakefile'
+      - '.github/workflows/test.yml'
 
 jobs:
   test:
