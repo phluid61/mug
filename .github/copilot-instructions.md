@@ -5,8 +5,10 @@ build process.
 
 ## Additional notes
 
-- `index.html` is a generated file. Do not edit it directly; modify the source
-  files (`head`, `tail`, `README.md`, `Rakefile`) and recompile with `rake`.
+- `index.html` is a build artefact generated in CI. It is not committed to the
+  repository. To preview locally, run `bundle install && rake compile`.
+- Deployment is handled by a GitHub Actions workflow that triggers on push to
+  the `gh-pages` branch. Do not deploy manually.
 - `README.md` is the content source for the site and should mirror the main
   branch's README. Sync content changes from main rather than editing in
   isolation.
