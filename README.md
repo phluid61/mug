@@ -2,6 +2,7 @@ Matty's Ultimate Gem
 ====================
 
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
+[![Test](https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg)](https://github.com/phluid61/mug/actions/workflows/test.yml)
 [![Hound-CI](https://img.shields.io/badge/style%20guide-hound--ci-a873d1.svg)](https://houndci.com/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) 
 
