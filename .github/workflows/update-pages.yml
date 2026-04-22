@@ -1,0 +1,15 @@
+name: Update GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: [README.md, LICENSE, code_of_conduct.md]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger gh-pages deploy
+        run: gh workflow run deploy-pages.yml --ref gh-pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
