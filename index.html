@@ -72,7 +72,623 @@
         <div class="page-header">
           <h1>phluid61</h1>
         </div>
-<div id="toc"><ul></ul></div><pre id="license" class="no-highlight">Copyright (c) 2013-2026, Matthew Kerwin <matthew@kerwin.net.au>
+<div id="toc"><ul></ul></div><h1><a href="#mattys-ultimate-gem" aria-hidden="true" class="anchor" id="mattys-ultimate-gem"></a>Matty's Ultimate Gem</h1>
+<p><a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version" /></a><br />
+<a href="https://github.com/phluid61/mug/actions/workflows/test.yml"><img src="https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg" alt="Test" /></a><br />
+<a href="code_of_conduct.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a></p>
+<h2><a href="#alias" aria-hidden="true" class="anchor" id="alias"></a>alias</h2>
+<h3><a href="#module" aria-hidden="true" class="anchor" id="module"></a>Module</h3>
+<h4><a href="#alias_singleton_methodnew_name-old_name--self" aria-hidden="true" class="anchor" id="alias_singleton_methodnew_name-old_name--self"></a><code>alias_singleton_method(new_name, old_name) =&gt; self</code></h4>
+<p>Makes <em>new_name</em> a new copy of the instance method <em>old_name</em>.  This can be used to retain access to instance methods that are overridden.</p>
+<h4><a href="#examples" aria-hidden="true" class="anchor" id="examples"></a>Examples</h4>
+<pre lang="ruby"><code>require 'mug/alias'
+
+module Mod
+  def self.foo
+    1
+  end
+  alias_singleton_method :bar, :foo
+  def self.foo
+    2
+  end
+end
+Mod.foo #=&gt; 2
+Mod.bar #=&gt; 1
+</code></pre>
+<h2><a href="#and-or" aria-hidden="true" class="anchor" id="and-or"></a>and-or</h2>
+<h3><a href="#object" aria-hidden="true" class="anchor" id="object"></a>Object</h3>
+<h4><a href="#objand-defaultobjand-default-o-block-" aria-hidden="true" class="anchor" id="objand-defaultobjand-default-o-block-"></a><code>obj.and default</code><br><code>obj.and default {|o| block }</code></h4>
+<p>Returns either <em>obj</em> or <em>default</em>, depending on the falsiness of <em>obj</em>.</p>
+<p>If a block is given, <em>obj</em> is yielded to it; if it returns truthy, <em>default</em> is returned, otherwise <em>obj</em> is returned.</p>
+<h4><a href="#objor-defaultobjor-default-o-block-" aria-hidden="true" class="anchor" id="objor-defaultobjor-default-o-block-"></a><code>obj.or default</code><br><code>obj.or default {|o| block }</code></h4>
+<p>Returns either <em>obj</em> or <em>default</em>, depending on the truthiness of <em>obj</em>.</p>
+<p>If a block is given, <em>obj</em> is yielded to it; if it returns truthy, <em>obj</em> is returned, otherwise <em>default</em> is returned.</p>
+<h4><a href="#objand_then-o-block-" aria-hidden="true" class="anchor" id="objand_then-o-block-"></a><code>obj.and_then {|o| block }</code></h4>
+<p>Calls <em>block</em> if <em>obj</em> is truthy.</p>
+<p>Returns <em>obj</em>.</p>
+<h4><a href="#objor_then-o-block-" aria-hidden="true" class="anchor" id="objor_then-o-block-"></a><code>obj.or_then {|o| block }</code></h4>
+<p>Calls <em>block</em> if <em>obj</em> is falsey.</p>
+<p>Returns <em>obj</em>.</p>
+<h4><a href="#examples-1" aria-hidden="true" class="anchor" id="examples-1"></a>Examples</h4>
+<pre lang="ruby"><code>require 'mug/and-or'
+
+data_store.get_env_hash.or(default_hash).do_something
+
+get_a_list.and(default_list, &amp;:empty?).do_something
+
+try_thing.and_then {|result| log &quot;got #{result.inspect}&quot; }
+try_thing.or_then { log &quot;failed&quot; }
+</code></pre>
+<h2><a href="#apply" aria-hidden="true" class="anchor" id="apply"></a>apply</h2>
+<h3><a href="#proc" aria-hidden="true" class="anchor" id="proc"></a>Proc</h3>
+<h4><a href="#procapply-args" aria-hidden="true" class="anchor" id="procapply-args"></a><code>proc.apply *args</code></h4>
+<p>Curries this Proc and partially applies parameters. If a sufficient number of arguments are supplied, it passes the supplied arguments to the original proc and returns the result. Otherwise, returns another curried proc that takes the rest of arguments.</p>
+<h3><a href="#method" aria-hidden="true" class="anchor" id="method"></a>Method</h3>
+<p>Note: <code>Method#curry</code> is in stdlib since Ruby 2.2. <code>apply</code> is shorthand for <code>curry.call(...)</code>.</p>
+<h4><a href="#methcurrymethcurry-n" aria-hidden="true" class="anchor" id="methcurrymethcurry-n"></a><code>meth.curry</code><br><code>meth.curry n</code></h4>
+<p>Returns a curried proc. If the optional arity argument is given, it determines the number of arguments. A curried proc receives some arguments. If a sufficient number of arguments are supplied, it passes the supplied arguments to the original proc and returns the result. Otherwise, returns another curried proc that takes the rest of arguments.</p>
+<h4><a href="#methapply-args" aria-hidden="true" class="anchor" id="methapply-args"></a><code>meth.apply *args</code></h4>
+<p>Curries this Method and partially applies parameters. If a sufficient number of arguments are supplied, it passes the supplied arguments to the original proc and returns the result. Otherwise, returns another curried proc that takes the rest of arguments.</p>
+<h2><a href="#arraydelete_all" aria-hidden="true" class="anchor" id="arraydelete_all"></a>array/delete_all</h2>
+<h3><a href="#array" aria-hidden="true" class="anchor" id="array"></a>Array</h3>
+<h4><a href="#arraydelete_all-item-block---arrayarraydelete_all--enumerator" aria-hidden="true" class="anchor" id="arraydelete_all-item-block---arrayarraydelete_all--enumerator"></a><code>array.delete_all {|item| block } =&gt; array</code><br><code>array.delete_all =&gt; Enumerator</code></h4>
+<p>Deletes every element of <code>self</code> for which block evaluates to <code>true</code>.</p>
+<p>Returns an array of the deleted elements.</p>
+<p>If no block is given, an Enumerator is returned instead.</p>
+<p>See <span data-escaped-char>#</span>delete<span data-escaped-char>_</span>if, <span data-escaped-char>#</span>reject!</p>
+<p><a href="https://bugs.ruby-lang.org/issues/13777">Feature #13777</a></p>
+<h2><a href="#arrayextend" aria-hidden="true" class="anchor" id="arrayextend"></a>array/extend</h2>
+<h3><a href="#array-1" aria-hidden="true" class="anchor" id="array-1"></a>Array</h3>
+<h4><a href="#arrayextendsize0-objnilarrayextendarrayarrayextendsize-index-block-" aria-hidden="true" class="anchor" id="arrayextendsize0-objnilarrayextendarrayarrayextendsize-index-block-"></a><code>array.extend!(size=0, obj=nil)</code><br><code>array.extend!(array)</code><br><code>array.extend!(size) {|index| block }</code></h4>
+<p>Extend this Array.</p>
+<p>In the first form, when a <em>size</em> and an optional <em>obj</em> are sent, the array is extended with <em>size</em> copies of <em>obj</em>. Take notice that all elements will reference the same object <em>obj</em>.</p>
+<p>The second form appends a copy of the array passed as a parameter (the array is generated by calling <code>#to_ary</code> on the parameter). See also: <code>#concat</code>, <code>#+</code></p>
+<p>In the last form, the array is extended by the given size. Each new element in the array is created by passing the element's index to the given block and storing the return value.</p>
+<h4><a href="#arrayextendsize0-objnilarrayextendarrayarrayextendsize-index-block--1" aria-hidden="true" class="anchor" id="arrayextendsize0-objnilarrayextendarrayarrayextendsize-index-block--1"></a><code>array.extend(size=0, obj=nil)</code><br><code>array.extend(array)</code><br><code>array.extend(size) {|index| block }</code></h4>
+<p>See <code>#extend!</code></p>
+<h2><a href="#arrayminus" aria-hidden="true" class="anchor" id="arrayminus"></a>array/minus</h2>
+<h3><a href="#array-2" aria-hidden="true" class="anchor" id="array-2"></a>Array</h3>
+<h4><a href="#arrayminusary-remainder-false" aria-hidden="true" class="anchor" id="arrayminusary-remainder-false"></a><code>array.minus(ary, remainder: false)</code></h4>
+<p>Subtract elements from this array.</p>
+<p>This is similar to <code>Array#-</code> except that elements from this array are removed only once per instance in <em>ary</em>.</p>
+<p>Note: for the single-argument case, <code>Array#minus</code> is similar to <code>Array#difference</code> (Ruby 2.6+). The <code>remainder:</code> option and <code>Array#^</code> have no stdlib equivalent.</p>
+<p>If <em>remainder</em> is given and true, returns a second array which is all elements in <em>ary</em> that were not present in this array.</p>
+<h4><a href="#array--other" aria-hidden="true" class="anchor" id="array--other"></a><code>array ^ other</code></h4>
+<p>Get the elements unique to one of two arrays.</p>
+<p>Duplicates in either array are included only once.</p>
+<h2><a href="#arraysamples" aria-hidden="true" class="anchor" id="arraysamples"></a>array/samples</h2>
+<h3><a href="#array-3" aria-hidden="true" class="anchor" id="array-3"></a>Array</h3>
+<h4><a href="#arraysamplesmin-int-max-int-random-rng--new_ary" aria-hidden="true" class="anchor" id="arraysamplesmin-int-max-int-random-rng--new_ary"></a><code>array.samples(min: int, max: int, random: rng) =&gt; new_ary</code></h4>
+<p>Choose a random subset of elements from the array.</p>
+<p>The elements are chosen by using random and unique indices into the array in order to ensure that an element doesn't repeat itself unless the array already contained duplicate elements.</p>
+<p>The optional <em>min</em> and <em>max</em> arguments restrict the size of the returned array.  <em>min</em> must be &gt;= 0, and <em>max</em> must be &gt;= <em>min</em>. (Both values are clamped to the size of the array.)</p>
+<p>If the array is empty, always returns an empty array.</p>
+<p>The optional <em>random</em> argument will be used as the random number generator.</p>
+<h2><a href="#arrayto_proc" aria-hidden="true" class="anchor" id="arrayto_proc"></a>array/to_proc</h2>
+<h3><a href="#array-4" aria-hidden="true" class="anchor" id="array-4"></a>Array</h3>
+<h4><a href="#arrayto_proc--proc-args-" aria-hidden="true" class="anchor" id="arrayto_proc--proc-args-"></a><code>array.to_proc =&gt; proc {|args..| ...}</code></h4>
+<p>Returns a Proc that accepts one or two arguments.</p>
+<p>The Proc's parameter is used as an index into this array.</p>
+<p>See: #slice</p>
+<h2><a href="#bittest" aria-hidden="true" class="anchor" id="bittest"></a>bittest</h2>
+<h3><a href="#integer" aria-hidden="true" class="anchor" id="integer"></a>Integer</h3>
+<h4><a href="#intandother-test-any" aria-hidden="true" class="anchor" id="intandother-test-any"></a><code>int.and?(other, test: :any)</code></h4>
+<p>Tests common bits in <em>this</em> AND <em>other</em>.</p>
+<p>test:</p>
+<ul>
+<li><code>:any</code> =&gt; true if any bits are set</li>
+<li><code>:all</code> =&gt; true if all bits are set</li>
+</ul>
+<h4><a href="#intand_anyother" aria-hidden="true" class="anchor" id="intand_anyother"></a><code>int.and_any?(other)</code></h4>
+<p>True if <em>this</em> AND <em>other</em> is non-zero.</p>
+<p>i.e. if any set bits in <em>other</em> are set in <em>this</em>.</p>
+<h4><a href="#intand_allother" aria-hidden="true" class="anchor" id="intand_allother"></a><code>int.and_all?(other)</code></h4>
+<p>True if <em>this</em> AND <em>other</em> is <em>other</em>.</p>
+<p>i.e. if all set bits in <em>other</em> are set in <em>this</em>.</p>
+<h4><a href="#intorother" aria-hidden="true" class="anchor" id="intorother"></a><code>int.or?(other)</code></h4>
+<p>True if <em>this</em> OR <em>other</em> is non-zero.</p>
+<h4><a href="#intxorother" aria-hidden="true" class="anchor" id="intxorother"></a><code>int.xor?(other)</code></h4>
+<p>True if <em>this</em> XOR <em>other</em> is non-zero.</p>
+<p>Note: <code>and_any?</code> and <code>and_all?</code> are similar to <code>Integer#anybits?</code> and <code>Integer#allbits?</code> (Ruby 2.5+). <code>or?</code> and <code>xor?</code> have no stdlib equivalent.</p>
+<h2><a href="#bool" aria-hidden="true" class="anchor" id="bool"></a>bool</h2>
+<h3><a href="#kernel" aria-hidden="true" class="anchor" id="kernel"></a>Kernel</h3>
+<h4><a href="#boolobj" aria-hidden="true" class="anchor" id="boolobj"></a><code>Bool(obj)</code></h4>
+<p>Returns the truthiness of <em>obj</em>, as either <em>True</em> or <em>False</em>.</p>
+<p>This is functionally equivalent to calling <code>!!obj</code></p>
+<h3><a href="#object-1" aria-hidden="true" class="anchor" id="object-1"></a>Object</h3>
+<h4><a href="#objto_b" aria-hidden="true" class="anchor" id="objto_b"></a><code>obj.to_b</code></h4>
+<p>Converts <em>obj</em> to a boolean using &quot;typical&quot; C-like conversion rules.</p>
+<p>The following values all become false:</p>
+<ul>
+<li><code>0</code>, <code>0.0</code>, etc. (any numeric zero)</li>
+<li><code>Float::NAN</code></li>
+<li><code>&quot;&quot;</code></li>
+<li><code>[]</code>, <code>{}</code>, etc. (any Enumerable or Enumerator with no elements)</li>
+<li>any Exception</li>
+</ul>
+<p>All others values become true.</p>
+<h4><a href="#objto_bool" aria-hidden="true" class="anchor" id="objto_bool"></a><code>obj.to_bool</code></h4>
+<p>Returns the truthiness of <em>obj</em>, as either <em>True</em> or <em>False</em>.</p>
+<p>This is functionally equivalent to calling <code>!!obj</code></p>
+<h3><a href="#examples-2" aria-hidden="true" class="anchor" id="examples-2"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/bool'
+
+Bool(obj) #=&gt; !!obj
+obj.to_bool #=&gt; !!obj
+obj.to_b #=&gt; C-like truthiness
+</code></pre>
+<h2><a href="#clamp" aria-hidden="true" class="anchor" id="clamp"></a>clamp</h2>
+<p>Clamps a number to a range.</p>
+<h3><a href="#range" aria-hidden="true" class="anchor" id="range"></a>Range</h3>
+<h4><a href="#rngbound-val--new_val" aria-hidden="true" class="anchor" id="rngbound-val--new_val"></a><code>rng.bound val =&gt; new_val</code></h4>
+<p>Bounds val so that <em>first</em> &lt;= <em>new<span data-escaped-char>_</span>val</em> &lt;= <em>last</em>.</p>
+<p>Returns <em>first</em> when <em>val</em> &lt; <em>first</em>, <em>last</em> when <em>val</em> &gt; <em>last</em>, otherwise <em>val</em> itself.</p>
+<p>Raises an exception if <em>val</em> &gt;= <em>end</em> and the range is exclusive.</p>
+<p>Note: <code>Numeric#clamp</code> is provided as a polyfill for Ruby &lt; 2.7. On Ruby 2.7+, the built-in <code>Comparable#clamp</code> is used instead.</p>
+<h2><a href="#diggable" aria-hidden="true" class="anchor" id="diggable"></a>diggable</h2>
+<p>Implements #dig for any object that implements #[]</p>
+<h3><a href="#diggable-1" aria-hidden="true" class="anchor" id="diggable-1"></a>Diggable</h3>
+<p>Extend any class or object that implements a <code>#[]</code> method, to also have <code>#dig</code></p>
+<h4><a href="#diggydig-idx" aria-hidden="true" class="anchor" id="diggydig-idx"></a><code>diggy.dig *idx</code></h4>
+<p>Extracts the nested value specified by the sequence of <code>idx</code> objects by calling <code>dig</code> at each step, returning <code>nil</code> if any intermediate step is <code>nil</code>.</p>
+<h2><a href="#enumerableany-and-all" aria-hidden="true" class="anchor" id="enumerableany-and-all"></a>enumerable/any-and-all</h2>
+<h3><a href="#enumerable" aria-hidden="true" class="anchor" id="enumerable"></a>Enumerable</h3>
+<h4><a href="#enumany_and_all-obj-block-" aria-hidden="true" class="anchor" id="enumany_and_all-obj-block-"></a><code>enum.any_and_all? {|obj| block }</code></h4>
+<p>Passes each element of the collection to the given block. The method returns <code>true</code> if the block contains elements that never return <code>false</code> or <code>nil</code>. If the block is not given, Ruby adds an implicit block of <code>{ |obj| obj }</code> which will cause <code>any_and_all?</code> to return <code>true</code> when none of the collection members are <code>false</code> or <code>nil</code>.</p>
+<h2><a href="#enumerablechain" aria-hidden="true" class="anchor" id="enumerablechain"></a>enumerable/chain</h2>
+<h3><a href="#enumerable-1" aria-hidden="true" class="anchor" id="enumerable-1"></a>Enumerable</h3>
+<h4><a href="#enumerablechainenumsenumerablechainenums--block-" aria-hidden="true" class="anchor" id="enumerablechainenumsenumerablechainenums--block-"></a><code>Enumerable.chain(*enums)</code><br><code>Enumerable.chain(*enums) {|...| block }</code></h4>
+<p>Invokes a block once for every element in a sequence of Enumerables.</p>
+<p>Note: the instance method <code>Enumerable#chain</code> is provided as a polyfill for Ruby &lt; 2.6. On Ruby 2.6+, the built-in <code>Enumerable#chain</code> (which returns a lazy <code>Enumerator::Chain</code>) is used instead.</p>
+<h2><a href="#enumerablecounts" aria-hidden="true" class="anchor" id="enumerablecounts"></a>enumerable/counts</h2>
+<p>Returns counts of objects in enumerables.</p>
+<p>Note: similar to <code>Enumerable#tally</code> (Ruby 2.7+). Unlike <code>tally</code>, the returned hash has a default value of 0 for missing keys.</p>
+<h3><a href="#enumerable-2" aria-hidden="true" class="anchor" id="enumerable-2"></a>Enumerable</h3>
+<h4><a href="#enumcounts" aria-hidden="true" class="anchor" id="enumcounts"></a><code>enum.counts</code></h4>
+<p>Returns a hash of <code>item=&gt;count</code> showing how many of each <em>item</em> are in this Enumerable.</p>
+<h4><a href="#enumcounts_by-item-block-" aria-hidden="true" class="anchor" id="enumcounts_by-item-block-"></a><code>enum.counts_by {|item| block }</code></h4>
+<p>Passes each element in turn to the block, and returns a hash of <code>result=&gt;count</code>.</p>
+<p>If no block is given, an enumerator is returned.</p>
+<h3><a href="#examples-3" aria-hidden="true" class="anchor" id="examples-3"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/enumerable/counts'
+
+%w(a b b).counts                   #=&gt; {'a'=&gt;1, 'b'=&gt;2}
+%w(a b b).counts_by{|o| o.upcase } #=&gt; {'A'=&gt;1, 'B'=&gt;2}
+</code></pre>
+<h2><a href="#enumerablehash-like" aria-hidden="true" class="anchor" id="enumerablehash-like"></a>enumerable/hash-like</h2>
+<p>Makes Enumerables quack a bit more like a hash.  A lot of these <em>will not work</em> on indeterminate or infinite sequences.</p>
+<h3><a href="#enumerable-3" aria-hidden="true" class="anchor" id="enumerable-3"></a>Enumerable</h3>
+<h4><a href="#each_pair--key-value--block---hsheach_pair--an_enumerator" aria-hidden="true" class="anchor" id="each_pair--key-value--block---hsheach_pair--an_enumerator"></a><code>each_pair {| key, value | block } =&gt; hsh</code><br><code>each_pair =&gt; an_enumerator</code></h4>
+<p>Calls <code>block</code> once for each key in the enum, passing the key-value pair as parameters. If no block is given, an enumerator is returned instead.</p>
+<h4><a href="#each_key--key--block---hsheach_key--an_enumerator" aria-hidden="true" class="anchor" id="each_key--key--block---hsheach_key--an_enumerator"></a><code>each_key {| key | block } =&gt; hsh</code><br><code>each_key =&gt; an_enumerator</code></h4>
+<p>Calls <code>block</code> once for each key in the enum, passing the key as a parameter. If no block is given, an enumerator is returned instead.</p>
+<h4><a href="#fetchkey--default---objfetchkey--key-block---obj" aria-hidden="true" class="anchor" id="fetchkey--default---objfetchkey--key-block---obj"></a><code>fetch(key [, default] ) =&gt; obj</code><br><code>fetch(key) { |key| block } =&gt; obj</code></h4>
+<p>Returns a value from the enum for the given key. If the key can't be found, there are several options: With no other arguments, it will raise a <code>KeyError</code> exception; if <code>default</code> is given, then that will be returned; if the optional code block is specified, then that will be run and its result returned.</p>
+<h4><a href="#fetch_valueskey---arrayfetch_valueskey---key-block---array" aria-hidden="true" class="anchor" id="fetch_valueskey---arrayfetch_valueskey---key-block---array"></a><code>fetch_values(key, ...) =&gt; array</code><br><code>fetch_values(key, ...) { |key| block } =&gt; array</code></h4>
+<p>Returns an array containing the values associated with the given keys but also raises <code>KeyError</code> when one of keys can't be found. Also see <code>#values_at</code> and <code>#fetch</code>.</p>
+<h4><a href="#keykey--true-or-false" aria-hidden="true" class="anchor" id="keykey--true-or-false"></a><code>key?(key) =&gt; true or false</code></h4>
+<p>Returns <code>true</code> if the given key is present in this enum.</p>
+<h4><a href="#keys--array" aria-hidden="true" class="anchor" id="keys--array"></a><code>keys =&gt; array</code></h4>
+<p>Returns a new array populated with the keys from this enum.</p>
+<h4><a href="#length--integer" aria-hidden="true" class="anchor" id="length--integer"></a><code>length =&gt; integer</code></h4>
+<p>Returns the number of key-value pairs in the hash.</p>
+<h4><a href="#memberkey--true-or-false" aria-hidden="true" class="anchor" id="memberkey--true-or-false"></a><code>member?(key) =&gt; true or false</code></h4>
+<p>Returns true if the given key is present in this enum.</p>
+<h4><a href="#slicekeys--a_hash" aria-hidden="true" class="anchor" id="slicekeys--a_hash"></a><code>slice(*keys) =&gt; a_hash</code></h4>
+<p>Returns a hash containing only the given keys and their values.</p>
+<h4><a href="#transform_keys-key-block---new_hashtransform_keys--an_enumerator" aria-hidden="true" class="anchor" id="transform_keys-key-block---new_hashtransform_keys--an_enumerator"></a><code>transform_keys {|key| block } =&gt; new_hash</code><br><code>transform_keys =&gt; an_enumerator</code></h4>
+<p>Returns a new hash with the results of running the block once for every key. If no block is given, an enumerator is returned instead.</p>
+<h4><a href="#transform_values-value-block---new_hashtransform_values--an_enumerator" aria-hidden="true" class="anchor" id="transform_values-value-block---new_hashtransform_values--an_enumerator"></a><code>transform_values {|value| block } =&gt; new_hash</code><br><code>transform_values =&gt; an_enumerator</code></h4>
+<p>Returns a new hash with the results of running the block once for every value. If no block is given, an enumerator is returned instead.</p>
+<h4><a href="#valuevalue--true-or-false" aria-hidden="true" class="anchor" id="valuevalue--true-or-false"></a><code>value?(value) =&gt; true or false</code></h4>
+<p>Returns <code>true</code> if the given value is present for some key.</p>
+<h4><a href="#values--array" aria-hidden="true" class="anchor" id="values--array"></a><code>values =&gt; array</code></h4>
+<p>Returns a new array populated with the values from this enum.</p>
+<h4><a href="#values_atkey---array" aria-hidden="true" class="anchor" id="values_atkey---array"></a><code>values_at(key, ...) =&gt; array</code></h4>
+<p>Return an array containing the values associated with the given keys.</p>
+<h2><a href="#fragile-method-chain" aria-hidden="true" class="anchor" id="fragile-method-chain"></a>fragile-method-chain</h2>
+<p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
+<pre lang="ruby"><code>require 'mug/fragile-method-chain'
+
+# Similar to: a.b &amp;&amp; a.b.c
+# except that a.b is not called twice
+a._?.b.c._!
+
+# Also works with #[] method
+nested_hash._?[:a][:b][:c]._!
+</code></pre>
+<h2><a href="#hashfetch-assign" aria-hidden="true" class="anchor" id="hashfetch-assign"></a>hash/fetch-assign</h2>
+<h3><a href="#hash" aria-hidden="true" class="anchor" id="hash"></a>Hash</h3>
+<h4><a href="#hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj" aria-hidden="true" class="anchor" id="hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj"></a><code>hsh.fetch_assign(key, default) =&gt; obj</code><br><code>hsh.fetch_assign(key) {|key| block } =&gt; obj</code></h4>
+<p>Returns a value from the hash for the given key. If the key can't be found, there are several options: if default is given, then that will be stored and returned; if the optional code block is specified, then that will be run and its result stored and returned.</p>
+<p>(<code>#compute_if_absent</code> is an alias of this method)</p>
+<pre lang="ruby"><code>require 'mug/hash/fetch-assign'
+
+hsh = {}
+
+hsh.fetch_assign(:a, 1) # =&gt; 1
+# hsh =&gt; {:a =&gt; 1}
+
+hsh.fetch_assign(:a, 42) # =&gt; 1
+# hsh =&gt; {:a =&gt; 1}
+
+hsh.fetch_assign(:b) {|key| key.to_s } #=&gt; &quot;b&quot;
+# hsh =&gt; {:a =&gt; 1, :b =&gt; &quot;b&quot;}
+</code></pre>
+<h2><a href="#hashmap" aria-hidden="true" class="anchor" id="hashmap"></a>hash/map</h2>
+<h3><a href="#hash-1" aria-hidden="true" class="anchor" id="hash-1"></a>Hash</h3>
+<h4><a href="#hshmap_values-v-block-" aria-hidden="true" class="anchor" id="hshmap_values-v-block-"></a><code>hsh.map_values {|v| block }</code></h4>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each value is replaced by the result of running it through <em>block</em>.</p>
+<p>As of Ruby 2.4 this is equivalent to <code>#transform_values</code></p>
+<pre lang="ruby"><code>require 'mug/hash/map'
+
+{'a'=&gt;1, 'b'=&gt;2}.map_values { |v| v*2 } #=&gt; {'a'=&gt;2, 'b'=&gt;4}
+{'a'=&gt;1, 'b'=&gt;2}.map_values { &quot;cat&quot; }   #=&gt; {'a'=&gt;&quot;cat&quot;, 'b'=&gt;&quot;cat&quot;}
+</code></pre>
+<h4><a href="#hshmap_values-v-block--1" aria-hidden="true" class="anchor" id="hshmap_values-v-block--1"></a><code>hsh.map_values! {|v| block }</code></h4>
+<p>Replaces the values in <em>hsh</em> by running them each through <em>block</em>.</p>
+<p>As of Ruby 2.4 this is equivalent to <code>#transform_values!</code></p>
+<p>See: #map<span data-escaped-char>_</span>values</p>
+<h4><a href="#hshmap_keys-k-block-" aria-hidden="true" class="anchor" id="hshmap_keys-k-block-"></a><code>hsh.map_keys {|k| block }</code></h4>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each key is replaced by the result of running it through <em>block</em>.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
+<p>As of Ruby 2.5 this is equivalent to <code>#transform_keys</code></p>
+<pre lang="ruby"><code>require 'mug/hash/map'
+
+{'a'=&gt;1, 'b'=&gt;2}.map_keys { |k| k*2 } #=&gt; {'aa'=&gt;1, 'bb'=&gt;2}
+{'a'=&gt;1, 'b'=&gt;2}.map_keys { &quot;cat&quot; }   #=&gt; {'cat'=&gt;2}
+</code></pre>
+<h4><a href="#hshmap_keys-k-block--1" aria-hidden="true" class="anchor" id="hshmap_keys-k-block--1"></a><code>hsh.map_keys! {|k| block }</code></h4>
+<p>Replaces the keys in <em>hsh</em> by running them each through <em>block</em>.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten in turn.</p>
+<p>As of Ruby 2.5 this is equivalent to <code>#transform_keys!</code></p>
+<p>See: #map<span data-escaped-char>_</span>keys</p>
+<h4><a href="#hshmap_pairs-k-v-block-" aria-hidden="true" class="anchor" id="hshmap_pairs-k-v-block-"></a><code>hsh.map_pairs {|k, v| block }</code></h4>
+<p>Returns a new hash which is a copy of <em>hsh</em> but each key-value pair is replaced by the result of running it through <em>block</em>.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
+<pre lang="ruby"><code>require 'mug/hash/map'
+
+{'a'=&gt;1, 'b'=&gt;2}.map_pairs { |k,v| [k*2, v+1] } #=&gt; {'aa'=&gt;2, 'bb'=&gt;3}
+{'a'=&gt;1, 'b'=&gt;2}.map_pairs { [&quot;cat&quot;,&quot;dog&quot;] }   #=&gt; {'cat'=&gt;'dog'}
+</code></pre>
+<h4><a href="#hshmap_pairs-k-v-block--1" aria-hidden="true" class="anchor" id="hshmap_pairs-k-v-block--1"></a><code>hsh.map_pairs! {|k, v| block }</code></h4>
+<p>Replaces the keys and values in <em>hsh</em> by running them each through <em>block</em>.</p>
+<p>If <em>block</em> returns duplicate keys, they will be overwritten.</p>
+<p>See: #map<span data-escaped-char>_</span>pairs</p>
+<h2><a href="#hashmerge" aria-hidden="true" class="anchor" id="hashmerge"></a>hash/merge</h2>
+<h3><a href="#hash-2" aria-hidden="true" class="anchor" id="hash-2"></a>Hash</h3>
+<h4><a href="#hshmerge_left-other_hash--new_hash" aria-hidden="true" class="anchor" id="hshmerge_left-other_hash--new_hash"></a><code>hsh.merge_left other_hash =&gt; new_hash</code></h4>
+<p>Returns a new hash containing the contents of <em>other_hash</em> and the contents of <em>hsh</em>. The value for each duplicate key is the value in <em>hsh</em> when it exists.</p>
+<h4><a href="#hshmerge_right-other_hash--new_hash" aria-hidden="true" class="anchor" id="hshmerge_right-other_hash--new_hash"></a><code>hsh.merge_right other_hash =&gt; new_hash</code></h4>
+<p>Returns a new hash containing the contents of <em>other_hash</em> and the contents of <em>hsh</em>. The value for each duplicate key is the value in <em>other_hash</em> when it exists.</p>
+<h4><a href="#hshmerge_left-other_hash--hsh" aria-hidden="true" class="anchor" id="hshmerge_left-other_hash--hsh"></a><code>hsh.merge_left! other_hash =&gt; hsh</code></h4>
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate keys are overwritten with the values from <em>other_hash</em> if the values in <em>hsh</em> are <em>nil</em>.</p>
+<h4><a href="#hshmerge_right-other_hash--hsh" aria-hidden="true" class="anchor" id="hshmerge_right-other_hash--hsh"></a><code>hsh.merge_right! other_hash =&gt; hsh</code></h4>
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate keys are overwritten with the values from <em>other_hash</em> unless the values in <em>other_hash</em> are <em>nil</em>.</p>
+<h2><a href="#hashoperations" aria-hidden="true" class="anchor" id="hashoperations"></a>hash/operations</h2>
+<h3><a href="#hash-3" aria-hidden="true" class="anchor" id="hash-3"></a>Hash</h3>
+<h4><a href="#hsh--other_hsh" aria-hidden="true" class="anchor" id="hsh--other_hsh"></a><code>hsh | other_hsh</code></h4>
+<p>Returns a new Hash, whose value is the same as this one, with any extras in <em>other_hash</em> added in.</p>
+<p>Useful for default options.</p>
+<pre lang="ruby"><code>require 'mug/hash/operations'
+
+def foo options={}
+  options | {b: 2, c: 2}
+end
+foo a: 1, b: 1 # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
+</code></pre>
+<h4><a href="#hsh--other_hsh-1" aria-hidden="true" class="anchor" id="hsh--other_hsh-1"></a><code>hsh + other_hsh</code></h4>
+<p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate keys are overwritten with the values from <em>other_hash</em></p>
+<pre lang="ruby"><code>require 'mug/hash/operations'
+
+a = {a: 1, b: 1}
+b = {b: 2, c: 2}
+a + b # =&gt; {:a=&gt;1, :b=&gt;2, :c=&gt;2}
+b + a # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
+</code></pre>
+<h4><a href="#hsh--o" aria-hidden="true" class="anchor" id="hsh--o"></a><code>hsh &lt;&lt; o</code></h4>
+<p>Appends stuff to the hash.</p>
+<ul>
+<li>If <em>o</em> is a Hash, this is identical to calling #merge!</li>
+<li>If <em>o</em> is an Array with two elements, it is interpreted as [key,value]</li>
+<li>If <em>o</em> can be converted to a hash with #to_h, this is identical to calling #merge!</li>
+<li>Otherwise an ArgumentError is raised.</li>
+</ul>
+<pre lang="ruby"><code>require 'mug/hash/operations'
+
+h = {}
+h &lt;&lt; {:a=&gt;0}       # h = {:a=&gt;0}
+h &lt;&lt; {:b=&gt;2,:c=&gt;3} # h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
+h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
+</code></pre>
+<h2><a href="#hashwhen" aria-hidden="true" class="anchor" id="hashwhen"></a>hash/when</h2>
+<p>Use a Hash like a case statement.</p>
+<pre lang="ruby"><code>case key
+when /foo/ then &quot;FOO&quot;
+when /bar/ then &quot;BAR&quot;
+else &quot;DEFAULT&quot;
+end
+</code></pre>
+<p>becomes:</p>
+<pre lang="ruby"><code>h = {
+  /foo/ =&gt; &quot;FOO&quot;,
+  /bar/ =&gt; &quot;BAR&quot;,
+}
+h.default = &quot;DEFAULT&quot;
+h.when key
+</code></pre>
+<h2><a href="#iff" aria-hidden="true" class="anchor" id="iff"></a>iff</h2>
+<h3><a href="#object-2" aria-hidden="true" class="anchor" id="object-2"></a>Object</h3>
+<h4><a href="#objiff-conditionobjiff--condition-" aria-hidden="true" class="anchor" id="objiff-conditionobjiff--condition-"></a><code>obj.iff? condition</code><br><code>obj.iff? { condition }</code></h4>
+<p>Test for logical equivalence.</p>
+<p>Returns true if <code>condition</code> and <code>obj</code> are either both truthy, or both falsey.</p>
+<h2><a href="#iterator" aria-hidden="true" class="anchor" id="iterator"></a>iterator</h2>
+<h3><a href="#iterator-1" aria-hidden="true" class="anchor" id="iterator-1"></a>Iterator</h3>
+<p>A special class of Enumerator that repeatedly yields values to a block.</p>
+<p>Note: similar to <code>Enumerator.produce</code> (Ruby 2.7+), but <code>Enumerator.produce</code> includes the initial value in its output.</p>
+<p>The initial yielded value is given in the constructor, but in subsequent iterations the result of the previous iteration is yielded.</p>
+<h4><a href="#newinitial-args--obj-args--newinitial-methodeach-args" aria-hidden="true" class="anchor" id="newinitial-args--obj-args--newinitial-methodeach-args"></a><code>new(initial, *args) { |obj, *args| ... }</code><br><code>new(initial, method=:each, *args)</code></h4>
+<p>Creates a new Iterator object, which can be used as an Enumerable.</p>
+<p>In the first form, iteration is defined by the given block, to which the current object and any other <em>args</em> are yielded.</p>
+<p>In the second, deprecated, form, a generated Iterator sends the given method with any +args+ to the iterand.</p>
+<p>Use of this form is discouraged.  Use Object#iter_for or Method#to_iter instead.</p>
+<h2><a href="#iteratorfor" aria-hidden="true" class="anchor" id="iteratorfor"></a>iterator/for</h2>
+<h3><a href="#object-3" aria-hidden="true" class="anchor" id="object-3"></a>Object</h3>
+<h4><a href="#objiter_formeth-args" aria-hidden="true" class="anchor" id="objiter_formeth-args"></a><code>obj.iter_for(meth, *args)</code></h4>
+<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.</p>
+<p>Initially the receiving object is <em>obj</em>.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+<pre lang="ruby"><code>require 'mug/iterator/for'
+
+0.iter_for(:next).take(5) #=&gt; [1,2,3,4,5]
+0.iter_for(:+,2).take(5) #=&gt; [2,4,6,8,10]
+</code></pre>
+<h2><a href="#iteratormethod" aria-hidden="true" class="anchor" id="iteratormethod"></a>iterator/method</h2>
+<h3><a href="#method-1" aria-hidden="true" class="anchor" id="method-1"></a>Method</h3>
+<h4><a href="#methto_iterargs" aria-hidden="true" class="anchor" id="methto_iterargs"></a><code>meth.to_iter(*args)</code></h4>
+<p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes <em>meth</em> on an object.</p>
+<p>Initially the receiving object is the object on which <em>meth</em> is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
+<pre lang="ruby"><code>require 'mug/iterator/method'
+
+0.method(:next).to_iter.take(5) #=&gt; [1,2,3,4,5]
+0.method(:+).to_iter(2).take(5) #=&gt; [2,4,6,8,10]
+</code></pre>
+<h2><a href="#loop-with" aria-hidden="true" class="anchor" id="loop-with"></a>loop-with</h2>
+<h3><a href="#kernel-1" aria-hidden="true" class="anchor" id="kernel-1"></a>Kernel</h3>
+<h4><a href="#loop_with_indexoffset0-i-block-" aria-hidden="true" class="anchor" id="loop_with_indexoffset0-i-block-"></a><code>loop_with_index(offset=0) {|i| block }</code></h4>
+<p>Repeatedly executes the block, yielding the current iteration count, which starts from <em>offset</em>. If no block is given, returns an Enumerator.</p>
+<p>Note: <code>loop_with_index</code> is similar to iterating with <code>(offset..).each</code> (Ruby 2.6+).</p>
+<h4><a href="#loop_with_objectobj-o-block-" aria-hidden="true" class="anchor" id="loop_with_objectobj-o-block-"></a><code>loop_with_object(obj) {|o| block }</code></h4>
+<p>Repeatedly executes the block, yielding an arbitrary object, <em>obj</em>.</p>
+<h3><a href="#examples-4" aria-hidden="true" class="anchor" id="examples-4"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/loop-with'
+
+loop_with_index do |i|
+  p i
+  break
+end
+
+arr = loop_with_object([]) do |a|
+  s = gets.chomp
+  throw StopIteration if s.empty?
+  a &lt;&lt; s
+end
+</code></pre>
+<h2><a href="#main" aria-hidden="true" class="anchor" id="main"></a>main</h2>
+<h3><a href="#kernel-2" aria-hidden="true" class="anchor" id="kernel-2"></a>Kernel</h3>
+<h4><a href="#__main____main__--block-" aria-hidden="true" class="anchor" id="__main____main__--block-"></a><code>__main__</code><br><code>__main__ { block }</code></h4>
+<p>Compares the calling source filename with <code>$PROGRAM_NAME</code> (<code>$0</code>).</p>
+<p>Returns a falsey value if the calling context is not in the 'main' file.</p>
+<p>If called without a block, and the calling context is in the 'main' file, returns <code>true</code>.</p>
+<p>If called with a block, and the calling context is in the 'main' file, the block is executed and the result is returned.</p>
+<h3><a href="#examples-5" aria-hidden="true" class="anchor" id="examples-5"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/main'
+
+if __main__
+  puts &quot;the main file&quot;
+end
+
+__main__ do
+  puts &quot;also the main file&quot;
+end
+
+# More advanced example:
+
+if __main__ { ARGV[0] == 'foo' }
+  do_foo
+end
+
+</code></pre>
+<h2><a href="#matchdataeach" aria-hidden="true" class="anchor" id="matchdataeach"></a>matchdata/each</h2>
+<h3><a href="#matchdata" aria-hidden="true" class="anchor" id="matchdata"></a>MatchData</h3>
+<h4><a href="#mdeachmdeach--str-block-" aria-hidden="true" class="anchor" id="mdeachmdeach--str-block-"></a><code>md.each</code><br><code>md.each { |str| block }</code></h4>
+<p>Iterates over each capture group in the MatchData object, including <code>$&amp;</code> (the entire matched string), yielding the captured string.</p>
+<h4><a href="#mdeach_capturemdeach_capture-key-str-block-" aria-hidden="true" class="anchor" id="mdeach_capturemdeach_capture-key-str-block-"></a><code>md.each_capture</code><br><code>md.each_capture {|key, str| block }</code></h4>
+<p>Iterates over each capture group in the MatchData object, yielding the capture position and captured string.</p>
+<p>The capture positions are either all Strings or all Integers, depending on whether the original Regexp had named capture groups or not.</p>
+<h4><a href="#mdeach_named_capturemdeach_named_capture-name-str-block-" aria-hidden="true" class="anchor" id="mdeach_named_capturemdeach_named_capture-name-str-block-"></a><code>md.each_named_capture</code><br><code>md.each_named_capture {|name, str| block }</code></h4>
+<p>Iterates over each named capture group in the MatchData object, yielding the capture name and string.</p>
+<h4><a href="#mdeach_positional_captureinclude_names-falsemdeach_positional_captureinclude_names-false-name-str-block-" aria-hidden="true" class="anchor" id="mdeach_positional_captureinclude_names-falsemdeach_positional_captureinclude_names-false-name-str-block-"></a><code>md.each_positional_capture(include_names: false)</code><br><code>md.each_positional_capture(include_names: false) {|name, str| block }</code></h4>
+<p>Iterates over each positional capture group in the MatchData object, yielding the capture position and string.</p>
+<p>If <code>include_names</code> is given and true, treats named captures as positional captures.</p>
+<p>WARNING: if mixing named and positional captures, no positional captures will be available using this method!</p>
+<h2><a href="#matchdatahash" aria-hidden="true" class="anchor" id="matchdatahash"></a>matchdata/hash</h2>
+<h3><a href="#matchdata-1" aria-hidden="true" class="anchor" id="matchdata-1"></a>MatchData</h3>
+<h4><a href="#mdto_h" aria-hidden="true" class="anchor" id="mdto_h"></a><code>md.to_h</code></h4>
+<p>Returns a Hash object of capture position =&gt; captured string.</p>
+<p>The capture positions are either all Strings or all Integers, depending on whether the original Regexp had named capture groups or not.</p>
+<h4><a href="#mdnamed_captures" aria-hidden="true" class="anchor" id="mdnamed_captures"></a><code>md.named_captures</code></h4>
+<p>Returns a Hash object of capture name =&gt; captured string.</p>
+<p>Note: <code>MatchData#named_captures</code> is in stdlib since Ruby 2.4.</p>
+<h4><a href="#mdpositional_capturesinclude_names-false" aria-hidden="true" class="anchor" id="mdpositional_capturesinclude_names-false"></a><code>md.positional_captures(include_names: false)</code></h4>
+<p>Returns a Hash object of capture position =&gt; captured string.</p>
+<p>If <code>include_names</code> is given and true, treats named captures as positional captures.</p>
+<p>WARNING: if mixing named and positional captures, no positional captures will be available using this method!</p>
+<h2><a href="#maybe" aria-hidden="true" class="anchor" id="maybe"></a>maybe</h2>
+<h3><a href="#object-4" aria-hidden="true" class="anchor" id="object-4"></a>Object</h3>
+<h4><a href="#objmaybeobjmaybe--block-" aria-hidden="true" class="anchor" id="objmaybeobjmaybe--block-"></a><code>obj.maybe</code><br><code>obj.maybe { block }</code></h4>
+<p>Invokes a method on <em>obj</em> iff <em>obj</em> is truthy, otherwise returns <em>obj</em>.</p>
+<p>When a block is given, the block is invoked in the scope of <em>obj</em> (i.e. <code>self</code> in the block refers to <em>obj</em>).</p>
+<p>When no block is given, <em>maybe</em> returns an object that conditionally delegates methods to <em>obj</em>.</p>
+<pre lang="ruby"><code>require 'mug/maybe'
+
+# Equivalent to: a &amp;&amp; a.b &amp;&amp; a.b.c
+# except that a and b are only invoked once
+
+# (block form)
+a.maybe{ b.maybe{ c } }
+
+# (delegator form)
+a.maybe.b.maybe.c
+</code></pre>
+<h2><a href="#negativity" aria-hidden="true" class="anchor" id="negativity"></a>negativity</h2>
+<h3><a href="#numeric" aria-hidden="true" class="anchor" id="numeric"></a>Numeric</h3>
+<h4><a href="#numnegative" aria-hidden="true" class="anchor" id="numnegative"></a><code>num.negative?</code></h4>
+<p>Returns <code>true</code> if <em>num</em> is negative (i.e. &lt; 0), <code>false</code> otherwise.</p>
+<h4><a href="#numpositive" aria-hidden="true" class="anchor" id="numpositive"></a><code>num.positive?</code></h4>
+<p>Returns <code>true</code> if <em>num</em> is positive (i.e. &gt; 0), <code>false</code> otherwise.</p>
+<h4><a href="#numnonnegative" aria-hidden="true" class="anchor" id="numnonnegative"></a><code>num.nonnegative?</code></h4>
+<p>Returns <code>true</code> if <em>num</em> is nonnegative (i.e. &gt;= 0), <code>false</code> otherwise.</p>
+<h4><a href="#numnonpositive" aria-hidden="true" class="anchor" id="numnonpositive"></a><code>num.nonpositive?</code></h4>
+<p>Returns <code>true</code> if <em>num</em> is nonpositive (i.e. &lt;= 0), <code>false</code> otherwise.</p>
+<h4><a href="#numnegative-1" aria-hidden="true" class="anchor" id="numnegative-1"></a><code>num.negative!</code></h4>
+<p>If <em>num</em> is negative (i.e. &lt; 0), returns itself, otherwise returns <em>nil</em>.</p>
+<h4><a href="#numpositive-1" aria-hidden="true" class="anchor" id="numpositive-1"></a><code>num.positive!</code></h4>
+<p>If <em>num</em> is positive (i.e. &gt; 0), returns itself, otherwise returns <em>nil</em>.</p>
+<h4><a href="#numnonnegative-1" aria-hidden="true" class="anchor" id="numnonnegative-1"></a><code>num.nonnegative!</code></h4>
+<p>If <em>num</em> is nonnegative (i.e. &gt;= 0), returns itself, otherwise returns <em>nil</em>.</p>
+<h4><a href="#numnonpositive-1" aria-hidden="true" class="anchor" id="numnonpositive-1"></a><code>num.nonpositive!</code></h4>
+<p>If <em>num</em> is nonpositive (i.e. &lt;= 0), returns itself, otherwise returns <em>nil</em>.</p>
+<h3><a href="#examples-6" aria-hidden="true" class="anchor" id="examples-6"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/negativity'
+
+if i.negative?
+  puts &quot;#{i} = 0 - #{-i}&quot;
+end
+
+n.positive? or raise('not enough items')
+
+x.nonnegative? ? x : -x
+
+arr.map{|i| i.nonpositive! }.compact
+</code></pre>
+<h2><a href="#not" aria-hidden="true" class="anchor" id="not"></a>not</h2>
+<h3><a href="#kernel-3" aria-hidden="true" class="anchor" id="kernel-3"></a>Kernel</h3>
+<h4><a href="#objnotobjnot-o-block-objnotaobjnota-o-block-" aria-hidden="true" class="anchor" id="objnotobjnot-o-block-objnotaobjnota-o-block-"></a><code>obj.not</code><br><code>obj.not {|o| block }</code><br><code>obj.not(*a)</code><br><code>obj.not(*a) {|o| block }</code></h4>
+<p>Negate a predicate.</p>
+<h3><a href="#examples-7" aria-hidden="true" class="anchor" id="examples-7"></a>Examples</h3>
+<pre lang="ruby"><code>require 'mug/not'
+
+false.not        #=&gt; true
+true.not         #=&gt; false
+
+[].not &amp;:empty?  #=&gt; false
+[1].not :empty?  #=&gt; true
+
+[1,-2,3].not(:all?) {|e| e &gt; 0 } #=&gt; true
+</code></pre>
+<h2><a href="#rexproc" aria-hidden="true" class="anchor" id="rexproc"></a>rexproc</h2>
+<h3><a href="#regexp" aria-hidden="true" class="anchor" id="regexp"></a>Regexp</h3>
+<h4><a href="#rexto_proc" aria-hidden="true" class="anchor" id="rexto_proc"></a><code>rex.to_proc</code></h4>
+<p>Returns a proc that accepts one argument, that matches against this regexp object.</p>
+<pre lang="ruby"><code>require 'mug/rexproc'
+
+%w[foo bar baz].select &amp;/\Ab/ #=&gt; [&quot;bar&quot;, &quot;baz&quot;]
+%w[foo bar baz].reject &amp;/\Ab/ #=&gt; [&quot;foo&quot;]
+%w[foo bar baz].find &amp;/\Ab/ #=&gt; &quot;bar&quot;
+</code></pre>
+<h2><a href="#self" aria-hidden="true" class="anchor" id="self"></a>self</h2>
+<h3><a href="#object-5" aria-hidden="true" class="anchor" id="object-5"></a>Object</h3>
+<h4><a href="#objselfobjself-o-block-objitselfobjitself-o-block-" aria-hidden="true" class="anchor" id="objselfobjself-o-block-objitselfobjitself-o-block-"></a><code>obj.self</code><br><code>obj.self {|o| block }</code><br><code>obj.itself</code><br><code>obj.itself {|o| block }</code></h4>
+<p>When a block is given, yields <em>obj</em> to the block and returns the resulting value.</p>
+<p>When no block is given, simply returns <em>obj</em>.</p>
+<p>Note: without a block, equivalent to <code>Object#itself</code> (Ruby 2.2+). With a block, equivalent to <code>Object#then</code> (Ruby 2.6+).</p>
+<blockquote>
+<p>Note: this is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <em>obj</em>, but <code>obj.self{nil}</code> returns <em>nil</em>.</p>
+</blockquote>
+<pre lang="ruby"><code>require 'mug/self'
+
+1.self #=&gt; 1
+obj.self #=&gt; obj
+2.self{|i| i*3 } #=&gt; 6
+[1,1,2,2,3].group_by(&amp;:self) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+
+1.itself #=&gt; 1
+obj.itself #=&gt; obj
+2.itself{|i| i*3 } #=&gt; 6
+[1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+</code></pre>
+<h4><a href="#objrevapplyargs-list-block-objcedeargs-list-block-objrevapplyargsobjcedeargs" aria-hidden="true" class="anchor" id="objrevapplyargs-list-block-objcedeargs-list-block-objrevapplyargsobjcedeargs"></a><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.cede(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code><br><code>obj.cede(*args)</code></h4>
+<p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
+<p>When no block is given, returns an Enumerator.</p>
+<h2><a href="#tau" aria-hidden="true" class="anchor" id="tau"></a>tau</h2>
+<p>Defines the true circle constant.</p>
+<pre lang="ruby"><code>Math::TAU #= 6.283185307179586..
+</code></pre>
+<p>Additionally it expands the BigDecimal/BigMath module:</p>
+<pre lang="ruby"><code>require 'bigdecimal'
+require 'bigdecimal/math'
+include BigMath
+
+puts TAU(15)
+</code></pre>
+<p>See <a href="http://tauday.com">http://tauday.com</a> to find out what it's all about.</p>
+<h2><a href="#time" aria-hidden="true" class="anchor" id="time"></a>time</h2>
+<h3><a href="#time-1" aria-hidden="true" class="anchor" id="time-1"></a>Time</h3>
+<h4><a href="#tto_now" aria-hidden="true" class="anchor" id="tto_now"></a><code>t.to_now</code></h4>
+<p>Returns the number of seconds since the time represented by this Time object.</p>
+<pre lang="ruby"><code>start = Time.now
+#...
+duration = start.to_now
+</code></pre>
+<h4><a href="#tfrom_now" aria-hidden="true" class="anchor" id="tfrom_now"></a><code>t.from_now</code></h4>
+<p>Returns the number of seconds until the time represented by this Time object.</p>
+<pre lang="ruby"><code>target = Time.new 2117, 1, 1, 0, 0, 0
+sleep target.from_now
+</code></pre>
+<h4><a href="#timeuntil-t" aria-hidden="true" class="anchor" id="timeuntil-t"></a><code>Time.until t</code></h4>
+<p>Returns the number of seconds until <code>t</code>.</p>
+<h4><a href="#timesince-t" aria-hidden="true" class="anchor" id="timesince-t"></a><code>Time.since t</code></h4>
+<p>Returns the number of seconds since <code>t</code>.</p>
+<h2><a href="#to_h" aria-hidden="true" class="anchor" id="to_h"></a>to<span data-escaped-char>_</span>h</h2>
+<p><strong>Removed</strong></p>
+<blockquote>
+<p>Note: for Ruy 2.1, <code>Enumerable#to_h</code> <a href="http://ruby-doc.org/core-2.1.0/Enumerable.html#method-i-to_h">is already defined</a>.</p>
+</blockquote>
+<blockquote>
+<p>Note: for Ruby &lt;2.0, it is advisable to instead use the <a href="https://rubygems.org/gems/to_h"><em>to<span data-escaped-char>_</span>h</em> gem</a>.</p>
+</blockquote>
+<h2><a href="#top" aria-hidden="true" class="anchor" id="top"></a>top</h2>
+<h3><a href="#enumerable-4" aria-hidden="true" class="anchor" id="enumerable-4"></a>Enumerable</h3>
+<h4><a href="#enumtopn1enumtopn1-ab-block-" aria-hidden="true" class="anchor" id="enumtopn1enumtopn1-ab-block-"></a><code>enum.top(n=1)</code><br><code>enum.top(n=1) {|a,b| block }</code></h4>
+<p>Get the top <em>n</em> items, in order from top to bottom.</p>
+<p>Returns an <em>Array</em> even when <em>n</em> is 1.</p>
+<p>See: <code>Enumerable#sort</code></p>
+<p>Note: <code>top(n)</code> is similar to <code>Enumerable#max(n)</code> (Ruby 2.2+).</p>
+<h4><a href="#enumtop_byn1-item-block-" aria-hidden="true" class="anchor" id="enumtop_byn1-item-block-"></a><code>enum.top_by(n=1) {|item| block }</code></h4>
+<p>Get the top <em>n</em> items, in order from top to bottom, ordered by mapping the values through the given block.</p>
+<p>Returns an <em>Array</em> even when <em>n</em> is 1. Values that are tied after mapping are returned in the initial order.</p>
+<p>If no block is given, an enumerator is returned instead.</p>
+<p>See: <code>Enumerable#sort_by</code></p>
+<p>Note: similar to <code>Enumerable#max_by(n)</code> (Ruby 2.2+), but guarantees stable ordering among tied elements.</p>
+<h4><a href="#enumbottomn1enumbottomn1-ab-block-" aria-hidden="true" class="anchor" id="enumbottomn1enumbottomn1-ab-block-"></a><code>enum.bottom(n=1)</code><br><code>enum.bottom(n=1) {|a,b| block }</code></h4>
+<p>Get the bottom <em>n</em> items, in order from bottom to top.</p>
+<p>Returns an <em>Array</em> even when <em>n</em> is 1.</p>
+<p>See: <code>Enumerable#sort</code></p>
+<p>Note: <code>bottom(n)</code> is similar to <code>Enumerable#min(n)</code> (Ruby 2.2+).</p>
+<h4><a href="#enumbottom_byn1-item-item-" aria-hidden="true" class="anchor" id="enumbottom_byn1-item-item-"></a><code>enum.bottom_by(n=1) {|item| item }</code></h4>
+<p>Get the bottom <em>n</em> items, in order from bottom to top, ordered by mapping the values through the given block.</p>
+<p>Returns an <em>Array</em> even when <em>n</em> is 1. Values that are tied after mapping are returned in the initial order.</p>
+<p>If no block is given, an enumerator is returned instead.</p>
+<p>See: <code>Enumerable#sort_by</code></p>
+<p>Note: similar to <code>Enumerable#min_by(n)</code> (Ruby 2.2+), but guarantees stable ordering among tied elements.</p>
+<h2><a href="#with" aria-hidden="true" class="anchor" id="with"></a>with</h2>
+<h3><a href="#kernel-4" aria-hidden="true" class="anchor" id="kernel-4"></a>Kernel</h3>
+<h4><a href="#withargs-foo-block-" aria-hidden="true" class="anchor" id="withargs-foo-block-"></a><code>with(*args) {|*foo| block }</code></h4>
+<p>Yields the arguments to a block.</p>
+<pre lang="ruby"><code>with(1, 2, 3) {|x, y, z| x + y + z }
+#=&gt; 6
+</code></pre>
+<pre id="license" class="no-highlight">Copyright (c) 2013-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -85,7 +701,103 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-</pre>      </div>
+</pre><h1><a href="#contributor-covenant-code-of-conduct" aria-hidden="true" class="anchor" id="contributor-covenant-code-of-conduct"></a>Contributor Covenant Code of Conduct</h1>
+<h2><a href="#our-pledge" aria-hidden="true" class="anchor" id="our-pledge"></a>Our Pledge</h2>
+<p>We as members, contributors, and leaders pledge to make participation in our<br />
+community a harassment-free experience for everyone, regardless of age, body<br />
+size, visible or invisible disability, ethnicity, sex characteristics, gender<br />
+identity and expression, level of experience, education, socio-economic status,<br />
+nationality, personal appearance, race, religion, or sexual identity<br />
+and orientation.</p>
+<p>We pledge to act and interact in ways that contribute to an open, welcoming,<br />
+diverse, inclusive, and healthy community.</p>
+<h2><a href="#our-standards" aria-hidden="true" class="anchor" id="our-standards"></a>Our Standards</h2>
+<p>Examples of behavior that contributes to a positive environment for our<br />
+community include:</p>
+<ul>
+<li>Demonstrating empathy and kindness toward other people</li>
+<li>Being respectful of differing opinions, viewpoints, and experiences</li>
+<li>Giving and gracefully accepting constructive feedback</li>
+<li>Accepting responsibility and apologizing to those affected by our mistakes,<br />
+and learning from the experience</li>
+<li>Focusing on what is best not just for us as individuals, but for the<br />
+overall community</li>
+</ul>
+<p>Examples of unacceptable behavior include:</p>
+<ul>
+<li>The use of sexualized language or imagery, and sexual attention or<br />
+advances of any kind</li>
+<li>Trolling, insulting or derogatory comments, and personal or political attacks</li>
+<li>Public or private harassment</li>
+<li>Publishing others' private information, such as a physical or email<br />
+address, without their explicit permission</li>
+<li>Other conduct which could reasonably be considered inappropriate in a<br />
+professional setting</li>
+</ul>
+<h2><a href="#enforcement-responsibilities" aria-hidden="true" class="anchor" id="enforcement-responsibilities"></a>Enforcement Responsibilities</h2>
+<p>Community leaders are responsible for clarifying and enforcing our standards of<br />
+acceptable behavior and will take appropriate and fair corrective action in<br />
+response to any behavior that they deem inappropriate, threatening, offensive,<br />
+or harmful.</p>
+<p>Community leaders have the right and responsibility to remove, edit, or reject<br />
+comments, commits, code, wiki edits, issues, and other contributions that are<br />
+not aligned to this Code of Conduct, and will communicate reasons for moderation<br />
+decisions when appropriate.</p>
+<h2><a href="#scope" aria-hidden="true" class="anchor" id="scope"></a>Scope</h2>
+<p>This Code of Conduct applies within all community spaces, and also applies when<br />
+an individual is officially representing the community in public spaces.<br />
+Examples of representing our community include using an official e-mail address,<br />
+posting via an official social media account, or acting as an appointed<br />
+representative at an online or offline event.</p>
+<h2><a href="#enforcement" aria-hidden="true" class="anchor" id="enforcement"></a>Enforcement</h2>
+<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be<br />
+reported to the community leaders responsible for enforcement at<br />
+<a href="mailto:mug.gem@kerwin.net.au">mug.gem@kerwin.net.au</a>.<br />
+All complaints will be reviewed and investigated promptly and fairly.</p>
+<p>All community leaders are obligated to respect the privacy and security of the<br />
+reporter of any incident.</p>
+<h2><a href="#enforcement-guidelines" aria-hidden="true" class="anchor" id="enforcement-guidelines"></a>Enforcement Guidelines</h2>
+<p>Community leaders will follow these Community Impact Guidelines in determining<br />
+the consequences for any action they deem in violation of this Code of Conduct:</p>
+<h3><a href="#1-correction" aria-hidden="true" class="anchor" id="1-correction"></a>1. Correction</h3>
+<p><strong>Community Impact</strong>: Use of inappropriate language or other behavior deemed<br />
+unprofessional or unwelcome in the community.</p>
+<p><strong>Consequence</strong>: A private, written warning from community leaders, providing<br />
+clarity around the nature of the violation and an explanation of why the<br />
+behavior was inappropriate. A public apology may be requested.</p>
+<h3><a href="#2-warning" aria-hidden="true" class="anchor" id="2-warning"></a>2. Warning</h3>
+<p><strong>Community Impact</strong>: A violation through a single incident or series<br />
+of actions.</p>
+<p><strong>Consequence</strong>: A warning with consequences for continued behavior. No<br />
+interaction with the people involved, including unsolicited interaction with<br />
+those enforcing the Code of Conduct, for a specified period of time. This<br />
+includes avoiding interactions in community spaces as well as external channels<br />
+like social media. Violating these terms may lead to a temporary or<br />
+permanent ban.</p>
+<h3><a href="#3-temporary-ban" aria-hidden="true" class="anchor" id="3-temporary-ban"></a>3. Temporary Ban</h3>
+<p><strong>Community Impact</strong>: A serious violation of community standards, including<br />
+sustained inappropriate behavior.</p>
+<p><strong>Consequence</strong>: A temporary ban from any sort of interaction or public<br />
+communication with the community for a specified period of time. No public or<br />
+private interaction with the people involved, including unsolicited interaction<br />
+with those enforcing the Code of Conduct, is allowed during this period.<br />
+Violating these terms may lead to a permanent ban.</p>
+<h3><a href="#4-permanent-ban" aria-hidden="true" class="anchor" id="4-permanent-ban"></a>4. Permanent Ban</h3>
+<p><strong>Community Impact</strong>: Demonstrating a pattern of violation of community<br />
+standards, including sustained inappropriate behavior,  harassment of an<br />
+individual, or aggression toward or disparagement of classes of individuals.</p>
+<p><strong>Consequence</strong>: A permanent ban from any sort of public interaction within<br />
+the community.</p>
+<h2><a href="#attribution" aria-hidden="true" class="anchor" id="attribution"></a>Attribution</h2>
+<p>This Code of Conduct is adapted from the <a href="https://www.contributor-covenant.org">Contributor Covenant</a>,<br />
+version 2.0, available at<br />
+<a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct.html">https://www.contributor-covenant.org/version/2/0/code_of_conduct.html</a>.</p>
+<p>Community Impact Guidelines were inspired by <a href="https://github.com/mozilla/diversity">Mozilla's code of conduct<br />
+enforcement ladder</a>.</p>
+<p>For answers to common questions about this code of conduct, see the FAQ at<br />
+<a href="https://www.contributor-covenant.org/faq">https://www.contributor-covenant.org/faq</a>. Translations are available at<br />
+<a href="https://www.contributor-covenant.org/translations">https://www.contributor-covenant.org/translations</a>.</p>
+      </div>
       <script src="/jquery.min.js"></script>
       <script src="/bootstrap.min.js"></script>
   </body>
