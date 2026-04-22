@@ -89,6 +89,9 @@ arguments.
 
 ### Method
 
+Note: `Method#curry` is in stdlib since Ruby 2.2. `apply` is
+shorthand for `curry.call(...)`.
+
 #### `meth.curry`<br>`meth.curry n`
 
 Returns a curried proc. If the optional arity argument is given,
@@ -160,6 +163,10 @@ Subtract elements from this array.
 
 This is similar to `Array#-` except that elements from this array are
 removed only once per instance in _ary_.
+
+Note: for the single-argument case, `Array#minus` is similar to
+`Array#difference` (Ruby 2.6+). The `remainder:` option and `Array#^`
+have no stdlib equivalent.
 
 If _remainder_ is given and true, returns a second array which is
 all elements in _ary_ that were not present in this array.
@@ -239,6 +246,9 @@ True if _this_ OR _other_ is non-zero.
 #### `int.xor?(other)`
 
 True if _this_ XOR _other_ is non-zero.
+
+Note: `and_any?` and `and_all?` are similar to `Integer#anybits?` and
+`Integer#allbits?` (Ruby 2.5+). `or?` and `xor?` have no stdlib equivalent.
 
 bool
 ----
@@ -352,6 +362,9 @@ enumerable/counts
 -----------------
 
 Returns counts of objects in enumerables.
+
+Note: similar to `Enumerable#tally` (Ruby 2.7+). Unlike `tally`, the
+returned hash has a default value of 0 for missing keys.
 
 ### Enumerable
 
@@ -701,6 +714,9 @@ iterator
 A special class of Enumerator that repeatedly yields values
 to a block.
 
+Note: similar to `Enumerator.produce` (Ruby 2.7+), but
+`Enumerator.produce` includes the initial value in its output.
+
 The initial yielded value is given in the constructor, but in
 subsequent iterations the result of the previous iteration is
 yielded.
@@ -767,6 +783,9 @@ loop-with
 Repeatedly executes the block, yielding the current iteration
 count, which starts from _offset_. If no block is given, returns
 an Enumerator.
+
+Note: `loop_with_index` is similar to iterating with `(offset..).each`
+(Ruby 2.6+).
 
 #### `loop_with_object(obj) {|o| block }`
 
@@ -879,6 +898,8 @@ groups or not.
 #### `md.named_captures`
 
 Returns a Hash object of capture name => captured string.
+
+Note: `MatchData#named_captures` is in stdlib since Ruby 2.4.
 
 #### `md.positional_captures(include_names: false)`
 
@@ -1021,6 +1042,9 @@ When a block is given, yields _obj_ to the block and returns the resulting value
 
 When no block is given, simply returns _obj_.
 
+Note: without a block, equivalent to `Object#itself` (Ruby 2.2+).
+With a block, equivalent to `Object#then` (Ruby 2.6+).
+
 > Note: this is different from `#tap` because `obj.tap{nil}` returns _obj_, but `obj.self{nil}` returns _nil_.
 
 ```ruby
@@ -1120,6 +1144,8 @@ Returns an _Array_ even when _n_ is 1.
 
 See: `Enumerable#sort`
 
+Note: `top(n)` is similar to `Enumerable#max(n)` (Ruby 2.2+).
+
 #### `enum.top_by(n=1) {|item| block }`
 
 Get the top _n_ items, in order from top to bottom, ordered
@@ -1132,6 +1158,9 @@ If no block is given, an enumerator is returned instead.
 
 See: `Enumerable#sort_by`
 
+Note: similar to `Enumerable#max_by(n)` (Ruby 2.2+), but guarantees
+stable ordering among tied elements.
+
 
 #### `enum.bottom(n=1)`<br>`enum.bottom(n=1) {|a,b| block }`
 
@@ -1140,6 +1169,8 @@ Get the bottom _n_ items, in order from bottom to top.
 Returns an _Array_ even when _n_ is 1.
 
 See: `Enumerable#sort`
+
+Note: `bottom(n)` is similar to `Enumerable#min(n)` (Ruby 2.2+).
 
 #### `enum.bottom_by(n=1) {|item| item }`
 
@@ -1152,6 +1183,9 @@ after mapping are returned in the initial order.
 If no block is given, an enumerator is returned instead.
 
 See: `Enumerable#sort_by`
+
+Note: similar to `Enumerable#min_by(n)` (Ruby 2.2+), but guarantees
+stable ordering among tied elements.
 
 with
 ----
