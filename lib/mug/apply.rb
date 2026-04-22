@@ -8,7 +8,8 @@ class Proc
   # arguments.
   #
   def apply(*args)
-    curry.call(*args)
+    n = arity < 0 ? -arity - 1 : arity
+    curry(n).call(*args)
   end
 end
 
@@ -21,7 +22,8 @@ class Method
   # arguments.
   #
   def apply(*args)
-    curry.call(*args)
+    n = arity < 0 ? -arity - 1 : arity
+    curry(n).call(*args)
   end
 end
 
