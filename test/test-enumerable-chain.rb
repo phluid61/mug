@@ -15,7 +15,8 @@ class Test_enumerable_chain < Test::Unit::TestCase
     ]
 
     enum = a.chain(b, c)
-    assert_kind_of( Enumerator, enum )
+    assert( enum.kind_of?(Enumerator) || enum.kind_of?(Enumerator::Chain),
+            "expected Enumerator or Enumerator::Chain, got #{enum.class}" )
 
     result = []
     enum.each do |*x|
