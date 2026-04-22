@@ -10,13 +10,8 @@ class Test_bool < Test::Unit::TestCase
     def each(&b) @a.each(&b); end
   end
 
-  if RUBY_VERSION.to_i >= 2
-    TRUTHY = [ 1, 1.0, Float::INFINITY, -Float::INFINITY, (1<<100).coerce(1).first, Rational(1,1), "x", [1], {1=>1}, MyEnum.new(1), [1].each ]
-    FALSY  = [ 0, 0.0, -0.0, Float::NAN, (1<<100).coerce(0).first, Rational(0,1), "", [], {}, MyEnum.new, [].each, RuntimeError.new ]
-  else
-    TRUTHY = [ 1, 1.0, Float::INFINITY, -Float::INFINITY, (1<<100).coerce(1).first, Rational(1,1), "x", [1], {1=>1}, MyEnum.new(1) ]
-    FALSY  = [ 0, 0.0, -0.0, Float::NAN, (1<<100).coerce(0).first, Rational(0,1), "", [], {}, MyEnum.new, RuntimeError.new ]
-  end
+  TRUTHY = [ 1, 1.0, Float::INFINITY, -Float::INFINITY, (1<<100).coerce(1).first, Rational(1,1), "x", [1], {1=>1}, MyEnum.new(1), [1].each ]
+  FALSY  = [ 0, 0.0, -0.0, Float::NAN, (1<<100).coerce(0).first, Rational(0,1), "", [], {}, MyEnum.new, [].each, RuntimeError.new ]
 
   alias assert_true assert
   def assert_false val, msg=UNASSIGNED

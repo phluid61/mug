@@ -24,15 +24,6 @@ class Test_clamp < Test::Unit::TestCase
     assert_equal( 5, 6.clamp(rng) )
   end
 
-  if RUBY_VERSION < '2.7'
-    def test_clamp__exclusive_range
-      rng = 3...5
-      assert_equal( 3, 2.clamp(rng) )
-      assert_equal( 4, 4.clamp(rng) )
-      assert_raise(ArgumentError) { 6.clamp(rng) }
-    end
-  end
-
   def test_bound__inclusive
     rng = 3..5
     assert_equal( 3, rng.bound(2) )
@@ -52,11 +43,6 @@ class Test_clamp < Test::Unit::TestCase
   end
 end
 
-if RUBY_VERSION.to_f >= 2.6
-  require_relative '2-6-test-clamp'
-end
-
-if RUBY_VERSION.to_f >= 2.7
-  require_relative '2-7-test-clamp'
-end
+require_relative '2-6-test-clamp'
+require_relative '2-7-test-clamp'
 

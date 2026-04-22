@@ -14,13 +14,6 @@ class MatchData
     end
   end
 
-  if RUBY_VERSION < '2.4'
-  # Returns a Hash object of capture name => captured string.
-  def named_captures
-    names.to_h{|n| [n, self[n]] }
-  end
-  end
-
   # Returns a Hash object of capture position => captured string.
   #
   # If +include_names+ is given and true, treats named captures

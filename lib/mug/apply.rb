@@ -13,24 +13,6 @@ class Proc
 end
 
 class Method
-  if RUBY_VERSION < '2.2'
-    #
-    # Returns a curried proc. If the optional arity argument is given,
-    # it determines the number of arguments. A curried proc receives
-    # some arguments. If a sufficient number of arguments are supplied,
-    # it passes the supplied arguments to the original proc and returns
-    # the result. Otherwise, returns another curried proc that takes the
-    # rest of arguments.
-    #
-    def curry(n=nil)
-      if n
-        to_proc.curry n
-      else
-        to_proc.curry
-      end
-    end
-  end
-
   #
   # Curries this Method and partially applies parameters.
   # If a sufficient number of arguments are supplied, it passes the
@@ -44,7 +26,7 @@ class Method
 end
 
 =begin
-Copyright (c) 2014, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2014-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
