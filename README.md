@@ -3,7 +3,7 @@ Matty's Ultimate Gem
 
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 [![Test](https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg)](https://github.com/phluid61/mug/actions/workflows/test.yml)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md) 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v3.0%20adopted-ff69b4.svg)](code_of_conduct.md) 
 
 alias
 -----
