@@ -1,0 +1,137 @@
+/* ==========================================================================
+   Page-specific styles for the mug documentation
+   ========================================================================== */
+
+#toc {
+  float: right;
+  background: var(--body-bg);
+}
+
+#license {
+  font: 12px/14px normal 'Andale Mono', monospace;
+  margin: 1em 0;
+  padding: 12px;
+  background: var(--subtle-bg);
+  color: var(--body-colour);
+}
+
+h2 {
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  background: rgba(12, 177, 206, 0.04);
+  padding: 0.1em;
+}
+
+h4 code {
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Dark-mode overrides for highlight.js default theme
+   ==========================================================================
+   Selectors mirror those in highlight.js/styles/default.css.  Colours are
+   based on the Tomorrow Night palette, keeping similar hues to the light
+   defaults (reds stay warm, greens stay green, blues stay blue).
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  h2 {
+    border-color: rgba(255, 255, 255, 0.06);
+    background: rgba(12, 177, 206, 0.08);
+  }
+
+  /* Base text and background */
+  pre code {
+    background: var(--pre-bg);
+    color: #c5c8c6;
+  }
+
+  pre code,
+  pre .subst,
+  pre .tag .title,
+  pre .lisp .title,
+  pre .clojure .built_in,
+  pre .nginx .title {
+    color: #c5c8c6;
+  }
+
+  /* Strings, titles, constants — warm red/pink */
+  pre .string,
+  pre .title,
+  pre .constant,
+  pre .parent,
+  pre .tag .value,
+  pre .rules .value,
+  pre .rules .value .number,
+  pre .preprocessor,
+  pre .ruby .symbol,
+  pre .ruby .symbol .string,
+  pre .aggregate,
+  pre .template_tag,
+  pre .django .variable,
+  pre .smalltalk .class,
+  pre .addition,
+  pre .flow,
+  pre .stream,
+  pre .bash .variable,
+  pre .apache .tag,
+  pre .apache .cbracket,
+  pre .tex .command,
+  pre .tex .special,
+  pre .erlang_repl .function_or_atom,
+  pre .markdown .header {
+    color: #cc6666;
+  }
+
+  /* Comments — muted grey */
+  pre .comment,
+  pre .annotation,
+  pre .template_comment,
+  pre .diff .header,
+  pre .chunk,
+  pre .markdown .blockquote {
+    color: #969896;
+  }
+
+  /* Numbers, dates, literals — orange */
+  pre .number,
+  pre .date,
+  pre .regexp,
+  pre .literal,
+  pre .smalltalk .symbol,
+  pre .smalltalk .char,
+  pre .go .constant,
+  pre .change,
+  pre .markdown .bullet,
+  pre .markdown .link_url {
+    color: #de935f;
+  }
+
+  /* Labels, decorators, javadoc — blue */
+  pre .label,
+  pre .javadoc,
+  pre .ruby .string,
+  pre .decorator,
+  pre .filter .argument,
+  pre .localvars,
+  pre .array,
+  pre .attr_selector,
+  pre .important,
+  pre .pseudo,
+  pre .pi,
+  pre .doctype,
+  pre .deletion,
+  pre .envvar,
+  pre .shebang,
+  pre .apache .sqbracket,
+  pre .nginx .built_in,
+  pre .tex .formula,
+  pre .erlang_repl .reserved,
+  pre .prompt,
+  pre .markdown .link_label,
+  pre .vhdl .attribute,
+  pre .clojure .attribute,
+  pre .coffeescript .property {
+    color: #81a2be;
+  }
+}
