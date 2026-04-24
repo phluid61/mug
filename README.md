@@ -1,12 +1,10 @@
-Matty's Ultimate Gem
-====================
+# Matty's Ultimate Gem
 
 [![Gem Version](https://badge.fury.io/rb/mug.png)](http://badge.fury.io/rb/mug)
 [![Test](https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg)](https://github.com/phluid61/mug/actions/workflows/test.yml)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v3.0%20adopted-ff69b4.svg)](code_of_conduct.md) 
 
-alias
------
+## alias
 
 ### Module
 
@@ -32,8 +30,7 @@ Mod.foo #=> 2
 Mod.bar #=> 1
 ```
 
-and-or
-------
+## and-or
 
 ### Object
 
@@ -74,8 +71,7 @@ try_thing.and_then {|result| log "got #{result.inspect}" }
 try_thing.or_then { log "failed" }
 ```
 
-apply
------
+## apply
 
 ### Proc
 
@@ -95,8 +91,7 @@ Returns a curried proc. If the optional arity argument is given, it determines t
 
 Curries this Method and partially applies parameters. If a sufficient number of arguments are supplied, it passes the supplied arguments to the original proc and returns the result. Otherwise, returns another curried proc that takes the rest of arguments.
 
-array/delete_all
----------------
+## array/delete_all
 
 ### Array
 
@@ -113,8 +108,7 @@ See \#delete\_if, \#reject!
 [Feature #13777](https://bugs.ruby-lang.org/issues/13777)
 
 
-array/extend
-------------
+## array/extend
 
 ### Array
 
@@ -132,8 +126,7 @@ In the last form, the array is extended by the given size. Each new element in t
 
 See `#extend!`
 
-array/minus
------------
+## array/minus
 
 ### Array
 
@@ -153,8 +146,7 @@ Get the elements unique to one of two arrays.
 
 Duplicates in either array are included only once.
 
-array/samples
--------------
+## array/samples
 
 ### Array
 
@@ -170,8 +162,7 @@ If the array is empty, always returns an empty array.
 
 The optional _random_ argument will be used as the random number generator.
 
-array/to_proc
--------------
+## array/to_proc
 
 ### Array
 
@@ -184,8 +175,7 @@ The Proc's parameter is used as an index into this array.
 See: #slice
 
 
-bittest
--------
+## bittest
 
 ### Integer
 
@@ -220,8 +210,7 @@ True if _this_ XOR _other_ is non-zero.
 
 Note: `and_any?` and `and_all?` are similar to `Integer#anybits?` and `Integer#allbits?` (Ruby 2.5+). `or?` and `xor?` have no stdlib equivalent.
 
-bool
-----
+## bool
 
 ### Kernel
 
@@ -263,8 +252,7 @@ obj.to_bool #=> !!obj
 obj.to_b #=> C-like truthiness
 ```
 
-clamp
------
+## clamp
 
 Clamps a number to a range.
 
@@ -281,8 +269,7 @@ Raises an exception if _val_ >= _end_ and the range is exclusive.
 Note: `Numeric#clamp` is provided as a polyfill for Ruby < 2.7. On Ruby 2.7+, the built-in `Comparable#clamp` is used instead.
 
 
-diggable
---------
+## diggable
 
 Implements #dig for any object that implements #[]
 
@@ -295,8 +282,7 @@ Extend any class or object that implements a `#[]` method, to also have `#dig`
 Extracts the nested value specified by the sequence of `idx` objects by calling `dig` at each step, returning `nil` if any intermediate step is `nil`.
 
 
-enumerable/any-and-all
-----------------------
+## enumerable/any-and-all
 
 ### Enumerable
 
@@ -305,8 +291,7 @@ enumerable/any-and-all
 Passes each element of the collection to the given block. The method returns `true` if the block contains elements that never return `false` or `nil`. If the block is not given, Ruby adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to return `true` when none of the collection members are `false` or `nil`.
 
 
-enumerable/chain
-----------------
+## enumerable/chain
 
 ### Enumerable
 
@@ -317,8 +302,7 @@ Invokes a block once for every element in a sequence of Enumerables.
 Note: the instance method `Enumerable#chain` is provided as a polyfill for Ruby < 2.6. On Ruby 2.6+, the built-in `Enumerable#chain` (which returns a lazy `Enumerator::Chain`) is used instead.
 
 
-enumerable/counts
------------------
+## enumerable/counts
 
 Returns counts of objects in enumerables.
 
@@ -346,8 +330,7 @@ require 'mug/enumerable/counts'
 ```
 
 
-enumerable/hash-like
---------------------
+## enumerable/hash-like
 
 Makes Enumerables quack a bit more like a hash.  A lot of these *will not work* on indeterminate or infinite sequences.
 
@@ -410,8 +393,7 @@ Returns a new array populated with the values from this enum.
 Return an array containing the values associated with the given keys.
 
 
-fragile-method-chain
---------------------
+## fragile-method-chain
 
 Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.
 
@@ -426,8 +408,7 @@ a._?.b.c._!
 nested_hash._?[:a][:b][:c]._!
 ```
 
-hash/fetch-assign
------------------
+## hash/fetch-assign
 
 ### Hash
 
@@ -453,8 +434,7 @@ hsh.fetch_assign(:b) {|key| key.to_s } #=> "b"
 ```
 
 
-hash/map
---------
+## hash/map
 
 ### Hash
 
@@ -526,8 +506,7 @@ If _block_ returns duplicate keys, they will be overwritten.
 See: #map\_pairs
 
 
-hash/merge
-----------
+## hash/merge
 
 ### Hash
 
@@ -547,8 +526,7 @@ Adds the contents of _other_hash_ to _hsh_. Entries with duplicate keys are over
 
 Adds the contents of _other_hash_ to _hsh_. Entries with duplicate keys are overwritten with the values from _other_hash_ unless the values in _other_hash_ are _nil_.
 
-hash/operations
----------------
+## hash/operations
 
 ### Hash
 
@@ -600,8 +578,7 @@ h << [:a,1]        # h = {:a=>1,:b=>2,:c=>3}
 ```
 
 
-hash/when
----------
+## hash/when
 
 Use a Hash like a case statement.
 
@@ -625,8 +602,7 @@ h.when key
 ```
 
 
-iff
----
+## iff
 
 ### Object
 
@@ -637,8 +613,7 @@ Test for logical equivalence.
 Returns true if `condition` and `obj` are either both truthy, or both falsey.
 
 
-iterator
---------
+## iterator
 
 ### Iterator
 
@@ -660,8 +635,7 @@ In the second, deprecated, form, a generated Iterator sends the given method wit
 Use of this form is discouraged.  Use Object#iter_for or Method#to_iter instead.
 
 
-iterator/for
-------------
+## iterator/for
 
 ### Object
 
@@ -678,8 +652,7 @@ require 'mug/iterator/for'
 0.iter_for(:+,2).take(5) #=> [2,4,6,8,10]
 ```
 
-iterator/method
----------------
+## iterator/method
 
 ### Method
 
@@ -696,8 +669,7 @@ require 'mug/iterator/method'
 0.method(:+).to_iter(2).take(5) #=> [2,4,6,8,10]
 ```
 
-loop-with
----------
+## loop-with
 
 ### Kernel
 
@@ -728,8 +700,7 @@ arr = loop_with_object([]) do |a|
 end
 ```
 
-main
-----
+## main
 
 ### Kernel
 
@@ -764,8 +735,7 @@ end
 
 ```
 
-matchdata/each
---------------
+## matchdata/each
 
 ### MatchData
 
@@ -791,8 +761,7 @@ If `include_names` is given and true, treats named captures as positional captur
 
 WARNING: if mixing named and positional captures, no positional captures will be available using this method!
 
-matchdata/hash
---------------
+## matchdata/hash
 
 ### MatchData
 
@@ -816,8 +785,7 @@ If `include_names` is given and true, treats named captures as positional captur
 
 WARNING: if mixing named and positional captures, no positional captures will be available using this method!
 
-maybe
------
+## maybe
 
 ### Object
 
@@ -842,8 +810,7 @@ a.maybe{ b.maybe{ c } }
 a.maybe.b.maybe.c
 ```
 
-negativity
-----------
+## negativity
 
 ### Numeric
 
@@ -895,8 +862,7 @@ x.nonnegative? ? x : -x
 arr.map{|i| i.nonpositive! }.compact
 ```
 
-not
---------
+## not
 
 ### Kernel
 
@@ -919,8 +885,7 @@ true.not         #=> false
 ```
 
 
-rexproc
--------
+## rexproc
 
 ### Regexp
 
@@ -936,8 +901,7 @@ require 'mug/rexproc'
 %w[foo bar baz].find &/\Ab/ #=> "bar"
 ```
 
-self
-----
+## self
 
 ### Object
 
@@ -971,8 +935,7 @@ When a block is given, yields _obj_ and any _args_ to the block and returns the 
 
 When no block is given, returns an Enumerator.
 
-tau
----
+## tau
 
 Defines the true circle constant.
 
@@ -992,8 +955,7 @@ puts TAU(15)
 
 See http://tauday.com to find out what it's all about.
 
-time
-----
+## time
 
 ### Time
 
@@ -1024,8 +986,7 @@ Returns the number of seconds until `t`.
 
 Returns the number of seconds since `t`.
 
-to\_h
-----
+## to\_h
 
 **Removed**
 
@@ -1033,8 +994,7 @@ to\_h
 
 > Note: for Ruby <2.0, it is advisable to instead use the [*to\_h* gem](https://rubygems.org/gems/to_h).
 
-top
----
+## top
 
 ### Enumerable
 
@@ -1083,8 +1043,7 @@ See: `Enumerable#sort_by`
 
 Note: similar to `Enumerable#min_by(n)` (Ruby 2.2+), but guarantees stable ordering among tied elements.
 
-with
-----
+## with
 
 ### Kernel
 
