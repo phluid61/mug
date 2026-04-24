@@ -43,13 +43,62 @@ jobs:
 
       - name: Build site
         if: steps.sync.outputs.changed == 'true'
-        run: bundle exec rake compile
+        run: |
+          bundle exec ruby <<'RUBY'
+          require 'commonmarker'
+          require 'cgi'
+          require 'fileutils'
+
+          def md_to_html(text)
+            Commonmarker.to_html(text, options: { render: { unsafe: true, hardbreaks: false } })
+          end
+
+          def rewrite_links(html)
+            html = html.gsub(/href="(?!https?:\/\/)([^"]*?)README\.md(#[^"]*)?"/) { %{href="#{$1}index.html#{$2}"} }
+            html = html.gsub(/href="(?!https?:\/\/)([^"]*?)\.md(#[^"]*)?"/) { %{href="#{$1}.html#{$2}"} }
+            html
+          end
+
+          def extract_title(md)
+            case md
+            when /^#\s+(.+)$/  then $1.strip
+            when /^(.+)\n=+\s*$/ then $1.strip
+            else nil
+            end
+          end
+
+          def build_page(md_file, html_file, title: nil, extra_html: nil)
+            md = File.read(md_file)
+            title ||= extract_title(md)
+            body = rewrite_links(md_to_html(md))
+            body << extra_html if extra_html
+            has_mermaid = body.gsub!(
+              /<pre><code class="language-mermaid">(.*?)<\/code><\/pre>/m,
+              '<pre class="mermaid">\1</pre>'
+            )
+            front_matter = "---\nlayout: default\n"
+            front_matter << "title: #{title.inspect}\n" if title
+            if has_mermaid
+              front_matter << "extra_head: |\n"
+              front_matter << "  <script src=\"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js\"></script>\n"
+            end
+            front_matter << "---\n"
+            FileUtils.mkdir_p(File.dirname(html_file))
+            File.write(html_file, front_matter + body)
+            puts "Built: #{html_file}"
+          end
+
+          license_html = '<pre id="license" class="no-highlight">' +
+            CGI.escapeHTML(File.read('LICENSE')) + '</pre>'
+          build_page('README.md', 'index.html', extra_html: license_html)
+          build_page('code_of_conduct.md', 'code_of_conduct.html')
+          RUBY
 
       - name: Commit changes
         if: steps.sync.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md LICENSE code_of_conduct.md index.html
+          git add README.md LICENSE code_of_conduct.md index.html code_of_conduct.html
           git commit -m "Sync content files from main and rebuild"
           git push
