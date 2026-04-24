@@ -1,35 +1,30 @@
 ---
 layout: default
-title: "Matty's Ultimate Gem"
-extra_head: |
-  <link rel="stylesheet" href="highlight.js/styles/default.css">
-  <link rel="stylesheet" href="page.css">
-  <script src="highlight.js/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+title: "Similar to: a.b && a.b.c"
 ---
-<div id="toc"><ul></ul></div><h1><a href="#mattys-ultimate-gem" aria-hidden="true" class="anchor" id="mattys-ultimate-gem"></a>Matty's Ultimate Gem</h1>
-<p><a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version" /></a><br />
-<a href="https://github.com/phluid61/mug/actions/workflows/test.yml"><img src="https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg" alt="Test" /></a><br />
-<a href="code_of_conduct.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-v3.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a></p>
+<h1><a href="#mattys-ultimate-gem" aria-hidden="true" class="anchor" id="mattys-ultimate-gem"></a>Matty's Ultimate Gem</h1>
+<p><a href="http://badge.fury.io/rb/mug"><img src="https://badge.fury.io/rb/mug.png" alt="Gem Version" /></a>
+<a href="https://github.com/phluid61/mug/actions/workflows/test.yml"><img src="https://github.com/phluid61/mug/actions/workflows/test.yml/badge.svg" alt="Test" /></a>
+<a href="code_of_conduct.html"><img src="https://img.shields.io/badge/Contributor%20Covenant-v3.0%20adopted-ff69b4.svg" alt="Contributor Covenant" /></a></p>
 <h2><a href="#alias" aria-hidden="true" class="anchor" id="alias"></a>alias</h2>
 <h3><a href="#module" aria-hidden="true" class="anchor" id="module"></a>Module</h3>
 <h4><a href="#alias_singleton_methodnew_name-old_name--self" aria-hidden="true" class="anchor" id="alias_singleton_methodnew_name-old_name--self"></a><code>alias_singleton_method(new_name, old_name) =&gt; self</code></h4>
 <p>Makes <em>new_name</em> a new copy of the instance method <em>old_name</em>.  This can be used to retain access to instance methods that are overridden.</p>
 <h4><a href="#examples" aria-hidden="true" class="anchor" id="examples"></a>Examples</h4>
-<pre lang="ruby"><code>require 'mug/alias'
-
-module Mod
-  def self.foo
-    1
-  end
-  alias_singleton_method :bar, :foo
-  def self.foo
-    2
-  end
-end
-Mod.foo #=&gt; 2
-Mod.bar #=&gt; 1
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/alias</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">module </span><span style="color:#c0c5ce;">Mod
+</span><span style="color:#c0c5ce;">  </span><span style="color:#b48ead;">def </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#8fa1b3;">foo
+</span><span style="color:#c0c5ce;">    </span><span style="color:#d08770;">1
+</span><span style="color:#c0c5ce;">  </span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">  alias_singleton_method </span><span style="color:#a3be8c;">:bar</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:foo
+</span><span style="color:#c0c5ce;">  </span><span style="color:#b48ead;">def </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.</span><span style="color:#8fa1b3;">foo
+</span><span style="color:#c0c5ce;">    </span><span style="color:#d08770;">2
+</span><span style="color:#c0c5ce;">  </span><span style="color:#b48ead;">end
+</span><span style="color:#b48ead;">end
+</span><span style="color:#ebcb8b;">Mod</span><span style="color:#c0c5ce;">.foo </span><span style="color:#65737e;">#=&gt; 2
+</span><span style="color:#ebcb8b;">Mod</span><span style="color:#c0c5ce;">.bar </span><span style="color:#65737e;">#=&gt; 1
+</span></code></pre>
 <h2><a href="#and-or" aria-hidden="true" class="anchor" id="and-or"></a>and-or</h2>
 <h3><a href="#object" aria-hidden="true" class="anchor" id="object"></a>Object</h3>
 <h4><a href="#objand-defaultobjand-default-o-block-" aria-hidden="true" class="anchor" id="objand-defaultobjand-default-o-block-"></a><code>obj.and default</code><br><code>obj.and default {|o| block }</code></h4>
@@ -45,15 +40,15 @@ Mod.bar #=&gt; 1
 <p>Calls <em>block</em> if <em>obj</em> is falsey.</p>
 <p>Returns <em>obj</em>.</p>
 <h4><a href="#examples-1" aria-hidden="true" class="anchor" id="examples-1"></a>Examples</h4>
-<pre lang="ruby"><code>require 'mug/and-or'
-
-data_store.get_env_hash.or(default_hash).do_something
-
-get_a_list.and(default_list, &amp;:empty?).do_something
-
-try_thing.and_then {|result| log &quot;got #{result.inspect}&quot; }
-try_thing.or_then { log &quot;failed&quot; }
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/and-or</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">data_store.get_env_hash.or(default_hash).do_something
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">get_a_list.and(default_list, &amp;</span><span style="color:#a3be8c;">:empty?</span><span style="color:#c0c5ce;">).do_something
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">try_thing.and_then {|</span><span style="color:#bf616a;">result</span><span style="color:#c0c5ce;">| log &quot;</span><span style="color:#a3be8c;">got </span><span style="color:#ab7967;">#{</span><span style="color:#a3be8c;">result.</span><span style="color:#96b5b4;">inspect</span><span style="color:#ab7967;">}</span><span style="color:#c0c5ce;">&quot; }
+</span><span style="color:#c0c5ce;">try_thing.or_then { log &quot;</span><span style="color:#a3be8c;">failed</span><span style="color:#c0c5ce;">&quot; }
+</span></code></pre>
 <h2><a href="#apply" aria-hidden="true" class="anchor" id="apply"></a>apply</h2>
 <h3><a href="#proc" aria-hidden="true" class="anchor" id="proc"></a>Proc</h3>
 <h4><a href="#procapply-args" aria-hidden="true" class="anchor" id="procapply-args"></a><code>proc.apply *args</code></h4>
@@ -146,12 +141,12 @@ try_thing.or_then { log &quot;failed&quot; }
 <p>Returns the truthiness of <em>obj</em>, as either <em>True</em> or <em>False</em>.</p>
 <p>This is functionally equivalent to calling <code>!!obj</code></p>
 <h3><a href="#examples-2" aria-hidden="true" class="anchor" id="examples-2"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/bool'
-
-Bool(obj) #=&gt; !!obj
-obj.to_bool #=&gt; !!obj
-obj.to_b #=&gt; C-like truthiness
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/bool</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#bf616a;">Bool</span><span style="color:#c0c5ce;">(obj) </span><span style="color:#65737e;">#=&gt; !!obj
+</span><span style="color:#c0c5ce;">obj.to_bool </span><span style="color:#65737e;">#=&gt; !!obj
+</span><span style="color:#c0c5ce;">obj.to_b </span><span style="color:#65737e;">#=&gt; C-like truthiness
+</span></code></pre>
 <h2><a href="#clamp" aria-hidden="true" class="anchor" id="clamp"></a>clamp</h2>
 <p>Clamps a number to a range.</p>
 <h3><a href="#range" aria-hidden="true" class="anchor" id="range"></a>Range</h3>
@@ -185,11 +180,11 @@ obj.to_b #=&gt; C-like truthiness
 <p>Passes each element in turn to the block, and returns a hash of <code>result=&gt;count</code>.</p>
 <p>If no block is given, an enumerator is returned.</p>
 <h3><a href="#examples-3" aria-hidden="true" class="anchor" id="examples-3"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/enumerable/counts'
-
-%w(a b b).counts                   #=&gt; {'a'=&gt;1, 'b'=&gt;2}
-%w(a b b).counts_by{|o| o.upcase } #=&gt; {'A'=&gt;1, 'B'=&gt;2}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/enumerable/counts</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">%w(</span><span style="color:#a3be8c;">a b b</span><span style="color:#c0c5ce;">).counts                   </span><span style="color:#65737e;">#=&gt; {&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2}
+</span><span style="color:#c0c5ce;">%w(</span><span style="color:#a3be8c;">a b b</span><span style="color:#c0c5ce;">).counts_by{|</span><span style="color:#bf616a;">o</span><span style="color:#c0c5ce;">| o.upcase } </span><span style="color:#65737e;">#=&gt; {&#39;A&#39;=&gt;1, &#39;B&#39;=&gt;2}
+</span></code></pre>
 <h2><a href="#enumerablehash-like" aria-hidden="true" class="anchor" id="enumerablehash-like"></a>enumerable/hash-like</h2>
 <p>Makes Enumerables quack a bit more like a hash.  A lot of these <em>will not work</em> on indeterminate or infinite sequences.</p>
 <h3><a href="#enumerable-3" aria-hidden="true" class="anchor" id="enumerable-3"></a>Enumerable</h3>
@@ -223,43 +218,43 @@ obj.to_b #=&gt; C-like truthiness
 <p>Return an array containing the values associated with the given keys.</p>
 <h2><a href="#fragile-method-chain" aria-hidden="true" class="anchor" id="fragile-method-chain"></a>fragile-method-chain</h2>
 <p>Defines a fragile method chain.  If any method call in the chain returns a falsy value, the chain aborts.</p>
-<pre lang="ruby"><code>require 'mug/fragile-method-chain'
-
-# Similar to: a.b &amp;&amp; a.b.c
-# except that a.b is not called twice
-a._?.b.c._!
-
-# Also works with #[] method
-nested_hash._?[:a][:b][:c]._!
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/fragile-method-chain</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># Similar to: a.b &amp;&amp; a.b.c
+</span><span style="color:#65737e;"># except that a.b is not called twice
+</span><span style="color:#c0c5ce;">a._?.b.c._!
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># Also works with #[] method
+</span><span style="color:#c0c5ce;">nested_hash._?[</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">][</span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">][</span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">]._!
+</span></code></pre>
 <h2><a href="#hashfetch-assign" aria-hidden="true" class="anchor" id="hashfetch-assign"></a>hash/fetch-assign</h2>
 <h3><a href="#hash" aria-hidden="true" class="anchor" id="hash"></a>Hash</h3>
 <h4><a href="#hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj" aria-hidden="true" class="anchor" id="hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj"></a><code>hsh.fetch_assign(key, default) =&gt; obj</code><br><code>hsh.fetch_assign(key) {|key| block } =&gt; obj</code></h4>
 <p>Returns a value from the hash for the given key. If the key can't be found, there are several options: if default is given, then that will be stored and returned; if the optional code block is specified, then that will be run and its result stored and returned.</p>
 <p>(<code>#compute_if_absent</code> is an alias of this method)</p>
-<pre lang="ruby"><code>require 'mug/hash/fetch-assign'
-
-hsh = {}
-
-hsh.fetch_assign(:a, 1) # =&gt; 1
-# hsh =&gt; {:a =&gt; 1}
-
-hsh.fetch_assign(:a, 42) # =&gt; 1
-# hsh =&gt; {:a =&gt; 1}
-
-hsh.fetch_assign(:b) {|key| key.to_s } #=&gt; &quot;b&quot;
-# hsh =&gt; {:a =&gt; 1, :b =&gt; &quot;b&quot;}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/fetch-assign</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">hsh = {}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">hsh.fetch_assign(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;"># =&gt; 1
+</span><span style="color:#65737e;"># hsh =&gt; {:a =&gt; 1}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">hsh.fetch_assign(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;"># =&gt; 1
+</span><span style="color:#65737e;"># hsh =&gt; {:a =&gt; 1}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">hsh.fetch_assign(</span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">) {|</span><span style="color:#bf616a;">key</span><span style="color:#c0c5ce;">| key.</span><span style="color:#96b5b4;">to_s </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; &quot;b&quot;
+</span><span style="color:#65737e;"># hsh =&gt; {:a =&gt; 1, :b =&gt; &quot;b&quot;}
+</span></code></pre>
 <h2><a href="#hashmap" aria-hidden="true" class="anchor" id="hashmap"></a>hash/map</h2>
 <h3><a href="#hash-1" aria-hidden="true" class="anchor" id="hash-1"></a>Hash</h3>
 <h4><a href="#hshmap_values-v-block-" aria-hidden="true" class="anchor" id="hshmap_values-v-block-"></a><code>hsh.map_values {|v| block }</code></h4>
 <p>Returns a new hash which is a copy of <em>hsh</em> but each value is replaced by the result of running it through <em>block</em>.</p>
 <p>As of Ruby 2.4 this is equivalent to <code>#transform_values</code></p>
-<pre lang="ruby"><code>require 'mug/hash/map'
-
-{'a'=&gt;1, 'b'=&gt;2}.map_values { |v| v*2 } #=&gt; {'a'=&gt;2, 'b'=&gt;4}
-{'a'=&gt;1, 'b'=&gt;2}.map_values { &quot;cat&quot; }   #=&gt; {'a'=&gt;&quot;cat&quot;, 'b'=&gt;&quot;cat&quot;}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/map</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_values { |</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">| v*</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; {&#39;a&#39;=&gt;2, &#39;b&#39;=&gt;4}
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_values { &quot;</span><span style="color:#a3be8c;">cat</span><span style="color:#c0c5ce;">&quot; }   </span><span style="color:#65737e;">#=&gt; {&#39;a&#39;=&gt;&quot;cat&quot;, &#39;b&#39;=&gt;&quot;cat&quot;}
+</span></code></pre>
 <h4><a href="#hshmap_values-v-block--1" aria-hidden="true" class="anchor" id="hshmap_values-v-block--1"></a><code>hsh.map_values! {|v| block }</code></h4>
 <p>Replaces the values in <em>hsh</em> by running them each through <em>block</em>.</p>
 <p>As of Ruby 2.4 this is equivalent to <code>#transform_values!</code></p>
@@ -268,11 +263,11 @@ hsh.fetch_assign(:b) {|key| key.to_s } #=&gt; &quot;b&quot;
 <p>Returns a new hash which is a copy of <em>hsh</em> but each key is replaced by the result of running it through <em>block</em>.</p>
 <p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
 <p>As of Ruby 2.5 this is equivalent to <code>#transform_keys</code></p>
-<pre lang="ruby"><code>require 'mug/hash/map'
-
-{'a'=&gt;1, 'b'=&gt;2}.map_keys { |k| k*2 } #=&gt; {'aa'=&gt;1, 'bb'=&gt;2}
-{'a'=&gt;1, 'b'=&gt;2}.map_keys { &quot;cat&quot; }   #=&gt; {'cat'=&gt;2}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/map</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_keys { |</span><span style="color:#bf616a;">k</span><span style="color:#c0c5ce;">| k*</span><span style="color:#d08770;">2 </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; {&#39;aa&#39;=&gt;1, &#39;bb&#39;=&gt;2}
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_keys { &quot;</span><span style="color:#a3be8c;">cat</span><span style="color:#c0c5ce;">&quot; }   </span><span style="color:#65737e;">#=&gt; {&#39;cat&#39;=&gt;2}
+</span></code></pre>
 <h4><a href="#hshmap_keys-k-block--1" aria-hidden="true" class="anchor" id="hshmap_keys-k-block--1"></a><code>hsh.map_keys! {|k| block }</code></h4>
 <p>Replaces the keys in <em>hsh</em> by running them each through <em>block</em>.</p>
 <p>If <em>block</em> returns duplicate keys, they will be overwritten in turn.</p>
@@ -281,11 +276,11 @@ hsh.fetch_assign(:b) {|key| key.to_s } #=&gt; &quot;b&quot;
 <h4><a href="#hshmap_pairs-k-v-block-" aria-hidden="true" class="anchor" id="hshmap_pairs-k-v-block-"></a><code>hsh.map_pairs {|k, v| block }</code></h4>
 <p>Returns a new hash which is a copy of <em>hsh</em> but each key-value pair is replaced by the result of running it through <em>block</em>.</p>
 <p>If <em>block</em> returns duplicate keys, they will be overwritten in the resulting hash.</p>
-<pre lang="ruby"><code>require 'mug/hash/map'
-
-{'a'=&gt;1, 'b'=&gt;2}.map_pairs { |k,v| [k*2, v+1] } #=&gt; {'aa'=&gt;2, 'bb'=&gt;3}
-{'a'=&gt;1, 'b'=&gt;2}.map_pairs { [&quot;cat&quot;,&quot;dog&quot;] }   #=&gt; {'cat'=&gt;'dog'}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/map</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_pairs { |</span><span style="color:#bf616a;">k</span><span style="color:#c0c5ce;">,</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">| [k*</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, v+</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">] } </span><span style="color:#65737e;">#=&gt; {&#39;aa&#39;=&gt;2, &#39;bb&#39;=&gt;3}
+</span><span style="color:#c0c5ce;">{&#39;</span><span style="color:#a3be8c;">a</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">b</span><span style="color:#c0c5ce;">&#39;=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}.map_pairs { [&quot;</span><span style="color:#a3be8c;">cat</span><span style="color:#c0c5ce;">&quot;,&quot;</span><span style="color:#a3be8c;">dog</span><span style="color:#c0c5ce;">&quot;] }   </span><span style="color:#65737e;">#=&gt; {&#39;cat&#39;=&gt;&#39;dog&#39;}
+</span></code></pre>
 <h4><a href="#hshmap_pairs-k-v-block--1" aria-hidden="true" class="anchor" id="hshmap_pairs-k-v-block--1"></a><code>hsh.map_pairs! {|k, v| block }</code></h4>
 <p>Replaces the keys and values in <em>hsh</em> by running them each through <em>block</em>.</p>
 <p>If <em>block</em> returns duplicate keys, they will be overwritten.</p>
@@ -305,22 +300,22 @@ hsh.fetch_assign(:b) {|key| key.to_s } #=&gt; &quot;b&quot;
 <h4><a href="#hsh--other_hsh" aria-hidden="true" class="anchor" id="hsh--other_hsh"></a><code>hsh | other_hsh</code></h4>
 <p>Returns a new Hash, whose value is the same as this one, with any extras in <em>other_hash</em> added in.</p>
 <p>Useful for default options.</p>
-<pre lang="ruby"><code>require 'mug/hash/operations'
-
-def foo options={}
-  options | {b: 2, c: 2}
-end
-foo a: 1, b: 1 # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/operations</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">foo </span><span style="color:#bf616a;">options</span><span style="color:#c0c5ce;">={}
+</span><span style="color:#c0c5ce;">  options | {</span><span style="color:#a3be8c;">b: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">c: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">foo </span><span style="color:#a3be8c;">a: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">b: </span><span style="color:#d08770;">1 </span><span style="color:#65737e;"># =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
+</span></code></pre>
 <h4><a href="#hsh--other_hsh-1" aria-hidden="true" class="anchor" id="hsh--other_hsh-1"></a><code>hsh + other_hsh</code></h4>
 <p>Adds the contents of <em>other_hash</em> to <em>hsh</em>. Entries with duplicate keys are overwritten with the values from <em>other_hash</em></p>
-<pre lang="ruby"><code>require 'mug/hash/operations'
-
-a = {a: 1, b: 1}
-b = {b: 2, c: 2}
-a + b # =&gt; {:a=&gt;1, :b=&gt;2, :c=&gt;2}
-b + a # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/operations</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">a = {</span><span style="color:#a3be8c;">a: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">b: </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">b = {</span><span style="color:#a3be8c;">b: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">c: </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">a + b </span><span style="color:#65737e;"># =&gt; {:a=&gt;1, :b=&gt;2, :c=&gt;2}
+</span><span style="color:#c0c5ce;">b + a </span><span style="color:#65737e;"># =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
+</span></code></pre>
 <h4><a href="#hsh--o" aria-hidden="true" class="anchor" id="hsh--o"></a><code>hsh &lt;&lt; o</code></h4>
 <p>Appends stuff to the hash.</p>
 <ul>
@@ -329,29 +324,29 @@ b + a # =&gt; {:a=&gt;1, :b=&gt;1, :c=&gt;2}
 <li>If <em>o</em> can be converted to a hash with #to_h, this is identical to calling #merge!</li>
 <li>Otherwise an ArgumentError is raised.</li>
 </ul>
-<pre lang="ruby"><code>require 'mug/hash/operations'
-
-h = {}
-h &lt;&lt; {:a=&gt;0}       # h = {:a=&gt;0}
-h &lt;&lt; {:b=&gt;2,:c=&gt;3} # h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
-h &lt;&lt; [:a,1]        # h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/hash/operations</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">h = {}
+</span><span style="color:#c0c5ce;">h &lt;&lt; {</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">=&gt;</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">}       </span><span style="color:#65737e;"># h = {:a=&gt;0}
+</span><span style="color:#c0c5ce;">h &lt;&lt; {</span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">=&gt;</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">=&gt;</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;"># h = {:a=&gt;0,:b=&gt;2,:c=&gt;3}
+</span><span style="color:#c0c5ce;">h &lt;&lt; [</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">]        </span><span style="color:#65737e;"># h = {:a=&gt;1,:b=&gt;2,:c=&gt;3}
+</span></code></pre>
 <h2><a href="#hashwhen" aria-hidden="true" class="anchor" id="hashwhen"></a>hash/when</h2>
 <p>Use a Hash like a case statement.</p>
-<pre lang="ruby"><code>case key
-when /foo/ then &quot;FOO&quot;
-when /bar/ then &quot;BAR&quot;
-else &quot;DEFAULT&quot;
-end
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#b48ead;">case</span><span style="color:#c0c5ce;"> key
+</span><span style="color:#b48ead;">when </span><span style="color:#c0c5ce;">/</span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">/ </span><span style="color:#b48ead;">then </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">FOO</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">when </span><span style="color:#c0c5ce;">/</span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">/ </span><span style="color:#b48ead;">then </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">BAR</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">DEFAULT</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">end
+</span></code></pre>
 <p>becomes:</p>
-<pre lang="ruby"><code>h = {
-  /foo/ =&gt; &quot;FOO&quot;,
-  /bar/ =&gt; &quot;BAR&quot;,
-}
-h.default = &quot;DEFAULT&quot;
-h.when key
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#c0c5ce;">h = {
+</span><span style="color:#c0c5ce;">  /</span><span style="color:#96b5b4;">foo</span><span style="color:#c0c5ce;">/ =&gt; &quot;</span><span style="color:#a3be8c;">FOO</span><span style="color:#c0c5ce;">&quot;,
+</span><span style="color:#c0c5ce;">  /</span><span style="color:#96b5b4;">bar</span><span style="color:#c0c5ce;">/ =&gt; &quot;</span><span style="color:#a3be8c;">BAR</span><span style="color:#c0c5ce;">&quot;,
+</span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">h.default = &quot;</span><span style="color:#a3be8c;">DEFAULT</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#c0c5ce;">h.when key
+</span></code></pre>
 <h2><a href="#iff" aria-hidden="true" class="anchor" id="iff"></a>iff</h2>
 <h3><a href="#object-2" aria-hidden="true" class="anchor" id="object-2"></a>Object</h3>
 <h4><a href="#objiff-conditionobjiff--condition-" aria-hidden="true" class="anchor" id="objiff-conditionobjiff--condition-"></a><code>obj.iff? condition</code><br><code>obj.iff? { condition }</code></h4>
@@ -372,21 +367,21 @@ h.when key
 <h4><a href="#objiter_formeth-args" aria-hidden="true" class="anchor" id="objiter_formeth-args"></a><code>obj.iter_for(meth, *args)</code></h4>
 <p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.</p>
 <p>Initially the receiving object is <em>obj</em>.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
-<pre lang="ruby"><code>require 'mug/iterator/for'
-
-0.iter_for(:next).take(5) #=&gt; [1,2,3,4,5]
-0.iter_for(:+,2).take(5) #=&gt; [2,4,6,8,10]
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/iterator/for</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">.iter_for(</span><span style="color:#a3be8c;">:next</span><span style="color:#c0c5ce;">).take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; [1,2,3,4,5]
+</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">.iter_for(</span><span style="color:#a3be8c;">:+</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">).take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; [2,4,6,8,10]
+</span></code></pre>
 <h2><a href="#iteratormethod" aria-hidden="true" class="anchor" id="iteratormethod"></a>iterator/method</h2>
 <h3><a href="#method-1" aria-hidden="true" class="anchor" id="method-1"></a>Method</h3>
 <h4><a href="#methto_iterargs" aria-hidden="true" class="anchor" id="methto_iterargs"></a><code>meth.to_iter(*args)</code></h4>
 <p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes <em>meth</em> on an object.</p>
 <p>Initially the receiving object is the object on which <em>meth</em> is defined.  After each iteration, the receiving object is replaced with the result of the previous iteration.</p>
-<pre lang="ruby"><code>require 'mug/iterator/method'
-
-0.method(:next).to_iter.take(5) #=&gt; [1,2,3,4,5]
-0.method(:+).to_iter(2).take(5) #=&gt; [2,4,6,8,10]
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/iterator/method</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">method</span><span style="color:#c0c5ce;">(</span><span style="color:#a3be8c;">:next</span><span style="color:#c0c5ce;">).to_iter.take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; [1,2,3,4,5]
+</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">method</span><span style="color:#c0c5ce;">(</span><span style="color:#a3be8c;">:+</span><span style="color:#c0c5ce;">).to_iter(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">).take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; [2,4,6,8,10]
+</span></code></pre>
 <h2><a href="#loop-with" aria-hidden="true" class="anchor" id="loop-with"></a>loop-with</h2>
 <h3><a href="#kernel-1" aria-hidden="true" class="anchor" id="kernel-1"></a>Kernel</h3>
 <h4><a href="#loop_with_indexoffset0-i-block-" aria-hidden="true" class="anchor" id="loop_with_indexoffset0-i-block-"></a><code>loop_with_index(offset=0) {|i| block }</code></h4>
@@ -395,19 +390,19 @@ h.when key
 <h4><a href="#loop_with_objectobj-o-block-" aria-hidden="true" class="anchor" id="loop_with_objectobj-o-block-"></a><code>loop_with_object(obj) {|o| block }</code></h4>
 <p>Repeatedly executes the block, yielding an arbitrary object, <em>obj</em>.</p>
 <h3><a href="#examples-4" aria-hidden="true" class="anchor" id="examples-4"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/loop-with'
-
-loop_with_index do |i|
-  p i
-  break
-end
-
-arr = loop_with_object([]) do |a|
-  s = gets.chomp
-  throw StopIteration if s.empty?
-  a &lt;&lt; s
-end
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/loop-with</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">loop_with_index </span><span style="color:#b48ead;">do </span><span style="color:#c0c5ce;">|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">|
+</span><span style="color:#c0c5ce;">  </span><span style="color:#96b5b4;">p</span><span style="color:#c0c5ce;"> i
+</span><span style="color:#c0c5ce;">  </span><span style="color:#b48ead;">break
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">arr = loop_with_object([]) </span><span style="color:#b48ead;">do </span><span style="color:#c0c5ce;">|</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">|
+</span><span style="color:#c0c5ce;">  s = </span><span style="color:#96b5b4;">gets</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">chomp
+</span><span style="color:#c0c5ce;">  </span><span style="color:#8fa1b3;">throw </span><span style="color:#bf616a;">StopIteration </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> s.empty?
+</span><span style="color:#c0c5ce;">  a &lt;&lt; s
+</span><span style="color:#b48ead;">end
+</span></code></pre>
 <h2><a href="#main" aria-hidden="true" class="anchor" id="main"></a>main</h2>
 <h3><a href="#kernel-2" aria-hidden="true" class="anchor" id="kernel-2"></a>Kernel</h3>
 <h4><a href="#__main____main__--block-" aria-hidden="true" class="anchor" id="__main____main__--block-"></a><code>__main__</code><br><code>__main__ { block }</code></h4>
@@ -416,23 +411,23 @@ end
 <p>If called without a block, and the calling context is in the 'main' file, returns <code>true</code>.</p>
 <p>If called with a block, and the calling context is in the 'main' file, the block is executed and the result is returned.</p>
 <h3><a href="#examples-5" aria-hidden="true" class="anchor" id="examples-5"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/main'
-
-if __main__
-  puts &quot;the main file&quot;
-end
-
-__main__ do
-  puts &quot;also the main file&quot;
-end
-
-# More advanced example:
-
-if __main__ { ARGV[0] == 'foo' }
-  do_foo
-end
-
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/main</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> __main__
+</span><span style="color:#c0c5ce;">  </span><span style="color:#96b5b4;">puts </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">the main file</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">__main__ </span><span style="color:#b48ead;">do
+</span><span style="color:#c0c5ce;">  </span><span style="color:#96b5b4;">puts </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">also the main file</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># More advanced example:
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> __main__ { </span><span style="color:#ebcb8b;">ARGV</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">] == &#39;</span><span style="color:#a3be8c;">foo</span><span style="color:#c0c5ce;">&#39; }
+</span><span style="color:#c0c5ce;">  do_foo
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span></code></pre>
 <h2><a href="#matchdataeach" aria-hidden="true" class="anchor" id="matchdataeach"></a>matchdata/each</h2>
 <h3><a href="#matchdata" aria-hidden="true" class="anchor" id="matchdata"></a>MatchData</h3>
 <h4><a href="#mdeachmdeach--str-block-" aria-hidden="true" class="anchor" id="mdeachmdeach--str-block-"></a><code>md.each</code><br><code>md.each { |str| block }</code></h4>
@@ -464,17 +459,17 @@ end
 <p>Invokes a method on <em>obj</em> iff <em>obj</em> is truthy, otherwise returns <em>obj</em>.</p>
 <p>When a block is given, the block is invoked in the scope of <em>obj</em> (i.e. <code>self</code> in the block refers to <em>obj</em>).</p>
 <p>When no block is given, <em>maybe</em> returns an object that conditionally delegates methods to <em>obj</em>.</p>
-<pre lang="ruby"><code>require 'mug/maybe'
-
-# Equivalent to: a &amp;&amp; a.b &amp;&amp; a.b.c
-# except that a and b are only invoked once
-
-# (block form)
-a.maybe{ b.maybe{ c } }
-
-# (delegator form)
-a.maybe.b.maybe.c
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/maybe</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># Equivalent to: a &amp;&amp; a.b &amp;&amp; a.b.c
+</span><span style="color:#65737e;"># except that a and b are only invoked once
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># (block form)
+</span><span style="color:#c0c5ce;">a.maybe{ b.maybe{ c } }
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># (delegator form)
+</span><span style="color:#c0c5ce;">a.maybe.b.maybe.c
+</span></code></pre>
 <h2><a href="#negativity" aria-hidden="true" class="anchor" id="negativity"></a>negativity</h2>
 <h3><a href="#numeric" aria-hidden="true" class="anchor" id="numeric"></a>Numeric</h3>
 <h4><a href="#numnegative" aria-hidden="true" class="anchor" id="numnegative"></a><code>num.negative?</code></h4>
@@ -494,43 +489,43 @@ a.maybe.b.maybe.c
 <h4><a href="#numnonpositive-1" aria-hidden="true" class="anchor" id="numnonpositive-1"></a><code>num.nonpositive!</code></h4>
 <p>If <em>num</em> is nonpositive (i.e. &lt;= 0), returns itself, otherwise returns <em>nil</em>.</p>
 <h3><a href="#examples-6" aria-hidden="true" class="anchor" id="examples-6"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/negativity'
-
-if i.negative?
-  puts &quot;#{i} = 0 - #{-i}&quot;
-end
-
-n.positive? or raise('not enough items')
-
-x.nonnegative? ? x : -x
-
-arr.map{|i| i.nonpositive! }.compact
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/negativity</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> i.negative?
+</span><span style="color:#c0c5ce;">  </span><span style="color:#96b5b4;">puts </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#ab7967;">#{</span><span style="color:#a3be8c;">i</span><span style="color:#ab7967;">}</span><span style="color:#a3be8c;"> = 0 - </span><span style="color:#ab7967;">#{</span><span style="color:#c0c5ce;">-</span><span style="color:#a3be8c;">i</span><span style="color:#ab7967;">}</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">n.positive? or </span><span style="color:#8fa1b3;">raise</span><span style="color:#c0c5ce;">(&#39;</span><span style="color:#a3be8c;">not enough items</span><span style="color:#c0c5ce;">&#39;)
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">x.nonnegative? ? x : -x
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">arr.map{|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">| i.nonpositive! }.compact
+</span></code></pre>
 <h2><a href="#not" aria-hidden="true" class="anchor" id="not"></a>not</h2>
 <h3><a href="#kernel-3" aria-hidden="true" class="anchor" id="kernel-3"></a>Kernel</h3>
 <h4><a href="#objnotobjnot-o-block-objnotaobjnota-o-block-" aria-hidden="true" class="anchor" id="objnotobjnot-o-block-objnotaobjnota-o-block-"></a><code>obj.not</code><br><code>obj.not {|o| block }</code><br><code>obj.not(*a)</code><br><code>obj.not(*a) {|o| block }</code></h4>
 <p>Negate a predicate.</p>
 <h3><a href="#examples-7" aria-hidden="true" class="anchor" id="examples-7"></a>Examples</h3>
-<pre lang="ruby"><code>require 'mug/not'
-
-false.not        #=&gt; true
-true.not         #=&gt; false
-
-[].not &amp;:empty?  #=&gt; false
-[1].not :empty?  #=&gt; true
-
-[1,-2,3].not(:all?) {|e| e &gt; 0 } #=&gt; true
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/not</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">.not        </span><span style="color:#65737e;">#=&gt; true
+</span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">.not         </span><span style="color:#65737e;">#=&gt; false
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">[].not &amp;</span><span style="color:#a3be8c;">:empty?  </span><span style="color:#65737e;">#=&gt; false
+</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">].not </span><span style="color:#a3be8c;">:empty?  </span><span style="color:#65737e;">#=&gt; true
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,-</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">].not(</span><span style="color:#a3be8c;">:all?</span><span style="color:#c0c5ce;">) {|</span><span style="color:#bf616a;">e</span><span style="color:#c0c5ce;">| e &gt; </span><span style="color:#d08770;">0 </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; true
+</span></code></pre>
 <h2><a href="#rexproc" aria-hidden="true" class="anchor" id="rexproc"></a>rexproc</h2>
 <h3><a href="#regexp" aria-hidden="true" class="anchor" id="regexp"></a>Regexp</h3>
 <h4><a href="#rexto_proc" aria-hidden="true" class="anchor" id="rexto_proc"></a><code>rex.to_proc</code></h4>
 <p>Returns a proc that accepts one argument, that matches against this regexp object.</p>
-<pre lang="ruby"><code>require 'mug/rexproc'
-
-%w[foo bar baz].select &amp;/\Ab/ #=&gt; [&quot;bar&quot;, &quot;baz&quot;]
-%w[foo bar baz].reject &amp;/\Ab/ #=&gt; [&quot;foo&quot;]
-%w[foo bar baz].find &amp;/\Ab/ #=&gt; &quot;bar&quot;
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/rexproc</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">%w[</span><span style="color:#a3be8c;">foo bar baz</span><span style="color:#c0c5ce;">].</span><span style="color:#96b5b4;">select </span><span style="color:#c0c5ce;">&amp;/</span><span style="color:#96b5b4;">\Ab</span><span style="color:#c0c5ce;">/ </span><span style="color:#65737e;">#=&gt; [&quot;bar&quot;, &quot;baz&quot;]
+</span><span style="color:#c0c5ce;">%w[</span><span style="color:#a3be8c;">foo bar baz</span><span style="color:#c0c5ce;">].reject &amp;/</span><span style="color:#96b5b4;">\Ab</span><span style="color:#c0c5ce;">/ </span><span style="color:#65737e;">#=&gt; [&quot;foo&quot;]
+</span><span style="color:#c0c5ce;">%w[</span><span style="color:#a3be8c;">foo bar baz</span><span style="color:#c0c5ce;">].find &amp;/</span><span style="color:#96b5b4;">\Ab</span><span style="color:#c0c5ce;">/ </span><span style="color:#65737e;">#=&gt; &quot;bar&quot;
+</span></code></pre>
 <h2><a href="#self" aria-hidden="true" class="anchor" id="self"></a>self</h2>
 <h3><a href="#object-5" aria-hidden="true" class="anchor" id="object-5"></a>Object</h3>
 <h4><a href="#objselfobjself-o-block-objitselfobjitself-o-block-" aria-hidden="true" class="anchor" id="objselfobjself-o-block-objitselfobjitself-o-block-"></a><code>obj.self</code><br><code>obj.self {|o| block }</code><br><code>obj.itself</code><br><code>obj.itself {|o| block }</code></h4>
@@ -540,46 +535,46 @@ true.not         #=&gt; false
 <blockquote>
 <p>Note: this is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <em>obj</em>, but <code>obj.self{nil}</code> returns <em>nil</em>.</p>
 </blockquote>
-<pre lang="ruby"><code>require 'mug/self'
-
-1.self #=&gt; 1
-obj.self #=&gt; obj
-2.self{|i| i*3 } #=&gt; 6
-[1,1,2,2,3].group_by(&amp;:self) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
-
-1.itself #=&gt; 1
-obj.itself #=&gt; obj
-2.itself{|i| i*3 } #=&gt; 6
-[1,1,2,2,3].group_by(&amp;:itself) #=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/self</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">.self </span><span style="color:#65737e;">#=&gt; 1
+</span><span style="color:#c0c5ce;">obj.self </span><span style="color:#65737e;">#=&gt; obj
+</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">.self{|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">| i*</span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; 6
+</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">].group_by(&amp;</span><span style="color:#a3be8c;">:self</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">itself </span><span style="color:#65737e;">#=&gt; 1
+</span><span style="color:#c0c5ce;">obj.</span><span style="color:#96b5b4;">itself </span><span style="color:#65737e;">#=&gt; obj
+</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">.</span><span style="color:#96b5b4;">itself</span><span style="color:#c0c5ce;">{|</span><span style="color:#bf616a;">i</span><span style="color:#c0c5ce;">| i*</span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">} </span><span style="color:#65737e;">#=&gt; 6
+</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">].group_by(&amp;</span><span style="color:#a3be8c;">:itself</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">#=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}
+</span></code></pre>
 <h4><a href="#objrevapplyargs-list-block-objcedeargs-list-block-objrevapplyargsobjcedeargs" aria-hidden="true" class="anchor" id="objrevapplyargs-list-block-objcedeargs-list-block-objrevapplyargsobjcedeargs"></a><code>obj.revapply(*args) {|*list| block }</code><br><code>obj.cede(*args) {|*list| block }</code><br><code>obj.revapply(*args)</code><br><code>obj.cede(*args)</code></h4>
 <p>When a block is given, yields <em>obj</em> and any <em>args</em> to the block and returns the resulting value.</p>
 <p>When no block is given, returns an Enumerator.</p>
 <h2><a href="#tau" aria-hidden="true" class="anchor" id="tau"></a>tau</h2>
 <p>Defines the true circle constant.</p>
-<pre lang="ruby"><code>Math::TAU #= 6.283185307179586..
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#ebcb8b;">Math</span><span style="color:#c0c5ce;">::TAU </span><span style="color:#65737e;">#= 6.283185307179586..
+</span></code></pre>
 <p>Additionally it expands the BigDecimal/BigMath module:</p>
-<pre lang="ruby"><code>require 'bigdecimal'
-require 'bigdecimal/math'
-include BigMath
-
-puts TAU(15)
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">bigdecimal</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">bigdecimal/math</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#8fa1b3;">include </span><span style="color:#bf616a;">BigMath
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#96b5b4;">puts </span><span style="color:#bf616a;">TAU</span><span style="color:#c0c5ce;">(</span><span style="color:#d08770;">15</span><span style="color:#c0c5ce;">)
+</span></code></pre>
 <p>See <a href="http://tauday.com">http://tauday.com</a> to find out what it's all about.</p>
 <h2><a href="#time" aria-hidden="true" class="anchor" id="time"></a>time</h2>
 <h3><a href="#time-1" aria-hidden="true" class="anchor" id="time-1"></a>Time</h3>
 <h4><a href="#tto_now" aria-hidden="true" class="anchor" id="tto_now"></a><code>t.to_now</code></h4>
 <p>Returns the number of seconds since the time represented by this Time object.</p>
-<pre lang="ruby"><code>start = Time.now
-#...
-duration = start.to_now
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#c0c5ce;">start = </span><span style="color:#ebcb8b;">Time</span><span style="color:#c0c5ce;">.now
+</span><span style="color:#65737e;">#...
+</span><span style="color:#c0c5ce;">duration = start.to_now
+</span></code></pre>
 <h4><a href="#tfrom_now" aria-hidden="true" class="anchor" id="tfrom_now"></a><code>t.from_now</code></h4>
 <p>Returns the number of seconds until the time represented by this Time object.</p>
-<pre lang="ruby"><code>target = Time.new 2117, 1, 1, 0, 0, 0
-sleep target.from_now
-</code></pre>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#c0c5ce;">target = </span><span style="color:#ebcb8b;">Time</span><span style="color:#c0c5ce;">.</span><span style="color:#8fa1b3;">new </span><span style="color:#d08770;">2117</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0
+</span><span style="color:#96b5b4;">sleep</span><span style="color:#c0c5ce;"> target.from_now
+</span></code></pre>
 <h4><a href="#timeuntil-t" aria-hidden="true" class="anchor" id="timeuntil-t"></a><code>Time.until t</code></h4>
 <p>Returns the number of seconds until <code>t</code>.</p>
 <h4><a href="#timesince-t" aria-hidden="true" class="anchor" id="timesince-t"></a><code>Time.since t</code></h4>
@@ -620,131 +615,27 @@ sleep target.from_now
 <h3><a href="#kernel-4" aria-hidden="true" class="anchor" id="kernel-4"></a>Kernel</h3>
 <h4><a href="#withargs-foo-block-" aria-hidden="true" class="anchor" id="withargs-foo-block-"></a><code>with(*args) {|*foo| block }</code></h4>
 <p>Yields the arguments to a block.</p>
-<pre lang="ruby"><code>with(1, 2, 3) {|x, y, z| x + y + z }
-#=&gt; 6
-</code></pre>
-<pre id="license" class="no-highlight">Copyright (c) 2013-2026, Matthew Kerwin <matthew@kerwin.net.au>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#c0c5ce;">with(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">) {|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">y</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">z</span><span style="color:#c0c5ce;">| x + y + z }
+</span><span style="color:#65737e;">#=&gt; 6
+</span></code></pre>
+<h2><a href="#contributor-code-of-conduct" aria-hidden="true" class="anchor" id="contributor-code-of-conduct"></a>Contributor Code of Conduct</h2>
+<p>This repository is subject to a <a href="code_of_conduct.html">Contributor Code of Conduct</a>
+adapted from the <a href="https://www.contributor-covenant.org">Contributor Covenant</a>, version 3.0, available at
+<a href="https://www.contributor-covenant.org/version/3/0/">https://www.contributor-covenant.org/version/3/0/</a></p>
+<h2><a href="#licence" aria-hidden="true" class="anchor" id="licence"></a>Licence</h2>
+<p>This project is licensed under the ISC licence. See <a href="LICENSE">LICENSE</a>
+for details</p>
+<pre id="license" class="no-highlight">Copyright (c) 2013-2026, Matthew Kerwin &lt;matthew@kerwin.net.au&gt;
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
 
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
 ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-</pre><h1><a href="#contributor-covenant-30-code-of-conduct" aria-hidden="true" class="anchor" id="contributor-covenant-30-code-of-conduct"></a>Contributor Covenant 3.0 Code of Conduct</h1>
-<h2><a href="#our-pledge" aria-hidden="true" class="anchor" id="our-pledge"></a>Our Pledge</h2>
-<p>We pledge to make our community welcoming, safe, and equitable for all.</p>
-<p>We are committed to fostering an environment that respects and promotes the dignity, rights, and<br />
-contributions of all individuals, regardless of characteristics including race, ethnicity, caste,<br />
-color, age, physical characteristics, neurodiversity, disability, sex or gender, gender identity or<br />
-expression, sexual orientation, language, philosophy or religion, national or social origin,<br />
-socio-economic position, level of education, or other status. The same privileges of participation<br />
-are extended to everyone who participates in good faith and in accordance with this Covenant.</p>
-<h2><a href="#encouraged-behaviors" aria-hidden="true" class="anchor" id="encouraged-behaviors"></a>Encouraged Behaviors</h2>
-<p>While acknowledging differences in social norms, we all strive to meet our community's expectations<br />
-for positive behavior. We also understand that our words and actions may be interpreted differently<br />
-than we intend based on culture, background, or native language.</p>
-<p>With these considerations in mind, we agree to behave mindfully toward each other and act in ways<br />
-that center our shared values, including:</p>
-<ol>
-<li>Respecting the <strong>purpose of our community</strong>, our activities, and our ways of gathering.</li>
-<li>Engaging <strong>kindly and honestly</strong> with others.</li>
-<li>Respecting <strong>different viewpoints</strong> and experiences.</li>
-<li><strong>Taking responsibility</strong> for our actions and contributions.</li>
-<li>Gracefully giving and accepting <strong>constructive feedback</strong>.</li>
-<li>Committing to <strong>repairing harm</strong> when it occurs.</li>
-<li>Behaving in other ways that promote and sustain the <strong>well-being of our community</strong>.</li>
-</ol>
-<h2><a href="#restricted-behaviors" aria-hidden="true" class="anchor" id="restricted-behaviors"></a>Restricted Behaviors</h2>
-<p>We agree to restrict the following behaviors in our community. Instances, threats, and promotion of<br />
-these behaviors are violations of this Code of Conduct.</p>
-<ol>
-<li><strong>Harassment.</strong> Violating explicitly expressed boundaries or engaging in unnecessary personal attention after any clear request to stop.</li>
-<li><strong>Character attacks.</strong> Making insulting, demeaning, or pejorative comments directed at a community member or group of people.</li>
-<li><strong>Stereotyping or discrimination.</strong> Characterizing anyone’s personality or behavior on the basis of immutable identities or traits.</li>
-<li><strong>Sexualization.</strong> Behaving in a way that would generally be considered inappropriately intimate in the context or purpose of the community.</li>
-<li><strong>Violating confidentiality</strong>. Sharing or acting on someone's personal or private information without their permission.</li>
-<li><strong>Endangerment.</strong> Causing, encouraging, or threatening violence or other harm toward any person or group.</li>
-<li>Behaving in other ways that <strong>threaten the well-being</strong> of our community.</li>
-</ol>
-<h3><a href="#other-restrictions" aria-hidden="true" class="anchor" id="other-restrictions"></a>Other Restrictions</h3>
-<ol>
-<li><strong>Misleading identity.</strong> Impersonating someone else for any reason, or pretending to be someone else to evade enforcement actions.</li>
-<li><strong>Failing to credit sources.</strong> Not properly crediting the sources of content you contribute.</li>
-<li><strong>Promotional materials</strong>. Sharing marketing or other commercial content in a way that is outside the norms of the community.</li>
-<li><strong>Irresponsible communication.</strong> Failing to responsibly present content which includes, links or describes any other restricted behaviors.</li>
-</ol>
-<h2><a href="#reporting-an-issue" aria-hidden="true" class="anchor" id="reporting-an-issue"></a>Reporting an Issue</h2>
-<p>Tensions can occur between community members even when they are trying their best to collaborate.<br />
-Not every conflict represents a code of conduct violation, and this Code of Conduct reinforces<br />
-encouraged behaviors and norms that can help avoid conflicts and minimize harm.</p>
-<p>When an incident does occur, it is important to report it promptly. To report a possible violation<br />
-send an email to <a href="mailto:matthew@kerwin.net.au">matthew@kerwin.net.au</a></p>
-<p>Community Moderators take reports of violations seriously and will make every effort to respond in a<br />
-timely manner. They will investigate all reports of code of conduct violations, reviewing messages,<br />
-logs, and recordings, or interviewing witnesses and other participants. Community Moderators will<br />
-keep investigation and enforcement actions as transparent as possible while prioritizing safety and<br />
-confidentiality. In order to honor these values, enforcement actions are carried out in private with<br />
-the involved parties, but communicating to the whole community may be part of a mutually agreed upon<br />
-resolution.</p>
-<h2><a href="#addressing-and-repairing-harm" aria-hidden="true" class="anchor" id="addressing-and-repairing-harm"></a>Addressing and Repairing Harm</h2>
-<p>If an investigation by the Community Moderators finds that this Code of Conduct has been violated,<br />
-the following enforcement ladder may be used to determine how best to repair harm, based on the<br />
-incident's impact on the individuals involved and the community as a whole. Depending on the<br />
-severity of a violation, lower rungs on the ladder may be skipped.</p>
-<ol>
-<li>Warning
-<ol>
-<li>Event: A violation involving a single incident or series of incidents.</li>
-<li>Consequence: A private, written warning from the Community Moderators.</li>
-<li>Repair: Examples of repair include a private written apology, acknowledgement of responsibility, and seeking clarification on expectations.</li>
-</ol>
-</li>
-<li>Temporarily Limited Activities
-<ol>
-<li>Event: A repeated incidence of a violation that previously resulted in a warning, or the first incidence of a more serious violation.</li>
-<li>Consequence: A private, written warning with a time-limited cooldown period designed to underscore the seriousness of the situation and give the community members involved time to process the incident. The cooldown period may be limited to particular communication channels or interactions with particular community members.</li>
-<li>Repair: Examples of repair may include making an apology, using the cooldown period to reflect on actions and impact, and being thoughtful about re-entering community spaces after the period is over.</li>
-</ol>
-</li>
-<li>Temporary Suspension
-<ol>
-<li>Event: A pattern of repeated violation which the Community Moderators have tried to address with warnings, or a single serious violation.</li>
-<li>Consequence: A private written warning with conditions for return from suspension. In general, temporary suspensions give the person being suspended time to reflect upon their behavior and possible corrective actions.</li>
-<li>Repair: Examples of repair include respecting the spirit of the suspension, meeting the specified conditions for return, and being thoughtful about how to reintegrate with the community when the suspension is lifted.</li>
-</ol>
-</li>
-<li>Permanent Ban
-<ol>
-<li>Event: A pattern of repeated code of conduct violations that other steps on the ladder have failed to resolve, or a violation so serious that the Community Moderators determine there is no way to keep the community safe with this person as a member.</li>
-<li>Consequence: Access to all community spaces, tools, and communication channels is removed. In general, permanent bans should be rarely used, should have strong reasoning behind them, and should only be resorted to if working through other remedies has failed to change the behavior.</li>
-<li>Repair: There is no possible repair in cases of this severity.</li>
-</ol>
-</li>
-</ol>
-<p>This enforcement ladder is intended as a guideline. It does not limit the ability of Community<br />
-Managers to use their discretion and judgment, in keeping with the best interests of our community.</p>
-<h2><a href="#scope" aria-hidden="true" class="anchor" id="scope"></a>Scope</h2>
-<p>This Code of Conduct applies within all community spaces, and also applies when an individual is<br />
-officially representing the community in public or other spaces. Examples of representing our<br />
-community include using an official email address, posting via an official social media account, or<br />
-acting as an appointed representative at an online or offline event.</p>
-<h2><a href="#attribution" aria-hidden="true" class="anchor" id="attribution"></a>Attribution</h2>
-<p>This Code of Conduct is adapted from the Contributor Covenant, version 3.0, permanently available at<br />
-<a href="https://www.contributor-covenant.org/version/3/0/">https://www.contributor-covenant.org/version/3/0/</a>.</p>
-<p>Contributor Covenant is stewarded by the Organization for Ethical Source and licensed under CC BY-SA<br />
-4.0. To view a copy of this license, visit<br />
-<a href="https://creativecommons.org/licenses/by-sa/4.0/">https://creativecommons.org/licenses/by-sa/4.0/</a></p>
-<p>For answers to common questions about Contributor Covenant, see the FAQ at<br />
-<a href="https://www.contributor-covenant.org/faq">https://www.contributor-covenant.org/faq</a>.<br />
-Translations are provided at<br />
-<a href="https://www.contributor-covenant.org/translations">https://www.contributor-covenant.org/translations</a>.<br />
-Additional enforcement and community guideline resources can be found at<br />
-<a href="https://www.contributor-covenant.org/resources">https://www.contributor-covenant.org/resources</a>.<br />
-The enforcement ladder was inspired by the work of<br />
-<a href="https://github.com/mozilla/inclusion">Mozilla’s code of conduct team</a>.</p>
+</pre>
