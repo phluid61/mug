@@ -408,6 +408,92 @@ a._?.b.c._!
 nested_hash._?[:a][:b][:c]._!
 ```
 
+## functional
+
+### Proc
+
+#### `proc.compose(*funcs) => proc`
+
+Composes a sequence of functions.
+
+A function is anything that responds to #to_proc, so
+symbols are allowed.
+
+This proc is prepended at the start of the composition.
+
+```ruby
+require 'mug/functional'
+
+proc = ->(x) { x.inspect }
+proc2 = proc.compose(:to_s, :length)
+proc2[123]    #=> 3
+proc2['abc']  #=> 5
+```
+
+#### `proc.precompose(*funcs) => proc`
+
+Composes a sequence of functions.
+
+A function is anything that responds to #to_proc, so
+symbols are allowed.
+
+This proc is appended at the end of the composition.
+
+```ruby
+require 'mug/functional'
+
+proc = ->(x) { x.inspect }
+proc2 = proc.precompose(:to_s, :length)
+proc2[123]    #=> "3"
+proc2['abc']  #=> "3"
+```
+
+#### `proc.mapply(*args) => array`
+
+Applies this function to each element of `args` in order.
+
+`proc.mapply(*args)` is equivalent to `args.map(&proc)`
+
+#### `proc.memoize => proc`
+
+Returns a new Proc that memoizes this one. For a given
+set of parameters, this proc is only invoked once; the
+result is remembered for subsequent invocations.
+
+```ruby
+proc = lambda do |x|
+  puts x
+  x
+end
+
+proc2 = proc.memoize
+
+proc2[1]  #=> prints "1", returns 1
+proc2[1]  #=> returns 1 immediately
+```
+
+#### `proc.trans(*indices) => proc`
+
+Generates a function that reorders its arguments according
+to `indices` and calls this function on the resulting
+list.
+
+The number of arguments passed through is capped at the
+minimum of the actual arg count and the indices count.
+
+#### `proc.zipmap(*funcs) => proc`
+
+Generates a function that maps its arguments to each of
+`funcs` in order.
+
+```ruby
+require 'mug/functional'
+
+printer = ->(*x) { p x }
+mapped_printer = printer.zipmap(:upcase, :downcase, :to_sym)
+mapped_printer.call('Hello', 'There', 'Everyone') #=> ["HELLO", "there", :Everyone]
+```
+
 ## hash/fetch-assign
 
 ### Hash

@@ -2,16 +2,60 @@
 class Proc
 
   #
+  # Composes a sequence of functions.
+  #
+  # A function is anything that responds to #to_proc, so
+  # symbols are allowed.
+  #
+  # This proc is prepended at the start of the composition.
+  #
+  def compose *funcs
+    return self if funcs.empty?
+    self >> funcs.map(&:to_proc).reduce(:>>)
+  end
+
+  #
+  # Composes a sequence of functions.
+  #
+  # A function is anything that responds to #to_proc, so
+  # symbols are allowed.
+  #
+  # This proc is appended at the end of the composition.
+  #
+  def precompose *funcs
+    return self if funcs.empty?
+    self << funcs.map(&:to_proc).reduce(:>>)
+  end
+
+  #
   # Applies this function to each element of +args+ in order.
+  #
+  # `proc.mapply(*args)` is equivalent to `args.map(&proc)`
   #
   def mapply *args
     args.map {|*a| self.call *a }
   end
 
   #
+  # Returns a new Proc that memoizes this one. For a given
+  # set of parameters, this proc is only invoked once; the
+  # result is remembered for subsequent invocations.
+  #
+  def memoize
+    cache = {}
+    lambda do |*args|
+      cache.fetch(args) {|_| cache[args] = self.call(*args) }
+    end
+  end
+  alias memoise memoize
+
+  #
   # Generates a function that reorders its arguments according
   # to +indices+ and calls this function on the resulting
   # list.
+  #
+  # The number of arguments passed through is capped at the
+  # minimum of the actual arg count and the indices count.
   #
   def trans *indices
     lambda do |*a|
@@ -25,19 +69,71 @@ class Proc
   # Generates a function that maps its arguments to each of
   # +funcs+ in order.
   #
-  def lens *funcs
-    lambda do |*a|
-      n = [a.size, funcs.size].min
-      funcs = (0...n).map do |i|
-        if funcs[i].respond_to? :call
-          funcs[i].call *a[i]
+  def zipmap *funcs
+    lambda do |*args|
+      n = [args.size, funcs.size].min
+      mapped = (0...n).map do |i|
+        func = funcs[i]
+        arg  = args[i]
+
+        if func.nil?
+          arg
+        elsif func.respond_to? :call
+          func.call arg
+        elsif func.is_a? Symbol and arg.respond_to? func
+          arg.__send__ func
         else
-          funcs[i]
+          raise TypeError, "expected callable, Symbol, or nil; got #{func.class}"
         end
       end
-      self.call funcs
+      self.call *mapped
     end
   end
 
+  class << self
+    def juxt *funcs
+      lambda do |*args|
+        funcs.map {|f| f.to_proc.call *args }
+      end
+    end
+
+    def identity
+      lambda {|x| x }
+    end
+
+    def const c
+      lambda {|*| c }
+    end
+  end
 end
 
+class Enumerator
+  class << self
+    def unfold(seed)
+      Enumerator.new do |y|
+        loop do
+          result = yield seed
+          break if result.nil?
+          value, seed = result
+          y << value
+        end
+      end
+    end
+  end
+end
+
+=begin
+Copyright (c) 2014-2026, Matthew Kerwin <matthew@kerwin.net.au>
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+=end
