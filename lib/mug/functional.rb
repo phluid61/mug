@@ -54,14 +54,45 @@ class Proc
   # to +indices+ and calls this function on the resulting
   # list.
   #
-  # The number of arguments passed through is capped at the
-  # minimum of the actual arg count and the indices count.
+  # The +arity+ parameter controls how mismatches in length
+  # between the arguments and indices are handled:
+  #   :min       - cap at the minimum of args and indices (default)
+  #   :max       - use the maximum; nil-fill if args are short,
+  #                pass-through if args are long
+  #   :indices   - always use indices.size; nil for out-of-bounds
+  #   :arguments - always use args.size; excess positions pass
+  #                through at their original index
   #
-  def trans *indices
-    lambda do |*a|
-      n = [a.size, indices.size].min
-      list = (0...n).map {|i| a[indices[i]] }
-      self.call *list
+  def trans *indices, arity: :min
+    case arity
+    when :min
+      lambda do |*a|
+        n = [a.size, indices.size].min
+        list = (0...n).map {|i| a[indices[i]] }
+        self.call *list
+      end
+    when :indices
+      lambda do |*a|
+        list = (0...indices.size).map {|i| a[indices[i]] }
+        self.call *list
+      end
+    when :arguments
+      lambda do |*a|
+        list = (0...a.size).map do |i|
+          i < indices.size ? a[indices[i]] : a[i]
+        end
+        self.call *list
+      end
+    when :max
+      lambda do |*a|
+        n = [a.size, indices.size].max
+        list = (0...n).map do |i|
+          i < indices.size ? a[indices[i]] : a[i]
+        end
+        self.call *list
+      end
+    else
+      raise ArgumentError, "unknown arity mode: #{arity.inspect}"
     end
   end
 

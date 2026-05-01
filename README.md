@@ -472,14 +472,35 @@ func2[1]  #=> prints "1", returns 1
 func2[1]  #=> returns 1 immediately
 ```
 
-#### `proc.trans(*indices) => proc`
+#### `proc.trans(*indices, arity: :min) => proc`
 
 Generates a function that reorders its arguments according
 to `indices` and calls this function on the resulting
 list.
 
-The number of arguments passed through is capped at the
-minimum of the actual arg count and the indices count.
+The `arity` parameter controls how mismatches in length
+between arguments and indices are handled:
+
+- `:min` – cap at the minimum of args and indices (default)
+- `:indices` – always use `indices.size`; nil for out-of-bounds args
+- `:arguments` – always use args count; excess positions pass through at their original index
+- `:max` – use the maximum; nil-fill if args are short, pass-through if args are long
+
+```ruby
+require 'mug/functional'
+
+prc = ->(*a) { a }
+
+prc.trans(1, 0).call(:a, :b, :c)                       #=> [:b, :a]
+prc.trans(1, 0, arity: :indices).call(:a, :b, :c)      #=> [:b, :a]
+prc.trans(1, 0, arity: :arguments).call(:a, :b, :c)    #=> [:b, :a, :c]
+prc.trans(1, 0, arity: :max).call(:a, :b, :c)          #=> [:b, :a, :c]
+
+prc.trans(2, 0, 1, arity: :min).call(:a, :b)           #=> [nil, :a]
+prc.trans(2, 0, 1, arity: :indices).call(:a, :b)       #=> [nil, :a, :b]
+prc.trans(2, 0, 1, arity: :arguments).call(:a, :b)     #=> [nil, :a]
+prc.trans(2, 0, 1, arity: :max).call(:a, :b)           #=> [nil, :a, :b]
+```
 
 #### `proc.zipmap(*funcs) => proc`
 

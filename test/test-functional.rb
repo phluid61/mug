@@ -106,6 +106,55 @@ class Test_functional_trans < Test::Unit::TestCase
     prc2 = prc.trans(1, 0)
     assert_equal( [:b, :a], prc2.call(:a, :b, :c) )
   end
+  # arity: :min (default, same as above tests)
+  def test_trans__arity_min_explicit
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(1, 0, arity: :min)
+    assert_equal( [:b, :a], prc2.call(:a, :b, :c) )
+  end
+  # arity: :indices
+  def test_trans__arity_indices__args_short
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(2, 0, 1, arity: :indices)
+    assert_equal( [nil, :a, :b], prc2.call(:a, :b) )
+  end
+  def test_trans__arity_indices__args_long
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(1, 0, arity: :indices)
+    assert_equal( [:b, :a], prc2.call(:a, :b, :c) )
+  end
+  # arity: :arguments
+  def test_trans__arity_arguments__args_short
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(2, 0, 1, arity: :arguments)
+    assert_equal( [nil, :a], prc2.call(:a, :b) )
+  end
+  def test_trans__arity_arguments__args_long
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(1, 0, arity: :arguments)
+    assert_equal( [:b, :a, :c], prc2.call(:a, :b, :c) )
+  end
+  # arity: :max
+  def test_trans__arity_max__args_short
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(2, 0, 1, arity: :max)
+    assert_equal( [nil, :a, :b], prc2.call(:a, :b) )
+  end
+  def test_trans__arity_max__args_long
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(1, 0, arity: :max)
+    assert_equal( [:b, :a, :c], prc2.call(:a, :b, :c) )
+  end
+  def test_trans__arity_max__equal_length
+    prc = lambda {|*a| a }
+    prc2 = prc.trans(2, 0, 1, arity: :max)
+    assert_equal( [:c, :a, :b], prc2.call(:a, :b, :c) )
+  end
+  # invalid arity
+  def test_trans__arity_invalid
+    prc = lambda {|*a| a }
+    assert_raise( ArgumentError ) { prc.trans(0, 1, arity: :bogus) }
+  end
 end
 
 class Test_functional_zipmap < Test::Unit::TestCase
