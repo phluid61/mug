@@ -12,10 +12,12 @@ class Proc
     #
     def apply(*args)
       n = arity < 0 ? -arity - 1 : arity
-      if args.length >= n
+      if lambda?
+        curry(n).call(*args)
+      elsif args.length >= n
         call(*args)
       else
-        proc { |*more| call(*args, *more) }
+        proc {|*more| call(*args, *more) }
       end
     end
   else
