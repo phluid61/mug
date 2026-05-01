@@ -33,7 +33,7 @@ class Proc
   # `proc.mapply(*args)` is equivalent to `args.map(&proc)`
   #
   def mapply *args
-    args.map {|*a| self.call *a }
+    args.map {|*a| self.call(*a) }
   end
 
   #
@@ -69,19 +69,19 @@ class Proc
       lambda do |*a|
         n = [a.size, indices.size].min
         list = (0...n).map {|i| a[indices[i]] }
-        self.call *list
+        self.call(*list)
       end
     when :indices
       lambda do |*a|
         list = (0...indices.size).map {|i| a[indices[i]] }
-        self.call *list
+        self.call(*list)
       end
     when :arguments
       lambda do |*a|
         list = (0...a.size).map do |i|
           i < indices.size ? a[indices[i]] : a[i]
         end
-        self.call *list
+        self.call(*list)
       end
     when :max
       lambda do |*a|
@@ -89,7 +89,7 @@ class Proc
         list = (0...n).map do |i|
           i < indices.size ? a[indices[i]] : a[i]
         end
-        self.call *list
+        self.call(*list)
       end
     else
       raise ArgumentError, "unknown arity mode: #{arity.inspect}"
@@ -111,13 +111,13 @@ class Proc
           arg
         elsif func.respond_to? :call
           func.call arg
-        elsif func.is_a? Symbol and arg.respond_to? func
+        elsif func.is_a?(Symbol) && arg.respond_to?(func)
           arg.__send__ func
         else
           raise TypeError, "expected callable, Symbol, or nil; got #{func.class}"
         end
       end
-      self.call *mapped
+      self.call(*mapped)
     end
   end
 
@@ -129,7 +129,7 @@ class Proc
     #
     def juxt *funcs
       lambda do |*args|
-        funcs.map {|f| f.to_proc.call *args }
+        funcs.map {|f| f.to_proc.call(*args) }
       end
     end
 
