@@ -424,10 +424,10 @@ This proc is prepended at the start of the composition.
 ```ruby
 require 'mug/functional'
 
-proc = ->(x) { x.inspect }
-proc2 = proc.compose(:to_s, :length)
-proc2[123]    #=> 3
-proc2['abc']  #=> 5
+func = ->(x) { x.inspect }
+func2 = func.compose(:to_s, :length)
+func2[123]    #=> 3
+func2['abc']  #=> 5
 ```
 
 #### `proc.precompose(*funcs) => proc`
@@ -442,10 +442,10 @@ This proc is appended at the end of the composition.
 ```ruby
 require 'mug/functional'
 
-proc = ->(x) { x.inspect }
-proc2 = proc.precompose(:to_s, :length)
-proc2[123]    #=> "3"
-proc2['abc']  #=> "3"
+func = ->(x) { x.inspect }
+func2 = func.precompose(:to_s, :length)
+func2[123]    #=> "3"
+func2['abc']  #=> "3"
 ```
 
 #### `proc.mapply(*args) => array`
@@ -456,20 +456,20 @@ Applies this function to each element of `args` in order.
 
 #### `proc.memoize => proc`
 
-Returns a new Proc that memoizes this one. For a given
+Generates a function that memoizes this one. For a given
 set of parameters, this proc is only invoked once; the
 result is remembered for subsequent invocations.
 
 ```ruby
-proc = lambda do |x|
+func = lambda do |x|
   puts x
   x
 end
 
-proc2 = proc.memoize
+func2 = func.memoize
 
-proc2[1]  #=> prints "1", returns 1
-proc2[1]  #=> returns 1 immediately
+func2[1]  #=> prints "1", returns 1
+func2[1]  #=> returns 1 immediately
 ```
 
 #### `proc.trans(*indices) => proc`
@@ -492,6 +492,66 @@ require 'mug/functional'
 printer = ->(*x) { p x }
 mapped_printer = printer.zipmap(:upcase, :downcase, :to_sym)
 mapped_printer.call('Hello', 'There', 'Everyone') #=> ["HELLO", "there", :Everyone]
+```
+
+#### `Proc.juxt(*funcs) => proc`
+
+Generates a function that maps its arguments to the
+given _funcs_ list in order.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.juxt :upcase, :downcase, :length
+func.call 'AbC'   #=> ['ABC', 'abc', 3]
+```
+
+#### `Proc.identity => proc`
+
+Generates an identity function that always returns its argument exactly.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.identity
+func.call(obj)   #=> obj
+```
+
+#### `Proc.const(c) => proc`
+
+Generates a constant function that always returns _c_.
+
+Note that it always returns the same object, so mutations will stick
+from invocation to invocation.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.const(obj)
+func.call          #=> obj
+func.call 1, 2, 3  #=> obj
+```
+
+### Enumerator
+
+#### `Enumerator.unfold(seed) {|s| block } => enum`
+
+Creates an Enumerator that can unfold a sequence from a given seed.
+
+```ruby
+require 'mug/functional'
+
+# counting by one
+enum = Enumerator.unfold(1) { |n| [n, n+1] }
+enum.take(5)  #=> [1, 2, 3, 4, 5]
+
+# Fibonacci sequence
+enum = Enumerator.unfold([0, 1]) { |(a,b)| [a, [b, a+b]] }
+enum.take(5)  #=> [0, 1, 1, 2, 3]
+
+# end enumeration with nil
+enum = Enumerator.unfold(1) { |n| n <= 3 ? [n, n+1] : nil }
+enum.take(5)  #=> [1, 2, 3]
 ```
 
 ## hash/fetch-assign
