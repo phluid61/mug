@@ -227,6 +227,126 @@ title: "Matty's Ultimate Gem"
 </span><span style="color:#65737e;"># Also works with #[] method
 </span><span style="color:#c0c5ce;">nested_hash._?[</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">][</span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">][</span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">]._!
 </span></code></pre>
+<h2><a href="#functional" aria-hidden="true" class="anchor" id="functional"></a>functional</h2>
+<h3><a href="#proc-1" aria-hidden="true" class="anchor" id="proc-1"></a>Proc</h3>
+<h4><a href="#proccomposefuncs--proc" aria-hidden="true" class="anchor" id="proccomposefuncs--proc"></a><code>proc.compose(*funcs) =&gt; proc</code></h4>
+<p>Composes a sequence of functions.</p>
+<p>A function is anything that responds to #to_proc, so
+symbols are allowed.</p>
+<p>This proc is prepended at the start of the composition.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func = -&gt;(x) { x.</span><span style="color:#96b5b4;">inspect </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">func2 = func.compose(</span><span style="color:#a3be8c;">:to_s</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:length</span><span style="color:#c0c5ce;">)
+</span><span style="color:#c0c5ce;">func2[</span><span style="color:#d08770;">123</span><span style="color:#c0c5ce;">]    </span><span style="color:#65737e;">#=&gt; 3
+</span><span style="color:#c0c5ce;">func2[&#39;</span><span style="color:#a3be8c;">abc</span><span style="color:#c0c5ce;">&#39;]  </span><span style="color:#65737e;">#=&gt; 5
+</span></code></pre>
+<h4><a href="#procprecomposefuncs--proc" aria-hidden="true" class="anchor" id="procprecomposefuncs--proc"></a><code>proc.precompose(*funcs) =&gt; proc</code></h4>
+<p>Composes a sequence of functions.</p>
+<p>A function is anything that responds to #to_proc, so
+symbols are allowed.</p>
+<p>This proc is appended at the end of the composition.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func = -&gt;(x) { x.</span><span style="color:#96b5b4;">inspect </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">func2 = func.precompose(</span><span style="color:#a3be8c;">:to_s</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:length</span><span style="color:#c0c5ce;">)
+</span><span style="color:#c0c5ce;">func2[</span><span style="color:#d08770;">123</span><span style="color:#c0c5ce;">]    </span><span style="color:#65737e;">#=&gt; &quot;3&quot;
+</span><span style="color:#c0c5ce;">func2[&#39;</span><span style="color:#a3be8c;">abc</span><span style="color:#c0c5ce;">&#39;]  </span><span style="color:#65737e;">#=&gt; &quot;3&quot;
+</span></code></pre>
+<h4><a href="#procmapplyargs--array" aria-hidden="true" class="anchor" id="procmapplyargs--array"></a><code>proc.mapply(*args) =&gt; array</code></h4>
+<p>Applies this function to each element of <code>args</code> in order.</p>
+<p><code>proc.mapply(*args)</code> is equivalent to <code>args.map(&amp;proc)</code></p>
+<h4><a href="#procmemoize--proc" aria-hidden="true" class="anchor" id="procmemoize--proc"></a><code>proc.memoize =&gt; proc</code></h4>
+<p>Generates a function that memoizes this one. For a given
+set of parameters, this proc is only invoked once; the
+result is remembered for subsequent invocations.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#c0c5ce;">func = </span><span style="color:#96b5b4;">lambda </span><span style="color:#b48ead;">do </span><span style="color:#c0c5ce;">|</span><span style="color:#bf616a;">x</span><span style="color:#c0c5ce;">|
+</span><span style="color:#c0c5ce;">  </span><span style="color:#96b5b4;">puts</span><span style="color:#c0c5ce;"> x
+</span><span style="color:#c0c5ce;">  x
+</span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func2 = func.memoize
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func2[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">]  </span><span style="color:#65737e;">#=&gt; prints &quot;1&quot;, returns 1
+</span><span style="color:#c0c5ce;">func2[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">]  </span><span style="color:#65737e;">#=&gt; returns 1 immediately
+</span></code></pre>
+<h4><a href="#proctransindices-arity-min--proc" aria-hidden="true" class="anchor" id="proctransindices-arity-min--proc"></a><code>proc.trans(*indices, arity: :min) =&gt; proc</code></h4>
+<p>Generates a function that reorders its arguments according
+to <code>indices</code> and calls this function on the resulting
+list.</p>
+<p>The <code>arity</code> parameter controls how mismatches in length
+between arguments and indices are handled:</p>
+<ul>
+<li><code>:min</code> – cap at the minimum of args and indices (default)</li>
+<li><code>:indices</code> – always use <code>indices.size</code>; nil for out-of-bounds args</li>
+<li><code>:arguments</code> – always use args count; excess positions pass through at their original index</li>
+<li><code>:max</code> – use the maximum; nil-fill if args are short, pass-through if args are long</li>
+</ul>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">prc = -&gt;(*a) { a }
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">)                       </span><span style="color:#65737e;">#=&gt; [:b, :a]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :indices</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">)      </span><span style="color:#65737e;">#=&gt; [:b, :a]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :arguments</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">)    </span><span style="color:#65737e;">#=&gt; [:b, :a, :c]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :max</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:c</span><span style="color:#c0c5ce;">)          </span><span style="color:#65737e;">#=&gt; [:b, :a, :c]
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :min</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">)           </span><span style="color:#65737e;">#=&gt; [nil, :a]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :indices</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">)       </span><span style="color:#65737e;">#=&gt; [nil, :a, :b]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :arguments</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">)     </span><span style="color:#65737e;">#=&gt; [nil, :a]
+</span><span style="color:#c0c5ce;">prc.trans(</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">arity: :max</span><span style="color:#c0c5ce;">).call(</span><span style="color:#a3be8c;">:a</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:b</span><span style="color:#c0c5ce;">)           </span><span style="color:#65737e;">#=&gt; [nil, :a, :b]
+</span></code></pre>
+<h4><a href="#proczipmapfuncs--proc" aria-hidden="true" class="anchor" id="proczipmapfuncs--proc"></a><code>proc.zipmap(*funcs) =&gt; proc</code></h4>
+<p>Generates a function that maps its arguments to each of
+<code>funcs</code> in order.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">printer = -&gt;(*x) { </span><span style="color:#96b5b4;">p</span><span style="color:#c0c5ce;"> x }
+</span><span style="color:#c0c5ce;">mapped_printer = printer.zipmap(</span><span style="color:#a3be8c;">:upcase</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:downcase</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:to_sym</span><span style="color:#c0c5ce;">)
+</span><span style="color:#c0c5ce;">mapped_printer.call(&#39;</span><span style="color:#a3be8c;">Hello</span><span style="color:#c0c5ce;">&#39;, &#39;</span><span style="color:#a3be8c;">There</span><span style="color:#c0c5ce;">&#39;, &#39;</span><span style="color:#a3be8c;">Everyone</span><span style="color:#c0c5ce;">&#39;) </span><span style="color:#65737e;">#=&gt; [&quot;HELLO&quot;, &quot;there&quot;, :Everyone]
+</span></code></pre>
+<h4><a href="#procjuxtfuncs--proc" aria-hidden="true" class="anchor" id="procjuxtfuncs--proc"></a><code>Proc.juxt(*funcs) =&gt; proc</code></h4>
+<p>Generates a function that maps its arguments to the
+given <em>funcs</em> list in order.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func = </span><span style="color:#ebcb8b;">Proc</span><span style="color:#c0c5ce;">.juxt </span><span style="color:#a3be8c;">:upcase</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:downcase</span><span style="color:#c0c5ce;">, </span><span style="color:#a3be8c;">:length
+</span><span style="color:#c0c5ce;">func.call &#39;</span><span style="color:#a3be8c;">AbC</span><span style="color:#c0c5ce;">&#39;   </span><span style="color:#65737e;">#=&gt; [&#39;ABC&#39;, &#39;abc&#39;, 3]
+</span></code></pre>
+<h4><a href="#procidentity--proc" aria-hidden="true" class="anchor" id="procidentity--proc"></a><code>Proc.identity =&gt; proc</code></h4>
+<p>Generates an identity function that always returns its argument exactly.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func = </span><span style="color:#ebcb8b;">Proc</span><span style="color:#c0c5ce;">.identity
+</span><span style="color:#c0c5ce;">func.call(obj)   </span><span style="color:#65737e;">#=&gt; obj
+</span></code></pre>
+<h4><a href="#procconstc--proc" aria-hidden="true" class="anchor" id="procconstc--proc"></a><code>Proc.const(c) =&gt; proc</code></h4>
+<p>Generates a constant function that always returns <em>c</em>.</p>
+<p>Note that it always returns the same object, so mutations will stick
+from invocation to invocation.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#c0c5ce;">func = </span><span style="color:#ebcb8b;">Proc</span><span style="color:#c0c5ce;">.const(obj)
+</span><span style="color:#c0c5ce;">func.call          </span><span style="color:#65737e;">#=&gt; obj
+</span><span style="color:#c0c5ce;">func.call </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">3  </span><span style="color:#65737e;">#=&gt; obj
+</span></code></pre>
+<h3><a href="#enumerator" aria-hidden="true" class="anchor" id="enumerator"></a>Enumerator</h3>
+<h4><a href="#enumeratorunfoldseed-s-block---enum" aria-hidden="true" class="anchor" id="enumeratorunfoldseed-s-block---enum"></a><code>Enumerator.unfold(seed) {|s| block } =&gt; enum</code></h4>
+<p>Creates an Enumerator that can unfold a sequence from a given seed.</p>
+<pre lang="ruby" style="background-color:#2b303b;"><code><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">mug/functional</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># counting by one
+</span><span style="color:#c0c5ce;">enum = </span><span style="color:#ebcb8b;">Enumerator</span><span style="color:#c0c5ce;">.unfold(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) { |</span><span style="color:#bf616a;">n</span><span style="color:#c0c5ce;">| [n, n+</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">] }
+</span><span style="color:#c0c5ce;">enum.take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">)  </span><span style="color:#65737e;">#=&gt; [1, 2, 3, 4, 5]
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># Fibonacci sequence
+</span><span style="color:#c0c5ce;">enum = </span><span style="color:#ebcb8b;">Enumerator</span><span style="color:#c0c5ce;">.unfold([</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">]) { |(</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">,</span><span style="color:#bf616a;">b</span><span style="color:#c0c5ce;">)| [a, [b, a+b]] }
+</span><span style="color:#c0c5ce;">enum.take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">)  </span><span style="color:#65737e;">#=&gt; [0, 1, 1, 2, 3]
+</span><span style="color:#c0c5ce;">
+</span><span style="color:#65737e;"># end enumeration with nil
+</span><span style="color:#c0c5ce;">enum = </span><span style="color:#ebcb8b;">Enumerator</span><span style="color:#c0c5ce;">.unfold(</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">) { |</span><span style="color:#bf616a;">n</span><span style="color:#c0c5ce;">| n &lt;= </span><span style="color:#d08770;">3 </span><span style="color:#c0c5ce;">? [n, n+</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">] : </span><span style="color:#d08770;">nil </span><span style="color:#c0c5ce;">}
+</span><span style="color:#c0c5ce;">enum.take(</span><span style="color:#d08770;">5</span><span style="color:#c0c5ce;">)  </span><span style="color:#65737e;">#=&gt; [1, 2, 3]
+</span></code></pre>
 <h2><a href="#hashfetch-assign" aria-hidden="true" class="anchor" id="hashfetch-assign"></a>hash/fetch-assign</h2>
 <h3><a href="#hash" aria-hidden="true" class="anchor" id="hash"></a>Hash</h3>
 <h4><a href="#hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj" aria-hidden="true" class="anchor" id="hshfetch_assignkey-default--objhshfetch_assignkey-key-block---obj"></a><code>hsh.fetch_assign(key, default) =&gt; obj</code><br><code>hsh.fetch_assign(key) {|key| block } =&gt; obj</code></h4>
