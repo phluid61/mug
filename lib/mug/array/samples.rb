@@ -17,6 +17,11 @@ class Array
   # The optional +random+ argument will be used as the random number
   # generator.
   #
+  # @param min [Integer] minimum subset size (default: 1)
+  # @param max [Integer] maximum subset size (default: array length)
+  # @param random [#rand] random number generator
+  # @return [Array] a new array containing the random subset
+  #
   def samples min: nil, max: nil, random: nil
     min = 1 if min.nil?
     min = length if min > length
@@ -39,7 +44,7 @@ class Array
 end
 
 =begin
-Copyright (c) 2016, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2016-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

@@ -3,8 +3,20 @@ require_relative '../iterator'
 
 class Method
   #
-  # Creates a new Iterator for this method, initially invoked
-  # on this method's receiver.
+  # Creates an Iterator object, which is a subclass of Enumerator
+  # that recursively invokes this method on an object.
+  #
+  # Initially the receiving object is the object on which this
+  # method is defined. After each iteration, the receiving object
+  # is replaced with the result of the previous iteration.
+  #
+  # @param args [Array] additional arguments passed to the method
+  # @return [Iterator] a new Iterator instance
+  #
+  # @example
+  #   require 'mug/iterator/method'
+  #   0.method(:next).to_iter.take(5)    #=> [1, 2, 3, 4, 5]
+  #   0.method(:+).to_iter(2).take(5)    #=> [2, 4, 6, 8, 10]
   #
   def to_iter *args
     Iterator.new(receiver) do |o|
@@ -14,7 +26,7 @@ class Method
 end
 
 =begin
-Copyright (c) 2013-2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

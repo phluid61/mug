@@ -6,6 +6,20 @@ module Enumerable
     # Invokes a block once for every element in a sequence of
     # Enumerables.
     #
+    # @param enums [Array<Enumerable>] the enumerables to chain
+    # @return [Enumerator] if no block is given
+    # @return [void] if a block is given
+    #
+    # @example
+    #   require 'mug/enumerable/chain'
+    #   Enumerable.chain([1, 2], [3, 4]) {|x| puts x }
+    #   # prints 1, 2, 3, 4
+    #
+    # @note The instance method +Enumerable#chain+ is provided as a
+    #   polyfill for Ruby < 2.6. On Ruby 2.6+, the built-in
+    #   +Enumerable#chain+ (which returns a lazy +Enumerator::Chain+)
+    #   is used instead.
+    #
     def chain *enums
       return enum_for(:chain, *enums) unless block_given?
       enums.each do |enum|

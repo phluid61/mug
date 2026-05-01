@@ -6,6 +6,9 @@ class Hash
   # contents of +hsh+. The value for each duplicate key is the value in
   # +hsh+ when it exists.
   #
+  # @param other_hash [Hash] the hash to merge with
+  # @return [Hash] a new merged hash
+  #
   def merge_left other_hash
     merge(other_hash) {|key, left, right| left.nil? ? right : left }
   end
@@ -14,6 +17,9 @@ class Hash
   # Returns a new hash containing the contents of +other_hash+ and the
   # contents of +hsh+. The value for each duplicate key is the value in
   # +other_hash+ when it exists.
+  #
+  # @param other_hash [Hash] the hash to merge with
+  # @return [Hash] a new merged hash
   #
   def merge_right other_hash
     merge(other_hash) {|key, left, right| right.nil? ? left : right }
@@ -24,6 +30,9 @@ class Hash
   # keys are overwritten with the values from +other_hash+ if the
   # values in +hsh+ are +nil+.
   #
+  # @param other_hash [Hash] the hash to merge with
+  # @return [Hash] +hsh+ after merging
+  #
   def merge_left! other_hash
     merge!(other_hash) {|key, left, right| left.nil? ? right : left }
   end
@@ -33,6 +42,9 @@ class Hash
   # keys are overwritten with the values from +other_hash+ unless the
   # values in +other_hash+ are +nil+.
   #
+  # @param other_hash [Hash] the hash to merge with
+  # @return [Hash] +hsh+ after merging
+  #
   def merge_right! other_hash
     merge!(other_hash) {|key, left, right| right.nil? ? left : right }
   end
@@ -40,7 +52,7 @@ class Hash
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

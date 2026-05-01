@@ -10,6 +10,9 @@ class Proc
     # Otherwise, returns another curried proc that takes the rest of
     # arguments.
     #
+    # @param args [Array] the arguments to partially apply
+    # @return [Object, Proc] the result if sufficient args, or a curried Proc
+    #
     def apply(*args)
       n = arity < 0 ? -arity - 1 : arity
       if lambda?
@@ -28,6 +31,9 @@ class Proc
     # Otherwise, returns another curried proc that takes the rest of
     # arguments.
     #
+    # @param args [Array] the arguments to partially apply
+    # @return [Object, Proc] the result if sufficient args, or a curried Proc
+    #
     def apply(*args)
       n = arity < 0 ? -arity - 1 : arity
       curry(n).call(*args)
@@ -42,6 +48,12 @@ class Method
   # supplied arguments to the original proc and returns the result.
   # Otherwise, returns another curried proc that takes the rest of
   # arguments.
+  #
+  # @note +Method#curry+ is in stdlib since Ruby 2.2. +apply+ is shorthand
+  #   for +curry.call(...)+.
+  #
+  # @param args [Array] the arguments to partially apply
+  # @return [Object, Proc] the result if sufficient args, or a curried Proc
   #
   def apply(*args)
     n = arity < 0 ? -arity - 1 : arity

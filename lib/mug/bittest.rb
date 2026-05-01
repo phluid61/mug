@@ -8,6 +8,19 @@ class Integer
   #   :any  => true if any bits are set
   #   :all  => true if all bits are set
   #
+  # @param other [Integer] the bitmask to test against
+  # @param test [Symbol] +:any+ or +:all+
+  # @return [Boolean] whether the bit test passes
+  # @raise [ArgumentError] if +test+ is not +:any+ or +:all+
+  #
+  # @example
+  #   require 'mug/bittest'
+  #   0b1010.and?(0b1000, test: :any)  #=> true
+  #   0b1010.and?(0b1100, test: :all)  #=> false
+  #
+  # @see #and_any?
+  # @see #and_all?
+  #
   def and? other, test: :any
     case test.to_sym
     when :any
@@ -24,6 +37,16 @@ class Integer
   #
   # i.e. if any set bits in +other+ are set in +this+.
   #
+  # @param other [Integer] the bitmask to test against
+  # @return [Boolean] whether any set bits in +other+ are set in +this+
+  #
+  # @example
+  #   require 'mug/bittest'
+  #   0b1010.and_any?(0b1000)  #=> true
+  #   0b1010.and_any?(0b0100)  #=> false
+  #
+  # @note Similar to +Integer#anybits?+ (Ruby 2.5+).
+  #
   def and_any? other
     return false if other.zero?
     self & other != 0
@@ -34,6 +57,16 @@ class Integer
   #
   # i.e. if all set bits in +other+ are set in +this+.
   #
+  # @param other [Integer] the bitmask to test against
+  # @return [Boolean] whether all set bits in +other+ are set in +this+
+  #
+  # @example
+  #   require 'mug/bittest'
+  #   0b1110.and_all?(0b1010)  #=> true
+  #   0b1010.and_all?(0b1100)  #=> false
+  #
+  # @note Similar to +Integer#allbits?+ (Ruby 2.5+).
+  #
   def and_all? other
     return false if other.zero?
     self & other == other
@@ -42,12 +75,32 @@ class Integer
   ##
   # True if +this+ OR +other+ is non-zero.
   #
+  # @param other [Integer] the value to OR with
+  # @return [Boolean] whether +this+ OR +other+ is non-zero
+  #
+  # @example
+  #   require 'mug/bittest'
+  #   0b1010.or?(0b0000)  #=> true
+  #   0b0000.or?(0b0000)  #=> false
+  #
+  # @note No stdlib equivalent exists.
+  #
   def or? other
     self | other != 0
   end
 
   ##
   # True if +this+ XOR +other+ is non-zero.
+  #
+  # @param other [Integer] the value to XOR with
+  # @return [Boolean] whether +this+ XOR +other+ is non-zero
+  #
+  # @example
+  #   require 'mug/bittest'
+  #   0b1010.xor?(0b1010)  #=> false
+  #   0b1010.xor?(0b0101)  #=> true
+  #
+  # @note No stdlib equivalent exists.
   #
   def xor? other
     self ^ other != 0
@@ -56,7 +109,7 @@ class Integer
 end
 
 =begin
-Copyright (c) 2016, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2016-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

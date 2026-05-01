@@ -6,6 +6,8 @@ class MatchData
   # The capture positions are either all Strings or all Integers,
   # depending on whether the original Regexp had named capture
   # groups or not.
+  #
+  # @return [Hash{String => String}, Hash{Integer => String}]
   def to_h
     if names.empty?
       captures.each_with_index.to_h{|v,i| [i+1, v] }
@@ -21,6 +23,9 @@ class MatchData
   #
   # WARNING: if mixing named and positional captures, no positional
   # captures will be available using this method!
+  #
+  # @param include_names [Boolean] whether to treat named captures as positional
+  # @return [Hash{Integer => String}]
   def positional_captures include_names: false
     return {} unless names.empty? || include_names
     captures.each_with_index.to_h{|v,i| [i+1, v] }

@@ -1,34 +1,106 @@
 
 class Numeric
 
+  # Returns +true+ if this number is negative (i.e. < 0), +false+ otherwise.
+  #
+  # @return [Boolean]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   -1.negative?  #=> true
+  #   0.negative?   #=> false
+  #   1.negative?   #=> false
   def negative?
     self < 0
   end
 
+  # Returns +true+ if this number is positive (i.e. > 0), +false+ otherwise.
+  #
+  # @return [Boolean]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   1.positive?   #=> true
+  #   0.positive?   #=> false
+  #   -1.positive?  #=> false
   def positive?
     self > 0
   end
 
+  # Returns +true+ if this number is nonnegative (i.e. >= 0), +false+ otherwise.
+  #
+  # @return [Boolean]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   1.nonnegative?   #=> true
+  #   0.nonnegative?   #=> true
+  #   -1.nonnegative?  #=> false
   def nonnegative?
     self >= 0
   end
 
+  # Returns +true+ if this number is nonpositive (i.e. <= 0), +false+ otherwise.
+  #
+  # @return [Boolean]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   -1.nonpositive?  #=> true
+  #   0.nonpositive?   #=> true
+  #   1.nonpositive?   #=> false
   def nonpositive?
     self <= 0
   end
 
+  # If this number is negative (i.e. < 0), returns itself, otherwise returns +nil+.
+  #
+  # @return [Numeric, nil]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   -1.negative!  #=> -1
+  #   0.negative!   #=> nil
+  #   1.negative!   #=> nil
   def negative!
     self < 0 ? self : nil
   end
 
+  # If this number is positive (i.e. > 0), returns itself, otherwise returns +nil+.
+  #
+  # @return [Numeric, nil]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   1.positive!   #=> 1
+  #   0.positive!   #=> nil
+  #   -1.positive!  #=> nil
   def positive!
     self > 0 ? self : nil
   end
 
+  # If this number is nonnegative (i.e. >= 0), returns itself, otherwise returns +nil+.
+  #
+  # @return [Numeric, nil]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   1.nonnegative!   #=> 1
+  #   0.nonnegative!   #=> 0
+  #   -1.nonnegative!  #=> nil
   def nonnegative!
     self >= 0 ? self : nil
   end
 
+  # If this number is nonpositive (i.e. <= 0), returns itself, otherwise returns +nil+.
+  #
+  # @return [Numeric, nil]
+  #
+  # @example
+  #   require 'mug/negativity'
+  #   -1.nonpositive!  #=> -1
+  #   0.nonpositive!   #=> 0
+  #   1.nonpositive!   #=> nil
   def nonpositive!
     self <= 0 ? self : nil
   end

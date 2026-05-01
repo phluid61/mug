@@ -3,6 +3,16 @@ module Kernel
   ##
   # Yields the arguments to a block.
   #
+  # @param args [Array] the arguments to yield
+  # @yield [*args] the arguments
+  # @return [Object] the result of the block
+  # @return [Enumerator] if no block is given
+  #
+  # @example
+  #   require 'mug/with'
+  #   with(1, 2, 3) {|x, y, z| x + y + z }
+  #   #=> 6
+  #
   def with *args
     return enum_for(:with, *args) unless block_given?
     yield(*args)
@@ -11,7 +21,7 @@ module Kernel
 end
 
 =begin
-Copyright (c) 2019, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2019-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

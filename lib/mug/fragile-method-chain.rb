@@ -2,10 +2,15 @@
 #
 # Invokes a method chain until one method returns a falsy value.
 #
-# For example:
+# If any method call in the chain returns a falsy value, the chain aborts.
 #
-#     a._?.b.c.d._!
-#     nested_hash._?[:a][:b][:c]._!
+# @example Basic method chain
+#   require 'mug/fragile-method-chain'
+#   a._?.b.c.d._!
+#
+# @example With the [] method
+#   require 'mug/fragile-method-chain'
+#   nested_hash._?[:a][:b][:c]._!
 #
 class FragileMethodChain
   #
@@ -21,6 +26,8 @@ class FragileMethodChain
   #
   # The final result will be the first +nil+ or +false+ value
   # returned in the chain, or its end result.
+  #
+  # @return [Object] the final result of the chain, or the first falsy value
   #
   def _!
     @o
@@ -64,13 +71,24 @@ class Object
   #
   # Begins a FragileMethodChain.
   #
+  # @return [FragileMethodChain] a new chain starting from this object
+  #
+  # @example
+  #   require 'mug/fragile-method-chain'
+  #   # Similar to: a.b && a.b.c
+  #   # except that a.b is not called twice
+  #   a._?.b.c._!
+  #
+  #   # Also works with #[] method
+  #   nested_hash._?[:a][:b][:c]._!
+  #
   def _?
     FragileMethodChain.new(self)
   end
 end
 
 =begin
-Copyright (c) 2013,2016,2020, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013,2016,2020-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

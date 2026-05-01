@@ -7,6 +7,11 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_values { |v| v*2 } #=> {'a'=>2, 'b'=>4}
   #   {'a'=>1, 'b'=>2}.map_values { "cat" }   #=> {'a'=>"cat", 'b'=>"cat"}
   #
+  # @note As of Ruby 2.4 this is equivalent to +#transform_values+
+  #
+  # @return [Hash] a new hash with transformed values
+  # @return [Enumerator] if no block is given
+  #
   def map_values &_block # :yields: value
     return enum_for(:map_values) unless block_given?
     hsh = {}
@@ -19,7 +24,11 @@ class Hash
   #
   # Replaces the values in +hsh+ by running them each through +block+.
   #
-  # See: #map_values
+  # @note As of Ruby 2.4 this is equivalent to +#transform_values!+
+  #
+  # @return [Hash] +hsh+ with values replaced
+  # @return [Enumerator] if no block is given
+  # @see #map_values
   #
   def map_values! &block # :yields: value
     return enum_for(:map_values!) unless block_given?
@@ -36,6 +45,11 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_keys { |k| k*2 } #=> {'aa'=>1, 'bb'=>2}
   #   {'a'=>1, 'b'=>2}.map_keys { "cat" }   #=> {'cat'=>2}
   #
+  # @note As of Ruby 2.5 this is equivalent to +#transform_keys+
+  #
+  # @return [Hash] a new hash with transformed keys
+  # @return [Enumerator] if no block is given
+  #
   def map_keys &_block # :yields: key
     return enum_for(:map_keys) unless block_given?
     hsh = {}
@@ -50,7 +64,11 @@ class Hash
   #
   # If +block+ returns duplicate keys, they will be overwritten in turn.
   #
-  # See: #map_keys
+  # @note As of Ruby 2.5 this is equivalent to +#transform_keys!+
+  #
+  # @return [Hash] +hsh+ with keys replaced
+  # @return [Enumerator] if no block is given
+  # @see #map_keys
   #
   def map_keys! &block # :yields: key
     return enum_for(:map_keys!) unless block_given?
@@ -67,6 +85,9 @@ class Hash
   #   {'a'=>1, 'b'=>2}.map_pairs { |k,v| [k*2, v+1] } #=> {'aa'=>2, 'bb'=>3}
   #   {'a'=>1, 'b'=>2}.map_pairs { ["cat","dog"] }   #=> {'cat'=>'dog'}
   #
+  # @return [Hash] a new hash with transformed key-value pairs
+  # @return [Enumerator] if no block is given
+  #
   def map_pairs &_block # :yields: key, value
     return enum_for(:map_pairs) unless block_given?
     hsh = {}
@@ -82,7 +103,9 @@ class Hash
   #
   # If +block+ returns duplicate keys, they will be overwritten.
   #
-  # See: #map_pairs
+  # @return [Hash] +hsh+ with keys and values replaced
+  # @return [Enumerator] if no block is given
+  # @see #map_pairs
   #
   def map_pairs! &block # :yields: key, value
     return enum_for(:map_pairs!) unless block_given?
@@ -91,7 +114,7 @@ class Hash
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

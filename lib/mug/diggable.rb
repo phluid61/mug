@@ -9,6 +9,17 @@ module Diggable
   # calling +dig+ at each step, returning +nil+ if any intermediate step is
   # +nil+.
   #
+  # @param idx [Array] the sequence of keys/indices to dig into
+  # @return [Object, nil] the nested value, or +nil+ if not found
+  #
+  # @example
+  #   require 'mug/diggable'
+  #   class Config
+  #     include Diggable
+  #     def [](key); {a: {b: 42}}[key]; end
+  #   end
+  #   Config.new.dig(:a, :b)  #=> 42
+  #
   def dig *idx
     inner = self[idx.shift]
     return inner if idx.empty? || inner.nil?
@@ -17,7 +28,7 @@ module Diggable
 end
 
 =begin
-Copyright (c) 2020, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2020-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

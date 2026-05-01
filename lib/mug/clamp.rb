@@ -9,6 +9,19 @@ class Range
   #
   # Raises an exception if val >= end and the range is exclusive.
   #
+  # @param val [Comparable] the value to bound within this range
+  # @return [Comparable] the bounded value
+  # @raise [ArgumentError] if +val+ >= +end+ and the range is exclusive
+  #
+  # @example
+  #   require 'mug/clamp'
+  #   (1..10).bound(5)   #=> 5
+  #   (1..10).bound(0)   #=> 1
+  #   (1..10).bound(11)  #=> 10
+  #
+  # @note +Numeric#clamp+ is provided as a polyfill for Ruby < 2.7.
+  #   On Ruby 2.7+, the built-in +Comparable#clamp+ is used instead.
+  #
   def bound val
     a = first
     return a if val < a

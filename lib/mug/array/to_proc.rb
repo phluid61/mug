@@ -2,9 +2,18 @@
 class Array
 
   #
-  # Returns a Proc that accepts a single argument.
+  # Returns a Proc that accepts one or two arguments.
   #
   # The Proc's parameter is used as an index into this array.
+  #
+  # @return [Proc] a proc that indexes into this array
+  # @see Array#slice
+  #
+  # @example
+  #   require 'mug/array/to_proc'
+  #
+  #   lookup = ['zero', 'one', 'two']
+  #   [0, 2, 1].map(&lookup) #=> ['zero', 'two', 'one']
   #
   def to_proc
     method(:slice).to_proc
@@ -13,7 +22,7 @@ class Array
 end
 
 =begin
-Copyright (c) 2017-2020, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

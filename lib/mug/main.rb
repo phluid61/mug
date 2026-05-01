@@ -12,6 +12,22 @@ module Kernel
   # If called with a block, and the calling context is in the 'main' file, the
   # block is executed and the result is returned.
   #
+  # @yield optional block to execute when in the main file
+  # @return [Boolean, Object, nil] +true+ if in main (no block), block result
+  #   (with block), or +nil+ if not in main
+  #
+  # @example Without a block
+  #   require 'mug/main'
+  #   if __main__
+  #     puts "the main file"
+  #   end
+  #
+  # @example With a block
+  #   require 'mug/main'
+  #   __main__ do
+  #     puts "also the main file"
+  #   end
+  #
   def __main__
     cloc = caller_locations(1, 1)[0]
     return if cloc.nil?
@@ -22,7 +38,7 @@ module Kernel
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

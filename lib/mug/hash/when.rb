@@ -4,6 +4,12 @@ class Hash
   #
   # Use a Hash like a case statement.
   #
+  # Returns the value whose key matches +o+ using <tt>===</tt>,
+  # or the default value.
+  #
+  # @param o [Object] the object to match against hash keys
+  # @return [Object] the value for the matching key, or the default value
+  #
   #   case key
   #   when /foo/ then "FOO"
   #   when /bar/ then "BAR"
@@ -29,7 +35,7 @@ class Hash
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

@@ -7,6 +7,9 @@ class Hash
   #
   # Useful for default options.
   #
+  # @param other_hash [Hash] the hash providing default values
+  # @return [Hash] a new hash with defaults applied
+  #
   # Example:
   #     opts = {:a => 1, :b => 2 }
   #     dflt = {:a => 0, :x => 9 }
@@ -21,6 +24,9 @@ class Hash
   # Entries with duplicate keys are overwritten with the
   # values from +other_hash+
   #
+  # @param other_hash [Hash] the hash to add
+  # @return [Hash] a new merged hash
+  #
   def + other_hash
     merge other_hash
   end
@@ -32,6 +38,10 @@ class Hash
   # If +o+ is an Array with two elements, it is interpreted as [key,value]
   # If +o+ can be converted to a hash with #to_h, this is identical to calling #merge!
   # Otherwise an ArgumentError is raised.
+  #
+  # @param o [Hash, Array, #to_h] the object to append
+  # @return [Hash] +hsh+ after appending
+  # @raise [ArgumentError] if +o+ cannot be appended
   #
   # Example:
   #     h = {}
@@ -53,7 +63,7 @@ class Hash
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

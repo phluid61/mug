@@ -7,6 +7,18 @@ class Object
   # Returns true if +condition+ and +obj+ are either
   # both truthy, or both falsey.
   #
+  # @param condition [Object] a value to test against +self+
+  # @yield when no positional argument is given, yields to obtain the condition
+  # @return [Boolean] +true+ if both +self+ and +condition+ are truthy or
+  #   both are falsey; +false+ otherwise
+  #
+  # @example
+  #   require 'mug/iff'
+  #   "hello".iff?(true)   #=> true
+  #   "hello".iff?(false)  #=> false
+  #   nil.iff?(false)      #=> true
+  #   nil.iff?(true)       #=> false
+  #
   def iff? *condition
     if condition.length == 1
       cond = condition[0]
@@ -21,7 +33,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

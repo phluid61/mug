@@ -8,7 +8,12 @@ class Array
   #
   # If no block is given, an Enumerator is returned instead.
   #
-  # See #delete_if, #reject!
+  # @yield [item] block that determines whether to delete
+  # @return [Array] the deleted elements
+  # @return [Enumerator] if no block is given
+  # @see Array#delete_if
+  # @see Array#reject!
+  # @see https://bugs.ruby-lang.org/issues/13777 Feature #13777
   #
   def delete_all &_block
     return enum_for :delete_all unless block_given?
@@ -25,7 +30,7 @@ class Array
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

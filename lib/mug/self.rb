@@ -6,6 +6,21 @@ class Object
   # If a block is given, this object is yielded to it, and the result
   # is returned.
   #
+  # @yield [o] optionally yields self to the block
+  # @yieldparam o [Object] this object
+  # @return [Object] self, or the result of the block
+  #
+  # @note Without a block, equivalent to +Object#itself+ (Ruby 2.2+).
+  #   With a block, equivalent to +Object#then+ (Ruby 2.6+).
+  #   This is different from +#tap+ because +obj.tap{nil}+ returns _obj_,
+  #   but +obj.self{nil}+ returns _nil_.
+  #
+  # @example
+  #   require 'mug/self'
+  #   1.self                          #=> 1
+  #   2.self{|i| i*3 }               #=> 6
+  #   [1,1,2,2,3].group_by(&:self)   #=> {1=>[1,1], 2=>[2,2], 3=>[3]}
+  #
   def self(&_block)
     if block_given?
       yield self
@@ -26,6 +41,13 @@ class Object
   # to a block. If no block is given, returns an
   # Enumerator.
   #
+  # @param args [Array] additional arguments to yield alongside self
+  # @yield [obj, *args] yields self and any additional arguments
+  # @yieldparam obj [Object] this object
+  # @yieldparam args [Object] additional arguments
+  # @return [Object] the result of the block
+  # @return [Enumerator] if no block is given
+  #
   def revapply(*args, &_block)
     if block_given?
       yield self, *args
@@ -37,7 +59,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

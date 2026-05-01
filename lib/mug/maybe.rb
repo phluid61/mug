@@ -6,12 +6,17 @@ class MaybeDelegator
   #
   # Creates a new MaybeDelegator, wrapping +o+
   #
+  # @param o [Object] the object to wrap
+  # @return [MaybeDelegator]
+  #
   def initialize o
     @o = o
   end
 
   #
   # Returns this MaybeDelegator object.
+  #
+  # @return [MaybeDelegator] self
   #
   def maybe
     self
@@ -34,12 +39,26 @@ end
 
 class Object
   #
-  # Do something if this object is truthy.
+  # Invokes a method on this object iff it is truthy, otherwise
+  # returns this object.
   #
-  # If a block is given, it is executed in the context of this
-  # object, iff this object is neither +nil+ nor +false+.
+  # When a block is given, the block is invoked in the scope of
+  # this object (i.e. +self+ in the block refers to this object).
   #
-  # If no block is given, returns a MaybeDelegator object.
+  # When no block is given, returns a MaybeDelegator that
+  # conditionally delegates methods to this object.
+  #
+  # @yield the block is evaluated in the scope of this object
+  # @return [Object, nil, false] the result of the block, or this object if falsy
+  # @return [MaybeDelegator] if no block is given
+  #
+  # @example
+  #   require 'mug/maybe'
+  #   # Equivalent to: a && a.b && a.b.c
+  #   # (block form)
+  #   a.maybe{ b.maybe{ c } }
+  #   # (delegator form)
+  #   a.maybe.b.maybe.c
   #
   def maybe &b
     if b
@@ -51,7 +70,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2013,2020, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2013,2020-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

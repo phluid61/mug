@@ -1,6 +1,29 @@
 
 class Module
 
+  # Makes +new_name+ a new copy of the singleton method +old_name+.
+  # This can be used to retain access to singleton methods that are
+  # overridden.
+  #
+  # @param new_name [Symbol] the name for the new alias
+  # @param old_name [Symbol] the name of the existing method
+  # @return [self]
+  #
+  # @example
+  #   require 'mug/alias'
+  #
+  #   module Mod
+  #     def self.foo
+  #       1
+  #     end
+  #     alias_singleton_method :bar, :foo
+  #     def self.foo
+  #       2
+  #     end
+  #   end
+  #   Mod.foo #=> 2
+  #   Mod.bar #=> 1
+  #
   def alias_singleton_method new_name, old_name
     singleton_class.class_exec { alias_method new_name, old_name }
     self
@@ -10,7 +33,7 @@ class Module
 end
 
 =begin
-Copyright (c) 2017, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2017-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

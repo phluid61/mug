@@ -1,7 +1,16 @@
 
 class Regexp
   #
-  # Matches the regexp against the parameter object.
+  # Returns a proc that accepts one argument, that matches against
+  # this regexp object.
+  #
+  # @return [Proc] a proc that matches its argument against this regexp
+  #
+  # @example
+  #   require 'mug/rexproc'
+  #   %w[foo bar baz].select &/\Ab/  #=> ["bar", "baz"]
+  #   %w[foo bar baz].reject &/\Ab/  #=> ["foo"]
+  #   %w[foo bar baz].find &/\Ab/    #=> "bar"
   #
   def to_proc
     lambda {|s| self =~ s }
@@ -9,7 +18,7 @@ class Regexp
 end
 
 =begin
-Copyright (c) 2014, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2014-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

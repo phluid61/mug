@@ -7,6 +7,15 @@ class Object
   # If a block is given, +obj+ is yielded to it; if it returns truthy,
   # +default+ is returned, otherwise +obj+ is returned.
   #
+  # @param default [Object] the value to return if the condition is met
+  # @yield [obj] optional block to determine the condition
+  # @return [Object] either +self+ or +default+
+  #
+  # @example
+  #   require 'mug/and-or'
+  #
+  #   get_a_list.and(default_list, &:empty?).do_something
+  #
   def and default, &_block
     if block_given?
       yield(self) ? default : self
@@ -21,6 +30,15 @@ class Object
   # If a block is given, +obj+ is yielded to it; if it returns truthy,
   # +obj+ is returned, otherwise +default+ is returned.
   #
+  # @param default [Object] the value to return if the condition is met
+  # @yield [obj] optional block to determine the condition
+  # @return [Object] either +self+ or +default+
+  #
+  # @example
+  #   require 'mug/and-or'
+  #
+  #   data_store.get_env_hash.or(default_hash).do_something
+  #
   def or default, &_block
     if block_given?
       yield(self) ? self : default
@@ -34,15 +52,31 @@ class Object
   #
   # Returns +obj+.
   #
+  # @yield [obj] called if +self+ is truthy
+  # @return [Object] +self+
+  #
+  # @example
+  #   require 'mug/and-or'
+  #
+  #   try_thing.and_then {|result| log "got #{result.inspect}" }
+  #
   def and_then &_block
     yield self if self
     self
   end
 
   #
-  # Calls +block+ is +obj+ is not falsey.
+  # Calls +block+ if +obj+ is falsey.
   #
   # Returns +obj+.
+  #
+  # @yield [obj] called if +self+ is falsey
+  # @return [Object] +self+
+  #
+  # @example
+  #   require 'mug/and-or'
+  #
+  #   try_thing.or_then { log "failed" }
   #
   def or_then &_block
     yield self unless self
@@ -52,7 +86,7 @@ class Object
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

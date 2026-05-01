@@ -5,9 +5,13 @@ class Time
   # Returns the number of seconds since the time represented by
   # this Time object.
   #
-  #     start = Time.now
-  #     #...
-  #     duration = start.to_now
+  # @return [Float] seconds elapsed since this time
+  #
+  # @example
+  #   require 'mug/time'
+  #   start = Time.now
+  #   #...
+  #   duration = start.to_now
   #
   def to_now
     #if Time.respond_to? :unix_timestamp
@@ -21,8 +25,12 @@ class Time
   # Returns the number of seconds until the time represented by
   # this Time object.
   #
-  #     target = Time.new 2117, 1, 1, 0, 0, 0
-  #     sleep target.from_now
+  # @return [Float] seconds remaining until this time
+  #
+  # @example
+  #   require 'mug/time'
+  #   target = Time.new 2117, 1, 1, 0, 0, 0
+  #   sleep target.from_now
   #
   def from_now
     #if time.respond_to? :unix_timestamp
@@ -37,12 +45,18 @@ class Time
     #
     # Returns the number of seconds until +t+
     #
+    # @param t [Time] the target time
+    # @return [Float] seconds until +t+
+    #
     def until t
       t.from_now
     end
 
     #
-    # Returns the number of since since +t+
+    # Returns the number of seconds since +t+
+    #
+    # @param t [Time] the reference time
+    # @return [Float] seconds since +t+
     #
     def since t
       t.to_now
@@ -53,7 +67,7 @@ class Time
 end
 
 =begin
-Copyright (c) 2016, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2016-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

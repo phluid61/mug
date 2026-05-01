@@ -7,6 +7,15 @@ module Enumerable
   # adds an implicit block of `{ |obj| obj }` which will cause `any_and_all?` to return `true`
   # when none of the collection members are `false` or `nil`.
   #
+  # @return [Boolean] true if the collection is non-empty and all elements are truthy
+  #
+  # @example
+  #   require 'mug/enumerable/any-and-all'
+  #   [1, 2, 3].any_and_all?        #=> true
+  #   [1, nil, 3].any_and_all?      #=> false
+  #   [].any_and_all?               #=> false
+  #   [2, 4, 6].any_and_all?(&:even?)  #=> true
+  #
   def any_and_all? &block
     block ||= proc {|obj| obj }
 
@@ -21,7 +30,7 @@ module Enumerable
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

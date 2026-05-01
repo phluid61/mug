@@ -9,6 +9,15 @@ class Proc
   #
   # This proc is prepended at the start of the composition.
   #
+  # @param funcs [Array<#to_proc>] functions to compose after this one
+  # @return [Proc] the composed function
+  #
+  # @example
+  #   require 'mug/functional'
+  #   func = ->(x) { x.inspect }
+  #   func2 = func.compose(:to_s, :length)
+  #   func2[123]    #=> 3
+  #
   def compose *funcs
     return self if funcs.empty?
     self >> funcs.map(&:to_proc).reduce(:>>)
@@ -22,6 +31,15 @@ class Proc
   #
   # This proc is appended at the end of the composition.
   #
+  # @param funcs [Array<#to_proc>] functions to compose before this one
+  # @return [Proc] the composed function
+  #
+  # @example
+  #   require 'mug/functional'
+  #   func = ->(x) { x.inspect }
+  #   func2 = func.precompose(:to_s, :length)
+  #   func2[123]    #=> "3"
+  #
   def precompose *funcs
     return self if funcs.empty?
     self << funcs.map(&:to_proc).reduce(:>>)
@@ -32,6 +50,9 @@ class Proc
   #
   # `proc.mapply(*args)` is equivalent to `args.map(&proc)`
   #
+  # @param args [Array] elements to apply this function to
+  # @return [Array] the results of applying this function to each element
+  #
   def mapply *args
     args.map {|*a| self.call(*a) }
   end
@@ -40,6 +61,18 @@ class Proc
   # Generates a function that memoizes this one. For a given
   # set of parameters, this proc is only invoked once; the
   # result is remembered for subsequent invocations.
+  #
+  # @return [Proc] a memoized version of this function
+  #
+  # @example
+  #   require 'mug/functional'
+  #   func = lambda do |x|
+  #     puts x
+  #     x
+  #   end
+  #   func2 = func.memoize
+  #   func2[1]  #=> prints "1", returns 1
+  #   func2[1]  #=> returns 1 immediately
   #
   def memoize
     cache = {}
@@ -62,6 +95,15 @@ class Proc
   #   :indices   - always use indices.size; nil for out-of-bounds
   #   :arguments - always use args.size; excess positions pass
   #                through at their original index
+  #
+  # @param indices [Array<Integer>] the new order of argument indices
+  # @param arity [Symbol] how to handle length mismatches
+  # @return [Proc] a function that reorders its arguments before calling this one
+  #
+  # @example
+  #   require 'mug/functional'
+  #   prc = ->(*a) { a }
+  #   prc.trans(1, 0).call(:a, :b, :c)  #=> [:b, :a]
   #
   def trans *indices, arity: :min
     case arity
@@ -100,6 +142,15 @@ class Proc
   # Generates a function that maps its arguments to each of
   # +funcs+ in order.
   #
+  # @param funcs [Array<#call, Symbol, nil>] functions to apply to each argument
+  # @return [Proc] a function that transforms its arguments before calling this one
+  #
+  # @example
+  #   require 'mug/functional'
+  #   printer = ->(*x) { p x }
+  #   mapped_printer = printer.zipmap(:upcase, :downcase, :to_sym)
+  #   mapped_printer.call('Hello', 'There', 'Everyone') #=> ["HELLO", "there", :Everyone]
+  #
   def zipmap *funcs
     lambda do |*args|
       n = [args.size, funcs.size].min
@@ -127,6 +178,14 @@ class Proc
     # Generates a function that maps its arguments to the
     # given +funcs+ list in order.
     #
+    # @param funcs [Array<#to_proc>] functions to apply to the arguments
+    # @return [Proc] a function that applies each func to its arguments
+    #
+    # @example
+    #   require 'mug/functional'
+    #   func = Proc.juxt :upcase, :downcase, :length
+    #   func.call 'AbC'   #=> ['ABC', 'abc', 3]
+    #
     def juxt *funcs
       lambda do |*args|
         funcs.map {|f| f.to_proc.call(*args) }
@@ -136,6 +195,8 @@ class Proc
     #
     # Generates an identity function that always returns its argument exactly.
     #
+    # @return [Proc] an identity function
+    #
     def identity
       lambda {|x| x }
     end
@@ -143,8 +204,11 @@ class Proc
     #
     # Generates a constant function that always returns +c+.
     #
-    # Note that it always returns the same object, so mutations will stick
-    # from invocation to invocation.
+    # @note It always returns the same object, so mutations will stick
+    #   from invocation to invocation.
+    #
+    # @param c [Object] the constant value to return
+    # @return [Proc] a function that always returns +c+
     #
     def const c
       lambda {|*| c }
@@ -158,6 +222,27 @@ class Enumerator
 
     #
     # Creates an Enumerator that can unfold a sequence from a given seed.
+    #
+    # The block receives the current seed and should return a two-element
+    # array <tt>[value, next_seed]</tt>, or +nil+ to end the sequence.
+    #
+    # @param seed [Object] the initial seed value
+    # @return [Enumerator] an enumerator that unfolds the sequence
+    #
+    # @example
+    #   require 'mug/functional'
+    #   enum = Enumerator.unfold(1) { |n| [n, n+1] }
+    #   enum.take(5)  #=> [1, 2, 3, 4, 5]
+    #
+    # @example Fibonacci sequence
+    #   require 'mug/functional'
+    #   enum = Enumerator.unfold([0, 1]) { |(a,b)| [a, [b, a+b]] }
+    #   enum.take(5)  #=> [0, 1, 1, 2, 3]
+    #
+    # @example End enumeration with nil
+    #   require 'mug/functional'
+    #   enum = Enumerator.unfold(1) { |n| n <= 3 ? [n, n+1] : nil }
+    #   enum.take(5)  #=> [1, 2, 3]
     #
     def unfold(seed, &blk)
       raise ArgumentError, 'no block given' unless block_given?

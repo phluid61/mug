@@ -4,6 +4,11 @@ class MatchData
   # Iterates over each capture group in the MatchData object,
   # including +$&+ (the entire matched string), yielding the
   # captured string.
+  #
+  # @yield [str] each captured string
+  # @yieldparam str [String] the captured string
+  # @return [Enumerator] if no block is given
+  # @return [MatchData] self
   def each &_b
     return enum_for(:each) unless block_given?
     to_a.each{|v| yield v }
@@ -15,6 +20,12 @@ class MatchData
   # The capture positions are either all Strings or all Integers,
   # depending on whether the original Regexp had named capture
   # groups or not.
+  #
+  # @yield [key, str] each capture position and string
+  # @yieldparam key [String, Integer] the capture position
+  # @yieldparam str [String] the captured string
+  # @return [Enumerator] if no block is given
+  # @return [MatchData] self
   def each_capture &_b
     return enum_for(:each_capture) unless block_given?
     if names.empty?
@@ -26,6 +37,12 @@ class MatchData
 
   # Iterates over each named capture group in the MatchData object,
   # yielding the capture name and string.
+  #
+  # @yield [name, str] each capture name and string
+  # @yieldparam name [String] the capture name
+  # @yieldparam str [String] the captured string
+  # @return [Enumerator] if no block is given
+  # @return [MatchData] self
   def each_named_capture &_b
     return enum_for(:each_named_capture) unless block_given?
     names.each{|n| yield n, self[n] }
@@ -39,6 +56,13 @@ class MatchData
   #
   # WARNING: if mixing named and positional captures, no positional
   # captures will be available using this method!
+  #
+  # @param include_names [Boolean] whether to treat named captures as positional
+  # @yield [pos, str] each capture position and string
+  # @yieldparam pos [Integer] the capture position
+  # @yieldparam str [String] the captured string
+  # @return [Enumerator] if no block is given
+  # @return [nil, MatchData] nil if named captures exist and include_names is false
   def each_positional_capture include_names: false, &_b
     return enum_for(:each_positional_capture, include_names: include_names) unless block_given?
     return unless names.empty? || include_names
@@ -48,7 +72,7 @@ class MatchData
 end
 
 =begin
-Copyright (c) 2018, Matthew Kerwin <matthew@kerwin.net.au>
+Copyright (c) 2018-2026, Matthew Kerwin <matthew@kerwin.net.au>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
