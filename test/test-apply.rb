@@ -55,3 +55,5 @@ class Test_apply < Test::Unit::TestCase
     assert_raise( ArgumentError ){ m1.curry(2) }
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

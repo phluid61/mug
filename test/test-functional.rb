@@ -240,3 +240,5 @@ class Test_functional_unfold < Test::Unit::TestCase
     assert_raise( ArgumentError ) { Enumerator.unfold(1) }
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

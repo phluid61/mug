@@ -10,3 +10,5 @@ class Test_rexproc < Test::Unit::TestCase
     assert_equal(  %[bar],     a.find(  &/\Ab/) )
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

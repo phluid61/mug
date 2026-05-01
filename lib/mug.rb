@@ -41,3 +41,4 @@ require_relative 'mug/time'
 require_relative 'mug/top'
 require_relative 'mug/with'
 
+# vim: set ts=2 sts=2 sw=2 expandtab:

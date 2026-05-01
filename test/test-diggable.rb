@@ -40,3 +40,5 @@ class Test_digabble < Test::Unit::TestCase
     assert_equal( nil, x.dig(*path) )
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

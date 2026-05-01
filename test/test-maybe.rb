@@ -98,3 +98,5 @@ class Test_maybe < Test::Unit::TestCase
     assert_equal( 2, a.maybe.b.c )
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

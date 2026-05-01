@@ -22,3 +22,5 @@ class Test_self < Test::Unit::TestCase
     assert_equal( 3, 1.revapply(2,3).size )
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

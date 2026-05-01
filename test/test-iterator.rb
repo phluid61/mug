@@ -15,3 +15,5 @@ class IteratorTest < Test::Unit::TestCase
     assert_equal([1,2,3,4,5], iter.take(5))
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:

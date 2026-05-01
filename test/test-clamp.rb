@@ -46,3 +46,4 @@ end
 require_relative '2-6-test-clamp'
 require_relative '2-7-test-clamp'
 
+# vim: set ts=2 sts=2 sw=2 expandtab:

@@ -16,3 +16,5 @@ class MethodToIterTest < Test::Unit::TestCase
     assert_equal([2, 4, 6, 8, 10], 0.method(:+).to_iter(2).take(5))
   end
 end
+
+# vim: set ts=2 sts=2 sw=2 expandtab:
