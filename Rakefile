@@ -19,3 +19,10 @@ rescue LoadError
   # rubocop not available
 end
 
+begin
+  require 'yard'
+  YARD::Rake::YardocTask.new
+rescue LoadError
+  # yard not available
+end
+

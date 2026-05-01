@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [README.md, LICENSE, code_of_conduct.md]
+    paths: [README.md, LICENSE, code_of_conduct.md, 'lib/**', .yardopts]
 
 permissions:
   contents: write
@@ -17,34 +17,46 @@ jobs:
   sync-and-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout gh-pages
+      - name: Checkout main
         uses: actions/checkout@v6
         with:
-          ref: gh-pages
-
-      - name: Sync files from main
-        id: sync
-        run: |
-          git fetch origin main
-          git checkout origin/main -- README.md LICENSE code_of_conduct.md
-          if git diff --cached --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No changes detected"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+          ref: main
+          path: main
 
       - name: Set up Ruby
-        if: steps.sync.outputs.changed == 'true'
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
           bundler-cache: true
+          working-directory: main
+
+      - name: Generate YARD docs
+        run: |
+          cd main
+          bundle exec yard doc --output-dir ../yard-output
+
+      - name: Install commonmarker
+        run: gem install commonmarker --no-document
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Sync content files from main
+        id: sync
+        run: |
+          cp main/README.md gh-pages/README.md
+          cp main/LICENSE gh-pages/LICENSE
+          cp main/code_of_conduct.md gh-pages/code_of_conduct.md
+          rm -rf gh-pages/docs
+          cp -r yard-output gh-pages/docs
 
       - name: Build site
-        if: steps.sync.outputs.changed == 'true'
         run: |
-          bundle exec ruby <<'RUBY'
+          cd main
+          ruby <<'RUBY'
           require 'commonmarker'
           require 'cgi'
           require 'fileutils'
@@ -90,15 +102,19 @@ jobs:
 
           license_html = '<pre id="license" class="no-highlight">' +
             CGI.escapeHTML(File.read('LICENSE')) + '</pre>'
-          build_page('README.md', 'index.html', extra_html: license_html)
-          build_page('code_of_conduct.md', 'code_of_conduct.html')
+          build_page('README.md', '../gh-pages/index.html', extra_html: license_html)
+          build_page('code_of_conduct.md', '../gh-pages/code_of_conduct.html')
           RUBY
 
-      - name: Commit changes
-        if: steps.sync.outputs.changed == 'true'
+      - name: Commit and push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md LICENSE code_of_conduct.md index.html code_of_conduct.html
-          git commit -m "Sync content files from main and rebuild"
-          git push
+          cd gh-pages
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes detected"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Sync content files from main and rebuild"
+            git push
+          fi

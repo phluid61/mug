@@ -1,0 +1,4 @@
+--markup markdown
+--readme README.md
+--files LICENSE,code_of_conduct.md
+lib/**/*.rb
