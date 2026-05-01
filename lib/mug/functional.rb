@@ -37,7 +37,7 @@ class Proc
   end
 
   #
-  # Returns a new Proc that memoizes this one. For a given
+  # Generates a function that memoizes this one. For a given
   # set of parameters, this proc is only invoked once; the
   # result is remembered for subsequent invocations.
   #
@@ -91,34 +91,55 @@ class Proc
   end
 
   class << self
+
+    #
+    # Generates a function that maps its arguments to the
+    # given +funcs+ list in order.
+    #
     def juxt *funcs
       lambda do |*args|
         funcs.map {|f| f.to_proc.call *args }
       end
     end
 
+    #
+    # Generates an identity function that always returns its argument exactly.
+    #
     def identity
       lambda {|x| x }
     end
 
+    #
+    # Generates a constant function that always returns +c+.
+    #
+    # Note that it always returns the same object, so mutations will stick
+    # from invocation to invocation.
+    #
     def const c
       lambda {|*| c }
     end
+
   end
 end
 
 class Enumerator
   class << self
-    def unfold(seed)
+
+    #
+    # Creates an Enumerator that can unfold a sequence from a given seed.
+    #
+    def unfold(seed, &blk)
+      raise ArgumentError, 'no block given' unless block_given?
       Enumerator.new do |y|
         loop do
-          result = yield seed
+          result = blk.call(seed)
           break if result.nil?
           value, seed = result
           y << value
         end
       end
     end
+
   end
 end
 
