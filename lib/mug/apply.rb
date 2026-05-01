@@ -1,15 +1,35 @@
-
 class Proc
-  #
-  # Curries this Proc and partially applies parameters.
-  # If a sufficient number of arguments are supplied, it passes the
-  # supplied arguments to the original proc and returns the result.
-  # Otherwise, returns another curried proc that takes the rest of
-  # arguments.
-  #
-  def apply(*args)
-    n = arity < 0 ? -arity - 1 : arity
-    curry(n).call(*args)
+  # TruffleRuby's Proc#curry does not perform partial application for
+  # non-lambda procs; it invokes the proc immediately regardless of the
+  # number of arguments supplied.
+  if RUBY_ENGINE == 'truffleruby'
+    #
+    # Curries this Proc and partially applies parameters.
+    # If a sufficient number of arguments are supplied, it passes the
+    # supplied arguments to the original proc and returns the result.
+    # Otherwise, returns another curried proc that takes the rest of
+    # arguments.
+    #
+    def apply(*args)
+      n = arity < 0 ? -arity - 1 : arity
+      if args.length >= n
+        call(*args)
+      else
+        proc { |*more| call(*args, *more) }
+      end
+    end
+  else
+    #
+    # Curries this Proc and partially applies parameters.
+    # If a sufficient number of arguments are supplied, it passes the
+    # supplied arguments to the original proc and returns the result.
+    # Otherwise, returns another curried proc that takes the rest of
+    # arguments.
+    #
+    def apply(*args)
+      n = arity < 0 ? -arity - 1 : arity
+      curry(n).call(*args)
+    end
   end
 end
 
