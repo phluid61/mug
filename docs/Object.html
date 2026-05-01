@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Object
+  
+    &mdash; Documentation by YARD 0.9.43
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css">
+
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+
+<script type="text/javascript">
+  pathId = "Object";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (O)</a> &raquo;
+    
+    
+    <span class="title">Object</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Object
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">BasicObject</span>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/mug/iff.rb<span class="defines">,<br>
+  lib/mug/bool.rb,<br> lib/mug/self.rb,<br> lib/mug/maybe.rb,<br> lib/mug/and-or.rb,<br> lib/mug/iterator/for.rb,<br> lib/mug/fragile-method-chain.rb</span>
+
+</dd>
+  </dl>
+  
+</div>
+
+
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#_%3F-instance_method" title="#_? (instance method)">#<strong>_?</strong>  &#x21d2; FragileMethodChain </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Begins a FragileMethodChain.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#and-instance_method" title="#and (instance method)">#<strong>and</strong>(default) {|obj| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns either <code>obj</code> or <code>default</code>, depending on the falsiness of <code>obj</code>.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#and_then-instance_method" title="#and_then (instance method)">#<strong>and_then</strong> {|obj| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calls <code>block</code> if <code>obj</code> is truthy.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iff%3F-instance_method" title="#iff? (instance method)">#<strong>iff?</strong>(*condition) { ... } &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Test for logical equivalence.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#iter_for-instance_method" title="#iter_for (instance method)">#<strong>iter_for</strong>(meth, *args)  &#x21d2; Iterator </a>
+    
+
+    
+      (also: #to_iter)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates an Iterator object, which is a subclass of Enumerator that recursively invokes a method on an object.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#maybe-instance_method" title="#maybe (instance method)">#<strong>maybe</strong> { ... } &#x21d2; Object, ... </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Invokes a method on this object iff it is truthy, otherwise returns this object.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#or-instance_method" title="#or (instance method)">#<strong>or</strong>(default) {|obj| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns either <code>obj</code> or <code>default</code>, depending on the truthiness of <code>obj</code>.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#or_then-instance_method" title="#or_then (instance method)">#<strong>or_then</strong> {|obj| ... } &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Calls <code>block</code> if <code>obj</code> is falsey.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#revapply-instance_method" title="#revapply (instance method)">#<strong>revapply</strong>(*args) {|obj, *args| ... } &#x21d2; Object, Enumerator </a>
+    
+
+    
+      (also: #cede)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Yields this object (and any other arguments) to a block.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#self-instance_method" title="#self (instance method)">#<strong>self</strong> {|o| ... } &#x21d2; Object </a>
+    
+
+    
+      (also: #itself)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns this object.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_b-instance_method" title="#to_b (instance method)">#<strong>to_b</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Converts <code>obj</code> to a boolean using &quot;typical&quot; C-like conversion rules.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_bool-instance_method" title="#to_bool (instance method)">#<strong>to_bool</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the truthiness of <code>obj</code>, as either <code>true</code> or <code>false</code>.</p></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#yield-instance_method" title="#yield (instance method)">#<strong>yield</strong>(&amp;block)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Deprecated alias for #self.</p></div></span>
+  
+</li>
+
+      
+    </ul>
+    
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_?-instance_method">
+  
+    #<strong>_?</strong>  &#x21d2; <tt><span class='object_link'><a href="FragileMethodChain.html" title="FragileMethodChain (class)">FragileMethodChain</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Begins a FragileMethodChain.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/fragile-method-chain</span><span class='tstring_end'>&#39;</span></span>
+<span class='comment'># Similar to: a.b &amp;&amp; a.b.c
+</span><span class='comment'># except that a.b is not called twice
+</span><span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid__?'>_?</span><span class='period'>.</span><span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_c'>c</span><span class='period'>.</span><span class='id identifier rubyid__!'>_!</span>
+
+<span class='comment'># Also works with #[] method
+</span><span class='id identifier rubyid_nested_hash'>nested_hash</span><span class='period'>.</span><span class='id identifier rubyid__?'>_?</span><span class='lbracket'>[</span><span class='symbol'>:a</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:b</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:c</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid__!'>_!</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FragileMethodChain.html" title="FragileMethodChain (class)">FragileMethodChain</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new chain starting from this object</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/fragile-method-chain.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__?'>_?</span>
+  <span class='const'><span class='object_link'><a href="FragileMethodChain.html" title="FragileMethodChain (class)">FragileMethodChain</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="FragileMethodChain.html#initialize-instance_method" title="FragileMethodChain#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="and-instance_method">
+  
+    #<strong>and</strong>(default) {|obj| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns either <code>obj</code> or <code>default</code>, depending on the falsiness of <code>obj</code>.</p>
+<p>If a block is given, <code>obj</code> is yielded to it; if it returns truthy,
+<code>default</code> is returned, otherwise <code>obj</code> is returned.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/and-or</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_get_a_list'>get_a_list</span><span class='period'>.</span><span class='id identifier rubyid_and'>and</span><span class='lparen'>(</span><span class='id identifier rubyid_default_list'>default_list</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='symbol'>:empty?</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_do_something'>do_something</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the value to return if the condition is met</p></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>obj</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optional block to determine the condition</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either <code>self</code> or <code>default</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/and-or.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='kw'>and</span> <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>yield</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_default'>default</span> <span class='op'>:</span> <span class='kw'>self</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_default'>default</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="and_then-instance_method">
+  
+    #<strong>and_then</strong> {|obj| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calls <code>block</code> if <code>obj</code> is truthy.</p>
+<p>Returns <code>obj</code>.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/and-or</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_try_thing'>try_thing</span><span class='period'>.</span><span class='id identifier rubyid_and_then'>and_then</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>got </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>obj</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>called if <code>self</code> is truthy</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>self</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/and-or.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_and_then'>and_then</span> <span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span>
+  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='kw'>self</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iff?-instance_method">
+  
+    #<strong>iff?</strong>(*condition) { ... } &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Test for logical equivalence.</p>
+<p>Returns true if <code>condition</code> and <code>obj</code> are either
+both truthy, or both falsey.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/iff</span><span class='tstring_end'>&#39;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_iff?'>iff?</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>   <span class='comment'>#=&gt; true
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_iff?'>iff?</span><span class='lparen'>(</span><span class='kw'>false</span><span class='rparen'>)</span>  <span class='comment'>#=&gt; false
+</span><span class='kw'>nil</span><span class='period'>.</span><span class='id identifier rubyid_iff?'>iff?</span><span class='lparen'>(</span><span class='kw'>false</span><span class='rparen'>)</span>      <span class='comment'>#=&gt; true
+</span><span class='kw'>nil</span><span class='period'>.</span><span class='id identifier rubyid_iff?'>iff?</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>       <span class='comment'>#=&gt; false</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>condition</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a value to test against <code>self</code></p></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>when no positional argument is given, yields to obtain the condition</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if both <code>self</code> and <code>condition</code> are truthy or
+both are falsey; <code>false</code> otherwise</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/iff.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_iff?'>iff?</span> <span class='op'>*</span><span class='id identifier rubyid_condition'>condition</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_cond'>cond</span> <span class='op'>=</span> <span class='id identifier rubyid_condition'>condition</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_cond'>cond</span> <span class='op'>=</span> <span class='kw'>yield</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>wrong number of arguments (given </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_condition'>condition</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='embexpr_end'>}</span><span class='tstring_content'>, expected 1)</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_cond'>cond</span> <span class='op'>?</span> <span class='op'>!</span><span class='op'>!</span><span class='kw'>self</span> <span class='op'>:</span> <span class='op'>!</span><span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="iter_for-instance_method">
+  
+    #<strong>iter_for</strong>(meth, *args)  &#x21d2; <tt><span class='object_link'><a href="Iterator.html" title="Iterator (class)">Iterator</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_iter-instance_method'>to_iter</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates an Iterator object, which is a subclass of Enumerator
+that recursively invokes a method on an object.</p>
+<p>Initially the receiving object is <code>self</code>. After each iteration,
+the receiving object is replaced with the result of the previous
+iteration.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/iterator/for</span><span class='tstring_end'>&#39;</span></span>
+<span class='int'>0</span><span class='period'>.</span><span class='id identifier rubyid_iter_for'>iter_for</span><span class='lparen'>(</span><span class='symbol'>:next</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_take'>take</span><span class='lparen'>(</span><span class='int'>5</span><span class='rparen'>)</span>  <span class='comment'>#=&gt; [1, 2, 3, 4, 5]
+</span><span class='int'>0</span><span class='period'>.</span><span class='id identifier rubyid_iter_for'>iter_for</span><span class='lparen'>(</span><span class='symbol'>:+</span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_take'>take</span><span class='lparen'>(</span><span class='int'>5</span><span class='rparen'>)</span>  <span class='comment'>#=&gt; [2, 4, 6, 8, 10]</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>meth</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the method name to invoke on each iteration</p></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>additional arguments passed to the method</p></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Iterator.html" title="Iterator (class)">Iterator</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Iterator instance</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/iterator/for.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_iter_for'>iter_for</span> <span class='id identifier rubyid_meth'>meth</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
+  <span class='const'><span class='object_link'><a href="Iterator.html" title="Iterator (class)">Iterator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Iterator.html#initialize-instance_method" title="Iterator#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_meth'>meth</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="maybe-instance_method">
+  
+    #<strong>maybe</strong> { ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>, ... 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Invokes a method on this object iff it is truthy, otherwise
+returns this object.</p>
+<p>When a block is given, the block is invoked in the scope of
+this object (i.e. <code>self</code> in the block refers to this object).</p>
+<p>When no block is given, returns a MaybeDelegator that
+conditionally delegates methods to this object.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/maybe</span><span class='tstring_end'>&#39;</span></span>
+<span class='comment'># Equivalent to: a &amp;&amp; a.b &amp;&amp; a.b.c
+</span><span class='comment'># (block form)
+</span><span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_maybe'>maybe</span><span class='lbrace'>{</span> <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_maybe'>maybe</span><span class='lbrace'>{</span> <span class='id identifier rubyid_c'>c</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+<span class='comment'># (delegator form)
+</span><span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_maybe'>maybe</span><span class='period'>.</span><span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_maybe'>maybe</span><span class='period'>.</span><span class='id identifier rubyid_c'>c</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>the block is evaluated in the scope of this object</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>, <tt>nil</tt>, <tt>false</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the block, or this object if falsy</p></div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="MaybeDelegator.html" title="MaybeDelegator (class)">MaybeDelegator</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if no block is given</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/maybe.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_maybe'>maybe</span> <span class='op'>&amp;</span><span class='id identifier rubyid_b'>b</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_b'>b</span>
+    <span class='kw'>self</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='const'><span class='object_link'><a href="MaybeDelegator.html" title="MaybeDelegator (class)">MaybeDelegator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="MaybeDelegator.html#initialize-instance_method" title="MaybeDelegator#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="or-instance_method">
+  
+    #<strong>or</strong>(default) {|obj| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns either <code>obj</code> or <code>default</code>, depending on the truthiness of <code>obj</code>.</p>
+<p>If a block is given, <code>obj</code> is yielded to it; if it returns truthy,
+<code>obj</code> is returned, otherwise <code>default</code> is returned.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/and-or</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_data_store'>data_store</span><span class='period'>.</span><span class='id identifier rubyid_get_env_hash'>get_env_hash</span><span class='period'>.</span><span class='id identifier rubyid_or'>or</span><span class='lparen'>(</span><span class='id identifier rubyid_default_hash'>default_hash</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_do_something'>do_something</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the value to return if the condition is met</p></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>obj</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optional block to determine the condition</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either <code>self</code> or <code>default</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/and-or.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='kw'>or</span> <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>yield</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='kw'>self</span> <span class='op'>:</span> <span class='id identifier rubyid_default'>default</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span> <span class='op'>||</span> <span class='id identifier rubyid_default'>default</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="or_then-instance_method">
+  
+    #<strong>or_then</strong> {|obj| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Calls <code>block</code> if <code>obj</code> is falsey.</p>
+<p>Returns <code>obj</code>.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/and-or</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_try_thing'>try_thing</span><span class='period'>.</span><span class='id identifier rubyid_or_then'>or_then</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failed</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>obj</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>called if <code>self</code> is falsey</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>self</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/and-or.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_or_then'>or_then</span> <span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span>
+  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>unless</span> <span class='kw'>self</span>
+  <span class='kw'>self</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="revapply-instance_method">
+  
+    #<strong>revapply</strong>(*args) {|obj, *args| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>, <tt><span class='object_link'><a href="Enumerator.html" title="Enumerator (class)">Enumerator</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='cede-instance_method'>cede</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Yields this object (and any other arguments)
+to a block. If no block is given, returns an
+Enumerator.</p>
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>additional arguments to yield alongside self</p></div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>obj</tt>, <tt>*args</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>yields self and any additional arguments</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>this object</p></div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>additional arguments</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the block</p></div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Enumerator.html" title="Enumerator (class)">Enumerator</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if no block is given</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/self.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_revapply'>revapply</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>yield</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_enum_for'>enum_for</span><span class='lparen'>(</span><span class='symbol'>:revapply</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>+</span> <span class='int'>1</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="self-instance_method">
+  
+    #<strong>self</strong> {|o| ... } &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='itself-instance_method'>itself</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>Without a block, equivalent to <code>Object#itself</code> (Ruby 2.2+).
+With a block, equivalent to <code>Object#then</code> (Ruby 2.6+).
+This is different from <code>#tap</code> because <code>obj.tap{nil}</code> returns <em>obj</em>,
+but <code>obj.self{nil}</code> returns <em>nil</em>.</p></div>
+  </div>
+
+<p>Returns this object.</p>
+<p>If a block is given, this object is yielded to it, and the result
+is returned.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/self</span><span class='tstring_end'>&#39;</span></span>
+<span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_self'>self</span>                          <span class='comment'>#=&gt; 1
+</span><span class='int'>2</span><span class='period'>.</span><span class='id identifier rubyid_self'>self</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='id identifier rubyid_i'>i</span><span class='op'>*</span><span class='int'>3</span> <span class='rbrace'>}</span>               <span class='comment'>#=&gt; 6
+</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>2</span><span class='comma'>,</span><span class='int'>2</span><span class='comma'>,</span><span class='int'>3</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_group_by'>group_by</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:self</span><span class='rparen'>)</span>   <span class='comment'>#=&gt; {1=&gt;[1,1], 2=&gt;[2,2], 3=&gt;[3]}</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>o</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optionally yields self to the block</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>o</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>this object</p></div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>self, or the result of the block</p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/self.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid__block'>_block</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='kw'>yield</span> <span class='kw'>self</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_b-instance_method">
+  
+    #<strong>to_b</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Converts <code>obj</code> to a boolean using &quot;typical&quot; C-like conversion rules.</p>
+<p>The following values all become false:</p>
+<ul>
+<li><code>0</code>, <code>0.0</code>, etc. (any numeric zero)</li>
+<li><code>Float::NAN</code></li>
+<li><code>&quot;&quot;</code> (empty string)</li>
+<li><code>[]</code>, <tt>{}</tt>, etc. (any Enumerable or Enumerator with no elements)</li>
+<li>any Exception</li>
+</ul>
+<p>All other values become true.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/bool</span><span class='tstring_end'>&#39;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_b'><span class='object_link'><a href="top-level-namespace.html#to_b-class_method" title="::to_b (method)">to_b</a></span></span>  <span class='comment'>#=&gt; true
+</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_b'><span class='object_link'><a href="top-level-namespace.html#to_b-class_method" title="::to_b (method)">to_b</a></span></span>       <span class='comment'>#=&gt; false
+</span><span class='int'>42</span><span class='period'>.</span><span class='id identifier rubyid_to_b'><span class='object_link'><a href="top-level-namespace.html#to_b-class_method" title="::to_b (method)">to_b</a></span></span>       <span class='comment'>#=&gt; true
+</span><span class='int'>0</span><span class='period'>.</span><span class='id identifier rubyid_to_b'><span class='object_link'><a href="top-level-namespace.html#to_b-class_method" title="::to_b (method)">to_b</a></span></span>        <span class='comment'>#=&gt; false</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>C-like truthiness of <code>self</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/bool.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_b'><span class='object_link'><a href="top-level-namespace.html#to_b-class_method" title="::to_b (method)">to_b</a></span></span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_bool-instance_method">
+  
+    #<strong>to_bool</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the truthiness of <code>obj</code>, as either <code>true</code> or <code>false</code>.
+This is functionally equivalent to calling <tt>!!obj</tt>.</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>mug/bool</span><span class='tstring_end'>&#39;</span></span>
+<span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hello</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="top-level-namespace.html#to_bool-class_method" title="::to_bool (method)">to_bool</a></span></span>  <span class='comment'>#=&gt; true
+</span><span class='kw'>nil</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'><span class='object_link'><a href="top-level-namespace.html#to_bool-class_method" title="::to_bool (method)">to_bool</a></span></span>      <span class='comment'>#=&gt; false</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the truthiness of <code>self</code></p></div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/bool.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_bool'><span class='object_link'><a href="top-level-namespace.html#to_bool-class_method" title="::to_bool (method)">to_bool</a></span></span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="yield-instance_method">
+  
+    #<strong>yield</strong>(&amp;block)  &#x21d2; <tt><span class='object_link'><a href="" title="Object (class)">Object</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Deprecated alias for #self</p>
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/mug/self.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span> <span class='comment'>#:nodoc:
+</span>  <span class='id identifier rubyid_warn'>warn</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Object#yield is deprecated; use Object#self</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_self'>self</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri May  1 05:14:14 2026 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.43 (ruby-3.3.11).
+</div>
+
+    </div>
+  </body>
+</html>
