@@ -111,7 +111,7 @@ class Proc
           arg
         elsif func.respond_to? :call
           func.call arg
-        elsif func.is_a?(Symbol) && arg.respond_to?(func)
+        elsif func.is_a? Symbol
           arg.__send__ func
         else
           raise TypeError, "expected callable, Symbol, or nil; got #{func.class}"
