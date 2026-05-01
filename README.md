@@ -408,6 +408,173 @@ a._?.b.c._!
 nested_hash._?[:a][:b][:c]._!
 ```
 
+## functional
+
+### Proc
+
+#### `proc.compose(*funcs) => proc`
+
+Composes a sequence of functions.
+
+A function is anything that responds to #to_proc, so
+symbols are allowed.
+
+This proc is prepended at the start of the composition.
+
+```ruby
+require 'mug/functional'
+
+func = ->(x) { x.inspect }
+func2 = func.compose(:to_s, :length)
+func2[123]    #=> 3
+func2['abc']  #=> 5
+```
+
+#### `proc.precompose(*funcs) => proc`
+
+Composes a sequence of functions.
+
+A function is anything that responds to #to_proc, so
+symbols are allowed.
+
+This proc is appended at the end of the composition.
+
+```ruby
+require 'mug/functional'
+
+func = ->(x) { x.inspect }
+func2 = func.precompose(:to_s, :length)
+func2[123]    #=> "3"
+func2['abc']  #=> "3"
+```
+
+#### `proc.mapply(*args) => array`
+
+Applies this function to each element of `args` in order.
+
+`proc.mapply(*args)` is equivalent to `args.map(&proc)`
+
+#### `proc.memoize => proc`
+
+Generates a function that memoizes this one. For a given
+set of parameters, this proc is only invoked once; the
+result is remembered for subsequent invocations.
+
+```ruby
+func = lambda do |x|
+  puts x
+  x
+end
+
+func2 = func.memoize
+
+func2[1]  #=> prints "1", returns 1
+func2[1]  #=> returns 1 immediately
+```
+
+#### `proc.trans(*indices, arity: :min) => proc`
+
+Generates a function that reorders its arguments according
+to `indices` and calls this function on the resulting
+list.
+
+The `arity` parameter controls how mismatches in length
+between arguments and indices are handled:
+
+- `:min` – cap at the minimum of args and indices (default)
+- `:indices` – always use `indices.size`; nil for out-of-bounds args
+- `:arguments` – always use args count; excess positions pass through at their original index
+- `:max` – use the maximum; nil-fill if args are short, pass-through if args are long
+
+```ruby
+require 'mug/functional'
+
+prc = ->(*a) { a }
+
+prc.trans(1, 0).call(:a, :b, :c)                       #=> [:b, :a]
+prc.trans(1, 0, arity: :indices).call(:a, :b, :c)      #=> [:b, :a]
+prc.trans(1, 0, arity: :arguments).call(:a, :b, :c)    #=> [:b, :a, :c]
+prc.trans(1, 0, arity: :max).call(:a, :b, :c)          #=> [:b, :a, :c]
+
+prc.trans(2, 0, 1, arity: :min).call(:a, :b)           #=> [nil, :a]
+prc.trans(2, 0, 1, arity: :indices).call(:a, :b)       #=> [nil, :a, :b]
+prc.trans(2, 0, 1, arity: :arguments).call(:a, :b)     #=> [nil, :a]
+prc.trans(2, 0, 1, arity: :max).call(:a, :b)           #=> [nil, :a, :b]
+```
+
+#### `proc.zipmap(*funcs) => proc`
+
+Generates a function that maps its arguments to each of
+`funcs` in order.
+
+```ruby
+require 'mug/functional'
+
+printer = ->(*x) { p x }
+mapped_printer = printer.zipmap(:upcase, :downcase, :to_sym)
+mapped_printer.call('Hello', 'There', 'Everyone') #=> ["HELLO", "there", :Everyone]
+```
+
+#### `Proc.juxt(*funcs) => proc`
+
+Generates a function that maps its arguments to the
+given _funcs_ list in order.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.juxt :upcase, :downcase, :length
+func.call 'AbC'   #=> ['ABC', 'abc', 3]
+```
+
+#### `Proc.identity => proc`
+
+Generates an identity function that always returns its argument exactly.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.identity
+func.call(obj)   #=> obj
+```
+
+#### `Proc.const(c) => proc`
+
+Generates a constant function that always returns _c_.
+
+Note that it always returns the same object, so mutations will stick
+from invocation to invocation.
+
+```ruby
+require 'mug/functional'
+
+func = Proc.const(obj)
+func.call          #=> obj
+func.call 1, 2, 3  #=> obj
+```
+
+### Enumerator
+
+#### `Enumerator.unfold(seed) {|s| block } => enum`
+
+Creates an Enumerator that can unfold a sequence from a given seed.
+
+```ruby
+require 'mug/functional'
+
+# counting by one
+enum = Enumerator.unfold(1) { |n| [n, n+1] }
+enum.take(5)  #=> [1, 2, 3, 4, 5]
+
+# Fibonacci sequence
+enum = Enumerator.unfold([0, 1]) { |(a,b)| [a, [b, a+b]] }
+enum.take(5)  #=> [0, 1, 1, 2, 3]
+
+# end enumeration with nil
+enum = Enumerator.unfold(1) { |n| n <= 3 ? [n, n+1] : nil }
+enum.take(5)  #=> [1, 2, 3]
+```
+
 ## hash/fetch-assign
 
 ### Hash
